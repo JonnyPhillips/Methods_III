@@ -9,9 +9,18 @@ navbar:
     - text: "Syllabus"
       icon: fa-book-open
       href: Syllabus/Syllabus_v5.html
+    - text: "Classes"
+      menu:
+      - text: "1 - Review"
+        href: Classes/Class_1/Class_1.html
+      - text: "2 - Framework for Explanation"
+        href: Classes/Class_2/Class_2.html
     - text: "Project"
       icon: fa-book-open
       href: Projects/Project.html
+    - text: "Links"
+      icon: fa-book-open
+      href: Links.html
 
 
 output:

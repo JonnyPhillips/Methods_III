@@ -1,8 +1,6 @@
 ---
-title: 'Quantitative Methods III: Explanation and Causation'
-output:
-  html_document:
-    df_print: paged
+title: 'Syllabus - Quantitative Methods III: Explanation and Causation'
+output: html_document
 date: "1st December, 2018"
 subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ---

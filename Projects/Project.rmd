@@ -1,12 +1,18 @@
 ---
-title: 'Quantitative Methods III: Explanation and Causation'
-output:
-  html_document:
-    df_print: paged
+title: 'Research Project'
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Project
+The research project is designed to give you an opportunity to practice implementing at least one of the methodologies studied in this course to answer your own research question. The paper should be no more than 15 pages and can be in English or Portuguese.
+
+Your paper and *all* of your data processing and analysis code should be submitted by email by 30th June 2019.
+
+Suggestions:
+    - Pick a simple, clear and interesting research question
+    - Make sure you have the right data available to apply your methodology
+    - Don't worry about the substantive results, focus on a valid and thorough implementation of the research methodology and interpreting the results
+
