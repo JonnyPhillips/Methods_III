@@ -8,7 +8,7 @@ navbar:
       href: index.html
     - text: "Syllabus"
       icon: fa-book-open
-      href: Syllabus v5.html
+      href: Syllabus_v5.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html
