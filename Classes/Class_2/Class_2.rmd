@@ -1,0 +1,19 @@
+---
+title: 'Class 2 - A Framework for Explanation'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+
+- Joshua D Angrist and Steve Pischke, Mastering 'Metrics. 2015. pp. xi-11
+- Guido W. Imbens and Donald B Rubin, Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Chs. 1 & 3
+- Miguel A. Hernan and James M. Robins, Causal Inference. 2019. Ch. 1.
+
+## [Lecture Slides](Slides_Class1_v1.pdf)
+
+## Replication Exercise
+

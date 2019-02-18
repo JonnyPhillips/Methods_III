@@ -1,7 +1,7 @@
-name: "Making Causal Critiques"
+name: "Methods III: Explanation"
 output_dir: "."
 navbar:
-  title: "Making Causal Critiques"
+  title: "Methods III: Explanation"
   left:
     - text: "Overview"
       icon: fa-home

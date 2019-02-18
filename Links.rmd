@@ -13,13 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Data Sources
 
-[Dataverse](http://dvn.iq.harvard.edu/dvn/)
-[ICPSR](https://www.icpsr.umich.edu/index.html)
+[Dataverse](http://dvn.iq.harvard.edu/dvn/)  
+[ICPSR](https://www.icpsr.umich.edu/index.html)  
 [IBGE](ftp://ftp.ibge.gov.br/)
 
 # R Help
 
-[R for Data Science](https://r4ds.had.co.nz/)
+[R for Data Science](https://r4ds.had.co.nz/)  
 [R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 
 # Stata Help
