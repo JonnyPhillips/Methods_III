@@ -7,18 +7,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This is a review week where we solidify the fundamentals of regression.
+This is a review week where we solidify the fundamentals of regression and its weaknesses.
 
 ## Readings
 #### Required
 **[King, Keohane and Verba, Designing Social Inquiry, pp. 150 - 196 & 128 - 139](Classes/Class_1/KKV_Class_1.pdf)**
 
-#### Replication Reading
-
-#### Additional Readings
-
-
-## Lecture Slides
-
-## Replication Exercise
 
