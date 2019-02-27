@@ -1,0 +1,8 @@
+/**
+ * Jetpack
+ *
+ * Style for the Jetpack plugin.
+ * This stylesheet is only enqueued if Jetpack is activated.
+ */
+
+.js .infinite-scroll .woo-pagination { display: none; }

@@ -59,7 +59,17 @@
 
 \frame{\titlepage}
 
-\section{Causal Inference}
+\section{Explanation}
+
+\begin{frame}
+\frametitle{Explanation}
+\begin{itemize}
+\item Descriptive Inference
+\item Predictive Inference
+\item Causal Inference
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Learning from Data}
@@ -234,6 +244,7 @@
 
 %Effects of causes
 
+
 \begin{frame}
 \frametitle{Causal Inference}
 \begin{itemize}
@@ -311,6 +322,8 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+\section{Causal Inference}
 
 \begin{frame}
 \frametitle{Causal Inference}

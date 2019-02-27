@@ -8,7 +8,7 @@ navbar:
       href: index.html
     - text: "Syllabus"
       icon: fa-book-open
-      href: Syllabus/Syllabus_v5.html
+      href: Syllabus/Syllabus_v6.html
     - text: "Classes"
       menu:
       - text: "1 - Review"
