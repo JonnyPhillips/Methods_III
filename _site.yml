@@ -25,6 +25,6 @@ navbar:
 
 output:
   html_document:
-    theme: paper
+    theme: flatly
     css: style.css
     highlight: tango

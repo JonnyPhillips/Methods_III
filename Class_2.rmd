@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - KKV, Designing Social Inquiry. 1994. Ch. 3.
 - Holland, Paul W., Statistics and Causal Inference. 1986. Journal of the American Statistical Association. 81:396.
 
-### [Lecture Slides](Slides_Class2_v1.pdf)
+### [Lecture Slides](Classes/Class_2/Slides_Class2_v1.pdf)
 
 ### Replication Exercise
 

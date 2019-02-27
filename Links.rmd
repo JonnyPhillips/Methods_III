@@ -7,22 +7,22 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Explanation and Causation
+### Explanation and Causation
 
 [egap Methods Guides](http://egap.org/list-methods-guides)
 
-# Data Sources
+### Data Sources
 
 [Dataverse](http://dvn.iq.harvard.edu/dvn/)  
 [ICPSR](https://www.icpsr.umich.edu/index.html)  
 [IBGE](ftp://ftp.ibge.gov.br/)
 
-# R Help
+### R Help
 
 [R for Data Science](https://r4ds.had.co.nz/)  
 [R Cheat Sheets](https://www.rstudio.com/resources/cheatsheets/)
 
-# Stata Help
+### Stata Help
 
 [Stata Cheat sheets](https://geocenter.github.io/StataTraining/portfolio/01_resource/)
 
