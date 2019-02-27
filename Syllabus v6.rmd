@@ -1,7 +1,7 @@
 ---
 title: 'Syllabus - Quantitative Methods III: Explanation and Causation'
 output: html_document
-date: "1st December, 2018"
+date: "1st February, 2019"
 subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ---
 
@@ -46,7 +46,7 @@ The essential toolkit for empirical research in political science therefore incl
 
 ## Prerequisites 
 
-Students are required to have completed FLS 6183, Quantitative Methods II.
+Students are required to have completed FLS 6183, Quantitative Methods II, or equivalent.
 
 ## Content
 
@@ -65,8 +65,8 @@ Part II practices implementing key causal methodologies. Each week we discuss th
 8. Difference-in-Differences (09/05/19)
 9. Controlling for Confounding (16/05/19)
 10. Matching (23/05/19)
-11. Comparative Cases (30/05/19)
-12. Process Tracing (06/06/19)
+11. Comparative Cases and Process Tracing (30/05/19)
+12. Generalizability, Reproducibility and Mechanisms (06/06/19)
 
 ## Evaluation
 
@@ -85,61 +85,11 @@ Part II practices implementing key causal methodologies. Each week we discuss th
 
 ## Bibliography
 
-- Mandatory reading is marked in *italics*.
-- The paper we will replicate is marked with a (R*), though some of these are still provisional.
+The list below is a general list of reference texts that we will use repeatedly throughout the course. For a detailed breakdown of readings for each class, please see the class-specific pages from the menu above.
 
-### Week 1 - Review: What Regression Does and Does Not Do
-
-[No readings]
-
-### Week 2 - A Framework for Explanation
-- *Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Chs. 1 & 3*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. pp. xi-11*
-
-### Week 3 - Field Experiments
-- *Alan S. Gerber and Donald P Green. Field Experiments: Design, Analysis and Interpretation. W.W. Norton & Company, 2012. Chs. 1-2.*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. pp. 12 - 46*
-- (R\*) *Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.*
-- Benjamin A. Olken. Direct Democracy and Local Public Goods: Evidence from a Field Experiment in Indonesia. American Political Science Review, 104(02):243-267, May 2010.
-
-
-### Week 4 - Survey and Lab Experiments
-- *Steven D Levitt and John A List. What Do Laboratory Experiments Tell Us About the Real World? 2006.*
-- (R\*) *Sam Whitt. Social Norms in the Aftermath of Ethnic Violence : Ethnicity and Fairness in Non-costly Decision Making. Journal of Conflict Resolution, 58(1):93-119, 2014*
-
-### Week 5 - Natural Experiments
-- *Thad Dunning. Natural Experiments in the Social Sciences: A Design-Based Approach. Yale University Press, 2012. Chapters 1, & 2*
-- (R\*) *Ana L. De La O. Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico. American Journal of Political Science, 57(1):1-14, Jan 2013.*
-
-### Week 6 - Instrumental Variables
-- *Thad Dunning. Natural Experiments in the Social Sciences: A Design-Based Approach. Yale University Press, 2012. Chapter 4*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. Ch. 3*
-- (R\*) *Jakob Svensson and Ritva Reinikka. Fighting Corruption to Improve Schooling: Evidence from a Newspaper Campaign in Uganda. Journal of the European Economic Association, 3(2), 2005.*
-
-### Week 7 - Discontinuities
-- *Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics: An Empiricist's Companion. Princeton University Press, 2009. Chapter 6*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. Ch. 4*
-- (R\*) *Rocio Titiunik. Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections. 2011.*
-
-### Week 8 - Difference-in-Differences
-- *Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics: An Empiricist's Companion. Princeton University Press, 2009. Chapter 5*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. Ch. 5*
-- (R\*) *Oeindrila Dube and Juan Vargas. Commodity Price Shocks and Civil Conflict: Evidence from Colombia. 2008.*
-
-### Week 9 - Controlling for Counterfactuals
-- *Stephen L Morgan and Christopher Winship. Counterfactuals and Causal Inference: Methods and Principles for Social Research. Cambridge University Press, 2007. Chapters 3 & 5 - 5.2*
-- *Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. Ch. 2*
-- (R\*) *Kate Baldwin. Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia. American Journal of Political Science, 57(4):794-809, 2013.*
-
-### Week 10 - Matching
-- *Stephen L Morgan and Christopher Winship. Counterfactuals and Causal Inference: Methods and Principles for Social Research. Cambridge University Press, 2007. Chapter 4*
-- (R\*) *Taylor C. Boas and Daniel F. Hidalgo. Controlling the Airwaves: Incumbency Advantage and Com-
-munity Radio in Brazil. American Journal of Political Science, 55(4):869-885, Oct 2011.*
-
-### Week 11 - Comparative Cases
-- *David Collier. The Comparative Method, 1993.*
-- (R\*) *Steven Levitsky and Lucan A Way. Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability. 2010.*
-
-### Week 12 - Process Tracing
-- *David Collier. Understanding Process Tracing. Political Science and Politics, 44(04):823-830, oct 2011.*
-- (R\*) *Tulia Falleti. Infilltrating the State: The Evolution of Health Reforms In Brazil, 1964-1988. In James Mahoney and Kathleen A. Thelen, editors, Explaining Institutional Change: Ambiguity, Agency and Power. 2009.*
+- Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015.
+- Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015.
+- Thad Dunning. Natural Experiments in the Social Sciences: A Design-Based Approach. Yale University Press, 2012.
+- Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics: An Empiricist's Companion. Princeton University Press, 2009.
+- Stephen L Morgan and Christopher Winship. Counterfactuals and Causal Inference: Methods and Principles for Social Research. Cambridge University Press, 2007.
+- Miguel A. Hernán, James M. Robins. Causal Inference. Boca Raton: Chapman & Hall/CRC. Forthcoming.

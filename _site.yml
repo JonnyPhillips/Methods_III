@@ -8,16 +8,16 @@ navbar:
       href: index.html
     - text: "Syllabus"
       icon: fa-book-open
-      href: Syllabus/Syllabus_v6.html
+      href: Syllabus_v6.html
     - text: "Classes"
       menu:
       - text: "1 - Review"
-        href: Classes/Class_1/Class_1.html
+        href: Class_1.html
       - text: "2 - Framework for Explanation"
-        href: Classes/Class_2/Class_2.html
+        href: Class_2.html
     - text: "Project"
       icon: fa-book-open
-      href: Projects/Project.html
+      href: Project.html
     - text: "Links"
       icon: fa-book-open
       href: Links.html
