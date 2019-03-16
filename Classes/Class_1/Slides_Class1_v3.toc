@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Probability and Statistics in 10 minutes}{3}{0}{2}
+\beamer@sectionintoc {3}{What does Regression do?}{4}{0}{3}
+\beamer@sectionintoc {4}{Guide to Designing Regressions}{8}{0}{4}
+\beamer@sectionintoc {5}{What does Regression NOT do?}{12}{0}{5}

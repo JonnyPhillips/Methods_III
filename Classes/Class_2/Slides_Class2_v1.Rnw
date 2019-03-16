@@ -8,6 +8,7 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{multirow}
+\usepackage{multicol}
 \usepackage{dcolumn}
 \usepackage{bigstrut}
 \usepackage{amsmath} 
@@ -49,6 +50,17 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+library(purrr)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T)
+@
+
 
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 1 - Review}
@@ -58,6 +70,116 @@
 \begin{document}
 
 \frame{\titlepage}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{center}
+$Pr(A)=\frac{\text{Number of times A occurs}}{\text{Number of Trials}}$ \\
+Joint Probability: $Pr(A \cap B) = P(A,B)$ \\
+Conditional Probability: $Pr(A|B) = \frac{Pr(A \cap B)}{Pr(B)}$ \\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{center}
+Independence: $A$ and $B$ are independent iff $Pr(A \cap B) = Pr(A) * Pr(B)$ \\
+Then: $Pr(A|B) = \frac{Pr(A \cap B)}{Pr(B)} = \frac{Pr(A) * Pr(B)}{Pr(B)} = Pr(A)$ \\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{itemize}
+\item A = It's raining in Osasco right now
+\item B = I flip this coin and get Heads
+\item Are these events independent?
+\pause
+\item Yes! One does not affect the other at all
+\item So $Pr(A \cap B) = Pr(A)*Pr(B)$
+\item $Pr(A \cap B) = 0.3 * 0.5 = 0.15$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{itemize}
+\item A = It's raining in Osasco right now
+\item B = It's raining in S\~{a}o Paulo right now
+\item Are these events independent?
+\pause
+\item No! If you know it's raining in Osasco there's a stronger chance it will be raining in S\~{a}o Paulo
+\item So $Pr(A \cap B) \neq Pr(A)*Pr(B)$
+\item $Pr(A \cap B) \neq 0.3 * 0.5 = 0.15$
+\item $Pr(A \cap B) > 0.15$ (probably)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+<<rain>>=
+N <- 1000
+rain <- tibble(day = seq(1,N,by=1),
+               rain_joint=runif(N,0,1),
+               rain_joint_yes=as.numeric(rain_joint>0.8),
+               rnd_OS=rbinom(N,1,0.2),
+               rnd_SP=rbinom(N,1,0.2),
+               OS=pmin(rain_joint_yes+rnd_OS,1),
+               SP=pmin(rain_joint_yes+rnd_SP,1),
+               OS_indep=rnd_OS,
+               SP_indep=rnd_SP
+               )
+
+rain_stats <- rain %>% mutate(rain_both=case_when(OS==1 & SP==1~1,
+                                    TRUE~0),
+                rain_both_indep=case_when(OS_indep==1 & SP_indep==1~1,
+                                    TRUE~0)) %>%
+  summarize(Pr_OS=mean(OS),
+            Pr_SP=mean(SP),
+            Pr_null=Pr_OS*Pr_SP,
+            Pr_OS_indep=mean(OS_indep),
+            Pr_SP_indep=mean(SP_indep),
+            Pr_Both=mean(rain_both),
+            Pr_Both_Indep=mean(rain_both_indep),
+            Pr_null_Indep=Pr_OS_indep*Pr_SP_indep)
+
+@
+\begin{multicols}{2}
+<<rain_graph1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+rain %>% filter(day<=30) %>%
+  select(day,OS_indep,SP_indep) %>%
+  mutate(SP_indep=SP_indep*0.7) %>%
+  gather(key="State",value="rain",-day) %>% 
+  ggplot() +
+  geom_col(aes(x=day,y=rain,fill=State), alpha=0.5, position=position_dodge(width=0.3)) +
+  theme_classic()
+
+@
+\footnotesize
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = \Sexpr{round(rain_stats$Pr_OS_indep,2)} * \Sexpr{round(rain_stats$Pr_SP_indep,2)} = \Sexpr{round(rain_stats$Pr_null_Indep,2)}$ \\
+$Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo}) = \Sexpr{round(rain_stats$Pr_Both_Indep,2)}$ \\
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo})$ \\
+\normalsize
+
+\columnbreak
+
+<<rain_graph2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+rain %>% filter(day<=30) %>%
+  select(day,OS,SP) %>%
+  mutate(SP=SP*0.7) %>%
+  gather(key="State",value="rain",-day) %>% 
+  ggplot() +
+  geom_col(aes(x=day,y=rain,fill=State), alpha=0.5, position=position_dodge(width=0.3)) +
+  theme_classic()
+
+@
+\footnotesize
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = \Sexpr{round(rain_stats %>% pull(Pr_OS),2)} * \Sexpr{round(rain_stats %>% pull(Pr_SP),2)} = \Sexpr{round(rain_stats %>% pull(Pr_null),2)}$ \\
+$Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo}) = \Sexpr{round(rain_stats %>% pull(Pr_Both),2)}$ \\
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) \neq Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo})$ \\
+\normalsize
+\end{multicols}
+\end{frame}
 
 \section{Explanation}
 
@@ -114,7 +236,7 @@
 \begin{frame}
 \frametitle{Learning from Data}
 \begin{itemize}
-\item Even when we compare multiple cases: 
+\item Even when we compare multiple cases:
 \pause
 \item \textbf{Correlation is not causation}
 \pause
@@ -131,6 +253,8 @@
 \item \textit{More} data will not help
 \pause
 \item The problem is the \textit{type} of data; it does not allow us to answer the causal question 
+\pause
+\item Remember, \textbf{regression only buys you correlation}
 \end{itemize}
 \end{frame}
 

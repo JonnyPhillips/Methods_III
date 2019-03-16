@@ -1,0 +1,334 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png')
+@
+
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 1 - Review}
+\author{Jonathan Phillips}
+\date{February 2019}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Course Objectives}
+\begin{enumerate}
+\item temp
+\end{enumerate}
+\end{frame}
+
+\section{Probability}
+
+\begin{frame}
+\frametitle{Data}
+\begin{enumerate}
+\item We work with variables, which VARY!
+\end{enumerate}
+\begin{multicols}{2}
+<<var, results='asis'>>=
+data <- tibble(Variable=rnorm(10000,0,1)) 
+data %>% slice(1:10) %>% xtable(row.names=F)
+
+@
+\columnbreak
+<<var2, fig.keep="all">>=
+data %>% ggplot() + 
+  geom_line(aes(x=Variable), stat="density") +
+  theme_classic()
+@
+\end{multicols}
+\end{frame}
+
+\section{What does Regression do?}
+
+\begin{frame}
+\frametitle{Regression}
+\begin{itemize}
+\item Regression is a \textbf{Conditional Expectation Function}
+\pause
+\item Conditional on $x$, what is our expectation (mean value) of $y$?
+\pause
+\item $E(y|x)$
+\pause
+\item When age is 20 ($x=40$), the average salary is R1.000 ($y=1.000$)
+\item When age is 40 ($x=40$), the average salary is R2.000 ($y=2.000$)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression}
+\begin{itemize}
+\item Regression is a \textbf{Conditional Expectation Function}
+\end{itemize}
+%Graph of CEF
+\end{frame}
+
+<<corr_regn>>=
+corr_regn <- tibble(x=rnorm(100,2,1),
+       y=x+rnorm(100,0,1))
+
+corr <- corr_regn %>% summarize(corr=cor(x,y)) %>% pull(corr) %>% round(3) 
+
+regn <- corr_regn %>% zelig(y~x, data=., model="ls") %>% summary()
+
+regn_std <- corr_regn %>% mutate_at(vars(x,y),scale) %>% 
+  zelig(y~x, data=., model="ls") %>% 
+  from_zelig_model() %>% 
+  tidy() %>% 
+  filter(term=="x") %>% 
+  pull(estimate) %>% 
+  round(3)
+
+@
+
+
+\begin{frame}
+\frametitle{Regression}
+\begin{itemize}
+\item Regression with two variables is very similar to calculating correlation
+\pause
+\item $\hat{beta}$=cor(x,y) * \frac{\sigma_Y}{\sigma_X}$
+\pause
+\item It's \textit{identical} if we standardize both variables first ($\frac{(x-\bar{x])}{\sigma_x}$)
+\end{itemize}
+<<corr_regn_fig1>>=
+corr_regn %>% ggplot() + 
+  geom_point(aes(x=x,y=y)) +
+  theme_classic()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression}
+\begin{itemize}
+\item Regression with two variables is very similar to calculating correlation
+\pause
+\item $\hat{beta}$=cor(x,y) * \frac{\sigma_Y}{\sigma_X}$
+\pause
+\item It's \textit{identical} if we standardize both variables first ($\frac{(x-\bar{x])}{\sigma_x}$)
+\end{itemize}
+<<corr_regn_fig2>>=
+corr_regn %>% ggplot() + 
+  geom_point(aes(x=x,y=y)) +
+  theme_classic()
+@
+Correlation is \Sexpr{corr}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression}
+\begin{itemize}
+\item Regression with two variables is very similar to calculating correlation
+\pause
+\item $\hat{beta}$=cor(x,y) * \frac{\sigma_Y}{\sigma_X}$
+\pause
+\item It's \textit{identical} if we standardize both variables first ($\frac{(x-\bar{x])}{\sigma_x}$)
+\end{itemize}
+<<corr_regn_fig2>>=
+corr_regn %>% ggplot() + 
+  geom_point(aes(x=x,y=y)) +
+  geom_smooth(aes(x=x,y=y), method="lm", se=F, col="black") +
+  theme_classic()
+@
+The regression result is:
+<<>>=
+
+@
+
+\end{frame}
+
+\section{Guide to Designing Regressions}
+
+\begin{frame}
+\frametitle{Regression Guide}
+\begin{enumerate}
+\item \textbf{Choose variables and measures:} To test a specific hypothesis
+\item \textbf{Choose a Model/Link Function:} Should match the data type of your outcome variable
+\item \textbf{Choose Covariates:} To match your strategy of inference
+\item \textbf{Choose Fixed Effects:} To focus on a specific level of variation
+\item \textbf{Choose Standard Error Structure:} To match known dependencies/clustering in the data
+\item \textbf{Interpret the coefficients:} Depending on the type/scale of the explanatory variable
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Models}
+The Regression Model reflects the data type of the outcome variable:
+\begin{itemize}
+\item Continuous -> Ordinary Least Squares  
+<<echo=T, eval=F>>=
+zelig(Y ~ X,data=d,model="ls")
+@
+\item Binary -> Logit  
+<<echo=T, eval=F>>=
+zelig(Y ~ X,data=d,model="logit")
+@
+\item Unordered categories -> Multinomial logit  
+<<echo=T, eval=F>>=
+zelig(Y ~ X,data=d,model="mlogit")
+@
+\item Ordered categories -> Ordered logit  
+<<echo=T, eval=F>>=
+zelig(Y ~ X,data=d,model="ologit")
+@
+\item Count -> Poisson  
+<<echo=T, eval=F>>=
+zelig(Y ~ X,data=d,model="poisson")
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpreting Regression Results}
+\begin{itemize}
+\item Difficult! It depends on the scale of the explanatory variable, scale of the outcome, the regression model we used, and the presence of any interaction
+\item Basic OLS:
+\begin{itemize}
+\item 1 [unit of explanatory variable] change in the explanatory variable is associated with a $\beta$ [unit of outcome variable] change in the outcome
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Predictions from Regressions}
+\begin{itemize}
+\item temp
+\end{itemize}
+\end{frame}
+
+%PVs for OLS, for logit, FDs
+%PVs vs. EVs
+
+\section{What does Regression NOT do?}
+
+<<egdata1,echo=FALSE,warning=FALSE,message=FALSE>>=
+set.seed(05410)
+N <- 1000
+gender <- rbinom(N,1,0.5)
+income <- gender*1000+rnorm(N,4000,800)
+redist <- gender*(-3)+rnorm(N,0,2)
+
+d <- data.frame(gender,income,redist)
+d$gender <- as.factor(d$gender)
+@
+
+\begin{frame}
+\frametitle{Omitted Variable Bias}
+<<confound3b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Omitted Variable Bias}
+<<confound3c,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Omitted Variable Bias}
+<<confound2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Omitted Variable Bias}
+<<confound3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  geom_smooth(data=d[d$gender==1,], aes(x=income,y=redist),method="lm",se=FALSE, color="blue") + 
+  geom_smooth(data=d[d$gender==0,], aes(x=income,y=redist),method="lm", se=FALSE, color="red") + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+% Overlap/Functional form error
+% Measurement Error
+% Omitted Variable Bias
+% Reverse Causation/Endogeneity
+% Self-Selection Bias
+% Data Selection Bias
+
+% Stress - in prep for week 2 - that regression only buys you (conditional) correlation
+
+%Chenage all examples to age-gender-income
+
+\end{document}
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")

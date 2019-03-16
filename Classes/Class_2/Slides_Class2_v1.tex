@@ -58,6 +58,7 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{multirow}
+\usepackage{multicol}
 \usepackage{dcolumn}
 \usepackage{bigstrut}
 \usepackage{amsmath} 
@@ -100,6 +101,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 1 - Review}
 \author{Jonathan Phillips}
@@ -109,7 +112,91 @@
 
 \frame{\titlepage}
 
-\section{Causal Inference}
+\begin{frame}
+\frametitle{Probability Review}
+\begin{center}
+$Pr(A)=\frac{\text{Number of times A occurs}}{\text{Number of Trials}}$ \\
+Joint Probability: $Pr(A \cap B) = P(A,B)$ \\
+Conditional Probability: $Pr(A|B) = \frac{Pr(A \cap B)}{Pr(B)}$ \\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{center}
+Independence: $A$ and $B$ are independent iff $Pr(A \cap B) = Pr(A) * Pr(B)$ \\
+Then: $Pr(A|B) = \frac{Pr(A \cap B)}{Pr(B)} = \frac{Pr(A) * Pr(B)}{Pr(B)} = Pr(A)$ \\
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{itemize}
+\item A = It's raining in Osasco right now
+\item B = I flip this coin and get Heads
+\item Are these events independent?
+\pause
+\item Yes! One does not affect the other at all
+\item So $Pr(A \cap B) = Pr(A)*Pr(B)$
+\item $Pr(A \cap B) = 0.3 * 0.5 = 0.15$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+\begin{itemize}
+\item A = It's raining in Osasco right now
+\item B = It's raining in S\~{a}o Paulo right now
+\item Are these events independent?
+\pause
+\item No! If you know it's raining in Osasco there's a stronger chance it will be raining in S\~{a}o Paulo
+\item So $Pr(A \cap B) \neq Pr(A)*Pr(B)$
+\item $Pr(A \cap B) \neq 0.3 * 0.5 = 0.15$
+\item $Pr(A \cap B) > 0.15$ (probably)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Probability Review}
+
+\begin{multicols}{2}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/rain_graph1-1} 
+
+\end{knitrout}
+\footnotesize
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = 0.2 * 0.2 = 0.04$ \\
+$Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo}) = 0.05$ \\
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo})$ \\
+\normalsize
+
+\columnbreak
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/rain_graph2-1} 
+
+\end{knitrout}
+\footnotesize
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) = 0.37 * 0.36 = 0.13$ \\
+$Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo}) = 0.25$ \\
+$Pr(\text{Rain in Osasco})*Pr(\text{Rain in S\~{a}o Paulo}) \neq Pr(\text{Rain in Osasco} \cap  \text{Rain in S\~{a}o Paulo})$ \\
+\normalsize
+\end{multicols}
+\end{frame}
+
+\section{Explanation}
+
+\begin{frame}
+\frametitle{Explanation}
+\begin{itemize}
+\item Descriptive Inference
+\item Predictive Inference
+\item Causal Inference
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Learning from Data}
@@ -154,7 +241,7 @@
 \begin{frame}
 \frametitle{Learning from Data}
 \begin{itemize}
-\item Even when we compare multiple cases: 
+\item Even when we compare multiple cases:
 \pause
 \item \textbf{Correlation is not causation}
 \pause
@@ -171,6 +258,8 @@
 \item \textit{More} data will not help
 \pause
 \item The problem is the \textit{type} of data; it does not allow us to answer the causal question 
+\pause
+\item Remember, \textbf{regression only buys you correlation}
 \end{itemize}
 \end{frame}
 
@@ -284,6 +373,7 @@
 
 %Effects of causes
 
+
 \begin{frame}
 \frametitle{Causal Inference}
 \begin{itemize}
@@ -361,6 +451,8 @@
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+\section{Causal Inference}
 
 \begin{frame}
 \frametitle{Causal Inference}

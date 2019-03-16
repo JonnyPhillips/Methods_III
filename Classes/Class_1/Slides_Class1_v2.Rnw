@@ -1,0 +1,94 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png')
+@
+
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 1 - Review}
+\author{Jonathan Phillips}
+\date{February 2019}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Introduction}
+
+\begin{frame}
+\frametitle{Course Objectives}
+\begin{enumerate}
+\item temp
+\end{enumerate}
+\end{frame}
+
+\section{Probability and Statistics in 10 minutes}
+
+\begin{frame}
+\frametitle{Data}
+<<var, results='asis'>>=
+data <- tibble(Variable=rnorm(10000,0,1)) 
+data %>% slice(1:10) %>% stargazer()
+@
+\end{frame}
+
+
+\end{document}
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")
