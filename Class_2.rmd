@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. pp. xi-11](Classes/Class_2/Readings/Angrist and Pischke - Mastering Metrics.pdf)**
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. pp. xi-11](Classes/Class_2/Readings/Angrist and Pischke - Mastering Metrics Ch.1.pdf)**
 - **[Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 1](Classes/Class_2/Readings/Imbens & Rubin - Ch.1 - Causality The Basic Framework.pdf)**
 - **[KKV, Designing Social Inquiry. 1994. pp. 75 - 99](Classes/Class_2/Readings/KKV Designing Social Inquiry pp75-99.pdf)**
 
