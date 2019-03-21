@@ -258,7 +258,7 @@ persp(den3d, box=F, theta=220, phi=45)
 \begin{multicols}{2}
 <<var5, results='asis'>>=
 data <- tibble(Variable_1=rnorm(100000,0,1),
-               Variable_2=0.3*Variable_1+0.07*Variable_1^2+rnorm(100000,0,0.2)) 
+               Variable_2=0.6*Variable_1+0.07*Variable_1^2+rnorm(100000,0,0.2)) 
 data %>% sample_n(10) %>% xtable() %>% print(include.rownames=F)
 
 @
@@ -332,11 +332,59 @@ optimize_noise <- coefs %>% map_df(ssr,data_orig %>% mutate(y=y+rnorm(n,0,1)))
 \pause
 \end{itemize}
 \begin{multicols}{2}
+<<graph_ols0, fig.height=2, fig.width=2>>=
+  data_orig %>% mutate(coef=0,
+               y_alt=y_rnd+0*x,
+               intercept=2-2*0,
+               yhat=intercept+0*x) %>%
+    ggplot() + geom_point(aes(x=x,y=y)) +
+  theme_classic() +
+  xlim(0.5,3.5) +
+  ylim(-0.3,4.5) +
+  xlab("D")
+@
+\columnbreak
+ 
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Least Squares}
+\begin{itemize}
+\item Regression identifies the line through the data that minimizes the sum of squared vertical distances 
+\item $y_i = \alpha + \beta D_i + \epsilon_i$
+\end{itemize}
+\begin{multicols}{2}
+<<graph_ols0b, fig.height=2, fig.width=2>>=
+  data_orig %>% mutate(coef=0,
+               y_alt=y_rnd+0*x,
+               intercept=2-2*0,
+               yhat=intercept+0*x) %>%
+    ggplot() + geom_point(aes(x=x,y=y)) +
+  geom_abline(aes(intercept=intercept,slope=coef),col="red") +
+  theme_classic() +
+  xlim(0.5,3.5) +
+  ylim(-0.3,4.5) +
+  xlab("D")
+@
+\columnbreak
+ 
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Least Squares}
+\begin{itemize}
+\item Regression identifies the line through the data that minimizes the sum of squared vertical distances 
+\item $y_i = \alpha + \beta D_i + \epsilon_i$
+\end{itemize}
+\begin{multicols}{2}
 Slope = 0
 <<graph_ols1, fig.height=2, fig.width=2>>=
 tilt(0,data_orig)
 @
 \columnbreak
+\pause
 Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==0) %>% pull(sum_resid_sq) %>% round(1)}
 <<graph_ssr1, fig.height=2, fig.width=2>>=
 optimize %>% filter(coef<=0) %>%
@@ -487,6 +535,7 @@ optimize %>% filter(coef<=2) %>%
 \frametitle{Regression as Least Squares}
 \begin{itemize}
 \item If we add pure \textit{noise} to $y$, our estimate of $\beta$ is unchanged
+\pause
 \begin{itemize}
 \item The residual error increases
 \end{itemize}
@@ -499,6 +548,7 @@ set.seed(456)
 tilt(1,data_orig %>% mutate(y=y+rnorm(n,0,1))) + geom_abline()
 @
 \columnbreak
+\pause
 Sum of Residuals$^2$ = \Sexpr{optimize_noise %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1)}
 <<graph_ssr7, fig.height=2, fig.width=2>>=
 optimize_noise %>% filter(coef<=2) %>%
@@ -519,7 +569,8 @@ optimize_noise %>% filter(coef<=2) %>%
 \begin{itemize}
 \item Dummy control variables \textit{remove variation} associated with specific levels or categories
 \begin{itemize}
-\item The same for fixed effects
+\item The same for Fixed Effects
+\pause
 \end{itemize}
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \epsilon_i$
 \end{itemize}
@@ -602,7 +653,7 @@ data_fe %>% ggplot() +
   ylab("y")
 @
 \columnbreak
-What if we treated each group \textit{separately}?
+What if we ran the regression for each group \textit{separately}?
 \end{multicols}
 \end{frame}
 
@@ -692,8 +743,8 @@ data_fe %>% ggplot() +
 \footnotesize
 Equivalently, dummy control variables restrict comparisons to \textbf{within the same group}:
 \begin{enumerate}
-\item How much does $X$ affect $Y$ within the blue group? 0
-\item How much does $X$ affect $Y$ within the red group? 0
+\item How much does $D$ affect $Y$ within the blue group? 0
+\item How much does $D$ affect $Y$ within the red group? 0
 \item What's the average of (1) and (2) (weighted by the number of units in each group)? 0
 \normalsize
 \end{enumerate}
@@ -704,7 +755,8 @@ Equivalently, dummy control variables restrict comparisons to \textbf{within the
 \frametitle{Regression as Least Squares}
 \begin{itemize}
 \item Continuous control variables \textit{remove variation} based on how much the control explains $y$
-\item $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \epsilon_i$
+\pause
+\item $y_i = \alpha + \beta_1 D_i + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
 <<graph_ols_control1, fig.height=2, fig.width=2>>=
@@ -725,6 +777,7 @@ data_control %>% ggplot() +
 
 @
 \columnbreak
+\pause
 <<reg_ols_control1>>=
 reg_coef <- lm(y~d, data=data_control) %>% 
   tidy() %>%
@@ -844,9 +897,13 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 
 @
 \begin{itemize}
-\item Equivalently, we subset to each value of $x$, and find each slope
-\item Then average these slopes, $\beta_1=\Sexpr{coef_means}$
+\item Equivalently, we subset the data to each value of $X$, and find each slope
+\pause
+\item Then average these slopes, $\beta_1 \sim 1$
+\pause
 \item Impossible with truly continuous variables
+\pause
+\item So regression uses linearity to fill in the gaps
 \end{itemize}
 \end{multicols}
 \end{frame}
@@ -856,7 +913,21 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \begin{itemize}
 \item Regression is also a \textbf{Conditional Expectation Function}
 \pause
-\item Conditional on $x$, what is our expectation (mean value) of $y$?
+\item \textbf{Conditional on D,} What is our expectation (mean value) of $y$?
+\end{itemize}
+\small
+\begin{center}
+\item $y_i = \alpha + \beta_1 D_i + \epsilon_i$ \\
+\pause
+\item $E(y) = \alpha + \beta_1 D$ \\
+\end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{itemize}
+\item \textbf{Conditional on a specific value of D,} what is our expectation (mean value) of $y$?
 \end{itemize}
 \small
 \begin{center}
@@ -870,7 +941,7 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \pause
 \item $(Attitude_i | Income_i=3000) = \Sexpr{round(2.235-0.000818*3000,2)} + N(0,2.38)$ \\
 \pause
-\item $E(Attitude | Income_i=3000) = \Sexpr{round(2.235-0.000818*3000,2)}$
+\item $E(Attitude | Income=3000) = \Sexpr{round(2.235-0.000818*3000,2)}$
 \end{center}
 \normalsize
 \end{frame}
@@ -878,8 +949,7 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item Regression is also a \textbf{Conditional Expectation Function}
-\item Conditional on $x$, what is our expectation (mean value) of $y$?
+\item \textbf{Conditional on a specific value of D,} what is our expectation (mean value) of $y$?
 \end{itemize}
 \small
 \begin{center}
@@ -890,7 +960,7 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \normalsize
 \pause
 \begin{itemize}
-\item $E(y|x)$, $E(Attitude | Income)$
+\item $E(Attitude | Income)$
 \begin{itemize}
 \item When income is 3000, the average attitude is \Sexpr{round(2.235-0.000818*3000,2)}
 \pause
@@ -899,9 +969,43 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \item When income  is -1000, the average attitude is \Sexpr{round(2.235-0.000818*-1000,2)}
 \end{itemize}
 \pause
-\item $E(attitude|income,age,gender,municipality)$
+\item $E(Attitude|\text{Income, Age, Gender, Municipality})$
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+<<cond_exp1a,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+<<cond_exp1b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+<<cond_exp1c,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
@@ -918,7 +1022,7 @@ d %>% ggplot() +
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+<<cond_exp1b2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
 
 preds_3000 <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
   setx(income=3000) %>%
@@ -946,15 +1050,48 @@ d %>% ggplot() +
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \pause
 \item But we \textbf{NEVER} know the exact value of $\beta$
 \pause
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \pause
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \pause
+\end{itemize}
+\end{itemize}
+\begin{multicols}{2}
+<<beta_dist_table_a, results='asis'>>=
+d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
+@
+\columnbreak
+<<beta_dist_a, fig.height=2.3, fig.width=2.7>>=
+beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
+
+beta %>% ggplot() + 
+  geom_vline(xintercept=-0.0008175,lty=1) +
+    geom_vline(xintercept=0,lty=2) +
+  theme_classic() +
+  xlab("Beta") +
+    ylab("Density") +
+    xlim(-0.0008175-2.5*0.00007832,0) +
+    ylim(0,5500) + 
+  theme(axis.text=element_text(size=8))
+@
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{itemize}
+\item How do we work out the conditional expectation? We estimate the $\beta$s
+\item But we \textbf{NEVER} know the exact value of $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
+\begin{itemize}
+\item That's why every $\beta$ comes with a standard error
 \end{itemize}
 \end{itemize}
 \begin{multicols}{2}
@@ -964,12 +1101,18 @@ d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
 @
 \columnbreak
-<<beta_dist, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
+<<beta_dist, fig.height=2.3, fig.width=2.7>>=
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
+beta %>% ggplot() + 
+  geom_line(aes(x=beta),stat="density",col="#2ca25f") +
+  geom_vline(xintercept=-0.0008175,lty=1) +
+    geom_vline(xintercept=0,lty=2) +
   theme_classic() +
-  xlab("Beta")
+  xlab("Beta") +
+    ylab("Density") +
+    xlim(-0.0008175-2.5*0.00007832,0) +
+    ylim(0,5500) + 
+  theme(axis.text=element_text(size=8))
 @
 \end{multicols}
 \end{frame}
@@ -977,37 +1120,9 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
-\begin{itemize}
-\item That's why every $\beta$ comes with a standard error
-\end{itemize}
-\end{itemize}
-\begin{multicols}{2}
-<<beta_dist_table_2, results='asis'>>=
-d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
-@
-\columnbreak
-<<beta_dist_2, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
-
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="Mean=-0.0008175")) +
-  theme_classic()
-@
-\end{multicols}
-\end{frame}
-
-\begin{frame}
-\frametitle{Regression as Conditional Expectation}
-\begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
-\item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \end{itemize}
@@ -1019,14 +1134,20 @@ d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
 @
 \columnbreak
-<<beta_dist_3, fig.height=2.7, fig.width=2.7>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
+<<beta_dist_3, fig.height=2.3, fig.width=2.7>>=
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="+/- 1.96*SE")) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=350, yend=350), lty=2) +
-  theme_classic()
+beta %>% ggplot() + 
+  geom_line(aes(x=beta),stat="density",col="#2ca25f") +
+  geom_vline(xintercept=-0.0008175,lty=1) +
+  geom_vline(xintercept=0,lty=2) +
+  annotate("text",x=-0.0008175,y=250,label="+/- 1.96*SE") +
+  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=530, yend=530), lty=2) +
+  theme_classic() +
+  xlab("Beta") +
+    ylab("Density") +
+    xlim(-0.0008175-2.5*0.00007832,0) +
+    ylim(0,5500) + 
+  theme(axis.text=element_text(size=8))
 @
 \end{multicols}
 \end{frame}
@@ -1034,9 +1155,9 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \end{itemize}
@@ -1048,16 +1169,22 @@ d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
 @
 \columnbreak
-<<beta_dist_4, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
+<<beta_dist_4, fig.height=2.3, fig.width=2.7>>=
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="95% CI")) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=350, yend=350), lty=2) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175-1.96*0.00007832,y=0,yend=350), lty=2) +
-  geom_segment(aes(x=-0.0008175+1.96*0.00007832,xend=-0.0008175+1.96*0.00007832,y=0,yend=350), lty=2) +
-  theme_classic()
+beta %>% ggplot() + 
+  geom_line(aes(x=beta),stat="density",col="#2ca25f") +
+  geom_vline(xintercept=-0.0008175,lty=1) +
+  geom_vline(xintercept=0,lty=2) +
+  annotate("text",x=-0.0008175,y=250,label="95% CI") +
+  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=530, yend=530), lty=2) +
+  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175-1.96*0.00007832,y=0,yend=530), lty=2) +
+  geom_segment(aes(x=-0.0008175+1.96*0.00007832,xend=-0.0008175+1.96*0.00007832,y=0,yend=530), lty=2) +
+  theme_classic() +
+  xlab("Beta") +
+    ylab("Density") +
+    xlim(-0.0008175-2.5*0.00007832,0) +
+    ylim(0,5500) + 
+  theme(axis.text=element_text(size=8))
 @
 \end{multicols}
 \end{frame}
@@ -1250,7 +1377,7 @@ corr_regn %>% mutate_at(vars(x,y),scale) %>%
 \columnbreak
 \begin{itemize}
 \item Correlation is \Sexpr{corr}
-\item It's \textit{identical} if we standardize both variables first ($\frac{(x-\bar{x})}{\sigma_x}$)
+\item It's \textbf{identical} if we standardize both variables first ($\frac{(x_i-\bar{x})}{\sigma_x}$)
 \item Standardized Regression Results:
 \end{itemize}
 <<corr_regn_table3, results='asis'>>=
@@ -1338,7 +1465,7 @@ $$r_{yx_1|x_2} = \frac{r_{yx_1} - r_{yx_2}r_{x_1x_2}}{\sqrt{(1-r^2_{yx_2})(1-r^2
 \pause
 \item We include a control for country
 \pause
-\item But everyone in Qatar earns exactly \$1m - no variation in income!
+\item But everyone in our data from Qatar earns exactly \$1m - no variation in income!
 \pause
 \item We may as well throw the Qatar data away
 \end{itemize}
@@ -1352,18 +1479,22 @@ The Regression Model reflects the data type of the outcome variable:
 \begin{itemize}
 \item Pick a precise number that reflects your attitude to redistribution
 \end{itemize}
+\pause
 \item Binary -> Logit  
 \begin{itemize}
 \item Do you support redistribution, yes or no?
 \end{itemize}
+\pause
 \item Unordered categories -> Multinomial logit  
 \begin{itemize}
 \item Do you think redistribution is a western, oriental or african concept?
 \end{itemize}
+\pause
 \item Ordered categories -> Ordered logit  
 \begin{itemize}
 \item Do you want a lot more, more, the same, less, or a lot less redistribution?
 \end{itemize}
+\pause
 \item Count -> Poisson  
 \begin{itemize}
 \item In the past year, how many times have you complained about redistribution?
@@ -1380,7 +1511,8 @@ The Regression Model reflects the data type of the outcome variable:
 \pause
 \item Control for gender if we want to compare men with men, women with women
 \pause
-\item Only include where there is theory or evidence that this variable could be an \textbf{omitted variable}
+\item Only include controls where there is theory or evidence that this variable could be an \textbf{omitted variable}
+\pause
 \end{itemize}
 \end{frame}
 
@@ -1405,12 +1537,17 @@ The Regression Model reflects the data type of the outcome variable:
 \frametitle{6. Errors Structure}
 \begin{itemize}
 \item An assumption of regression analysis is that the errors are independent
+\pause
 \begin{itemize}
 \item Knowing the value of one error tells you \textit{nothing} about the value of the next error
 \end{itemize}
-\item But your attitudes to redistribution are probably very similar to everyone you live with, even after controlling for income etc. due to 'unobservable' variables (conversations over dinner...)
+\pause
+\item But attitudes to redistribution are probably very similar to everyone you live with, even after controlling for income etc. 
+\pause
+\item Due to 'unobservable' variables (conversations over dinner...)
 \pause
 \item So we don't really have 2 observations, we have closer to 1 'independent' observation
+\pause
 \item So the standard errors for our $\beta$'s are \textit{over-confident} (too small)
 \pause
 \item We need to adjust for these dependencies with clustered standard errors
@@ -1465,13 +1602,18 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \item Difficult! It depends on:
 \begin{enumerate}
 \item The scale of the explanatory variable
+\pause
 \item The scale of the outcome
+\pause
 \item The regression model we used
+\pause
 \item The presence of any interaction
+\pause
 \end{enumerate}
 \item Basic OLS: $y_i = \alpha + \beta D_i + \epsilon$
+\pause
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $\beta$ \textcolor{blue}{[unit of $y$]} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$\beta$ [unit of $y$]} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1488,7 +1630,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item Basic OLS \textbf{with log outcome}: $log(y_i) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a  \textcolor{blue}{$100*(e^{\beta}-1)\%$} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a  \textcolor{blue}{$100*(e^{\beta}-1)\%$} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1505,7 +1647,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item Basic OLS \textbf{with log treatment}: $y_i = \alpha + \beta log(D_i) + \epsilon$
 \begin{itemize}
-\item A \textcolor{blue}{1\%} change in the explanatory variable is associated with a  \textcolor{blue}{$\beta*ln(\frac{101}{100})$} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1\%} change in the explanatory variable is associated with a  \textcolor{blue}{$\beta*log(\frac{101}{100})$} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1522,7 +1664,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Logit:} $Pr(y_i=1) = logit^{-1} (\alpha + \beta D_i + \epsilon)$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $\beta$ change in the \textcolor{blue}{log-odds} of $y_i=1$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$\beta$ change in the log-odds} of $y_i=1$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1539,7 +1681,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Logit:} $Pr(y_i=1) = logit^{-1} (\alpha + \beta D_i + \epsilon)$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of $y_i=1$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of $y_i=1$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1556,7 +1698,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Multinomial:} $Pr(y_i=C) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta_C}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of moving from the baseline category to the outcome category $C$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta_C}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of moving from the baseline category to the outcome category $C$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1573,7 +1715,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Ordered Multinomial:} $Pr(y_i=C) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta_C}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of moving up one unit on the outcome scale, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta_C}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of moving up one unit on the outcome scale, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1591,10 +1733,62 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \item \textbf{OLS with Interaction:} $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \beta_3 D_i * X_i + \epsilon$
 \begin{itemize}
 \item $$ \frac{\partial y}{\partial D} = \beta_1 + \beta_3 X$$
-\item $\beta_1$ is the effect of $D$ when $X=0$ - \textit{May not make sense!}
+\item \textcolor{blue}{$\beta_1$ is the effect of $D$ when $X=0$} : \textit{May not make sense!}
 \item Insert values for $X$ and see how the marginal effect changes
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{7. Interpreting Regression Results}
+\begin{multicols}{2}
+\footnotesize
+\textbf{OLS with Interaction:} \\
+$Redist_i = \alpha + \beta_1 Gender_i + \beta_2 Income_i \\+ \beta_3 Gender_i * Income_i + \epsilon_i$ \\
+\pause
+$$\frac{\partial Redist}{\partial Gender} = \beta_1 + \beta_3*Income$$ \\
+\pause
+$$\frac{\partial Redist}{\partial Income} = \beta_2 + \beta_3*Gender$$
+\normalsize
+\pause
+<<interaction_plot, results='asis'>>=
+set.seed(05410)
+N <- 1000
+gender <- rbinom(N,1,0.5)
+income <- gender*1000+rnorm(N,4000,800)
+redist <- gender*(-3)+rnorm(N,0,2) + income*0.08 + income*gender*0.001
+
+d_inter <- data.frame(gender,income,redist)
+d_inter$gender <- as.factor(d_inter$gender)
+
+inter_model <- d_inter %>% lm(redist ~ gender*income,data=.)
+
+d_inter %>% zelig(redist~gender*income, data=., model="ls", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
+
+@
+\columnbreak
+\pause
+<<interaction_plot_2, fig.height=1.6, fig.width=2.5, dpi=288>>=
+library(interplot)
+
+interplot(m=inter_model, var1="gender", var2="income",xmin=0,xmax=7000) + 
+  theme_classic() +
+  xlab("Income") + 
+  ylab("Marginal Effect \nof Gender \non Attitudes") +
+  xlim(0,7000) +
+  theme(axis.title=element_text(size=8,face="bold"))
+@
+\pause
+<<interaction_plot_3, fig.height=1.6, fig.width=2.5, dpi=288>>=
+interplot(m=inter_model, var1="income", var2="gender") + 
+  theme_classic() +
+  xlab("Gender") + 
+  ylab("Marginal Effect\nof Income \non Attitudes")+
+  theme(axis.title=element_text(size=8,face="bold"))
+@
+\end{multicols}
 \end{frame}
 
 \begin{frame}
@@ -1639,19 +1833,20 @@ $$Attitude_i = \alpha + \beta_1 \text{ Income}_i + \epsilon_i$$
 $$Attitude_i = 2.235 - 0.000818 \text{ Income}_i + N(0,2.378)$$
 \textbf{Increasing Income from 3000 to 6000:} \\
 $$\Delta Attitude_i = (2.235-0.000818*6000) - (2.235-0.000818*3000)$$
-$$\Delta Attitude_i = \Sexpr{2.235-0.000818*6000} - \Sexpr{2.235-0.000818*3000}$$
+$$\Delta Attitude_i = \Sexpr{2.235-0.000818*6000} - (\Sexpr{2.235-0.000818*3000})$$
 $$\Delta Attitude_i = \Sexpr{2.235-0.000818*6000 - (2.235-0.000818*3000)}$$
 \end{frame}
 
 \begin{frame}
 \frametitle{8. Predictions from Regressions}
 <<predictions1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-
 d %>% ggplot() + 
   geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
   geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
+  geom_point(x=3000,y=preds_3000, col="red", size=0.2) +
+  geom_point(x=6000,y=preds_6000, col="blue", size=0.2) +
   geom_point(x=6000,y=2.235-0.000818*6000, col="blue", size=4) +
+  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
   theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
 @
 \end{frame}
@@ -1680,6 +1875,7 @@ pvs %>% ggplot() +
   theme_classic() + xlab("Attitude to Redistribution")
 @
 \columnbreak
+\pause
 First Differences:
 <<predictions3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
 pvs  %>%
@@ -1698,18 +1894,23 @@ pvs  %>%
 \frametitle{8. Predictions from Regressions}
 \begin{itemize}
 \item The regression model matters because the wrong model makes non-sensical predictions
+\pause
 \item Consider a binary outcome: $Gender_i = \alpha + \beta Income_i + \epsilon_i$
+\pause
 \item Compare the OLS and Logit regression tables:
+\pause
 \end{itemize}
 \begin{multicols}{2}
 <<preds_1_ols,results='asis'>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="ls", cite=F) %>%
+  d %>% mutate(gender=as.numeric(as.character(gender))) %>% 
+  zelig(gender~income, data=., model="ls", cite=F) %>%
   from_zelig_model() %>%
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
 @
 \columnbreak
 <<preds_1_logit,results='asis'>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="logit", cite=F) %>%
+  d %>% mutate(gender=as.numeric(as.character(gender))) %>% 
+  zelig(gender~income, data=., model="logit", cite=F) %>%
   from_zelig_model() %>%
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
 @
@@ -1763,8 +1964,6 @@ pvs  %>%
 \end{enumerate}
 \pause
 \item These all require \textbf{research design}, \textbf{theory} and \textbf{assumptions}
-\pause
-\item 
 \end{itemize}
 \end{frame}
 
@@ -1778,19 +1977,19 @@ pvs  %>%
 \pause
 \item By chance...
 \pause
-\item Due to complex social patterns...
+\item Due to complex social and historical patterns...
 \pause
 \item But we cannot conclude that $D$ causes or explains $Y$
 \pause
 \end{itemize}
 \item \textit{More} data will not help
 \pause
-\item The problem is the \textit{type} of data; it does not allow us to answer the causal question 
+\item The problem is the \textit{content} of data; it does not allow us to answer the causal question 
 \end{itemize}
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=}
-\includegraphics[width=0.9\textwidth]{Chocolate_Nobel.jpg}
+\includegraphics[width=0.85\textwidth]{Chocolate_Nobel.jpg}
 
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages={1}]{chart_1.pdf}
@@ -1808,11 +2007,16 @@ pvs  %>%
 \frametitle{What Does Regression NOT Do?}
 \begin{itemize}
 \item Why is correlation (regression) not causation?
+\pause
 \begin{enumerate}
 \item Omitted Variable Bias
+\pause
 \item Reverse Causation
+\pause
 \item Selection Bias
+\pause
 \item Measurement Bias
+\pause
 \item Lack of Overlap, Model Dependence
 \end{enumerate}
 \end{itemize}
@@ -1882,10 +2086,12 @@ reg_rev_caus2 <- d %>% mutate(income=scale(income),
   stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
 @
 \end{multicols}
+\pause
 \item Remember, regression measures the \textit{vertical} (not diagonal) distances to the regression line
 \begin{itemize}
 \item It minimizes the \textit{prediction errors} for $Y$
 \end{itemize}
+\pause
 \item But that doesn't mean it identifies the direction of causation!
 \end{itemize}
 \end{frame}
@@ -1924,7 +2130,7 @@ d_sel %>% ggplot() +
 \begin{itemize}
 \item Imagine we do not see 'rich' units with high income (above R\$4000)
 \end{itemize}
-<<selection2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+<<selection2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3, fig.width=5>>=
 d_sel %>%  ggplot() + 
   geom_point(aes(x=income,y=redist, group=rich,color=rich), size=0.7) + 
   geom_smooth(data=d[d$income<4000,], aes(x=income,y=redist),method="lm",se=FALSE, color="black") + 
@@ -1944,7 +2150,9 @@ d_sel %>%  ggplot() +
 \item \textbf{Selection into the dataset}
 \item \textbf{Selection into treatment}
 \end{enumerate}
+\pause
 \item In each case, we don't see the \textit{full} relationship between $D$ and $Y$
+\pause
 \item So our regression estimates are biased
 \end{itemize}
 \end{frame}
@@ -1955,9 +2163,12 @@ d_sel %>%  ggplot() +
 \item There are four selection risks:
 \begin{enumerate}
 \item \textbf{Selection into existence:}
+\pause
 \begin{itemize}
 \item Where do units (eg. political parties) come from?
+\pause
 \item Probably only parties that have a chance of success are formed
+\pause
 \item Does forming a party cause electoral success? Not for most people!
 \end{itemize}
 \end{enumerate}
@@ -1971,9 +2182,11 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{1}
 \item \textbf{Selection into survival:}
+\pause
 \begin{itemize}
 \item Certain types of units disappear, so the units we see don't tell the full story
 \end{itemize}
+\pause
 \end{enumerate}
 \end{itemize}
 \begin{multicols}{2}
@@ -1981,7 +2194,9 @@ d_sel %>%  ggplot() +
 \columnbreak
 \begin{itemize}
 \item Where would additional armour protect bombers?
+\pause
 \item Returned bombers got hit
+\pause
 \item But we do not know where \textit{bombers that did not return} got hit
 \end{itemize}
 \end{multicols}
@@ -1994,9 +2209,12 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{2}
 \item \textbf{Selection into the dataset:}
+\pause
 \begin{itemize}
 \item Our dataset may not be representative
-\item Only units with particular values of $X$ and $Y$ enter the dataset
+\pause
+\item Only units with particular values of $D$ and $Y$ enter the dataset
+\pause
 \item Eg. If survey respondents who refuse are different from those who respond - the anti-redistribution poor may dislike answering surveys 
 \end{itemize}
 \end{enumerate}
@@ -2010,9 +2228,12 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{3}
 \item \textbf{Selection into treatment:}
+\pause
 \begin{itemize}
 \item All units are in our dataset, but they \textit{choose} their treatment value
+\pause
 \item Who chooses treatment? Those with the most to benefit, i.e. depending on $Y$!
+\pause
 \item Applying treatment to the others would probably have a very different effect
 \end{itemize}
 \end{enumerate}
@@ -2029,11 +2250,11 @@ d_sel %>%  ggplot() +
   \caption{Effects of Measurement Error}
     \begin{tabular}{|l|l|p{4cm}|}
     \hline
-          & Measured with Bias & Measured with Random Noise \bigstrut\\
+          & Measured with \textbf{Bias} & Measured with \textbf{Random Noise} \bigstrut\\
     \hline
-    Outcome Variable & Effect biased & No bias but wider standard errors \bigstrut\\
+    Outcome Variable & Coefficient biased & No bias but wider standard errors \bigstrut\\
     \hline
-    Treatment Variable & Effect biased & Effect biased to zero \bigstrut\\
+    Treatment Variable & Coefficient biased & Effect biased towards zero \bigstrut\\
     \hline
     \end{tabular}%
   \label{tab:addlabel}%
@@ -2118,15 +2339,19 @@ d_measure %>% mutate(income=income+rnorm(nrow(d),0,2)) %>%
 \frametitle{5. Lack of Overlap}
 \begin{itemize}
 \item Regression normally helps us pick appropriate comparisons
+\pause
 \begin{itemize}
 \item Eg. Controlling for gender, what is the effect of income on attitudes to redistribution? 
 \end{itemize}
+\pause
 \item But what if there are no women with high income?
+\pause
 \item Regression \textit{creates} comparisons for us
 \begin{itemize}
 \item How? Using the functional form of the regression
 \item A linear regression interpolates/extrapolates \textit{linearly} to 'create' comparison cases
 \end{itemize}
+\pause
 \item Lack of overlap probably means we \textit{cannot} explain outcomes with this data
 \end{itemize}
 \end{frame}
@@ -2193,13 +2418,18 @@ d4 %>% ggplot() +
 \frametitle{5. Lack of Overlap}
 \begin{itemize}
 \item With more than a few variables, lack of overlap is \textit{guaranteed}
+\pause
 \item 6 variables with 10 categories each = $10^6 = 1,000,000$ possibilities
+\pause
 \item Common datasets have 0\% counterfactuals present in the data (King 2006)
+\pause
 \begin{itemize}
 \item How many 45 year-old female accountants with a PhD and a cat who live in Centro are there?
+\pause
 \item And we need some that are low-income and some that are high-income
 \end{itemize}
 \item A problem of \textbf{multi-dimensionality}
+\pause
 \item And of \textbf{model dependence} - our results depend on the functional form in our regression model
 \end{itemize}
 \end{frame}
@@ -2210,15 +2440,20 @@ d4 %>% ggplot() +
 \item Regression is just fancy correlation
 \begin{itemize}
 \item A \textbf{conditional expectation}
+\pause
 \end{itemize}
 \item 'Smart' regression pays more attention to what \textbf{comparisons} you want to make than to statistical tests
 \begin{itemize}
 \item And to \textbf{interpretation/prediction} rather than p-values
 \end{itemize}
+\pause
 \item Regression \textbf{cannot explain} relationships
 \begin{itemize}
 \item \textbf{Correlation is not causation}
+\pause
 \item We need to understand better \textbf{how the data were produced}
+\pause
+\item \textbf{Explanation} depends on research design, data selection, assumptions and qualitative evidence
 \end{itemize}
 \end{enumerate}
 \end{frame}

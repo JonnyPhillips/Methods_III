@@ -25,3 +25,8 @@ broom
 plotly
 MASS
 webshot
+abind
+Matrix
+lme4
+arm
+interplot

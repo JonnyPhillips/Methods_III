@@ -1,6 +1,56 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
-\documentclass[xcolor=x11names,compress]{beamer}
+\documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 %\documentclass[xcolor=x11names,compress,handout]{beamer}
 \usepackage[]{graphicx}
 \usepackage[]{color}
@@ -59,30 +109,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<setup, echo=F, warning=F, message=F>>=
-library(knitr)
-library(tidyverse)
-library(stargazer)
-library(xtable)
-library(zeligverse)
-library(broom)
-library(purrr)
-library(plotly)
-library(MASS)
-library(webshot)
-knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T)
-@
 
-<<egdata1,echo=FALSE,warning=FALSE,message=FALSE>>=
-set.seed(05410)
-N <- 1000
-gender <- rbinom(N,1,0.5)
-income <- gender*1000+rnorm(N,4000,800)
-redist <- gender*(-3)+rnorm(N,0,2)
 
-d <- data.frame(gender,income,redist)
-d$gender <- as.factor(d$gender)
-@
+
 
 
 
@@ -90,7 +119,7 @@ d$gender <- as.factor(d$gender)
 \subtitle{Week 1 - Review of Regression}
 \author{Jonathan Phillips}
 \date{March 2019}
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 \frame{\titlepage}
@@ -213,19 +242,34 @@ d$gender <- as.factor(d$gender)
 \item We work with variables, which VARY!
 \end{itemize}
 \begin{multicols}{2}
-<<var, results='asis'>>=
-data <- tibble(Variable=rnorm(10000,0,1)) 
-data %>% sample_n(10) %>% xtable() %>% print(include.rownames=F)
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Sat Mar 16 08:25:14 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{r}
+  \hline
+Variable \\ 
+  \hline
+0.30 \\ 
+  -0.67 \\ 
+  0.39 \\ 
+  0.03 \\ 
+  -1.26 \\ 
+  1.26 \\ 
+  -1.44 \\ 
+  0.16 \\ 
+  0.50 \\ 
+  0.01 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-@
 \columnbreak
-<<var2, fig.keep="all">>=
-data %>% ggplot() + 
-  geom_line(aes(x=Variable), stat="density") +
-  theme_classic() +
-  theme(axis.text=element_text(size=14),
-        axis.title=element_text(size=14,face="bold"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/var2-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -235,18 +279,34 @@ data %>% ggplot() +
 \item We work with variables, which VARY!
 \end{itemize}
 \begin{multicols}{2}
-<<var3, results='asis'>>=
-data <- tibble(Variable_1=rnorm(10000,0,1),
-               Variable_2=rnorm(10000,0,1)) 
-data %>% sample_n(10) %>% xtable() %>% print(include.rownames=F)
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Sat Mar 16 08:28:46 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+Variable\_1 & Variable\_2 \\ 
+  \hline
+-0.44 & 0.63 \\ 
+  0.06 & 0.68 \\ 
+  -0.21 & -0.02 \\ 
+  0.44 & -0.25 \\ 
+  1.29 & 0.46 \\ 
+  -0.38 & -0.81 \\ 
+  -1.04 & 0.24 \\ 
+  -0.16 & 1.84 \\ 
+  1.29 & 0.06 \\ 
+  -0.10 & -0.18 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-@
 \columnbreak
-<<var4, fig.keep="all">>=
-den3d <- kde2d(data$Variable_1, data$Variable_2)
-#plot_ly(x = den3d$x, y = den3d$y, z = den3d$z) %>% add_surface()
-persp(den3d, box=F, theta=220, phi=45)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/var4-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -256,62 +316,39 @@ persp(den3d, box=F, theta=220, phi=45)
 \item We work with variables, which VARY!
 \end{itemize}
 \begin{multicols}{2}
-<<var5, results='asis'>>=
-data <- tibble(Variable_1=rnorm(100000,0,1),
-               Variable_2=0.3*Variable_1+0.07*Variable_1^2+rnorm(100000,0,0.2)) 
-data %>% sample_n(10) %>% xtable() %>% print(include.rownames=F)
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Thu Mar 21 09:13:31 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+Variable\_1 & Variable\_2 \\ 
+  \hline
+-0.86 & -0.69 \\ 
+  -0.35 & -0.44 \\ 
+  1.27 & 0.42 \\ 
+  -0.35 & -0.22 \\ 
+  -0.43 & -0.56 \\ 
+  0.05 & -0.04 \\ 
+  0.69 & 0.70 \\ 
+  1.27 & 1.07 \\ 
+  0.22 & -0.00 \\ 
+  -0.28 & -0.13 \\ 
+   \hline
+\end{tabular}
+\end{table}
 
-@
 \columnbreak
-<<var6, fig.keep="all">>=
-den3d <- kde2d(data$Variable_1, data$Variable_2)
-#plot_ly(x = den3d$x, y = den3d$y, z = den3d$z) %>% add_surface()
-#orca("var2.png")
-persp(den3d, box=F, theta=220, phi=45)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/var6-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
 
-<<ols_two_charts>>=
-set.seed(12345)
 
-n <- 30
-
-#Real coef of 1
-data_orig <- tibble(x=rnorm(n,2,0.6),
-               y_rnd=rnorm(n,0,0.6),
-               y=x+y_rnd)
-
-coefs <- seq(0,2,0.5)
-
-tilt <- function(coef,d){
-  d %>% mutate(coef=coef,
-               y_alt=y_rnd+coef*x,
-               intercept=2-2*coef,
-               yhat=intercept+coef*x) %>%
-    ggplot() + geom_point(aes(x=x,y=y)) +
-    geom_abline(aes(intercept=intercept,slope=coef),col="red") +
-    geom_segment(aes(x=x,xend=x,y=y,yend=yhat), lty=2, col="red") +
-  theme_classic() +
-  xlim(0.5,3.5) +
-  ylim(-0.3,4.5) +
-  xlab("D")
-}
-
-ssr <- function(coef,d){
-  d %>% mutate(coef=coef,
-               y_alt=y_rnd+coef*x,
-               intercept=2-2*coef,
-               yhat=intercept+coef*x,
-               resid_sq=(yhat-y)^2) %>%
-  summarize(sum_resid_sq=sum(resid_sq)) %>%
-    mutate(coef=coef)
-}
-
-optimize <- coefs %>% map_df(ssr,data_orig)
-optimize_noise <- coefs %>% map_df(ssr,data_orig %>% mutate(y=y+rnorm(n,0,1)))
-@
 
 \begin{frame}
 \frametitle{What Does Regression Actually Do?}
@@ -332,22 +369,54 @@ optimize_noise <- coefs %>% map_df(ssr,data_orig %>% mutate(y=y+rnorm(n,0,1)))
 \pause
 \end{itemize}
 \begin{multicols}{2}
-Slope = 0
-<<graph_ols1, fig.height=2, fig.width=2>>=
-tilt(0,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols0-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==0) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr1, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=0) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+ 
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Least Squares}
+\begin{itemize}
+\item Regression identifies the line through the data that minimizes the sum of squared vertical distances 
+\item $y_i = \alpha + \beta D_i + \epsilon_i$
+\end{itemize}
+\begin{multicols}{2}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols0b-1} 
+
+\end{knitrout}
+\columnbreak
+ 
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Least Squares}
+\begin{itemize}
+\item Regression identifies the line through the data that minimizes the sum of squared vertical distances 
+\item $y_i = \alpha + \beta D_i + \epsilon_i$
+\end{itemize}
+\begin{multicols}{2}
+Slope = 0
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols1-1} 
+
+\end{knitrout}
+\columnbreak
+\pause
+Sum of Residuals$^2$ = 29.6
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr1-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -359,21 +428,18 @@ optimize %>% filter(coef<=0) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 0.5
-<<graph_ols2, fig.height=2, fig.width=2>>=
-tilt(0.5,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols2-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==0.5) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr2, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=0.5) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+Sum of Residuals$^2$ = 21.6
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr2-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -385,21 +451,18 @@ optimize %>% filter(coef<=0.5) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 1
-<<graph_ols3, fig.height=2, fig.width=2>>=
-tilt(1,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols3-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr3, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=1) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+Sum of Residuals$^2$ = 18.3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr3-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -411,21 +474,18 @@ optimize %>% filter(coef<=1) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 1.5
-<<graph_ols4, fig.height=2, fig.width=2>>=
-tilt(1.5,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols4-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==1.5) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr4, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=1.5) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+Sum of Residuals$^2$ = 19.6
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr4-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -437,21 +497,18 @@ optimize %>% filter(coef<=1.5) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 2
-<<graph_ols5, fig.height=2, fig.width=2>>=
-tilt(2,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols5-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==2) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr5, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=2) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+Sum of Residuals$^2$ = 25.5
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr5-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -463,22 +520,18 @@ optimize %>% filter(coef<=2) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 1
-<<graph_ols6, fig.height=2, fig.width=2>>=
-tilt(1,data_orig)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols6-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr6, fig.height=2, fig.width=2>>=
-optimize %>% filter(coef<=2) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  theme_classic() +
-  geom_hline(yintercept=optimize %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1),lty=2) +
-  xlim(0,2) +
-  ylim(10,30) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+Sum of Residuals$^2$ = 18.3
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr6-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -487,6 +540,7 @@ optimize %>% filter(coef<=2) %>%
 \frametitle{Regression as Least Squares}
 \begin{itemize}
 \item If we add pure \textit{noise} to $y$, our estimate of $\beta$ is unchanged
+\pause
 \begin{itemize}
 \item The residual error increases
 \end{itemize}
@@ -494,23 +548,19 @@ optimize %>% filter(coef<=2) %>%
 \end{itemize}
 \begin{multicols}{2}
 Slope = 1
-<<graph_ols7, fig.height=2, fig.width=2>>=
-set.seed(456)
-tilt(1,data_orig %>% mutate(y=y+rnorm(n,0,1))) + geom_abline()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols7-1} 
+
+\end{knitrout}
 \columnbreak
-Sum of Residuals$^2$ = \Sexpr{optimize_noise %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1)}
-<<graph_ssr7, fig.height=2, fig.width=2>>=
-optimize_noise %>% filter(coef<=2) %>%
-  ggplot() +
-  geom_point(aes(x=coef,y=sum_resid_sq),col="red") +
-  geom_hline(yintercept=optimize_noise %>% filter(coef==1) %>% pull(sum_resid_sq) %>% round(1),lty=2) +
-  theme_classic() +
-  xlim(0,2) +
-  ylim(60,100) +
-  ylab("Sum Residuals^2") +
-  xlab("Slope")
-@
+\pause
+Sum of Residuals$^2$ = 63.9
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ssr7-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -519,34 +569,17 @@ optimize_noise %>% filter(coef<=2) %>%
 \begin{itemize}
 \item Dummy control variables \textit{remove variation} associated with specific levels or categories
 \begin{itemize}
-\item The same for fixed effects
+\item The same for Fixed Effects
+\pause
 \end{itemize}
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE1, fig.height=2, fig.width=2>>=
-set.seed(124)
-n <- 30
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE1-1} 
 
-data_fe <- tibble(group=factor(c(rep("a",n/2),rep("b",n/2))),
-                  x=rnorm(n,2,0.6),
-                  y=rnorm(n,0,0.6)) %>%
-  mutate(x=case_when(group=="a"~x,
-                     group=="b"~x+1),
-         y=case_when(group=="a"~y,
-                     group=="b"~y+1))
-
-data_fe %>% ggplot() + 
-  geom_point(aes(x=x,y=y)) +
-  geom_smooth(aes(x=x,y=y),col="black",method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
-
-@
+\end{knitrout}
 \columnbreak
 Ignoring the dummy control variable, the slope coefficient is 1 
 \end{multicols}
@@ -562,18 +595,11 @@ Ignoring the dummy control variable, the slope coefficient is 1
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE2, fig.height=2, fig.width=2>>=
-data_fe %>% ggplot() + 
-  geom_point(aes(x=x,y=y,col=group)) +
-  geom_smooth(aes(x=x,y=y),col="black",method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE2-1} 
 
-@
+\end{knitrout}
 \columnbreak
 But the data points really represent two very different groups, blues and reds
 \end{multicols}
@@ -589,20 +615,13 @@ But the data points really represent two very different groups, blues and reds
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \beta_2 X_j + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE3, fig.height=2, fig.width=2>>=
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE3-1} 
 
-data_fe %>% ggplot() + 
-  geom_point(aes(x=x,y=y, col=group)) +
-  geom_smooth(aes(x=x,y=y,col=group), method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
-@
+\end{knitrout}
 \columnbreak
-What if we treated each group \textit{separately}?
+What if we ran the regression for each group \textit{separately}?
 \end{multicols}
 \end{frame}
 
@@ -616,19 +635,11 @@ What if we treated each group \textit{separately}?
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \beta_2 X_j + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE4, fig.height=2, fig.width=2>>=
-data_fe %>% mutate(y=case_when(group=="a"~y+0.5,
-                               group=="b"~y-0.5)) %>%
-  ggplot() + 
-  geom_point(aes(x=x,y=y, col=group)) +
-  geom_smooth(aes(x=x,y=y,col=group), method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE4-1} 
+
+\end{knitrout}
 \columnbreak
 Dummy control variables \textit{remove} the average $Y$ differences between blues and reds
 \end{multicols}
@@ -644,20 +655,11 @@ Dummy control variables \textit{remove} the average $Y$ differences between blue
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \beta_2 X_j + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE5, fig.height=2, fig.width=2>>=
-data_fe %>% mutate(y=case_when(group=="a"~y+0.5,
-                               group=="b"~y-0.5)) %>%
-  ggplot() + 
-  geom_point(aes(x=x,y=y, col=group)) +
-  geom_smooth(aes(x=x,y=y,col=group), method="lm",se=F) +
-  geom_smooth(aes(x=x,y=y),col="black", method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE5-1} 
+
+\end{knitrout}
 \columnbreak
 The new regression line for the full data now has a slope of zero
 \end{multicols}
@@ -673,27 +675,17 @@ The new regression line for the full data now has a slope of zero
 \item $y_{ij} = \alpha + \beta_1 D_{ij} + \beta_2 X_j + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_FE_last, fig.height=2, fig.width=2>>=
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_FE_last-1} 
 
-data_fe %>% ggplot() + 
-  geom_point(aes(x=x,y=y, col=group)) +
-  geom_smooth(aes(x=x,y=y,col=group), method="lm",se=F) +
-  geom_smooth(data=data_fe %>% mutate(y=case_when(group=="a"~y+0.5,
-                               group=="b"~y-0.5)), 
-              aes(x=x,y=y),col="black", method="lm",se=F) +
-    theme_classic() +
-    xlim(1.2,4.5) +
-    ylim(-1,2) + 
-  theme(legend.position = "none") +
-  xlab("D") +
-  ylab("y")
-@
+\end{knitrout}
 \columnbreak
 \footnotesize
 Equivalently, dummy control variables restrict comparisons to \textbf{within the same group}:
 \begin{enumerate}
-\item How much does $X$ affect $Y$ within the blue group? 0
-\item How much does $X$ affect $Y$ within the red group? 0
+\item How much does $D$ affect $Y$ within the blue group? 0
+\item How much does $D$ affect $Y$ within the red group? 0
 \item What's the average of (1) and (2) (weighted by the number of units in each group)? 0
 \normalsize
 \end{enumerate}
@@ -704,35 +696,19 @@ Equivalently, dummy control variables restrict comparisons to \textbf{within the
 \frametitle{Regression as Least Squares}
 \begin{itemize}
 \item Continuous control variables \textit{remove variation} based on how much the control explains $y$
-\item $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \epsilon_i$
+\pause
+\item $y_i = \alpha + \beta_1 D_i + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_control1, fig.height=2, fig.width=2>>=
-set.seed(012)
-data_control <- tibble(x=sample(seq(1,5,1),n,replace=T),
-                       y_rnd=rnorm(n,0,0.6),
-                       d=x/2+rnorm(n,2,0.6),
-                       y=x+d+y_rnd,
-                       y_no_x=d+y_rnd,
-                       residuals=lm(y~x)$residuals)
-#cor(data_control$y_no_x,data_control$residuals)
-data_control %>% ggplot() + 
-  geom_point(aes(x=d,y=y)) +
-  geom_smooth(aes(x=d,y=y),col="black",method="lm",se=F) +
-    theme_classic() +
-  xlab("D") +
-  ylab("y")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_control1-1} 
 
-@
+\end{knitrout}
 \columnbreak
-<<reg_ols_control1>>=
-reg_coef <- lm(y~d, data=data_control) %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-@
-The coefficient $\beta_1$ is \Sexpr{reg_coef} \\
+\pause
+
+The coefficient $\beta_1$ is 2.267 \\
 Real effect = 1
 \end{multicols}
 \end{frame}
@@ -744,16 +720,13 @@ Real effect = 1
 \item $y_i = \alpha + \beta_1 D_i + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_control2, fig.height=2, fig.width=2>>=
-data_control %>% ggplot() + 
-  geom_text(aes(x=d,y=y,label=x)) +
-  geom_smooth(aes(x=d,y=y),col="black",method="lm",se=F) +
-    theme_classic() +
-  xlab("D") +
-  ylab("y")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_control2-1} 
+
+\end{knitrout}
 \columnbreak
-The coefficient $\beta_1$ is \Sexpr{reg_coef} \\
+The coefficient $\beta_1$ is 2.267 \\
 Real effect = 1
 \end{multicols}
 \end{frame}
@@ -765,25 +738,14 @@ Real effect = 1
 \item $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_control3, fig.height=2, fig.width=2>>=
-#cor(data_control$y_no_x,data_control$residuals)
-data_control %>% ggplot() + 
-  geom_text(aes(x=d,y=residuals,label=x)) +
-  geom_smooth(aes(x=d,y=residuals),col="black",method="lm",se=F) +
-  geom_smooth(aes(x=d,y=y),col="black",method="lm",se=F) +
-    theme_classic() +
-  xlab("D") +
-  ylab("y")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_control3-1} 
+
+\end{knitrout}
 \columnbreak
-<<reg_ols_control3>>=
-reg_coef2 <- lm(y~d+x, data=data_control) %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-@
-The coefficient $\beta_1$ is \Sexpr{reg_coef2} \\
+
+The coefficient $\beta_1$ is 1.024 \\
 Real effect = 1
 \end{multicols}
 \end{frame}
@@ -795,58 +757,21 @@ Real effect = 1
 \item $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \epsilon_i$
 \end{itemize}
 \begin{multicols}{2}
-<<graph_ols_control4, fig.height=2, fig.width=2>>=
-data_control %>% ggplot() + 
-  geom_text(aes(x=d,y=y,label=x)) +
-  geom_smooth(aes(x=d,y=y),col="black",method="lm",se=F) +
-  geom_smooth(data=data_control %>% filter(x==1),aes(x=d,y=y),col="#c6dbef",method="lm",se=F) +
-  geom_smooth(data=data_control %>% filter(x==2),aes(x=d,y=y),col="#9ecae1",method="lm",se=F) +
-  geom_smooth(data=data_control %>% filter(x==3),aes(x=d,y=y),col="#6baed6",method="lm",se=F) +
-  geom_smooth(data=data_control %>% filter(x==4),aes(x=d,y=y),col="#4292c6",method="lm",se=F) +
-  geom_smooth(data=data_control %>% filter(x==5),aes(x=d,y=y),col="#2171b5",method="lm",se=F) +
-  theme_classic() +
-  xlab("D") +
-  ylab("y")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graph_ols_control4-1} 
+
+\end{knitrout}
 \columnbreak
-<<reg_ols_control4>>=
-reg_coef4_1 <- lm(y~d+x, data=data_control %>% filter(x==1))  %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
 
-reg_coef4_2 <- lm(y~d+x, data=data_control %>% filter(x==2))  %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-
-reg_coef4_3 <- lm(y~d+x, data=data_control %>% filter(x==3))  %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-
-reg_coef4_4 <- lm(y~d+x, data=data_control %>% filter(x==4))  %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-
-reg_coef4_5 <- lm(y~d+x, data=data_control %>% filter(x==5))  %>% 
-  tidy() %>%
-  filter(term=="d") %>%
-  pull(estimate) %>%
-  round(3)
-
-coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_coef4_5)),2)
-
-@
 \begin{itemize}
-\item Equivalently, we subset to each value of $x$, and find each slope
-\item Then average these slopes, $\beta_1=\Sexpr{coef_means}$
+\item Equivalently, we subset the data to each value of $X$, and find each slope
+\pause
+\item Then average these slopes, $\beta_1 \sim 1$
+\pause
 \item Impossible with truly continuous variables
+\pause
+\item So regression uses linearity to fill in the gaps
 \end{itemize}
 \end{multicols}
 \end{frame}
@@ -856,7 +781,21 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \begin{itemize}
 \item Regression is also a \textbf{Conditional Expectation Function}
 \pause
-\item Conditional on $x$, what is our expectation (mean value) of $y$?
+\item \textbf{Conditional on D,} What is our expectation (mean value) of $y$?
+\end{itemize}
+\small
+\begin{center}
+\item $y_i = \alpha + \beta_1 D_i + \epsilon_i$ \\
+\pause
+\item $E(y) = \alpha + \beta_1 D$ \\
+\end{center}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{itemize}
+\item \textbf{Conditional on a specific value of D,} what is our expectation (mean value) of $y$?
 \end{itemize}
 \small
 \begin{center}
@@ -868,9 +807,9 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \pause
 \item $(Attitude_i | Income_i=3000) = 2.235 - 0.000818 * 3000 + N(0,2.38)$ \\
 \pause
-\item $(Attitude_i | Income_i=3000) = \Sexpr{round(2.235-0.000818*3000,2)} + N(0,2.38)$ \\
+\item $(Attitude_i | Income_i=3000) = -0.22 + N(0,2.38)$ \\
 \pause
-\item $E(Attitude | Income_i=3000) = \Sexpr{round(2.235-0.000818*3000,2)}$
+\item $E(Attitude | Income=3000) = -0.22$
 \end{center}
 \normalsize
 \end{frame}
@@ -878,8 +817,7 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item Regression is also a \textbf{Conditional Expectation Function}
-\item Conditional on $x$, what is our expectation (mean value) of $y$?
+\item \textbf{Conditional on a specific value of D,} what is our expectation (mean value) of $y$?
 \end{itemize}
 \small
 \begin{center}
@@ -890,67 +828,73 @@ coef_means <- round(mean(c(reg_coef4_1,reg_coef4_2,reg_coef4_3,reg_coef4_4,reg_c
 \normalsize
 \pause
 \begin{itemize}
-\item $E(y|x)$, $E(Attitude | Income)$
+\item $E(Attitude | Income)$
 \begin{itemize}
-\item When income is 3000, the average attitude is \Sexpr{round(2.235-0.000818*3000,2)}
+\item When income is 3000, the average attitude is -0.22
 \pause
-\item When income  is 6000, the average attitude is \Sexpr{round(2.235-0.000818*6000,2)}
+\item When income  is 6000, the average attitude is -2.67
 \pause
-\item When income  is -1000, the average attitude is \Sexpr{round(2.235-0.000818*-1000,2)}
+\item When income  is -1000, the average attitude is 3.05
 \end{itemize}
 \pause
-\item $E(attitude|income,age,gender,municipality)$
+\item $E(Attitude|\text{Income, Age, Gender, Municipality})$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1a-1} 
 
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
-  geom_point(x=6000,y=2.235-0.000818*6000, col="blue", size=4) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1b-1} 
 
-preds_3000 <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=3000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(predicted_value)
+\end{knitrout}
+\end{frame}
 
-preds_6000 <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=6000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(predicted_value)
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1c-1} 
 
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  geom_point(x=3000,y=preds_3000, col="red", size=0.2) +
-  geom_point(x=6000,y=preds_6000, col="blue", size=0.2) +
-  geom_point(x=6000,y=2.235-0.000818*6000, col="blue", size=4) +
-  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\end{knitrout}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression as Conditional Expectation}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1b2-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \pause
 \item But we \textbf{NEVER} know the exact value of $\beta$
 \pause
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \pause
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
@@ -958,235 +902,236 @@ d %>% ggplot() +
 \end{itemize}
 \end{itemize}
 \begin{multicols}{2}
-<<beta_dist_table, results='asis'>>=
-d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
-@
-\columnbreak
-<<beta_dist, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  theme_classic() +
-  xlab("Beta")
-@
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 21, 2019 - 9:36:22 AM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.000818$^{***}$ (0.000078) \\ 
+  Constant & 2.234719$^{***}$ (0.361477) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\columnbreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist_a-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \end{itemize}
 \end{itemize}
 \begin{multicols}{2}
-<<beta_dist_table_2, results='asis'>>=
-d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
-@
-\columnbreak
-<<beta_dist_2, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="Mean=-0.0008175")) +
-  theme_classic()
-@
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 07, 2019 - 12:50:31 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.000818$^{***}$ (0.000078) \\ 
+  Constant & 2.234719$^{***}$ (0.361477) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\columnbreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \end{itemize}
 \end{itemize}
 \begin{multicols}{2}
-<<beta_dist_table_3, results='asis'>>=
-d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
-@
-\columnbreak
-<<beta_dist_3, fig.height=2.7, fig.width=2.7>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="+/- 1.96*SE")) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=350, yend=350), lty=2) +
-  theme_classic()
-@
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 07, 2019 - 1:07:27 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.000818$^{***}$ (0.000078) \\ 
+  Constant & 2.234719$^{***}$ (0.361477) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\columnbreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist_3-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
 \begin{itemize}
-\item How do we work out the conditional expectation? We estimate $\beta$
+\item How do we work out the conditional expectation? We estimate the $\beta$s
 \item But we \textbf{NEVER} know the exact value of $\beta$
-\item Regression \textbf{estimates a distribution} for $\beta$
+\item Regression \textbf{estimates a distribution} for each $\beta$
 \begin{itemize}
 \item That's why every $\beta$ comes with a standard error
 \end{itemize}
 \end{itemize}
 \begin{multicols}{2}
-<<beta_dist_table_4, results='asis'>>=
-d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), digits=6)
-@
-\columnbreak
-<<beta_dist_4, fig.height=2.3, fig.width=2.5>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832))
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  geom_text(aes(x=-0.0008175,200,label="95% CI")) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175+1.96*0.00007832, y=350, yend=350), lty=2) +
-  geom_segment(aes(x=-0.0008175-1.96*0.00007832,xend=-0.0008175-1.96*0.00007832,y=0,yend=350), lty=2) +
-  geom_segment(aes(x=-0.0008175+1.96*0.00007832,xend=-0.0008175+1.96*0.00007832,y=0,yend=350), lty=2) +
-  theme_classic()
-@
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 07, 2019 - 1:07:32 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.000818$^{***}$ (0.000078) \\ 
+  Constant & 2.234719$^{***}$ (0.361477) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\columnbreak
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist_4-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1d,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-midpoint <- 2.235 + 4500*-0.0008175
-intercepts <- midpoint - beta*4500
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1d-1} 
 
-coefs <- tibble(alpha=pull(intercepts),
-                beta=pull(beta))
-
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs[1,],aes(intercept=alpha,slope=beta)) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1e,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs[1:2,],aes(intercept=alpha,slope=beta)) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1e-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1f,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs[1:3,],aes(intercept=alpha,slope=beta)) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1f-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1g,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs[1:20,],aes(intercept=alpha,slope=beta)) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1g-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1g2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs,aes(intercept=alpha,slope=beta)) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1g2-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1h,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-preds_3000_ev <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=3000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(expected_value)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1h-1} 
 
-preds_6000_ev <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=6000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(expected_value)
-
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs,aes(intercept=alpha,slope=beta)) +
-  geom_point(x=3000,y=preds_3000_ev, col="red", size=0.2) +
-  geom_point(x=6000,y=preds_6000_ev, col="blue", size=0.2) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Regression as Conditional Expectation}
-<<cond_exp1i,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-preds_3000_ev <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=3000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(expected_value)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/cond_exp1i-1} 
 
-preds_6000_ev <- d %>% zelig(redist~income, data=., model="ls", cite=F) %>%
-  setx(income=6000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  pull(expected_value)
-
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_abline(data=coefs,aes(intercept=alpha,slope=beta)) +
-  geom_point(x=3000,y=preds_3000, col="red", size=0.2) +
-  geom_point(x=6000,y=preds_6000, col="blue", size=0.2) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + 
-  xlim(2000,7000) + 
-  ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 
-<<corr_regn>>=
-corr_regn <- tibble(x=rnorm(100,2,1),
-       y=x+rnorm(100,0,1))
 
-corr <- corr_regn %>% summarize(corr=cor(x,y)) %>% pull(corr) %>% round(3) 
-@
 
 \begin{frame}
 \frametitle{Regression as (Partial) Correlation}
@@ -1197,11 +1142,11 @@ corr <- corr_regn %>% summarize(corr=cor(x,y)) %>% pull(corr) %>% round(3)
 \pause
 \end{itemize}
 \begin{multicols}{2}
-<<corr_regn_fig1, fig.height=3, fig.width=3>>=
-corr_regn %>% ggplot() + 
-  geom_point(aes(x=x,y=y)) +
-  theme_classic()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/corr_regn_fig1-1} 
+
+\end{knitrout}
 \columnbreak
 \end{multicols}
 \end{frame}
@@ -1213,24 +1158,31 @@ corr_regn %>% ggplot() +
 \item $\hat{\beta}=cor(x,y) * \frac{\sigma_Y}{\sigma_X}$
 \end{itemize}
 \begin{multicols}{2}
-<<corr_regn_fig2, fig.height=3, fig.width=3>>=
-corr_regn %>% ggplot() + 
-  geom_point(aes(x=x,y=y)) +
-  theme_classic()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/corr_regn_fig2-1} 
+
+\end{knitrout}
 \columnbreak
 \begin{itemize}
-\item Correlation is \Sexpr{corr}
+\item Correlation is 0.781
 \pause
 \item Regression Results:
 \end{itemize}
-<<corr_regn_table2, results='asis'>>=
-corr_regn %>% zelig(y~x, data=., model="ls", cite=F) %>% 
-  from_zelig_model() %>% 
-  tidy() %>%
-  select(term, estimate) %>%
-  xtable(row.names=F, digits=3)
-@
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Sat Mar 02 10:51:08 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlr}
+  \hline
+ & term & estimate \\ 
+  \hline
+1 & (Intercept) & 0.006 \\ 
+  2 & x & 1.008 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
 \end{multicols}
 \end{frame}
 
@@ -1241,26 +1193,31 @@ corr_regn %>% zelig(y~x, data=., model="ls", cite=F) %>%
 \item $\hat{\beta}=cor(x,y) * \frac{\sigma_Y}{\sigma_X}$
 \end{itemize}
 \begin{multicols}{2}
-<<corr_regn_fig3, fig.height=3, fig.width=3>>=
-corr_regn %>% mutate_at(vars(x,y),scale) %>% 
-  ggplot() + 
-  geom_point(aes(x=x,y=y)) +
-  theme_classic()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/corr_regn_fig3-1} 
+
+\end{knitrout}
 \columnbreak
 \begin{itemize}
-\item Correlation is \Sexpr{corr}
-\item It's \textit{identical} if we standardize both variables first ($\frac{(x-\bar{x})}{\sigma_x}$)
+\item Correlation is 0.781
+\item It's \textbf{identical} if we standardize both variables first ($\frac{(x_i-\bar{x})}{\sigma_x}$)
 \item Standardized Regression Results:
 \end{itemize}
-<<corr_regn_table3, results='asis'>>=
-corr_regn %>% mutate_at(vars(x,y),scale) %>% 
-  zelig(y~x, data=., model="ls", cite=F) %>% 
-  from_zelig_model() %>% 
-  tidy() %>%
-  select(term, estimate) %>%
-  xtable(row.names=F, digits=3)
-@
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Sat Mar 02 10:51:11 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlr}
+  \hline
+ & term & estimate \\ 
+  \hline
+1 & (Intercept) & 0.000 \\ 
+  2 & x & 0.781 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
 \end{multicols}
 \end{frame}
 
@@ -1338,7 +1295,7 @@ $$r_{yx_1|x_2} = \frac{r_{yx_1} - r_{yx_2}r_{x_1x_2}}{\sqrt{(1-r^2_{yx_2})(1-r^2
 \pause
 \item We include a control for country
 \pause
-\item But everyone in Qatar earns exactly \$1m - no variation in income!
+\item But everyone in our data from Qatar earns exactly \$1m - no variation in income!
 \pause
 \item We may as well throw the Qatar data away
 \end{itemize}
@@ -1352,18 +1309,22 @@ The Regression Model reflects the data type of the outcome variable:
 \begin{itemize}
 \item Pick a precise number that reflects your attitude to redistribution
 \end{itemize}
+\pause
 \item Binary -> Logit  
 \begin{itemize}
 \item Do you support redistribution, yes or no?
 \end{itemize}
+\pause
 \item Unordered categories -> Multinomial logit  
 \begin{itemize}
 \item Do you think redistribution is a western, oriental or african concept?
 \end{itemize}
+\pause
 \item Ordered categories -> Ordered logit  
 \begin{itemize}
 \item Do you want a lot more, more, the same, less, or a lot less redistribution?
 \end{itemize}
+\pause
 \item Count -> Poisson  
 \begin{itemize}
 \item In the past year, how many times have you complained about redistribution?
@@ -1380,7 +1341,8 @@ The Regression Model reflects the data type of the outcome variable:
 \pause
 \item Control for gender if we want to compare men with men, women with women
 \pause
-\item Only include where there is theory or evidence that this variable could be an \textbf{omitted variable}
+\item Only include controls where there is theory or evidence that this variable could be an \textbf{omitted variable}
+\pause
 \end{itemize}
 \end{frame}
 
@@ -1405,12 +1367,17 @@ The Regression Model reflects the data type of the outcome variable:
 \frametitle{6. Errors Structure}
 \begin{itemize}
 \item An assumption of regression analysis is that the errors are independent
+\pause
 \begin{itemize}
 \item Knowing the value of one error tells you \textit{nothing} about the value of the next error
 \end{itemize}
-\item But your attitudes to redistribution are probably very similar to everyone you live with, even after controlling for income etc. due to 'unobservable' variables (conversations over dinner...)
+\pause
+\item But attitudes to redistribution are probably very similar to everyone you live with, even after controlling for income etc. 
+\pause
+\item Due to 'unobservable' variables (conversations over dinner...)
 \pause
 \item So we don't really have 2 observations, we have closer to 1 'independent' observation
+\pause
 \item So the standard errors for our $\beta$'s are \textit{over-confident} (too small)
 \pause
 \item We need to adjust for these dependencies with clustered standard errors
@@ -1424,16 +1391,11 @@ The Regression Model reflects the data type of the outcome variable:
 \begin{frame}
 \frametitle{6. Errors Structure}
 \begin{multicols}{2}
-<<beta_dist_errors_4, fig.height=2.7, fig.width=2.7>>=
-beta <- tibble(beta=rnorm(10000,-0.0008175,0.00007832),
-                 beta_2=rnorm(10000,-0.0008175,0.00014832))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist_errors_4-1} 
 
-beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-    geom_vline(xintercept=-0.0008175, lty=2) +
-    theme_classic() +
-    xlab("Beta") +
-    xlim(min(beta$beta_2),max(beta$beta_2))
-@
+\end{knitrout}
 \columnbreak
 \begin{itemize}
 \item The distribution of our estimated betas suggests we're pretty confident $\beta$ is close to $-0.0008175$
@@ -1444,14 +1406,11 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \begin{frame}
 \frametitle{6. Errors Structure}
 \begin{multicols}{2}
-<<beta_dist_errors_5, fig.height=2.7, fig.width=2.7>>=
-  beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
-  geom_line(aes(x=beta_2),stat="density") +
-  geom_vline(xintercept=-0.0008175, lty=2) +
-  theme_classic() +
-  xlab("Beta") +
-  xlim(min(beta$beta_2),max(beta$beta_2))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/beta_dist_errors_5-1} 
+
+\end{knitrout}
 \columnbreak
 \begin{itemize}
 \item With clustered SEs, the wider distribution of our betas suggests we're \textit{less} confident $\beta$ is close to $-0.0008175$
@@ -1465,13 +1424,18 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \item Difficult! It depends on:
 \begin{enumerate}
 \item The scale of the explanatory variable
+\pause
 \item The scale of the outcome
+\pause
 \item The regression model we used
+\pause
 \item The presence of any interaction
+\pause
 \end{enumerate}
 \item Basic OLS: $y_i = \alpha + \beta D_i + \epsilon$
+\pause
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $\beta$ \textcolor{blue}{[unit of $y$]} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$\beta$ [unit of $y$]} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1488,7 +1452,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item Basic OLS \textbf{with log outcome}: $log(y_i) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a  \textcolor{blue}{$100*(e^{\beta}-1)\%$} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a  \textcolor{blue}{$100*(e^{\beta}-1)\%$} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1505,7 +1469,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item Basic OLS \textbf{with log treatment}: $y_i = \alpha + \beta log(D_i) + \epsilon$
 \begin{itemize}
-\item A \textcolor{blue}{1\%} change in the explanatory variable is associated with a  \textcolor{blue}{$\beta*ln(\frac{101}{100})$} change in the outcome, holding other variables constant
+\item A \textcolor{blue}{1\%} change in the explanatory variable is associated with a  \textcolor{blue}{$\beta*log(\frac{101}{100})$} change in the outcome, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1522,7 +1486,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Logit:} $Pr(y_i=1) = logit^{-1} (\alpha + \beta D_i + \epsilon)$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $\beta$ change in the \textcolor{blue}{log-odds} of $y_i=1$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$\beta$ change in the log-odds} of $y_i=1$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1539,7 +1503,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Logit:} $Pr(y_i=1) = logit^{-1} (\alpha + \beta D_i + \epsilon)$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of $y_i=1$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of $y_i=1$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1556,7 +1520,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Multinomial:} $Pr(y_i=C) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta_C}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of moving from the baseline category to the outcome category $C$, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta_C}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of moving from the baseline category to the outcome category $C$, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1573,7 +1537,7 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \end{enumerate}
 \item \textbf{Ordered Multinomial:} $Pr(y_i=C) = \alpha + \beta D_i + \epsilon$
 \begin{itemize}
-\item A 1 \textcolor{blue}{[unit of $D$]} change in the explanatory variable is associated with a $100*(e^{\beta_C}-1)\%$ change in the \textcolor{blue}{odds (relative probability, $\frac{p}{1-p}$)} of moving up one unit on the outcome scale, holding other variables constant
+\item A \textcolor{blue}{1 [unit of $D$]} change in the explanatory variable is associated with a \textcolor{blue}{$100*(e^{\beta_C}-1)\%$ change in the odds (relative probability, $\frac{p}{1-p}$)} of moving up one unit on the outcome scale, holding other variables constant
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -1591,10 +1555,64 @@ beta %>% ggplot() + geom_line(aes(x=beta),stat="density") +
 \item \textbf{OLS with Interaction:} $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \beta_3 D_i * X_i + \epsilon$
 \begin{itemize}
 \item $$ \frac{\partial y}{\partial D} = \beta_1 + \beta_3 X$$
-\item $\beta_1$ is the effect of $D$ when $X=0$ - \textit{May not make sense!}
+\item \textcolor{blue}{$\beta_1$ is the effect of $D$ when $X=0$} : \textit{May not make sense!}
 \item Insert values for $X$ and see how the marginal effect changes
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{7. Interpreting Regression Results}
+\begin{multicols}{2}
+\footnotesize
+\textbf{OLS with Interaction:} \\
+$Redist_i = \alpha + \beta_1 Gender_i + \beta_2 Income_i \\+ \beta_3 Gender_i * Income_i + \epsilon_i$ \\
+\pause
+$$\frac{\partial Redist}{\partial Gender} = \beta_1 + \beta_3*Income$$ \\
+\pause
+$$\frac{\partial Redist}{\partial Income} = \beta_2 + \beta_3*Gender$$
+\normalsize
+\pause
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 21, 2019 - 10:56:54 AM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ gender1 & $-$2.942614$^{***}$ (0.700510) \\ 
+  income & 0.079980$^{***}$ (0.000110) \\ 
+  gender1:income & 0.000986$^{***}$ (0.000152) \\ 
+  Constant & 0.112903 (0.454926) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+\columnbreak
+\pause
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/interaction_plot_2-1} 
+
+\end{knitrout}
+\pause
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/interaction_plot_3-1} 
+
+\end{knitrout}
+\end{multicols}
 \end{frame}
 
 \begin{frame}
@@ -1621,7 +1639,7 @@ $$Attitude_i = 2.235 - 0.000818 \text{ Income}_i + N(0,2.378)$$ \\
 \pause
 \textbf{If Income is 3000:}  \\
 $$Attitude_i = 2.235-0.000818*3000 + N(0,2.378)$$ \\
-$$Attitude_i = \Sexpr{2.235-0.000818*3000} + N(0,2.378)$$
+$$Attitude_i = -0.219 + N(0,2.378)$$
 \end{frame}
 
 \begin{frame}
@@ -1630,7 +1648,7 @@ $$Attitude_i = \alpha + \beta_1 \text{ Income}_i + \epsilon_i$$ \\
 $$Attitude_i = 2.235 - 0.000818 \text{ Income}_i + N(0,2.378)$$ \\
 \textbf{If Income is 6000:}  \\
 $$Attitude_i = 2.235-0.000818*6000 + N(0,2.378)$$ \\
-$$Attitude_i = \Sexpr{2.235-0.000818*6000} + N(0,2.378)$$
+$$Attitude_i = -2.673 + N(0,2.378)$$
 \end{frame}
 
 \begin{frame}
@@ -1639,58 +1657,36 @@ $$Attitude_i = \alpha + \beta_1 \text{ Income}_i + \epsilon_i$$
 $$Attitude_i = 2.235 - 0.000818 \text{ Income}_i + N(0,2.378)$$
 \textbf{Increasing Income from 3000 to 6000:} \\
 $$\Delta Attitude_i = (2.235-0.000818*6000) - (2.235-0.000818*3000)$$
-$$\Delta Attitude_i = \Sexpr{2.235-0.000818*6000} - \Sexpr{2.235-0.000818*3000}$$
-$$\Delta Attitude_i = \Sexpr{2.235-0.000818*6000 - (2.235-0.000818*3000)}$$
+$$\Delta Attitude_i = -2.673 - (-0.219)$$
+$$\Delta Attitude_i = -2.454$$
 \end{frame}
 
 \begin{frame}
 \frametitle{8. Predictions from Regressions}
-<<predictions1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/predictions1-1} 
 
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  geom_point(x=3000,y=2.235-0.000818*3000, col="red", size=4) +
-  geom_point(x=6000,y=2.235-0.000818*6000, col="blue", size=4) +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{8. Predictions from Regressions}
 \begin{multicols}{2}
 Predicted Values:
-<<predictions2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-pvs_low <- d %>% zelig(redist ~ income, data=., model="ls", cite=F) %>% 
-  setx(income=3000) %>% 
-  sim() %>%
-  zelig_qi_to_df()
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/predictions2-1} 
 
-pvs_high <- d %>% zelig(redist ~ income, data=., model="ls", cite=F) %>% 
-  setx(income=6000) %>% 
-  sim() %>%
-  zelig_qi_to_df()
-
-pvs <- pvs_low %>% bind_rows(pvs_high) %>%
-  select(`temp_fitted[i, ]`,predicted_value) %>%
-  rename("Income"=`temp_fitted[i, ]`)
-
-pvs %>% ggplot() + 
-  geom_line(aes(x=predicted_value, group=factor(Income), col=factor(Income)),stat="density") +
-  theme_classic() + xlab("Attitude to Redistribution")
-@
+\end{knitrout}
 \columnbreak
+\pause
 First Differences:
-<<predictions3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-pvs  %>%
-  mutate(id=rep(1:N,2)) %>% 
-  spread(key="Income",value="predicted_value") %>%
-  mutate(First_Difference=`6000`-`3000`) %>%
-  ggplot() +
-  geom_line(aes(x=First_Difference),stat="density") +
-  geom_vline(xintercept=0,lty=2) +
-  theme_classic() + xlab("Attitude to Redistribution")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/predictions3-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -1698,21 +1694,62 @@ pvs  %>%
 \frametitle{8. Predictions from Regressions}
 \begin{itemize}
 \item The regression model matters because the wrong model makes non-sensical predictions
+\pause
 \item Consider a binary outcome: $Gender_i = \alpha + \beta Income_i + \epsilon_i$
+\pause
 \item Compare the OLS and Logit regression tables:
+\pause
 \end{itemize}
 \begin{multicols}{2}
-<<preds_1_ols,results='asis'>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="ls", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
-@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 21, 2019 - 11:12:10 AM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & gender \\ 
+\hline \\[-1.8ex] 
+ income & 0.0003$^{***}$ (0.00001) \\ 
+  Constant & $-$0.696$^{***}$ (0.066) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \columnbreak
-<<preds_1_logit,results='asis'>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="logit", cite=F) %>%
-  from_zelig_model() %>%
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
-@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Thu, Mar 21, 2019 - 11:12:11 AM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & gender \\ 
+\hline \\[-1.8ex] 
+ income & 0.001$^{***}$ (0.0001) \\ 
+  Constant & $-$6.360$^{***}$ (0.457) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \end{multicols}
 \end{frame}
 
@@ -1724,26 +1761,17 @@ pvs  %>%
 \item Compare the OLS and Logit \textbf{predictions} of gender for an income of R\$3000:
 \end{itemize}
 \begin{multicols}{2}
-<<preds_1_ols_chart,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=4>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="ls", cite=F) %>%
-  setx(income=3000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  ggplot() +
-  geom_line(aes(x=predicted_value),stat="density") +
-  theme_classic()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/preds_1_ols_chart-1} 
+
+\end{knitrout}
 \columnbreak
-<<preds_1_logit_chart,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=4>>=
-  d %>% zelig(as.numeric(as.character(gender))~income, data=., model="logit", cite=F) %>%
-  setx(income=3000) %>%
-  sim() %>%
-  zelig_qi_to_df() %>%
-  mutate(predicted_value=factor(predicted_value)) %>%
-  ggplot() +
-  geom_bar(aes(x=predicted_value)) +
-  theme_classic()
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/preds_1_logit_chart-1} 
+
+\end{knitrout}
 \end{multicols}
 \end{frame}
 
@@ -1763,8 +1791,6 @@ pvs  %>%
 \end{enumerate}
 \pause
 \item These all require \textbf{research design}, \textbf{theory} and \textbf{assumptions}
-\pause
-\item 
 \end{itemize}
 \end{frame}
 
@@ -1778,19 +1804,19 @@ pvs  %>%
 \pause
 \item By chance...
 \pause
-\item Due to complex social patterns...
+\item Due to complex social and historical patterns...
 \pause
 \item But we cannot conclude that $D$ causes or explains $Y$
 \pause
 \end{itemize}
 \item \textit{More} data will not help
 \pause
-\item The problem is the \textit{type} of data; it does not allow us to answer the causal question 
+\item The problem is the \textit{content} of data; it does not allow us to answer the causal question 
 \end{itemize}
 \end{frame}
 
 \setbeamercolor{background canvas}{bg=}
-\includegraphics[width=0.9\textwidth]{Chocolate_Nobel.jpg}
+\includegraphics[width=0.85\textwidth]{Chocolate_Nobel.jpg}
 
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages={1}]{chart_1.pdf}
@@ -1808,11 +1834,16 @@ pvs  %>%
 \frametitle{What Does Regression NOT Do?}
 \begin{itemize}
 \item Why is correlation (regression) not causation?
+\pause
 \begin{enumerate}
 \item Omitted Variable Bias
+\pause
 \item Reverse Causation
+\pause
 \item Selection Bias
+\pause
 \item Measurement Bias
+\pause
 \item Lack of Overlap, Model Dependence
 \end{enumerate}
 \end{itemize}
@@ -1820,45 +1851,39 @@ pvs  %>%
 
 \begin{frame}
 \frametitle{1. Omitted Variable Bias}
-<<confound3b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), color="black",size=0.7) + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/confound3b-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{1. Omitted Variable Bias}
-<<confound3c,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% mutate(gender="All Data") %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, colour=gender),size=0.7, show.legend=TRUE) + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black", show.legend=TRUE) + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6) +
-  scale_colour_manual(values="black")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/confound3c-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{1. Omitted Variable Bias}
-<<confound2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/confound2-1} 
+
+\end{knitrout}
 \end{frame}
 
 
 \begin{frame}
 \frametitle{1. Omitted Variable Bias}
-<<confound3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
-  geom_smooth(data=d[d$gender==1,], aes(x=income,y=redist),method="lm",se=FALSE, color="blue") + 
-  geom_smooth(data=d[d$gender==0,], aes(x=income,y=redist),method="lm", se=FALSE, color="red") + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/confound3-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -1868,24 +1893,64 @@ d %>% ggplot() +
 \pause
 \item Does the 'direction' of regression  matter? I.e. Does regression treat $D$ and $Y$ differently? \pause Yes! 
 \begin{multicols}{2}
-<<rev_cause_1,results='asis'>>=
-reg_rev_caus1 <- d %>% mutate(income=scale(income),
-                              redist=scale(redist)) %>% 
-  lm(redist~income + gender, data=.) %>% 
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
-@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 06, 2019 - 12:10:54 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.011 (0.029) \\ 
+  gender1 & $-$1.201$^{***}$ (0.058) \\ 
+  Constant & 0.589$^{***}$ (0.038) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \columnbreak
-<<rev_cause_2,results='asis'>>=
-reg_rev_caus2 <- d %>% mutate(income=scale(income),
-                              redist=scale(redist)) %>%
-  lm(income~redist + gender, data=.) %>% 
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"))
-@
+
+% Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Wed, Mar 06, 2019 - 12:10:55 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & income \\ 
+\hline \\[-1.8ex] 
+ redist & $-$0.013 (0.034) \\ 
+  gender1 & 0.993$^{***}$ (0.069) \\ 
+  Constant & $-$0.487$^{***}$ (0.043) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \end{multicols}
+\pause
 \item Remember, regression measures the \textit{vertical} (not diagonal) distances to the regression line
 \begin{itemize}
 \item It minimizes the \textit{prediction errors} for $Y$
 \end{itemize}
+\pause
 \item But that doesn't mean it identifies the direction of causation!
 \end{itemize}
 \end{frame}
@@ -1908,15 +1973,11 @@ reg_rev_caus2 <- d %>% mutate(income=scale(income),
 \begin{itemize}
 \item Imagine we do not see 'rich' units with high income (above R\$4000)
 \end{itemize}
-<<selection1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3, fig.width=5>>=
-d_sel <- d %>% mutate(rich=ifelse(income>=4000,"Rich","Poor")) 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/selection1-1} 
 
-d_sel %>% ggplot() + 
-  geom_point(data=d_sel[d_sel$income<4000,], aes(x=income,y=redist, group=rich,color=rich), size=0.7) + 
-  geom_smooth(data=d[d$income<4000,], aes(x=income,y=redist),method="lm",se=FALSE, color="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6) +
-  scale_colour_manual(values = c("black", "grey"))
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -1924,14 +1985,11 @@ d_sel %>% ggplot() +
 \begin{itemize}
 \item Imagine we do not see 'rich' units with high income (above R\$4000)
 \end{itemize}
-<<selection2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d_sel %>%  ggplot() + 
-  geom_point(aes(x=income,y=redist, group=rich,color=rich), size=0.7) + 
-  geom_smooth(data=d[d$income<4000,], aes(x=income,y=redist),method="lm",se=FALSE, color="black") + 
-  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="grey") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6) +
-  scale_colour_manual(values = c("black", "grey"))
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/selection2-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -1944,7 +2002,9 @@ d_sel %>%  ggplot() +
 \item \textbf{Selection into the dataset}
 \item \textbf{Selection into treatment}
 \end{enumerate}
+\pause
 \item In each case, we don't see the \textit{full} relationship between $D$ and $Y$
+\pause
 \item So our regression estimates are biased
 \end{itemize}
 \end{frame}
@@ -1955,9 +2015,12 @@ d_sel %>%  ggplot() +
 \item There are four selection risks:
 \begin{enumerate}
 \item \textbf{Selection into existence:}
+\pause
 \begin{itemize}
 \item Where do units (eg. political parties) come from?
+\pause
 \item Probably only parties that have a chance of success are formed
+\pause
 \item Does forming a party cause electoral success? Not for most people!
 \end{itemize}
 \end{enumerate}
@@ -1971,9 +2034,11 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{1}
 \item \textbf{Selection into survival:}
+\pause
 \begin{itemize}
 \item Certain types of units disappear, so the units we see don't tell the full story
 \end{itemize}
+\pause
 \end{enumerate}
 \end{itemize}
 \begin{multicols}{2}
@@ -1981,7 +2046,9 @@ d_sel %>%  ggplot() +
 \columnbreak
 \begin{itemize}
 \item Where would additional armour protect bombers?
+\pause
 \item Returned bombers got hit
+\pause
 \item But we do not know where \textit{bombers that did not return} got hit
 \end{itemize}
 \end{multicols}
@@ -1994,9 +2061,12 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{2}
 \item \textbf{Selection into the dataset:}
+\pause
 \begin{itemize}
 \item Our dataset may not be representative
-\item Only units with particular values of $X$ and $Y$ enter the dataset
+\pause
+\item Only units with particular values of $D$ and $Y$ enter the dataset
+\pause
 \item Eg. If survey respondents who refuse are different from those who respond - the anti-redistribution poor may dislike answering surveys 
 \end{itemize}
 \end{enumerate}
@@ -2010,9 +2080,12 @@ d_sel %>%  ggplot() +
 \begin{enumerate}
 \setcounter{enumi}{3}
 \item \textbf{Selection into treatment:}
+\pause
 \begin{itemize}
 \item All units are in our dataset, but they \textit{choose} their treatment value
+\pause
 \item Who chooses treatment? Those with the most to benefit, i.e. depending on $Y$!
+\pause
 \item Applying treatment to the others would probably have a very different effect
 \end{itemize}
 \end{enumerate}
@@ -2029,11 +2102,11 @@ d_sel %>%  ggplot() +
   \caption{Effects of Measurement Error}
     \begin{tabular}{|l|l|p{4cm}|}
     \hline
-          & Measured with Bias & Measured with Random Noise \bigstrut\\
+          & Measured with \textbf{Bias} & Measured with \textbf{Random Noise} \bigstrut\\
     \hline
-    Outcome Variable & Effect biased & No bias but wider standard errors \bigstrut\\
+    Outcome Variable & Coefficient biased & No bias but wider standard errors \bigstrut\\
     \hline
-    Treatment Variable & Effect biased & Effect biased to zero \bigstrut\\
+    Treatment Variable & Coefficient biased & Effect biased towards zero \bigstrut\\
     \hline
     \end{tabular}%
   \label{tab:addlabel}%
@@ -2049,20 +2122,34 @@ d_sel %>%  ggplot() +
 \item No extra noise:
 \end{itemize}
 \begin{multicols}{2}
-<<measure2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d_measure <- d %>% mutate(income=income/1000)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/measure2-1} 
 
-d_measure %>% ggplot() + 
-  geom_point(aes(x=income,y=redist), size=0.7) + 
-  geom_smooth(aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2,7) + ylim(-8,6)
-@
+\end{knitrout}
 \columnbreak
-<<measure2_table, results='asis'>>=
-d_measure %>% 
-  lm(redist~income, data=.) %>% 
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), header=F)
-@
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.818$^{***}$ (0.078) \\ 
+  Constant & 2.235$^{***}$ (0.361) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \end{multicols}
 \end{frame}
 
@@ -2073,21 +2160,34 @@ d_measure %>%
 \item Noise in the \textbf{outcome variable}:
 \end{itemize}
 \begin{multicols}{2}
-<<measure2b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-set.seed(5679)
-d_measure %>% mutate(redist=redist+rnorm(nrow(d),0,3.5)) %>%
-  ggplot() + 
-  geom_point(aes(x=income,y=redist), size=0.7) + 
-  geom_smooth(aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2,7) + ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/measure2b-1} 
+
+\end{knitrout}
 \columnbreak
-<<measure2b_table, results='asis'>>=
-set.seed(5679)
-d_measure %>% mutate(redist=redist+rnorm(nrow(d),0,3.5)) %>%
-  lm(redist~income, data=.) %>% 
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), header=F)
-@
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.831$^{***}$ (0.144) \\ 
+  Constant & 2.272$^{***}$ (0.665) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \end{multicols}
 \end{frame}
 
@@ -2098,19 +2198,34 @@ d_measure %>% mutate(redist=redist+rnorm(nrow(d),0,3.5)) %>%
 \item Noise in the \textbf{explanatory} variable:
 \end{itemize}
 \begin{multicols}{2}
-<<measure2c,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-d_measure %>% mutate(income=income+rnorm(nrow(d),0,2)) %>% 
-  ggplot() + 
-  geom_point(aes(x=income,y=redist), size=0.7) + 
-  geom_smooth(aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2,7) + ylim(-8,6)
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/measure2c-1} 
+
+\end{knitrout}
 \columnbreak
-<<measure2c_table, results='asis'>>=
-d_measure %>% mutate(income=income+rnorm(nrow(d),0,2)) %>%
-  lm(redist~income, data=.) %>% 
-  stargazer(single.row = TRUE, column.sep.width = "1pt", font.size="tiny", keep.stat=c("n"), header=F)
-@
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\tiny 
+\begin{tabular}{@{\extracolsep{1pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & redist \\ 
+\hline \\[-1.8ex] 
+ income & $-$0.187$^{***}$ (0.037) \\ 
+  Constant & $-$0.620$^{***}$ (0.183) \\ 
+ \hline \\[-1.8ex] 
+Observations & 1,000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 \end{multicols}
 \end{frame}
 
@@ -2118,88 +2233,66 @@ d_measure %>% mutate(income=income+rnorm(nrow(d),0,2)) %>%
 \frametitle{5. Lack of Overlap}
 \begin{itemize}
 \item Regression normally helps us pick appropriate comparisons
+\pause
 \begin{itemize}
 \item Eg. Controlling for gender, what is the effect of income on attitudes to redistribution? 
 \end{itemize}
+\pause
 \item But what if there are no women with high income?
+\pause
 \item Regression \textit{creates} comparisons for us
 \begin{itemize}
 \item How? Using the functional form of the regression
 \item A linear regression interpolates/extrapolates \textit{linearly} to 'create' comparison cases
 \end{itemize}
+\pause
 \item Lack of overlap probably means we \textit{cannot} explain outcomes with this data
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{5. Lack of Overlap}
-<<overlap1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-set.seed(05410)
-N <- 1000
-gender <- rbinom(N,1,0.5)
-income <- gender*2000+rnorm(N,4000,300)
-redist <- gender*(-3)+rnorm(N,0,2)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/overlap1-1} 
 
-d2 <- data.frame(gender,income,redist)
-d2$gender <- as.factor(d2$gender)
-
-d2 %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(3000,7000) + ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{5. Lack of Overlap}
-<<overlap2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-set.seed(05410)
-N <- 1000
-gender <- rbinom(N,1,0.5)
-income <- gender*2000+rnorm(N,4000,300)
-redist <- gender*(-3)+rnorm(N,0,2)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/overlap2-1} 
 
-d2 <- data.frame(gender,income,redist)
-d2$gender <- as.factor(d2$gender)
-
-d2 %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
-  geom_smooth(aes(x=income,y=redist), method="lm", se=F, col="black") +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(3000,7000) + ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{5. Lack of Overlap}
-<<overlap3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
-set.seed(05410)
-N <- 500
-gender <- as.factor(0)
-income <- 2000+rnorm(N,4000,300)
-redist <- (2.5)+rnorm(N,0,2)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/overlap3-1} 
 
-d3 <- data.frame(gender,income,redist)
-
-d4 <- d2 %>% bind_rows(d3)
-
-d4 %>% ggplot() + 
-  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
-  geom_smooth(data=d2,aes(x=income,y=redist), method="lm", se=F, col="black") +
-  geom_smooth(data=d4[d4$gender==0,],aes(x=income,y=redist), method="lm", se=F, col="black") +
-  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(3000,7000) + ylim(-8,6)
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{5. Lack of Overlap}
 \begin{itemize}
 \item With more than a few variables, lack of overlap is \textit{guaranteed}
+\pause
 \item 6 variables with 10 categories each = $10^6 = 1,000,000$ possibilities
+\pause
 \item Common datasets have 0\% counterfactuals present in the data (King 2006)
+\pause
 \begin{itemize}
 \item How many 45 year-old female accountants with a PhD and a cat who live in Centro are there?
+\pause
 \item And we need some that are low-income and some that are high-income
 \end{itemize}
 \item A problem of \textbf{multi-dimensionality}
+\pause
 \item And of \textbf{model dependence} - our results depend on the functional form in our regression model
 \end{itemize}
 \end{frame}
@@ -2210,15 +2303,20 @@ d4 %>% ggplot() +
 \item Regression is just fancy correlation
 \begin{itemize}
 \item A \textbf{conditional expectation}
+\pause
 \end{itemize}
 \item 'Smart' regression pays more attention to what \textbf{comparisons} you want to make than to statistical tests
 \begin{itemize}
 \item And to \textbf{interpretation/prediction} rather than p-values
 \end{itemize}
+\pause
 \item Regression \textbf{cannot explain} relationships
 \begin{itemize}
 \item \textbf{Correlation is not causation}
+\pause
 \item We need to understand better \textbf{how the data were produced}
+\pause
+\item \textbf{Explanation} depends on research design, data selection, assumptions and qualitative evidence
 \end{itemize}
 \end{enumerate}
 \end{frame}
