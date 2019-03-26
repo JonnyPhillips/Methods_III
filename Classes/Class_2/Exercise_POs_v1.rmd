@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = F, include=F)
 library(tidyverse)
 ```
 
-1. Generate data on a population of 1,000 people. Specifically, create a variable (a vector) that randomly assigns these people to be male or female (50:50). Hint: In R, try $rbinom$ and in Stata, try $ $.
+1. Generate data on a population of 1,000 people. Specifically, create a variable (a vector) that randomly assigns these people to be male or female (50:50). *Hint: In R, try $rbinom$ and in Stata, try $rbinomial$.*
 ```{r}
 N <- 1000
 x <- rbinom(N,1,0.5)
