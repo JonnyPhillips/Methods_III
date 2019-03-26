@@ -15,6 +15,8 @@ navbar:
         href: Class_1.html
       - text: "2 - Framework for Explanation"
         href: Class_2.html
+      - text: "3 - Field Experiments"
+        href: Class_3.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html

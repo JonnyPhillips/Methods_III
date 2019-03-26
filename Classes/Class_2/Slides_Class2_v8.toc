@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Explanation}{2}{0}{1}
+\beamer@sectionintoc {2}{Causal Inference}{28}{0}{2}
+\beamer@sectionintoc {3}{Why Observational Data is Biased}{70}{0}{3}
+\beamer@sectionintoc {4}{Rest of the Course}{114}{0}{4}

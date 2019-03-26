@@ -1,0 +1,27 @@
+---
+title: 'Class 3 - Field Experiments'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+#### Required
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015. pp. 26 - 46](Classes/Class_3/Readings/Angrist_Pischke_26_46.pdf)**
+- **[Alan S. Gerber and Donald P Green. Field Experiments: Design, Analysis and Interpretation. W.W. Norton & Company, 2012. Chs. 1-2.](Classes/Class_3/Readings/Gerber_Green_Ch1_2.pdf)**
+
+#### Additional Readings
+- [Esther Duflo, Rachel Glennerster and Michael Kremer (2007), Using Randomization in Development Economics Research : A Toolkit, CEPR Discussion Paper 6059](Classes/Class_3/Readings/Duflo et al Randomization Toolkit.pdf)
+- [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 6](Classes/Class_3/Readings/Imbens_Rubin_104_125.pdf)
+- Benjamin A. Olken. Direct Democracy and Local Public Goods: Evidence from a Field Experiment in Indonesia. American Political Science Review, 104(02):243-267, May 2010.
+
+<br> </br>
+
+## [Lecture Slides](Classes/Class_3/Slides_v1.pdf)
+
+## Replication Exercise
+- **Exercise:**
+- **Paper:** [Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.](Classes/Class_3/Replication/Gerber Green and Larimer 2008.pdf)
+- **Data:** 

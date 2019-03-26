@@ -1,20 +1,21 @@
 ---
 title: "Exercise: Understanding Potential Outcomes"
 output: pdf_document
+fontsize: 16pt
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F)
+knitr::opts_chunk$set(echo = F, include=F)
+library(tidyverse)
 ```
 
-1. Generate data on a population of 1,000 people. Specifically, create a vector that randomly assigns these people to be male or female (50:50).
+1. Generate data on a population of 1,000 people. Specifically, create a variable (a vector) that randomly assigns these people to be male or female (50:50). Hint: In R, try $rbinom$ and in Stata, try $ $.
 ```{r}
 N <- 1000
 x <- rbinom(N,1,0.5)
-
 ```
 
-2. Now we are going to simulate the potential outcomes under control ($y_0$) for our population. Create another vector of random normally-distributed values with mean of 5 and standard deviation of 1. 
+2. Now we are going to simulate the potential outcomes - a measure of attitudes - *under control* ($y_0$) for our population. Create another variable of random normally-distributed values with mean of 5 and standard deviation of 1. 
 
 ```{r}
 y0 <- rnorm(N,5,1)
@@ -25,7 +26,7 @@ y0 <- rnorm(N,5,1)
 y0 <- y0 + x
 ```
 
-4. Now simulate potential outcomes under treatment for all units. Define a *constant* treatment effect of $c=2$  and create another vector $y_1=y_0+c$.
+4. Now simulate potential outcomes *under treatment* ($y_1$) for all units. Define a *constant* treatment effect of $c=2$  and create another vector $y_1=y_0+c$.
 ```{r}
 c <-2
 y1 <- y0 + c
@@ -33,58 +34,91 @@ y1 <- y0 + c
 
 5. To compare our two sets of potential outcomes, plot two density charts on the same figure - one for $y_0$ and one for $y_1$.
 ```{r}
+data <- tibble(x,y0,y1)
+
 data %>% ggplot() +
   geom_density(aes(x=y0), col="blue") +
   geom_density(aes(x=y1),col="dark green") +
   theme_classic()
 ```
 
-6. Next, let us assume a specific **Treatment Assignment Mechanism** where men are more likely than women to receive treatment. First, create a 'latent' variable which consists of two components added together: (i) $0.5*x$ (i.e. half the value of the gender variable), and (ii) a random uniform value between zero and one. Finally, create a new vector $D$ which is equal to one when the latent variable is larger than 0.75, and zero otherwise.
+6. Next, let us assume a specific **Treatment Assignment Mechanism** where men are more likely than women to receive treatment. First, create a temporary 'latent' variable which consists of two components added together: (i) $0.5*x$ (i.e. half the value of the gender variable), and (ii) a random uniform value between zero and one. Finally, create a new vector $D$ which is equal to one when the latent variable is larger than 0.75, and zero otherwise.
 ```{r}
 data <- data %>% mutate(rnd=runif(N,0,1),
                         D=ifelse(0.5*x+rnd>0.75,1,0))
 ```
 
-7. To show that gender and treatment are related, calculate the correlation between $x$ and $D$.
+7. To show that gender and treatment - maybe we can think of treatment as low income and high income - are related, calculate the correlation between $x$ and $D$.
 ```{r}
 cor(data$x,data$D)
 ```
 
-8. What is the average of the real indvidual treatment effects based on the potential outcomes, $E(y_1-y_0)$? 
+8. What is the average of the *real* indvidual treatment effects based on the potential outcomes, $E(y_1-y_0)$? 
 ```{r}
 Actual_causal_effect <- data %>% 
   summarize(Actual_ATE=mean(y1-y0))
 ```
 
-9. The Fundamental Problem of Causal Inference is that we *cannot* calculate (8.) above. Instead, we only observe one value: $y_obs$. Create a new vector for $y_obs$ which equals $y_1$ if $D=1$ but which equals $y_0$ if $D=0$.
+9. The Fundamental Problem of Causal Inference is that we *cannot* calculate (8.) above. Instead, we only observe one value: $y_{obs}$. Create a new variable $y_{obs}$ which equals $y_1$ if $D=1$ but which equals $y_0$ if $D=0$.
 ```{r}
 data <- data %>% mutate(y_obs=case_when(D==1~y1,
                                         D==0~y0))
 ```
 
-10. Based on the observable data, run the basic regression of treatment on observable outcomes. Interpret the result. Is this consistent with the treatment effect that we assumed at the start?
+10. Based on the observable data, run the basic regression of treatment ($D$) on observable outcomes ($y_{obs}$). Interpret the result. Is this an accurate estimate of the treatment effect that we assumed at the start?
 ```{r}
 data %>% lm(y_obs~D,data=.) %>% summary()
 ```
 
-11. Re-run your code above but with $c=0$ so we are assuming $$NO$$ treatment effect. Run the regression in (10.) again - what is the result?
+11. Re-run all your code above but this time with $c=0$ so we are assuming **NO** treatment effect. Run the regression in (10.) again - what is the result?
 
-12. To see why, let's plot two density charts on the same figure - one for the distribution of observable $y_obs$ for the treated group and one for the distribution of observable $y_obs$ for the control group.
 ```{r}
-data %>% ggplot() +
-  geom_density(data=data %>% filter(D==0),aes(x=y_obs), col="blue") +
-  geom_density(data=data %>% filter(D==1),aes(x=y_obs),col="dark green") +
+data_no_effect <- tibble(x=rbinom(N,1,0.5),
+                         y0=x+rnorm(N,5,1),
+                         y1=y0+0,
+                         rnd=runif(N,0,1),
+                         D=ifelse(0.5*x+rnd>0.75,1,0)) %>% 
+  mutate(y_obs=case_when(D==1~y1,
+                         D==0~y0))
+
+data_no_effect %>% ggplot() +
+  geom_density(aes(x=y0), col="blue") +
+  geom_density(aes(x=y1),col="dark green") +
+  theme_classic()
+
+data_no_effect %>% lm(y_obs~D,data=.) %>% summary()
+```
+
+12. To see why, let's plot two density charts on the same figure - one for the distribution of observable $y_{obs}$ for the treated group ($y_{obs}|D==1$) and one for the distribution of observable $y_{obs}$ for the control group ($y_{obs}|D==0$).
+```{r}
+data_no_effect %>% ggplot() +
+  geom_density(data=data_no_effect %>% filter(D==0),aes(x=y_obs), col="blue") +
+  geom_density(data=data_no_effect %>% filter(D==1),aes(x=y_obs),col="dark green") +
   theme_classic()
 ```
 
-13. For $c=0$, run the regression of treatment on observable outcomes, but this time controlling for gender ($y_obs=\alpha + \beta_1 D+\beta_2 x + \epsilon$).
+13. Run your code again for $c=0$, but this time assume a larger population of $N=1,000,000$. Does that solve the problem?
+
 ```{r}
-data %>% lm(y_obs~D + x,data=.) %>% summary()
+N <- 1000000
+data_large_N <- tibble(x=rbinom(N,1,0.5),
+                         y0=x+rnorm(N,5,1),
+                         y1=y0+0,
+                         rnd=runif(N,0,1),
+                         D=ifelse(0.5*x+rnd>0.75,1,0)) %>% 
+  mutate(y_obs=case_when(D==1~y1,
+                         D==0~y0))
+
+data_large_N %>% ggplot() +
+  geom_density(aes(x=y0), col="blue") +
+  geom_density(aes(x=y1),col="dark green") +
+  theme_classic()
+
+data_large_N %>% lm(y_obs~D,data=.) %>% summary()
 ```
 
-14. Run your code again, but this time assume a larger population of $N=1,000,000$. Does that help?
-
-15. Run your code again, but this time add some normally-distributed random noise to $c$ with mean zero and standard deviation 0.2.
-
-16. 
+14. For $c=0$, run the regression of treatment on observable outcomes, but this time controlling for gender.
+```{r}
+data_no_effect %>% lm(y_obs~D + x,data=.) %>% summary()
+```
 
