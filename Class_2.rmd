@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-## [Lecture Slides](Classes/Class_2/Slides_Class2_v7.pdf)
+## [Lecture Slides](Classes/Class_2/Slides_Class2_v10.pdf)
 
 ## [Causal Relationships App](https://poliong.shinyapps.io/DAGs/)
 
