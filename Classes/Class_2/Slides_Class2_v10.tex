@@ -462,7 +462,7 @@ Y_{0i}\text{   GDP Growth of Brazil in 2010 if NOT a Democracy}
 \pause
 \item To explain a systematic treatment - not a single event - we need \textbf{multiple counterfactual comparisons}
 \pause
-\item We know how democracy works in Europe; the question is what will happen if it becomes more common in Africa?
+\item We know how democracy works in Europe; the question is what will happen if it becomes more common in the whole world?
 \pause
 \begin{block}{Average Treatment Effect}
 \item We want to calculate an \textbf{Average Treatment Effect} 
@@ -508,22 +508,24 @@ Y_{0i}\text{   GDP Growth of Brazil in 2010 if NOT a Democracy}
 \item In reality, some units are \textbf{actually treated} ($D=1$), others are \textbf{actually control} ($D=0$)
 \end{itemize}
 \pause
+\footnotesize
 \begin{block}{Average Treatment Effect on the Treated}
 \begin{multline}
-\item $$ATT=E(\alpha_i|D=1) = E (Y_1 - Y_0|D=1) = E(Y_1|D=1) - E(Y_0|D=1) = \\ \frac{\sum_i (Y_{1i} - Y_{0i}|D=1)}{N_{Treated}}$$
+\item $$ATT=E(\alpha_i|D=1) = E (Y_1 - Y_0|D=1) = \frac{\sum_i (Y_{1i} - Y_{0i}|D=1)}{N_{Treated}}$$
 \end{multline}
 \end{block}
 \pause
 \begin{block}{Average Treatment Effect on the Untreated (Control)}
 \begin{multline}
-\item $$ATU=E(\alpha_i|D=0) = E (Y_1 - Y_0|D=0) = E(Y_1|D=0) - E(Y_0|D=0) = \\ \frac{\sum_i (Y_{1i} - Y_{0i}|D=0)}{N_{Control}}$$
+\item $$ATU=E(\alpha_i|D=0) = E (Y_1 - Y_0|D=0) = \frac{\sum_i (Y_{1i} - Y_{0i}|D=0)}{N_{Control}}$$
 \end{multline}
 \end{block}
+\normalsize
 \pause
 \begin{itemize}
-\item The three estimates are usually different
+\item The three effect estimates are usually different
 \begin{itemize}
-\item The effect democracy has had in Europe is different to the effect if we introduced democracy in Africa
+\item The effect democracy has had in Europe is different to the effect if it were introduced in Africa
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -570,15 +572,15 @@ Y_{0i}\text{   GDP Growth of Brazil in 2010 if NOT a Democracy}
     \hline
     Brasil & 1 & 4     & 1      & 3 \bigstrut\\
     \hline
-     &  &     &       &  \bigstrut\\
+     &  &     &       &  \bigstrut\\[-2ex]
     \hline
     Bolivia & 1 & 2     & 4     & -2 \bigstrut\\
     \hline
-     &  &     &     &  \bigstrut\\
+     &  &     &     &  \bigstrut\\[-2ex]
     \hline
-     &  &      &      &  \bigstrut\\
+     &  &      &      &  \bigstrut\\[-2ex]
     \hline
-    \textbf{ATT} & 1 & 3     & 2.5     & 0.5 \bigstrut\\
+    \textbf{ATT} & \textbf{1} & \textbf{3}     & \textbf{2.5}     & \textbf{0.5} \bigstrut\\
 \hline
     \end{tabular}%
   \label{tab:addlabel}%
@@ -598,17 +600,17 @@ Y_{0i}\text{   GDP Growth of Brazil in 2010 if NOT a Democracy}
     \hline
           & \multicolumn{1}{p{1.8cm}|}{$D_i$} & \multicolumn{1}{p{2cm}|}{$Y_1$} & \multicolumn{1}{p{2.2cm}|}{$Y_0$} & \multicolumn{1}{p{1.8cm}|}{$Y_{1} - Y_{0}$} \bigstrut\\
     \hline
-     &  &      &       &  \bigstrut\\
+     &  &      &       &  \bigstrut\\[-2ex]
     \hline
     Argentina & 0 & 7    & 4      & 3 \bigstrut\\
     \hline
-     &  &      &      &  \bigstrut\\
+     &  &      &      &  \bigstrut\\[-2ex]
     \hline
     Colombia & 0 &  7   & 7    & 0 \bigstrut\\
     \hline
     Peru & 0 & 5     & 4     & 1 \bigstrut\\
     \hline
-    ATU & 0 & 6.3     & 5     & 1.3 \bigstrut\\
+    \textbf{ATU} & \textbf{0} & \textbf{6.3}     & \textbf{5}     & \textbf{1.3} \bigstrut\\
 \hline
     \end{tabular}%
   \label{tab:addlabel}%
@@ -622,7 +624,7 @@ Y_{0i}\text{   GDP Growth of Brazil in 2010 if NOT a Democracy}
 \begin{itemize}
 \item No units can receive \textbf{both} treatment and control
 \pause
-\item So we can never observe both $Y_1$ and $Y_0$ for the same unit
+\item So we can never observe both $Y_1$ and $Y_0$ \textbf{for the same unit}
 \pause
 \item \textit{Individual} Treatment Effects are \textbf{Impossible to Estimate}
 \end{itemize}
@@ -725,11 +727,72 @@ $$Y_{i}^{obs} = D_i \cdot Y_{1i} + (1-D_i) \cdot Y_{0i}$$
 
 \begin{frame}
 \frametitle{Causal Inference}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+  \caption{Potential Outcomes Example}
+    \begin{tabular}{|p{1.8cm}|p{1.8cm}|p{2cm}|}
+    \hline
+          & \multicolumn{1}{p{1.8cm}|}{Democracy?} & \textbf{Observed} GDP Growth \bigstrut\\
+    \hline
+          & \multicolumn{1}{p{1.8cm}|}{$D_i$} & \multicolumn{1}{p{1.8cm}|}{$Y^{obs}$} \bigstrut\\
+    \hline
+    Brasil & 1 & 4 \bigstrut\\
+    \hline
+    Argentina & 0      & 4 \bigstrut\\
+    \hline
+    Bolivia & 1      & 2 \bigstrut\\
+    \hline
+    Colombia & 0    & 7 \bigstrut\\
+    \hline
+    Peru & 0 & 4 \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Inference}
 \begin{itemize}
 \item Actually, nothing stops us calculating the \textbf{Average Treatment Effect}
 \pause
-\item The question is, is the ATE accurate? \pause No!
+\item The question is, is the ATE accurate?
 \pause
+\end{itemize}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|p{1.8cm}|p{1.8cm}|p{2cm}|p{2cm}|p{2cm}|}
+    \hline
+          & \multicolumn{1}{p{1.8cm}|}{Democracy?} & \multicolumn{1}{p{2cm}|}{GDP Growth if Democracy} & \multicolumn{1}{p{2.2cm}|}{GDP Growth if NOT Democracy} & \textbf{Treatment Effect} \bigstrut\\
+    \hline
+          & \multicolumn{1}{p{1.8cm}|}{$D_i$} & \multicolumn{1}{p{2cm}|}{$Y_1$} & \multicolumn{1}{p{2.2cm}|}{$Y_0$} & \multicolumn{1}{p{1.8cm}|}{$Y_{1} - Y_{0}$} \bigstrut\\
+    \hline
+    Brasil & 1 & 4     & 1      & 3 \bigstrut\\
+    \hline
+    Argentina & 0 & 7    & 4      & 3 \bigstrut\\
+    \hline
+    Bolivia & 1 & 2     & 4     & -2 \bigstrut\\
+    \hline
+    Colombia & 0 &  7   & 7    & 0 \bigstrut\\
+    \hline
+    Peru & 0 & 5     & 4     & 1 \bigstrut\\
+    \hline
+    \textbf{Average Treatment Effect} & & \textbf{5} & \textbf{4} & \textbf{1} \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Inference}
+\begin{itemize}
+\item Actually, nothing stops us calculating the \textbf{Average Treatment Effect}
+\item The question is, is the ATE accurate?
 \end{itemize}
 \footnotesize
 \begin{table}[htbp]
@@ -799,7 +862,7 @@ $$Y_{i}^{obs} = D_i \cdot Y_{1i} + (1-D_i) \cdot Y_{0i}$$
 \pause
 \item Counterfactuals are not \textbf{plausible}
 \pause
-\item Causal effects are biased
+\item Causal effects are \textbf{biased}
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -867,7 +930,7 @@ $$Y_{i}^{obs} = D_i \cdot Y_{1i} + (1-D_i) \cdot Y_{0i}$$
 \begin{frame}
 \frametitle{Causal Inference}
 \begin{itemize}
-\item Contrasting the averages of the hypothetical variables and the observed variables:
+\item Lots of averages:
 \end{itemize}
 \begin{table}[htbp]
   \centering
@@ -883,22 +946,44 @@ $$Y_{i}^{obs} = D_i \cdot Y_{1i} + (1-D_i) \cdot Y_{0i}$$
     \end{tabular}%
   \label{tab:addlabel}%
 \end{table}%
+\end{frame}
 
+\begin{frame}
+\frametitle{Causal Inference}
+\begin{itemize}
+\item Lots of averages:
+\end{itemize}
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|c|l|l|l|}
+    \hline
+          &       & \multicolumn{2}{c|}{Hypothetical outcome} \bigstrut\\
+    \hline
+          &       & $Y0$    & $Y1$ \bigstrut\\
+    \hline
+    \multirow{2}[4]{*}{Actual Treatment} & $D=0$   & \cellcolor{blue!25}$E(Y_{0i}|D=0)$ & $E(Y_{1i}|D=0)$ \bigstrut\\
+\cline{2-4}          & $D=1$   & $E(Y_{0i}|D=1)$ & \cellcolor{blue!25}$E(Y_{1i}|D=1)$ \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
 \end{frame}
 
 \begin{frame}
 \frametitle{Causal Inference}
 \begin{itemize}
 \item All our causal estimates are \textbf{averages}
+\pause
 \begin{itemize}
 \item We cannot distinguish the null hypothesis of no average effect from the sharp null hypothesis of no individual effects
+\pause
 \end{itemize}
 \footnotesize
 \begin{table}[htbp]
   \centering
     \begin{tabular}{|l|p{3cm}|p{3cm}|}
     \hline
-          & \multicolumn{1}{p{3cm}|}{No Average Effect ($Y_1-Y_0$)} & \multicolumn{1}{p{3cm}|}{"Sharp null": No individual effects ($Y_1-Y_0$)} \bigstrut\\
+          & \multicolumn{1}{p{3cm}|}{No Average Effect $E(Y_1-Y_0)=0$} & \multicolumn{1}{p{3cm}|}{"Sharp null": No individual effects ($Y_{1i}-Y_{0i}=0$)} \bigstrut\\
     \hline
     Brasil & 2     & 0 \bigstrut\\
     \hline
@@ -925,12 +1010,18 @@ $$Y_{i}^{obs} = D_i \cdot Y_{1i} + (1-D_i) \cdot Y_{0i}$$
 \frametitle{Bias}
 \begin{itemize}
 \item Why are potential outcomes biased in our data?
+\pause
 \begin{enumerate}
 \item Omitted Variables
+\pause
 \item Reverse Causation
+\pause
 \item Selection Bias
+\pause
 \end{enumerate}
-\item \textbf{In all of these cases the potential outcomes are distorted so basic regression is biased}
+\item In all of these cases \textbf{the potential outcomes are distorted}
+\pause
+\item So basic regression is \textbf{biased}
 \end{itemize}
 \end{frame}
 
@@ -944,6 +1035,7 @@ A real causal relationship:
 
 \end{knitrout}
 \columnbreak
+\pause
 Being misled by omitted variable bias:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -956,6 +1048,7 @@ Being misled by omitted variable bias:
 \item A third variable causes some units to have \textbf{different values of potential outcomes}, AND for those \textbf{same units to be treated}
 \pause
 \item So treated units have non-representative $Y_1$
+\pause
 \item And control units have non-representative $Y_0$
 \end{itemize}
 \end{frame}
@@ -1004,7 +1097,7 @@ Being misled by omitted variable bias:
 \item Let's say that $Y_{1i} = Y_{0i} + \alpha$, where $\alpha$ is the real constant treatment effect
 \end{itemize}
 $$ \hat{ATE} = E(Y_1|D=1) - E(Y_0|D=0)$$ \\ \pause
-$$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} + \underbrace{E(Y_0|D=1) - E(Y_0|D=0)}_\text{Bias}$$ \\ \pause
+$$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} + \underbrace{E(Y_0|D=1) - E(Y_0|D=0)}_\text{Bias}$$ \\
 \end{frame}
 
 
@@ -1018,6 +1111,7 @@ A real causal relationship:
 
 \end{knitrout}
 \columnbreak
+\pause
 Being misled by reverse causation:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -1029,7 +1123,7 @@ Being misled by reverse causation:
 \pause
 \item $D$ does not affect $Y$, but higher $Y$ makes treatment ($D$) more likely
 \pause
-\item So the two variables are correlated
+\item So the two variables are \textbf{correlated}
 \end{itemize}
 \end{frame}
 
@@ -1133,6 +1227,12 @@ Being misled by Selection Bias:
 \item The units which benefit most from treatment (largest $y_1-y_0$) \textbf{choose treatment}
 \pause
 \item We don't see any of the low $y_1$'s of units which avoid treatment
+\begin{itemize}
+\pause
+\item Countries which can boost their GDP growth by becoming a democracy choose to democratize
+\pause
+\item Ex. Mexico? Myanmar?
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -1143,12 +1243,6 @@ Being misled by Selection Bias:
 \includegraphics[width=\maxwidth]{figure/SSB1-1} 
 
 \end{knitrout}
-\begin{itemize}
-\pause
-\item Countries which can boost their GDP growth by becoming a democracy choose to democratize
-\pause
-\item Ex. Mexico? Myanmar?
-\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -1186,10 +1280,11 @@ Being misled by Selection Bias:
 \end{multline}
 \footnotesize
 NB: For equal-sized treatment and control groups
-\normalsize\end{frame}
+\normalsize
+\end{frame}
 
 \begin{frame}
-\frametitle{Causal Inference}
+\frametitle{Treatment Assignment Mechanism}
 \begin{itemize}
 \item In all of these cases, \textbf{which units receive 'treatment' ($D_i=1$)}, and why, affect our estimate of the relationship between $D$ and $Y$
 \pause
@@ -1202,16 +1297,16 @@ NB: For equal-sized treatment and control groups
 \begin{itemize}
 \item It means our comparison control cases are really misleading
 \pause
-\item $Y_0$ for Malaysia is not a good guide to the $Y_0$ for Switzerland
+\item $Y_0$ for North Korea is not a good guide to the $Y_0$ for Sweden
 \pause
-\item What would happen if the 'untreated' units got treated?
+\item What would happen if the control units got treated?
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Causal Inference}
+\frametitle{Treatment Assignment Mechanism}
 \begin{itemize}
 \item The comparability of treatment and control units depends on how they got to be treated
 \pause
@@ -1222,7 +1317,7 @@ NB: For equal-sized treatment and control groups
 \end{frame}
 
 \begin{frame}
-\frametitle{Causal Inference}
+\frametitle{Treatment Assignment Mechanism}
 \begin{itemize}
 \item Explanation is more reliable where the \textbf{Treatment Assignment Mechanism is Independent of Potential Outcomes}
 \pause
@@ -1230,10 +1325,11 @@ NB: For equal-sized treatment and control groups
 \item Independent means the values of the potential outcomes give us no information about whether that unit was treated
 \pause
 \item Potential outcomes are 'balanced' across control and treatment groups
+\pause
 \end{itemize}
 \end{itemize}
 \begin{block}{Independence of Treatment Assignment}
-\item Treatment Assignment is Independent of Potential Outcomes
+\item Treatment Assignment does NOT depend on the values of units' Potential Outcomes
 \pause 
 \item $(Y_1,Y_0) \perp D$
 \pause
@@ -1244,7 +1340,7 @@ NB: For equal-sized treatment and control groups
 \end{frame}
 
 \begin{frame}
-\frametitle{Causal Inference}
+\frametitle{Summary}
 \begin{itemize}
 \item Template to analyze a paper:
 \begin{enumerate}
@@ -1254,13 +1350,15 @@ NB: For equal-sized treatment and control groups
 \pause
 \item What is the Fundamental Problem of Causal Inference in this case?
 \pause
-\item How do we define the Average Treatment Effect in this case?
+\item How do we define the Average Treatment Effect (ATE) in this case? ATT? ATU?
 \pause
 \item What is the Treatment Assignment Mechanism?
 \pause
+\item Draw a causal diagram of the variables in the study, including the treatment assignment mechanism
+\pause
 \item Is Treatment Assignment independent of Potential Outcomes?
 \pause
-\item What is the risk of:
+\item Describe the risk of:
 \begin{itemize}
 \item Omitted Variable Bias?
 \pause
@@ -1275,6 +1373,17 @@ NB: For equal-sized treatment and control groups
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages={2}]{Ross_2001.pdf}
 
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item Try experimenting with the [App here](https://poliong.shinyapps.io/DAGs/)
+\pause
+\item Can you create an artificial effect between $D$ and $Y$ even when there is no direct causal effect?
+\pause
+\item Under what conditions can you recover the real treatment effect?
+\end{itemize}
+\end{frame}
+
 \section{Rest of the Course}
 
 \begin{frame}
@@ -1282,7 +1391,7 @@ NB: For equal-sized treatment and control groups
 \begin{itemize}
 \item The rest of the course is mostly about:
 \begin{itemize}
-\item \textbf{Design-Based Solutions:} Which treatment assignment mechanisms \textbf{avoid these biases} and provide plausible counterfactuals
+\item \textbf{Design-Based Solutions} to the Fundamental Problem of Causal Inference: Which treatment assignment mechanisms \textbf{avoid these biases} and provide plausible counterfactuals
 \pause
 \item How much can we learn with better research design?
 \pause
@@ -1301,18 +1410,18 @@ NB: For equal-sized treatment and control groups
     \hline
           &       & \multicolumn{1}{p{2.4cm}|}{\textbf{Independence of Treatment Assignment}} & \multicolumn{1}{p{3cm}|}{\textbf{Researcher Controls Treatment Assignment?}} \bigstrut\\
     \hline
-    \multicolumn{1}{|p{2.6cm}|}{\multirow{2}[4]{2cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{2}[4]{2cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
 \cline{2-4}          & Survey and Lab Experiments &  \checkmark     & \checkmark \bigstrut\\
     \hline
           &       &       &  \bigstrut\\
     \hline
-    \multicolumn{1}{|p{2.6cm}|}{\multirow{3}[6]{2cm}{\textbf{Natural Experiments}}} & Randomized Natural Experiments &  \checkmark     &  \bigstrut\\
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{3}[6]{2cm}{\textbf{Natural Experiments}}} & Randomized Natural Experiments &  \checkmark     &  \bigstrut\\
 \cline{2-4}          & Instrumental Variables & \checkmark      &  \bigstrut\\
 \cline{2-4}          & Discontinuities & \checkmark      &  \bigstrut\\
     \hline
           &       &       &  \bigstrut\\
     \hline
-    \multicolumn{1}{|p{2.6cm}|}{\multirow{4}[8]{2cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{4}[8]{2cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
 \cline{2-4}          & Controlling for Confounding &       &  \bigstrut\\
 \cline{2-4}          & Matching &       &  \bigstrut\\
 \cline{2-4}          & Comparative Cases and Process Tracing &       &  \bigstrut\\
@@ -1324,48 +1433,6 @@ NB: For equal-sized treatment and control groups
 \end{frame}
 
 \end{document}
-
-\begin{frame}
-\frametitle{Causal Inference}
-\begin{itemize}
-\item We can't even look at the change in countries that switch to a PR system
-\begin{itemize}
-\item What if \textbf{all} countries had started to invest more in education at the same time, for different reasons?
-\item The potential outcome for Country X in time 1 is different to at time 2
-\end{itemize}
-\item So we need to consider the \textbf{counterfactual} - what would have happened if the country had \textbf{not} switched to a PR system?
-\item So we can only estimate the effect by comparing \textbf{across} units
-\item That is why we are doing causal \textbf{inference}, not causal proof
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Causal Inference}
-\begin{itemize}
-\item So we need to consider the exact \textbf{counterfactual} - what would have happened if the country had \textbf{not} switched to a PR system?
-\pause
-\begin{itemize}
-\item This is \textbf{impossible} to know
-\pause
-\item We can only \textit{estimate} the effect by comparing \textbf{across} units in some way
-\pause
-\item That is why we are doing causal \textbf{inference}, not causal proof
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Causal Inference}
-\begin{itemize}
-\item To compare across units we need counterfactuals: \textbf{control} units that do not receive treatment
-\item Control units can never be perfect substitutes
-\item Causal Inference is all about identifying a \textbf{plausible counterfactual}
-\begin{itemize}
-\item Plausible means that the potential outcomes of the control unit are the same as those of the treated unit
-\end{itemize}
-\end{itemize}
-\end{frame}
-
 
 
 %setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')

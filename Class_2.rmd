@@ -22,5 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## [Lecture Slides](Classes/Class_2/Slides_Class2_v7.pdf)
 
+## [Causal Relationships App](https://poliong.shinyapps.io/DAGs/)
+
 ## [Lab Exercise to Complete during Class](Classes/Class_2/Exercise_POs_v1.pdf)
 
