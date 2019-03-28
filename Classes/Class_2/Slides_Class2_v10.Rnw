@@ -1583,7 +1583,7 @@ NB: For equal-sized treatment and control groups
 \begin{frame}
 \frametitle{Summary}
 \begin{itemize}
-\item Try experimenting with the \href{Causal Relationships App here}{https://poliong.shinyapps.io/DAGs/}
+\item Try experimenting with the \href{https://poliong.shinyapps.io/DAGs/}{Causal Relationships App here}
 \pause
 \item Can you create an artificial effect between $D$ and $Y$ even when there is no direct causal effect?
 \pause

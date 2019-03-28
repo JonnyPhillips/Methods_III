@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  28 MAR 2019 09:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  28 MAR 2019 09:40
 entering extended mode
 **./Slides_Class2_v10.tex
 (Slides_Class2_v10.tex
@@ -4662,10 +4662,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 23112 strings out of 493333
- 443508 string characters out of 3139194
+ 23113 strings out of 493333
+ 443528 string characters out of 3139194
  524817 words of memory out of 3000000
- 25610 multiletter control sequences out of 15000+200000
+ 25611 multiletter control sequences out of 15000+200000
  83158 words of font info for 151 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,59p,876b,608s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -4680,7 +4680,7 @@ b><C:/Users/Jonny/AppData/Roaming/MiKTeX/2.9/fonts/type1/mathdesign/mdbch/md-ch
 b7y.pfb><C:/Users/Jonny/AppData/Roaming/MiKTeX/2.9/fonts/type1/mathdesign/mdbch
 /md-chbma.pfb><C:/Users/Jonny/AppData/Roaming/MiKTeX/2.9/fonts/type1/mathdesign
 /mdbch/md-chr7v.pfb>
-Output written on Slides_Class2_v10.pdf (186 pages, 1810883 bytes).
+Output written on Slides_Class2_v10.pdf (186 pages, 1810831 bytes).
 PDF statistics:
  1949 PDF objects out of 2073 (max. 8388607)
  378 named destinations out of 1000 (max. 500000)
