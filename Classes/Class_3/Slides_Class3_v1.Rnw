@@ -1,0 +1,377 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!orange}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+library(purrr)
+library(DiagrammeR)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T)
+@
+
+<<egdata1,echo=FALSE,warning=FALSE,message=FALSE>>=
+set.seed(05410)
+N <- 10000
+treatment <- rbinom(N,1,0.5)
+outcome <- 0.3*treatment+rnorm(N,0,5)
+
+d <- data.frame(as.factor(treatment),outcome)
+@
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 3 - Field Experiments}
+\author{Jonathan Phillips}
+\date{April 2019}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Rest of the Course}
+
+\begin{frame}
+\frametitle{Rest of the Course}
+\begin{itemize}
+\item The rest of the course is mostly about:
+\begin{itemize}
+\item \textbf{Design-Based Solutions} to the Fundamental Problem of Causal Inference: Which treatment assignment mechanisms \textbf{avoid these biases} and provide plausible counterfactuals
+\pause
+\item How much can we learn with better research design?
+\pause
+\item \textbf{Model-Based Solutions:} Not so much.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rest of the Course}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+  \scalebox{0.7}{
+    \begin{tabular}{|p{2.2cm}|p{5cm}|c|c|}
+    \hline
+          &       & \multicolumn{1}{p{2.4cm}|}{\textbf{Independence of Treatment Assignment}} & \multicolumn{1}{p{3cm}|}{\textbf{Researcher Controls Treatment Assignment?}} \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{2}[4]{2cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
+\cline{2-4}          & Survey and Lab Experiments &  \checkmark     & \checkmark \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{3}[6]{2cm}{\textbf{Natural Experiments}}} & Randomized Natural Experiments &  \checkmark     &  \bigstrut\\
+\cline{2-4}          & Instrumental Variables & \checkmark      &  \bigstrut\\
+\cline{2-4}          & Discontinuities & \checkmark      &  \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.8cm}|}{\multirow{4}[8]{2cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
+\cline{2-4}          & Controlling for Confounding &       &  \bigstrut\\
+\cline{2-4}          & Matching &       &  \bigstrut\\
+\cline{2-4}          & Comparative Cases and Process Tracing &       &  \bigstrut\\
+    \hline
+    \end{tabular}}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\section{Independence}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item Last week, we identified why it's hard to estimate causal effects:
+\pause
+\item \textbf{The Treatment Assignment Mechanism is almost never independent of Potential Outcomes}
+\pause
+\item So estimates of the ATE are \textbf{biased}
+\pause
+\item The solution?
+\pause
+\item \textbf{Treatment Assignment Mechanisms that \textit{ARE} independent of potential outcomes}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item Why does Independence of Treatment Assignment help us achieve causal inference?
+\begin{itemize}
+\item We want to estimate:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1) - E(Y_0)
+\end{eqnarray}
+\pause
+\begin{itemize}
+\item Our data provides:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1|D=1)\text{ ,   }E(Y_0|D=0)
+\end{eqnarray}
+\pause
+\begin{itemize}
+\item With independence, $Y_1, Y_0 \perp D$:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1|D=1) &=& E(Y_1) \text{ ,   }  \pause E(Y_0|D=0) &=& E(Y_0) \\
+\pause
+E(Y_1|D=1) - E(Y_0|D=0) &=& E(Y_1) - E(Y_0) \\
+\end{eqnarray}
+\item Potential outcomes in the treatment and control groups are now \textbf{unbiased} and representative of \textit{all} the units
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item What is the treatment assignment mechanism under \textbf{randomization}?
+\pause
+\begin{itemize}
+\item It has nothing to do with potential outcomes!
+\begin{itemize}
+\item Every unit has \textbf{exactly the same} probability of treatment
+\item No omitted variable bias is possible
+\item No self-selection is possible
+\item No reverse causation is possible
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item This is the \textbf{entire} causal diagram:
+\end{itemize}
+\pause
+<<explanation1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=2.5, fig.width=4>>=
+nodes <- tibble(id=1:2,
+                label=c("Randomized Treatment","Outcome"),
+                      color="aqua")
+
+edges <- tibble(from=c(1),
+                to=c(2))
+
+create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir', 'LR', 'graph') %>% 
+  set_edge_attrs(edge_attr=color, values="black") %>% 
+  render_graph()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item But our logic works only based on \textbf{expectations} (averages)
+\pause
+\begin{itemize}
+\item \textit{On average}, potential outcomes will be balanced
+\pause
+\item That's more likely in larger samples
+\pause
+\item Less likely in small samples; by chance, potential outcomes may be biased
+\pause
+\item We have no way of \textit{verifying} if potential outcomes are biased
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Analyzing Field Experiments}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item If treatment is random we know that:
+$$E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) $$
+\pause
+\item What is $E(Y_1|D=1)$? 
+\pause 
+\item What is $E(Y_0|D=0)$?
+\pause
+\item This is easy! 
+\pause
+\item Just the difference in outcome means between treatment and control units
+\pause
+\begin{itemize}
+\item And a simple T-test for statistical significance
+\pause
+\item NO modelling assumptions (``non-parametric'')
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item Simple Regression $=$ Difference-in-means T-test
+\pause
+$$Y_i \sim \alpha + \beta D_i = \epsilon_i$$
+\pause
+$$Y_i = Y_{0i} + (Y_{1i} - Y_{0i}) D_i + \epsilon_i$$
+\pause
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item Simple Regression $=$ Difference-in-means T-test
+\pause
+\footnotesize
+\item T-test Results:
+<<t-test, results='asis'>>=
+d %>% mutate(treatment=factor(treatment,ordered = T,levels=c(1,0))) %>% 
+  t.test(outcome~treatment, data=.) %>% 
+  tidy() %>% 
+  select(estimate,statistic,p.value) %>% 
+  xtable(digits=5)
+@
+\pause
+\item Regression Results:
+<<reg1, results='asis'>>=
+d %>% lm(outcome~treatment, data=.) %>% tidy() %>% xtable(digits=5)
+@
+\end{itemize}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\begin{itemize}
+\item Hard! We can't just 'pick' treated units off the top of our heads
+\pause
+\item Computers are deterministic
+\pause
+\item The best we can do is to use atmospheric noise or radioactive decay
+\pause
+\end{itemize}
+\item In the real world, randomization is hard
+\begin{itemize}
+\item Pressure to help the most needy
+\pause
+\item Political pressure
+\pause
+\item We don't want to be guinea pigs!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\pause
+\item So how do we confirm that randomization has succeeded?
+\pause
+\begin{itemize}
+\item We can't directly test potential outcomes
+\end{itemize}
+\begin{enumerate}
+\item \textbf{Qualitative research:} to reconstruct the treatment process
+\pause
+\item \textbf{Balance tests:} We can directly test other variables between treatment and control
+\begin{itemize}
+\item Randomization balances \textit{all} variables, not just potential outcomes
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\pause
+\item Three options to assign treatment and control 'independent' of potential outcomes:
+\pause
+\begin{enumerate}
+\item Flip a coin for every unit
+\pause
+\item Pair units and flip a coin to assign one to treatment
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Implementing Field Experiments}
+
+\section{Designing Field Experiments}
+
+\end{document}
+
+%Random sample vs. Random treatment
+%why 50:50
+
+%\pause
+%\item But we can assess balance in \textit{observable} covariates
+%\item What if some covariates are imbalanced? %Expected 1/20. Still need to correct as could be real bias.
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")
