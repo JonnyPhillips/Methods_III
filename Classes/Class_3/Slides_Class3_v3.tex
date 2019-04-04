@@ -1,0 +1,806 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!orange}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 3 - Field Experiments}
+\author{Jonathan Phillips}
+\date{April 2019}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Rest of the Course}
+\begin{itemize}
+\item The rest of the course is mostly about:
+\begin{itemize}
+\item \textbf{Design-Based Solutions} to the Fundamental Problem of Causal Inference: Which treatment assignment mechanisms \textbf{avoid biases} and provide plausible counterfactuals
+\pause
+\item How much can we learn with better research design?
+\pause
+\item \textbf{Model-Based Solutions:} Not so much.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rest of the Course}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+  \scalebox{0.7}{
+    \begin{tabular}{|p{2.2cm}|p{5cm}|c|c|}
+    \hline
+          &       & \multicolumn{1}{p{2.4cm}|}{\textbf{Independence of Treatment Assignment}} & \multicolumn{1}{p{3cm}|}{\textbf{Researcher Controls Treatment Assignment?}} \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{2}[4]{2cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
+\cline{2-4}          & Survey and Lab Experiments &  \checkmark     & \checkmark \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{3}[6]{2cm}{\textbf{Natural Experiments}}} & Randomized Natural Experiments &  \checkmark     &  \bigstrut\\
+\cline{2-4}          & Instrumental Variables & \checkmark      &  \bigstrut\\
+\cline{2-4}          & Discontinuities & \checkmark      &  \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{4}[8]{2cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
+\cline{2-4}          & Controlling for Confounding &       &  \bigstrut\\
+\cline{2-4}          & Matching &       &  \bigstrut\\
+\cline{2-4}          & Comparative Cases and Process Tracing &       &  \bigstrut\\
+    \hline
+    \end{tabular}}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\section{Independence}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item Last week, we identified why it's hard to estimate causal effects:
+\pause
+\item \textbf{The Treatment Assignment Mechanism depends on Potential Outcomes}
+\pause
+\item So estimates of the ATE are \textbf{biased}
+\pause
+\item The solution?
+\pause
+\item \textbf{Treatment Assignment Mechanisms that \textit{ARE} independent of potential outcomes}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item Why does Independence of Treatment Assignment help us achieve causal inference?
+\begin{itemize}
+\item We want to estimate:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1) - E(Y_0)
+\end{eqnarray}
+\pause
+\begin{itemize}
+\item Our data provides:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1|D=1)\text{ ,   }E(Y_0|D=0)
+\end{eqnarray}
+\pause
+\begin{itemize}
+\item With independence, $Y_1, Y_0 \perp D$:
+\end{itemize}
+\begin{eqnarray}
+E(Y_1|D=1) = E(Y_1) \text{ ,   }  \pause E(Y_0|D=0) = E(Y_0) \\
+\pause
+E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) \\
+\end{eqnarray}
+\item Potential outcomes in the treatment and control groups are now \textbf{unbiased} and representative of \textit{all} the units
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item What is the treatment assignment mechanism under \textbf{randomization}?
+\pause
+\begin{itemize}
+\item It has nothing to do with potential outcomes!
+\pause
+\item So we get a representative sample of $Y_0$ and $Y_1$
+\pause
+\begin{itemize}
+\item Every unit has \textbf{exactly the same} probability of treatment
+\pause
+\item Potential outcomes are 'Completely Missing at Random'
+\pause
+\item No omitted variable bias is possible
+\item No self-selection is possible
+\item No reverse causation is possible
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item This is the \textbf{entire} causal diagram:
+\end{itemize}
+\pause
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/explanation1-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item Why does randomization remove selection bias?
+\item Assume: $Y_{1i} = Y_{0i} + \alpha$, where $\alpha$ is the real constant treatment effect
+\end{itemize}
+$$ \hat{ATE} = E(Y_1|D=1) - E(Y_0|D=0)$$ \\ \pause
+$$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} + \underbrace{E(Y_0|D=1) - E(Y_0|D=0)}_\text{Bias}$$ \\
+\begin{itemize}
+\item Now, use the Independence of Treatment Assignment:
+\end{itemize}
+$$ E(Y_0|D=1) = E(Y_0|D=0)$$ \\
+$$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} $$ \\
+\begin{itemize}
+\item This works for observable \textit{and} unobservable variables
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Independent Treatment Assignment}
+\begin{itemize}
+\item But this logic works only based on \textbf{expectations} (averages)
+\pause
+\begin{itemize}
+\item \textit{On average}, potential outcomes will be balanced
+\pause
+\item That's more likely in larger samples
+\pause
+\item Less likely in small samples; by chance, potential outcomes may be biased
+\pause
+\item We have no way of \textit{verifying} if potential outcomes are biased
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Balance in Repeateed Experiments}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+
+\section{Analysis}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item If treatment is random we know that:
+$$E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) $$
+\pause
+\item What is $E(Y_1|D=1)$? 
+\pause 
+\item What is $E(Y_0|D=0)$?
+\pause
+\item This is easy! 
+\pause
+\item Just the difference in outcome means between treatment and control units
+\pause
+\begin{itemize}
+\item And a simple T-test for statistical significance
+\pause
+\item NO modelling assumptions (``non-parametric'')
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item Simple Regression $=$ Difference-in-means T-test
+\pause
+$$Y_i \sim \alpha + \beta D_i = \epsilon_i$$
+\pause
+$$Y_i = Y_{0i} + (Y_{1i} - Y_{0i}) D_i + \epsilon_i$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Analyzing Field Experiments}
+\begin{itemize}
+\item Simple Regression $=$ Difference-in-means T-test
+\pause
+\footnotesize
+\item T-test Results:
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Mar 29 10:11:31 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & estimate & statistic & p.value \\ 
+  \hline
+1 & 0.27065 & 2.69475 & 0.00706 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\pause
+\item Regression Results ($Y_i = \alpha + \beta D_i = \epsilon_i$):
+% latex table generated in R 3.5.2 by xtable 1.8-3 package
+% Fri Mar 29 10:11:31 2019
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlrrrr}
+  \hline
+ & term & estimate & std.error & statistic & p.value \\ 
+  \hline
+1 & (Intercept) & 0.03459 & 0.07110 & 0.48647 & 0.62664 \\ 
+  2 & treatment & 0.27065 & 0.10044 & 2.69472 & 0.00706 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Repeated Experiments}
+\begin{itemize}
+\item The results from one experiment are not perfect
+\pause
+\item Treatment effects are still \textit{probabilistic} (random variables) so we may get the wrong answer by chance
+\pause
+\item In repeated experiments, 95\% of confidence intervals will cross the true treatment effect
+\end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in eval(predvars, data, env): object 'Y' not found}}\end{kframe}
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Clustered Treatments}
+\begin{itemize}
+\item Clustered sampling: To reduce data collection costs
+\pause
+\item Clustered treatment: To reduce implementation costs, or to test specific theories
+\pause
+\item Eg. Holding Town Hall meetings does not make sense at the individual level
+\pause
+\item If treatment (or sampling) are clustered, we will have dependencies in our errors - closer people are more similar
+\pause
+\item So standard errors must be clustered at the level of treatment (eg. village)
+\pause
+\item In general, inference is more efficient with more higher-level units (more villages, less people per village)
+\pause
+\begin{itemize}
+\item But there is usually a cost trade-off
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Covariates}
+\begin{itemize}
+\item Do we need to control for covariates in experiments?
+\pause
+\item If randomization worked and the sample size is large, usually not
+\pause
+\item Three reasons to include controls:
+\begin{itemize}
+\item Small sample, but note causal inference is now model-dependent
+\pause
+\item Chance/residual imbalance on a specific variable which we want to adjust for
+\pause
+\item To improve precision, i.e. reduce the standard errors on $\beta$
+\begin{itemize}
+\item The more variation in $Y$ we can explain with covariates, the more certain we can be on the effectof $D$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Other Quantities of Interest}
+\begin{itemize}
+\item Average Treatment Effects are just one summary statistic
+\pause
+\item Can be influenced by outliers
+\pause
+\item What if an average effect of +5\% income leaves half the population hugely rich and half very poor?
+\pause
+\item Average treatment effects are easiest (difference-in-means equals mean-difference)
+\pause
+\item But we can also estimate Quantile treatment effects, eg. the effect of treatment on the bottom 10\% of the distribution
+\end{itemize}
+\end{frame}
+
+\section{Assumptions}
+
+\begin{frame}
+\frametitle{Assumptions}
+\begin{enumerate}
+\item Compliance with Randomization procedure
+\item Randomization produced balance on potential outcomes
+\item SUTVA
+\item Excludability
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Compliance with Randomization procedure}
+\begin{itemize}
+\item Randomization is unpopular
+\pause
+\item Need to verify treatment allocation
+\begin{itemize}
+\item Transparency, documentation
+\end{itemize}
+\pause
+\item And treatment compliance
+\begin{itemize}
+\item Did anyone assigned to control manage to get treatment?
+\pause
+\end{itemize}
+\item \textbf{Design:} Double-blind assignment
+\item \textbf{Checks:} Qualitative fieldwork
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{2. Randomization Produced Balanced Potential Outcomes}
+\begin{itemize}
+\item Impossible to Test!
+\pause
+\item But we can test observable pre-treatment covariates
+\pause
+\item If covariates are the same in the treatment and control groups, this variable \textit{cannot} explain any differences in outcomes
+\pause
+\item \textbf{Check:} Normally a difference in means T-test
+\pause
+\item \textbf{Check:} Or a Kolmogorov-Smirnov Test of identical distributions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{2. Randomization Produced Balanced Potential Outcomes}
+\begin{itemize}
+\item What if a balance test comes back with a p-value < 0.05?
+\pause
+\item It probably will!
+\begin{enumerate}
+\item We are testing many variables, so some differences arise by chance
+\pause
+\item We have a large N, so we can detect very small differences
+\pause
+\end{enumerate}
+\item \textbf{Check:} For balance, \textbf{What matters are \textit{substantive} differences, not p-values}
+\pause
+\item Two safety nets:
+\begin{enumerate}
+\item \textbf{Analysis:} We can still include covariates in our analysis, controlling for 'residual' imbalance
+\pause
+\item \textbf{Analysis:} We are using p-values in our \textit{analysis}, which take into account 'chance' imbalance
+\pause
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. SUTVA}
+\begin{itemize}
+\item Stable Unit Treatment Value Assumption = \textbf{No Spillovers}
+\pause
+\item Technically, treatment of unit $j$ does not affect the potential outcomes for unit $i$
+\pause
+$$(Y_{1i}, Y_{0i}) \perp D_j$$
+\pause
+$$Y_i(D_i, D_j, D_k, D_l, D_m, D_n, D_o, D_p...) = Y_i(D_i)$$
+\pause
+\item But spillovers are common! If you get an award, I might feel more motivated or less motivated
+\pause
+\item Why are spillovers a problem?
+\pause
+\begin{itemize}
+\item \textbf{Design:} Limit risk of spillovers, eg. leave 20 miles between each unit
+\item \textbf{Check:} Qualitative fieldwork
+\item \textbf{Analysis:} Try to \textit{measure} spillovers
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{4. Excludability}
+\begin{itemize}
+\item \textbf{Nothing else correlated with treatment affects potential outcomes}
+\pause
+\item Assignment to treatment causes a \textbf{'second'} treatment
+\pause
+\item Eg. We share information about specific politicians on the radio, but the politicians then counter with their own broadcasts
+\pause
+\item Our treatment effect is no longer \textit{only} the effect of our information
+\pause
+\item Or do we want to measure these additional effects?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{4. Excludability}
+\begin{itemize}
+\item \textbf{Nothing else correlated with treatment affects potential outcomes}
+\pause
+\item Some responses to treatment we want to capture ('net effects')
+\begin{itemize}
+\item Eg. One reason richer families change their attitudes to government is because they start paying taxes
+\end{itemize}
+\pause
+\item Others we don't want to capture
+\begin{itemize}
+\item Eg. Measurement bias: Researchers treat treated units differently and record higher outcomes for them
+\pause
+\item Or Hawthorne Effects arising from being studied, not treatment (more next week)
+\end{itemize}
+\item \textit{Design:} Careful specification of treatment and control
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{4. Excludability}
+\begin{itemize}
+\item What if we find zero effect of government investment of \$1000 in healthcare on health outcomes, because households responded by reducing their spending by exactly \$1000?
+\pause
+\item Experimental treatment effects capture \textit{all} net downstream effects
+\end{itemize}
+\end{frame}
+
+\section{Implementing Field Experiments}
+
+\begin{frame}
+\frametitle{Implementing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\begin{itemize}
+\item Hard! We can't just 'pick' treated units off the top of our heads
+\pause
+\item Computers are deterministic
+\pause
+\item The best we can do is to use atmospheric noise or radioactive decay
+\pause
+\end{itemize}
+\item In the real world, randomization is hard
+\begin{itemize}
+\item Pressure to help the most needy
+\pause
+\item Political pressure
+\pause
+\item We don't want to be guinea pigs!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\pause
+\item So how do we confirm that randomization has succeeded?
+\pause
+\begin{itemize}
+\item We can't directly test potential outcomes
+\end{itemize}
+\begin{enumerate}
+\item \textbf{Qualitative research:} to reconstruct the treatment process
+\pause
+\item \textbf{Balance tests:} We can directly test other variables between treatment and control
+\begin{itemize}
+\item Randomization balances \textit{all} variables, not just potential outcomes
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementing Field Experiments}
+\begin{itemize}
+\item How do we randomize?
+\pause
+\item Three options to assign treatment and control 'independent' of potential outcomes:
+\pause
+\begin{itemize}
+\item We have N units and want equal probability of treatment for each:
+\end{itemize}
+\begin{enumerate}
+\item Flip a coin for every unit so every unit has probability $0.5$ of treatment
+\pause
+\item Randomize the order of the units and assign the first $\frac{N}{2}$ units to treatment
+\pause
+\item Pair units and flip a coin to assign one to treatment so exactly $\frac{N}{2}$ get treatment
+\pause
+\end{enumerate}
+\item What's the difference between these three options?
+\pause
+\item What \% treated? 50:50 is usually most efficient
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementing Field Experiments}
+\begin{itemize}
+\item \textbf{Blocking}
+\pause
+\item Randomization is \textit{inefficient} and risky
+\pause
+\item We know we need balance on key covariates, eg. gender, democracy
+\begin{itemize}
+\item So why leave this to chance??
+\pause
+\item We can measure these variables and \textit{enforce} balance (50\% female in both treatment and control)
+\pause
+\item Blocking means randomizing \textit{within} fixed groups
+\pause
+\item Eg. We have 10 states and a sample size of 5000 - so we fix 250 treated and 250 control in each state
+\end{itemize}
+\item "Block what you can; randomize what you cannot"
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementing Field Experiments}
+\begin{itemize}
+\item Random treatment vs. Random samples
+\pause
+\item Representative potential outcomes vs. Sample representative of larger population
+\pause
+\item Causal inference vs. Statistical inference
+\pause
+\item Both work in the same way - randomization avoids selection (into the data/treatment)
+\end{itemize}
+\end{frame}
+
+\section{Critiquing Field Experiments}
+
+\begin{frame}
+\frametitle{Critiquing Field Experiments}
+\begin{itemize}
+\item Field experiments are easy to evaluate. What can go wrong??
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Results are a Black Box}
+\begin{itemize}
+\item We know that $D$ causes $Y$ in this population. So what?
+\pause
+\item We know that giving people money causes them to vote more often. So what?
+\pause
+\item We want to learn about generalizable political processes.
+\pause
+\item What theory is this testing? \pause Does it reject any theory?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{2. Generalizability of Context}
+\begin{itemize}
+\item Our causal conclusions are \textbf{specific to the population we drew our sample from}
+\pause
+\item Income makes attitudes to redistribution more negative in the USA
+\pause
+\begin{itemize}
+\item What is the effect in Angola?
+\end{itemize}
+\pause
+\item Secondary school education leads to more conservative voting
+\pause
+\begin{itemize}
+\item What is the effect of university education?
+\end{itemize}
+\pause
+\item Yes, you randomly sampled and randomly assigned treatment, but the population you drew from was not the full population
+\pause
+\begin{itemize}
+\item Experiments are only possible where people agree, and those places are not representatie
+\pause
+\item Selection bias has come back!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Generalizability of Treatment}
+\begin{itemize}
+\item The effect of an education intervention in an experiment in Butant\~{a} raised test scores by 20\%, and was evaluated and verified by USP
+\pause
+\item The government expands the program nationwide. Do Brazilian students' scores improve on average by 20\%?
+\pause
+\item Three problems:
+\begin{enumerate}
+\item \textbf{Implementation Varies:} Implementing at scale is \textbf{hard}, costly and requires delegation to less motivated and skilled actors. Oversight pressure is also reduced.
+\pause
+\item \textbf{Ownership and Excludability:} Telling someone to implement an intervention is different from working with a self-motivated actor who designed the intervention. Knowing you were randomly assigned to treatment rather than choosing treatment changes political ownership, perceptions and motivation.
+\pause
+\item \textbf{General Equilibrium Effects:} Average test scores went from 75\% to 95\%, so the exam board readjusted the test and made it harder.
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Generalizability of Treatment}
+\begin{itemize}
+\item Eg. The Millennium Villages Project
+\pause
+\item WB/UN/Columbia University tried to invest USD\$120 per person in 14 African villages
+\pause
+\item Mixed but positive results: crop yields increased 85-350\%, malaria reduced 50\%
+\pause
+\item But sites were not representative (close to main roads and cities so they're easy to visit)
+\pause
+\item Treatment could not be scaled (Every village cannot get visits from Columbia professors twice a year)
+\pause
+\item And politics was ignored (No implementation unless you give them responsibility, but lose control)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{4. Skewed Learning}
+\begin{itemize}
+\item Research focuses on where experiments are most possible, not where it is most needed
+\pause
+\item Selection bias in research findings
+\pause
+\item 
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+
+% Balance tests really unnecessary as p-values already take chance of bad randomisation into account (https://janhove.github.io/reporting/2014/09/26/balance-tests)
+% 95% interval repeated experiments example
+% *Deworming wars - As example of difficulty of interpreting and aggregating field experiments
+
+% Outcomes defined over time; large effects decay
+% Downstream experiments
+% Heterogeneous treatment effects
+% Non-compliance, attrition
+
+
+% Give examples of bad designs and get them to identify why
+%Data-mining on heterog effects - need to justify by theory. Eg. treated five villages and worked in one - do we believe it?
+% GE effects, eg. changes in sorting, competition, expectations, norms
+%Hawthorne effects (for next week)
+% Venn diagram style explanation of popn, sample, treated and control
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")

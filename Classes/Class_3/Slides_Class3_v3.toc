@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Independence}{6}{0}{1}
+\beamer@sectionintoc {2}{Analysis}{33}{0}{2}
+\beamer@sectionintoc {3}{Assumptions}{67}{0}{3}
+\beamer@sectionintoc {4}{Implementing Field Experiments}{103}{0}{4}
+\beamer@sectionintoc {5}{Critiquing Field Experiments}{131}{0}{5}
