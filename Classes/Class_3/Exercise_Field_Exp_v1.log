@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  2 APR 2019 18:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  4 APR 2019 10:58
 entering extended mode
 **./Exercise_Field_Exp_v1.tex
 (Exercise_Field_Exp_v1.tex
@@ -943,24 +943,24 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 {C:/Users/Jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 174.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 182.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 174.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 182.
 (Exercise_Field_Exp_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 174.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 174.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 182.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 182.
 Package rerunfilecheck Info: File `Exercise_Field_Exp_v1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 174.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 182.
  ) 
 Here is how much of TeX's memory you used:
- 12266 strings out of 493333
- 176979 string characters out of 3139194
+ 12272 strings out of 493333
+ 177059 string characters out of 3139194
  281154 words of memory out of 3000000
- 15577 multiletter control sequences out of 15000+200000
- 31982 words of font info for 57 fonts, out of 3000000 for 9000
+ 15581 multiletter control sequences out of 15000+200000
+ 37955 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,4n,38p,273b,406s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,4n,38p,273b,404s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Fil
 es/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX 2.9/fonts/e
 nc/dvips/lm/lm-ec.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmbx10
@@ -969,7 +969,7 @@ Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi7.pfb><C:/Program Files/MiKTeX 2.9/f
 onts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb>
-Output written on Exercise_Field_Exp_v1.pdf (2 pages, 142632 bytes).
+Output written on Exercise_Field_Exp_v1.pdf (2 pages, 142958 bytes).
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  21 named destinations out of 1000 (max. 500000)

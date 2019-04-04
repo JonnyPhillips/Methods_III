@@ -87,28 +87,7 @@ data %>% lm(y_obs ~ D, data=.) %>% summary()
 data %>% lm(y_obs ~ D + x, data=.) %>% summary()
 ```
 
-13. Repeat the above experiment 100 times with the same $x$, $y_0$ and $y_1$ every time, but re-randomize treatment assignment. For each experiment, calculate the confidence interval. Finally, calculate how many of the 100 confidence intervals cover the real treatment effect ($c=2$).
-
-```{r}
-out <- list()
-for (i in 1:100) {
-  out[[i]] <- data %>% mutate(D=rbinom(N,1,0.5),
-                            y_obs=case_when(D==1~y1,
-                                        D==0~y0)) %>% 
-    lm(y_obs ~ D + x, data=.) %>% 
-    tidy() %>%
-    filter(term=="D") %>%
-    mutate(conf.lo=estimate-1.96*std.error,
-           conf.hi=estimate+1.96*std.error) %>%
-    select(conf.lo, conf.hi)
-}
-
-out %>% bind_rows() %>%
-  mutate(covers_2=ifelse(conf.lo>2|conf.hi<2,0,1)) %>%
-  tally(covers_2)
-```
-
-14. Now let’s try to understand how things change when treatment is clustered:
+13. Now let’s try to understand how things change when treatment is clustered:
 
 a. In one of your datasets, add an additional column which transforms (‘bins’) the $y_0$ variable into a categorical variable with 20 categories, where category ‘1’ represents the lowest values of $y_0$ and category ’20’ contains the highest values of $y_0$. This reflects the fact that people in the same cluster have more similar characteristics. 
 
@@ -133,4 +112,25 @@ d. Now run the regression of observable outcomes (yobs) on clustered treatment (
 
 ```{r}
 data %>% lm_robust(y_obs ~ D_cluster, data=., clusters=cluster) %>% summary()
+```
+
+14. Repeat the experiment and regression from Question 11 one hundred times with the same $x$, $y_0$ and $y_1$ every time, but re-randomize treatment assignment $D$ each time. For each experiment, perform the basic regression and calculate the 95\% confidence interval on the treatment variable. Finally, calculate how many of the 100 confidence intervals cover the real treatment effect ($c=2$).
+
+```{r}
+out <- list()
+for (i in 1:100) {
+  out[[i]] <- data %>% mutate(D=rbinom(N,1,0.5),
+                            y_obs=case_when(D==1~y1,
+                                        D==0~y0)) %>% 
+    lm(y_obs ~ D + x, data=.) %>% 
+    tidy() %>%
+    filter(term=="D") %>%
+    mutate(conf.lo=estimate-1.96*std.error,
+           conf.hi=estimate+1.96*std.error) %>%
+    select(conf.lo, conf.hi)
+}
+
+out %>% bind_rows() %>%
+  mutate(covers_2=ifelse(conf.lo>2|conf.hi<2,0,1)) %>%
+  tally(covers_2)
 ```
