@@ -11,6 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 [egap Methods Guides](http://egap.org/list-methods-guides)
 
+### Apps
+
+[Causality](https://poliong.shinyapps.io/DAGs/)
+[Potential Outcomes and Experiments](https://poliong.shinyapps.io/to_deploy/)
+
 ### Data Sources
 
 [Dataverse](http://dvn.iq.harvard.edu/dvn/)  

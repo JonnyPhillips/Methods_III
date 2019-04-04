@@ -62,11 +62,11 @@ Part II practices implementing key causal methodologies. Each week we discuss th
 5. Randomized Natural Experiments (18/04/19)
 6. Instrumental Variables (25/04/19)
 7. Discontinuities (02/05/19)
-8. Difference-in-Differences (09/05/19)
-9. Controlling for Confounding (16/05/19)
-10. Matching (23/05/19)
-11. Comparative Cases and Process Tracing (30/05/19)
-12. Generalizability, Reproducibility and Mechanisms (06/06/19)
+8. Difference-in-Differences (16/05/19)
+9. Controlling for Confounding (23/05/19)
+10. Matching (30/05/19)
+11. Comparative Cases and Process Tracing (06/06/19)
+12. Generalizability, Reproducibility and Mechanisms (13/06/19)
 
 ## Evaluation
 
