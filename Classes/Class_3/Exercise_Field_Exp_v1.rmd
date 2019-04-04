@@ -75,7 +75,7 @@ data %>% t.test(y1 ~ D, data=.)
 data %>% t.test(y_obs ~ D, data=.)
 ```
 
-11. As an alternative, run the basic regression of observable outcomes ($y_obs$) on treatment ($D$). How does this compare to the difference-in-means test above?
+11. As an alternative, run the basic regression of observable outcomes ($y_{obs}$) on treatment ($D$). How does this compare to the difference-in-means test above?
 
 ```{r}
 data %>% lm(y_obs ~ D, data=.) %>% summary()
@@ -102,13 +102,15 @@ cluster_treat <- tibble(cluster=factor(1:20),D_cluster=rbinom(20,1,0.5))
 data <- data %>% left_join(cluster_treat,by="cluster")
 ```
 
-c. Now run the regression of observable outcomes (yobs) on clustered treatment ($D\_cluster$). What is the confidence interval around the size of the effect $D\_cluster$? Does this makes sense?
+c. Recalculate $y_{obs}$ based on the new treatment variable, $D\_cluster$.
+
+d. Now run the regression of observable outcomes (yobs) on clustered treatment ($D\_cluster$). What is the confidence interval around the size of the effect $D\_cluster$? Does this makes sense?
 
 ```{r}
 data %>% lm(y_obs ~ D_cluster, data=.) %>% summary()
 ```
 
-d. Now run the regression of observable outcomes (yobs) on clustered treatment (D_cluster), and cluster standard errors at the cluster level. How does the confidence interval on $D\_cluster$ differ from the previous analysis without clustered standard errors?
+e. Now run the regression of observable outcomes (yobs) on clustered treatment (D_cluster), and cluster standard errors at the cluster level. How does the confidence interval on $D\_cluster$ differ from the previous analysis without clustered standard errors?
 
 ```{r}
 data %>% lm_robust(y_obs ~ D_cluster, data=., clusters=cluster) %>% summary()

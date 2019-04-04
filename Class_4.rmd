@@ -9,10 +9,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Levitt, Steven D. and John A List, 2006, What do Laboratory Experiments Tell us about the Real World?](Classes/Class_4/Readings/Levitt and List 2006.pdf)**
-- **[Gaines, Brain J., James H. Kuklinski and Paul J. Quirk, 2007, The Logic of the Survey Experiment Reexamined, Political Analysis 15:1](Classes/Class_4/Readings/Gaines et al 2006.pdf)**
-- **[Habyarimana, James, Macartan Humphreys, Daniel N Posner, Jeremy M. Weinstein, 2007, Why Does Ethnicity Diversity Undermine Public Goods Provision? American Political Science Review, 101:4](Classes/Class_4/Readings/Habyarimana et al 2007.pdf)**
 - **[Hainmueller, Jens, Daniel J Hopkins and Teppei Yamamoto, 2013, Causal Inference in Conjoint Analysis: Understanding Multidimensional Choices via Stated Preference Experiments, Political Analysis, pp.1-30](Classes/Class_4/Readings/Jens et al 2013 Conjoint.pdf)**
+- **[Levitt, Steven D. and John A List, 2006, What do Laboratory Experiments Tell us about the Real World?](Classes/Class_4/Readings/Levitt and List 2006.pdf)**
+- **[Gaines, Brain J., James Kuklinski and Paul J. Quirk, 2007, The Logic of the Survey Experiment Reexamined, Political Analysis 15:1](Classes/Class_4/Readings/Gaines et al 2006.pdf)**
+- **[Habyarimana, James, Macartan Humphreys, Daniel N Posner, Jeremy M. Weinstein, 2007, Why Does Ethnicity Diversity Undermine Public Goods Provision? American Political Science Review, 101:4](Classes/Class_4/Readings/Habyarimana et al 2007.pdf)**
 
 #### Additional Readings
 - [Blair, Graeme and Kosuke Imai, 2012, Statistical Analysis of List Experiments, Political Analysis, 20:47-77](Classes/Class_4/Readings/Blair List.pdf)
