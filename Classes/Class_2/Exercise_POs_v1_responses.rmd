@@ -131,3 +131,21 @@ data_large_N %>% lm(y_obs~D,data=.) %>% stargazer(keep.stat=c("n"), header=F)
 data_no_effect %>% lm(y_obs~D + x,data=.) %>% stargazer(keep.stat=c("n"), header=F)
 ```
 
+### Stata Code
+
+set obs 1000  
+gen x=rbinomial(1,0.5)  
+gen y0=rnormal(5,1)  
+replace y0=y0+x  
+gen y1=y0+2  
+kdensity y0, addplot(kdensity y1)  
+gen rnd=0.5*x+runiform(0,1)  
+gen D=0  
+replace D=1 if rnd>0.75  
+correlate x D  
+gen real_TE=y1-y0  
+mean real_TE  
+gen y_obs=y0  
+replace y_obs=y1 if D==1  
+regress y_obs D  
+regress y_obs D x  
