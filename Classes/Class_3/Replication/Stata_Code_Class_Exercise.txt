@@ -1,0 +1,27 @@
+Excluding for loop
+
+set obs 1000
+gen x=rbinomial(1,0.5)
+gen y0=rnormal(5,1)
+replace y0=y0+x
+gen y1=y0+2
+gen D=rbinomial(1,0.5)
+correlate x D
+gen y_obs=y0
+replace y_obs=y1 if D==1
+ttest x, by(D)
+ttest y0, by(D)
+ttest y1, by(D)
+ttest y_obs, by(D)
+regress y_obs D
+regress y_obs D x
+egen cluster = cut(y0), group(20)
+
+tempfile original_data
+save `original_data'
+keep cluster
+duplicates drop
+gen D_cluster=rbinomial(1,0.5)
+merge 1:m cluster using `original_data', assert(match) nogenerate
+regress y_obs D_cluster x
+regress y_obs D_cluster x, vce(cluster cluster)

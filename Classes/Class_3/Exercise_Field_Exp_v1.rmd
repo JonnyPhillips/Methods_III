@@ -95,7 +95,7 @@ a. In one of your datasets, add an additional column which transforms (â€˜binsâ€
 data <- data %>% mutate(cluster=as.factor(ntile(y0,20)))
 ```
 
-b. Add a new binary treatment variable, $D\_cluster$, that randomly assigns each cluster to treatment or control. 
+b. Add a new binary treatment variable, $D\_cluster$, that randomly assigns each cluster to treatment or control (so treatment is at the level of the cluster). 
 
 ```{r}
 cluster_treat <- tibble(cluster=factor(1:20),D_cluster=rbinom(20,1,0.5))
@@ -104,10 +104,16 @@ data <- data %>% left_join(cluster_treat,by="cluster")
 
 c. Recalculate $y_{obs}$ based on the new treatment variable, $D\_cluster$.
 
+```{r}
+data <- data %>% mutate(y_obs_cluster=case_when(D_cluster==1~y1,
+                                        D_cluster==0~y0))
+```
+
+
 d. Now run the regression of observable outcomes (yobs) on clustered treatment ($D\_cluster$). What is the confidence interval around the size of the effect $D\_cluster$? Does this makes sense?
 
 ```{r}
-data %>% lm(y_obs ~ D_cluster, data=.) %>% summary()
+data %>% lm(y_obs_cluster ~ D_cluster, data=.) %>% summary()
 ```
 
 e. Now run the regression of observable outcomes (yobs) on clustered treatment (D_cluster), and cluster standard errors at the cluster level. How does the confidence interval on $D\_cluster$ differ from the previous analysis without clustered standard errors?
