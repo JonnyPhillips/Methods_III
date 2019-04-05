@@ -5,7 +5,7 @@ fontsize: 16pt
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = F, include=F)
+knitr::opts_chunk$set(echo = T, include=T)
 library(tidyverse)
 library(broom)
 library(estimatr)
