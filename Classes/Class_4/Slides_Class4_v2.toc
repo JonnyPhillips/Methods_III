@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Lab Experiments}{8}{0}{1}
+\beamer@sectionintoc {2}{Survey Experiments}{48}{0}{2}
+\beamer@sectionintoc {3}{Psychological Considerations}{66}{0}{3}
+\beamer@sectionintoc {4}{Generalizability}{129}{0}{4}

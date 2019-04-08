@@ -1,0 +1,161 @@
+---
+title: "Exercise: Analyzing Survey Experiments"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, include=F)
+library(tidyverse)
+library(broom)
+library(estimatr)
+library(stargazer)
+library(texreg)
+library(list)
+library(zeligverse)
+```
+
+\textbf{Download the datasets from the website containing responses to survey experiments. Answer the following questions:}
+
+```{r}
+survey <- read_csv("Survey_data.csv")
+
+#survey <- survey %>% filter(is.na(list_response)==F)
+```
+
+### Priming Experiment
+
+`Survey_data.csv`
+
+1. Respondents were primed with one of two questions ('hope' and 'anger'). How does this prime affect subsequent answers to the question about the need for constitutional reform? Calculate the difference-in-means estimate of the average treatment effect. Interpret the result.
+
+```{r}
+survey %>% group_by(Primed) %>% 
+  dplyr::summarize(mean=mean(Constitution_Reform_Support,na.rm=T)) %>%
+  mutate(ATE=mean-lag(mean))
+```
+
+2. Perform the same analysis, but using a simple OLS regression. 
+
+```{r}
+survey %>% lm(Constitution_Reform_Support ~ Primed, data=.) %>% summary()
+```
+
+
+### List Experiment
+
+`Survey_data.csv`
+
+The number of items the respondent states are contained in the variable `list_response`. If they were shown a control list (3 items) the variable `list_treated` is equal to zero, and if they were shown a treatmeng list (4 items) the variable `list_treated` is equal to one.
+
+3. Calculate the average treatment effect by subtracting the mean number of responses between the treated and control lists. Interpret the results in terms of the proportion of respondents who have experienced the sensitive item.
+
+```{r}
+survey %>% group_by(list_treated) %>%
+  summarize(mean=mean(list_response,na.rm=T)) %>%
+  mutate(ATE=mean-lag(mean))
+```
+
+4. Conduct the same analysis using a simple OLS regression. What is the 95\% confidence interval of the proportion of respondents who received a clientelist offer?
+
+```{r}
+survey %>% lm(list_response~list_treated, data=.) %>%
+  tidy() %>%
+  mutate(conf.lo=estimate-std.error*1.96,
+         conf.hi=estimate+std.error*1.96) %>%
+  filter(term=="list_treated") %>%
+  select(conf.lo, conf.hi)
+  
+```
+
+5. Now let's check the assumptions of the list experiment. First, check if there is a design effect using the function `ict.test` in the `list` package (for R only). (Note you will need to remove missing values before running the test). Interpret the results.
+
+```{r}
+survey_no_na <- survey %>% filter(is.na(list_response)==F)
+
+ict.test(survey_no_na$list_response, survey_no_na$list_treated, J=3)
+```
+
+6. Next, let's check for floor and ceiling effects. There is a complex statistical test for this in the `list` package (in R only): Try the code below and interpret the 'floor' and 'ceiling' parameters to see if they are statistically significant from zero. These are the estimates of whether anyone who should have answered '4' actually lied and answered '3', or who should have answered '1' actually lied and answered '0'. 
+
+```{r, eval=F, echo=T}
+ictreg(list_response~1,
+       data=survey %>% as.data.frame(),
+       treat="list_treated",
+       J=3, 
+       method="ml",
+       floor=T,
+       ceiling=T,
+       floor.fit="bayesglm",
+       ceiling.fit="bayesglm") %>% 
+  summary()
+```
+
+7. The survey also asked people directly, `direct_clientelism`. whether they had experienced the sensitive item (Has anyone ever offered you a gift, some food or money in exchange for your vote?). Compare the non-response rate (NA responses) to the direct and indirect questions. 
+
+```{r}
+survey %>% summarize(na_list=sum(is.na(list_response))/dim(survey)[1]*100,
+                     na_direct=sum(is.na(direct_clientelism))/dim(survey)[1]*100)
+```
+
+8. Compare the estimate of the incidence of clientelism from the direct responses to the indirect estimate from the list experiment. What does this suggest about the level of social desirability bias?
+
+```{r}
+survey %>% summarize(direct_mean=mean(direct_clientelism,na.rm=T))
+```
+
+9. Are men or women more likely to have engaged in the sensitive item (been offered a gift)? Run an OLS regression with an interaction between the list treatment and gender to find out. Interpret the results. 
+
+```{r}
+survey %>% lm(list_response~list_treated*gender, data=.) %>% 
+  tidy()
+
+```
+
+### Conjoint Experiment
+
+`Conjoint_data.csv`
+
+Respondents to a household survey were shown pairs of candidate profiles with different characteristics and asked which candidate they would vote for. 
+
+The dataset is arranged with one row for every candidate that each respondent assessed (two candidates \* two candidates \* 4047 respondents). So there are four rows for every respondent - two experiments with two candidates in each. The first columns describe the attributes of each candidate profile. The variable `conjoint_choice` is a binary indicator of which candidate the respondent opted to vote for. There are also columns for the characteristics of the respondent (gender, age, and whether they are a co-ethnic of the candidate profile).
+
+```{r}
+conjoint <- read_csv("Conjoint_data.csv")
+```
+
+10. How many possible combinations of attributes for a single profile are there? Multiply the number of possible levels for every attribute.
+
+```{r}
+2*3*4*2*2
+```
+
+11. Run a simple OLS regression to evaluate how the 'Public Goods (PG)' attribute of a Profile affects the respondent's choice of candidate.
+
+```{r}
+conjoint %>% zelig(conjoint_choice~1+Profile_PG, data=.,model="ls")
+```
+
+12. Since our outcome is a binary variable, run the same regression but with a logit model.
+
+```{r}
+conjoint %>% zelig(conjoint_choice~1+Profile_PG, data=.,model="logit")
+```
+
+13. Since each respondent participated in two experiments, their answers are likely to be highly correlated. So we have less 'N' than we think. Cluster the standard errors of your OLS regression according to the respondent identifier (UID).
+
+```{r}
+conjoint %>% lm_robust(conjoint_choice~1+Profile_PG, data=., clusters=UID)
+```
+
+14. Assess the influence of all of the profile attributes at the same time in an OLS regression. Interpret the results.
+
+```{r}
+conjoint %>% zelig(conjoint_choice~1+Profile_Gender + Profile_Caste + Profile_Party + Profile_PG + Profile_Promise, data=.,model="ls")
+```
+
+15. We an also assess how respondents' characteristics affect their choice. Does the importance of the 'Promise' attribute vary by gender? Use an interaction term between the Promise attribute and respondent gender, and interpret the results. 
+
+```{r}
+conjoint %>% zelig(conjoint_choice~1+Profile_Promise*respondent_gender, data=.,model="logit")
+```

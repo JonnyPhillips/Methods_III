@@ -23,7 +23,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-## [Lecture Slides](Classes/Class_4/Slides_v1.pdf)
+## [Lecture Slides](Classes/Class_4/Slides_v4.pdf)
+
+## [Lab Exercise to Complete during Class](Classes/Class_4/Lab_Exercise/Exercise_Survey_Exp_v3.pdf)
+ - [Survey_data.csv](Classes/Class_4/Lab_Exercise/Survey_data.csv)
+ - [Conjoint_data.csv](Classes/Class_4/Lab_Exercise/Conjoint_data.csv)
 
 ## Replication Exercise
 - [Exercise](Classes/Class_4/Replication/)
