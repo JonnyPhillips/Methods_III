@@ -23,7 +23,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-## [Lecture Slides](Classes/Class_4/Slides_v4.pdf)
+## [Lecture Slides](Classes/Class_4/Slides_v5.pdf)
+
+## [Link to Example Survey Experiments](https://uspdata.surveycto.com/collect/Untitled_20190410122331?caseid=)
 
 ## [Lab Exercise to Complete during Class](Classes/Class_4/Lab_Exercise/Exercise_Survey_Exp_v3.pdf)
  - [Survey_data.csv](Classes/Class_4/Lab_Exercise/Survey_data.csv)
@@ -31,6 +33,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Replication Exercise
 - [Exercise](Classes/Class_4/Replication/)
-- [Paper:Whitt, Sam, 2014, Social Norms in the Aftermath of Ethnic Violence: Ethnicity and Fairness in Non-Costly Decision Making, Journal of Conflict Resolution, 58:1](Classes/Class_4/Readings/Whitt 2014.pdf)
+- [Paper: Whitt, Sam, 2014, Social Norms in the Aftermath of Ethnic Violence: Ethnicity and Fairness in Non-Costly Decision Making, Journal of Conflict Resolution, 58:1](Classes/Class_4/Readings/Whitt 2014.pdf)
     - [Supplementary Appendix to Paper](Classes/Class_4/Replication/Supplementary_Appendix_final.pdf)
 - [Data](Classes/Class_4/Replication/replication.dta)
