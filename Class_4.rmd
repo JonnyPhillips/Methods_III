@@ -32,7 +32,7 @@ knitr::opts_chunk$set(echo = TRUE)
  - [Conjoint_data.csv](Classes/Class_4/Lab_Exercise/Conjoint_data.csv)
 
 ## Replication Exercise
-- [Exercise](Classes/Class_4/Replication/)
+- [Exercise](Classes/Class_4/Replication/Replication_Exercise_2_v7.pdf)
 - [Paper: Whitt, Sam, 2014, Social Norms in the Aftermath of Ethnic Violence: Ethnicity and Fairness in Non-Costly Decision Making, Journal of Conflict Resolution, 58:1](Classes/Class_4/Readings/Whitt 2014.pdf)
     - [Supplementary Appendix to Paper](Classes/Class_4/Replication/Supplementary_Appendix_final.pdf)
-- [Data](Classes/Class_4/Replication/replication.dta)
+- [Data](Classes/Class_4/Replication/Whitt_replication.csv)
