@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  10 APR 2019 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2017.1.11)  11 APR 2019 09:40
 entering extended mode
 **./Slides_Class4_v5.tex
 (Slides_Class4_v5.tex
@@ -2419,22 +2419,39 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 654 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 656 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 656
+[][]
+ []
+
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2443,14 +2460,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 654 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 656 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2459,7 +2476,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.654 \end{frame}
+l.656 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2470,7 +2487,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2478,7 +2495,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2493,7 +2510,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2502,7 +2519,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2510,22 +2527,39 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 654 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 656 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 656
+[][]
+ []
+
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2534,14 +2568,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 654 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 656 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2550,7 +2584,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.654 \end{frame}
+l.656 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2561,7 +2595,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2569,7 +2603,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2584,7 +2618,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2593,7 +2627,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2601,22 +2635,39 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 654 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 656 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 656
+[][]
+ []
+
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2625,14 +2676,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 654 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 656 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2641,7 +2692,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.654 \end{frame}
+l.656 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2652,7 +2703,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2660,7 +2711,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2675,7 +2726,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2684,7 +2735,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2692,22 +2743,39 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 654 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 656 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 656
+[][]
+ []
+
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2716,14 +2784,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 654 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 656 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2732,7 +2800,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.654 \end{frame}
+l.656 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2743,7 +2811,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2751,7 +2819,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.654 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2766,7 +2834,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2775,7 +2843,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.654 \end{frame}
+l.656 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2783,22 +2851,39 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 656 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.656 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 656
+[][]
+ []
+
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2807,14 +2892,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 656 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2823,7 +2908,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.656 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2834,7 +2919,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.656 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2842,7 +2927,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.656 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2857,7 +2942,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.656 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2866,7 +2951,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.656 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2874,13 +2959,13 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2889,7 +2974,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2898,14 +2983,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2914,7 +2999,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.678 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -2925,7 +3010,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -2933,7 +3018,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2948,7 +3033,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2957,7 +3042,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2965,13 +3050,13 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2980,7 +3065,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -2989,14 +3074,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3005,7 +3090,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.678 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -3016,7 +3101,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -3024,7 +3109,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3039,7 +3124,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3048,7 +3133,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -3056,13 +3141,13 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3071,7 +3156,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3080,14 +3165,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3096,7 +3181,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.678 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -3107,7 +3192,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -3115,7 +3200,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3130,7 +3215,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3139,7 +3224,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -3147,13 +3232,13 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3162,7 +3247,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3171,14 +3256,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3187,7 +3272,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.678 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -3198,7 +3283,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -3206,7 +3291,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3221,7 +3306,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3230,7 +3315,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
@@ -3238,13 +3323,13 @@ Things are pretty mixed up, but I think the worst is over.
 
 ]
 
-! LaTeX Error: \begin{itemize} on input line 674 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3253,7 +3338,7 @@ or  <return>  to continue without it.
 ! Undefined control sequence.
 <argument> .../enumerate \beameritemnestingprefix 
                                                   body end
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3262,14 +3347,14 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: \begin{beamer@frameslide} on input line 674 ended by \end{beamer
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
 @framepauses}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3278,7 +3363,7 @@ or  <return>  to continue without it.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.674 \end{frame}
+l.678 \end{frame}
                  
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -3289,7 +3374,7 @@ my insertion and my current dilemma will both disappear.
 ! Too many }'s.
 \endbeamer@frameslide ...amer@framepauses}\egroup 
                                                   \ifx \beamer@frametitle \@...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -3297,7 +3382,7 @@ Such booboos are generally harmless, so keep going.
 ! Undefined control sequence.
 \endbeamer@frameslide ...box \else \beamer@zoomer 
                                                   \fi \beamer@undolabels \be...
-l.674 \end{frame}
+l.678 \end{frame}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3312,7 +3397,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -3321,59 +3406,241 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 <recently read> \endgroup 
                           
-l.674 \end{frame}
+l.678 \end{frame}
                  
 Things are pretty mixed up, but I think the worst is over.
 
 [145
 
-] [146
+]
 
-] [147
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+<argument> .../enumerate \beameritemnestingprefix 
+                                                  body end
+l.678 \end{frame}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
+@framepauses}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.678 \end{frame}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Too many }'s.
+\endbeamer@frameslide ...amer@framepauses}\egroup 
+                                                  \ifx \beamer@frametitle \@...
+l.678 \end{frame}
+                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Undefined control sequence.
+\endbeamer@frameslide ...box \else \beamer@zoomer 
+                                                  \fi \beamer@undolabels \be...
+l.678 \end{frame}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.678 \end{frame}
+                 
+Things are pretty mixed up, but I think the worst is over.
+
+[146
+
+]
+
+! LaTeX Error: \begin{itemize} on input line 678 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Undefined control sequence.
+<argument> .../enumerate \beameritemnestingprefix 
+                                                  body end
+l.678 \end{frame}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{beamer@frameslide} on input line 678 ended by \end{beamer
+@framepauses}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.678 \end{frame}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Too many }'s.
+\endbeamer@frameslide ...amer@framepauses}\egroup 
+                                                  \ifx \beamer@frametitle \@...
+l.678 \end{frame}
+                 
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Undefined control sequence.
+\endbeamer@frameslide ...box \else \beamer@zoomer 
+                                                  \fi \beamer@undolabels \be...
+l.678 \end{frame}
+                 
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.678 \end{frame}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.678 \end{frame}
+                 
+Things are pretty mixed up, but I think the worst is over.
+
+[147
 
 ] [148
 
 ] [149
 
+] [150
+
+] [151
+
 ]
-<Hainmueller2014.pdf, id=1288, 587.15056pt x 785.92223pt>
+<Hainmueller2014.pdf, id=1305, 587.15056pt x 785.92223pt>
 File: Hainmueller2014.pdf Graphic file (type pdf)
 
 <use Hainmueller2014.pdf>
-Package pdftex.def Info: Hainmueller2014.pdf used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf used on input line 696.
 (pdftex.def)             Requested size: 587.14912pt x 785.92032pt.
 File: Hainmueller2014.pdf Graphic file (type pdf)
  <use Hainmueller2014.pdf>
-Package pdftex.def Info: Hainmueller2014.pdf used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf used on input line 696.
 (pdftex.def)             Requested size: 587.14912pt x 785.92032pt.
 
-<Hainmueller2014.pdf, id=1291, page=22, 597.50829pt x 845.0471pt>
+<Hainmueller2014.pdf, id=1308, page=22, 597.50829pt x 845.0471pt>
 File: Hainmueller2014.pdf Graphic file (type pdf)
 
 <use Hainmueller2014.pdf, page 22>
-Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 696.
 (pdftex.def)             Requested size: 597.50682pt x 845.04504pt.
 File: Hainmueller2014.pdf Graphic file (type pdf)
  <use Hainmueller2014.pdf, page 22>
-Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 696.
 (pdftex.def)             Requested size: 956.01456pt x 1352.07722pt.
 File: Hainmueller2014.pdf Graphic file (type pdf)
 
 <use Hainmueller2014.pdf, page 22>
-Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 696.
 (pdftex.def)             Requested size: 956.01456pt x 1352.07722pt.
 File: Hainmueller2014.pdf Graphic file (type pdf)
  <use Hainmueller2014.pdf, page 22>
-Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 696.
 (pdftex.def)             Requested size: 956.01456pt x 1352.07722pt.
 File: Hainmueller2014.pdf Graphic file (type pdf)
 
 <use Hainmueller2014.pdf, page 22>
-Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
+Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 696.
 (pdftex.def)             Requested size: 956.01456pt x 1352.07722pt.
- [150
+ [152
 
- <./Hainmueller2014.pdf>] [151]
+ <./Hainmueller2014.pdf>] [153]
 \tf@nav=\write6
 \openout6 = `Slides_Class4_v5.nav'.
 
@@ -3383,12 +3650,12 @@ Package pdftex.def Info: Hainmueller2014.pdf, page22 used on input line 692.
 \tf@snm=\write8
 \openout8 = `Slides_Class4_v5.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 702.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 702.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 706.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 706.
 
 (Slides_Class4_v5.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 702.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 702.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 706.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 706.
 Package rerunfilecheck Info: File `Slides_Class4_v5.out' has not changed.
 (rerunfilecheck)             Checksum: D8A3A1BA353A13564B4F987682D6A77A;157.
 
@@ -3397,10 +3664,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 22697 strings out of 493333
- 436259 string characters out of 3139194
+ 22703 strings out of 493333
+ 436339 string characters out of 3139194
  512726 words of memory out of 3000000
- 25342 multiletter control sequences out of 15000+200000
+ 25344 multiletter control sequences out of 15000+200000
  50369 words of font info for 68 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,59p,875b,587s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -3411,9 +3678,9 @@ sers/Jonny/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/arev/ArevSans-Roman.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Jonny/
 AppData/Roaming/MiKTeX/2.9/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Class4_v5.pdf (151 pages, 665236 bytes).
+Output written on Slides_Class4_v5.pdf (153 pages, 671140 bytes).
 PDF statistics:
- 1411 PDF objects out of 1440 (max. 8388607)
- 306 named destinations out of 1000 (max. 500000)
+ 1428 PDF objects out of 1440 (max. 8388607)
+ 310 named destinations out of 1000 (max. 500000)
  122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
