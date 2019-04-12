@@ -11,7 +11,7 @@ To be submitted (code + answers) by midnight, Wednesday 17th April.
 
 First read the paper by Whitt (2014) on the class website. 
 
-Then open the Stata data file *replication.dta* (in R use `read_dta` from the `Haven` package). Each 'game' is represented as two rows in the dataset, one for the first recipient and one for the second recipient. The key variables are:
+Then open the data file *Whitt_replication.csv*. Each 'game' is represented as two rows in the dataset, one for the first recipient and one for the second recipient. The key variables are:
 
 - **Game** - An index for each game/experiment with a new subject
 - **Subject_ethnicity** - the *subject*'s ethnicity
@@ -71,9 +71,9 @@ write_csv(d, "Whitt_replication.csv")
 ```
 
 
-**1. Briefly describe what the 'treatment' is in this experiment.**
+**1. Briefly describe what the 'treatment' and the 'control' is in this experiment. What is the outcome measure?**
 
-**2. To describe how the players split the money in all the games, replicate a figure similar to Figure 1 (or an equivalent Table if a Figure is tricky).**
+**2. To describe how the subjects split the money in all the games, replicate a figure similar to Figure 1 in Whitt 2014 (or an equivalent Table if a Figure is tricky).**
 
 ```{r,Q2}
 
@@ -158,9 +158,9 @@ d %>% lm(Amount~Subject_ethnicity*Recipient_ethnicity, data=.) %>%
   texreg()
 ```
 
-**9. The estimates in Q7 and Q4 are different from those in Table 3 of Whitt (2014). So far we have assumed that the allocations only depend on the individual ethnicities of each recipient and not on the specific *pair* of recipients in each game. For example, Bosniaks may have negative sentiments towards both Croats and Serbs, but what happens when they have to choose between allocating money in the specific pairing of Croats and Serbs together? How do they choose to allocate? **
+**9. The estimates in Q7 and Q4 are different from those in Table 3 of Whitt (2014). So far we have assumed that the allocations only depend on the individual ethnicities of each recipient and not on the specific *pair* of recipients in each game. For example, Bosniaks may have negative sentiments towards both Croats and Serbs, but what happens when they have to choose between allocating money in the specific pairing of Croats and Serbs together?**
 
-**Run a regression which includes a three-way interaction between subject ethnicity, recipient ethnicity and the *pair* of the recipients' ethnicity. Compare the results to Table 3 in Whitt 2004 (which just presents the averages, not the results of a regression, but should be comparable if we put in the effort to interpret our coefficients correctly).**
+**Run a regression which includes a three-way interaction between subject ethnicity, recipient ethnicity and the *pair* of the recipients' ethnicity (`Recipient_Pairing'). Compare the results to Table 3 in Whitt 2004 (which just presents the averages, not the results of a regression, but should be comparable if we put in the effort to interpret our coefficients correctly).**
 
 ```{r,Q9, results='asis'}
 ### Correct
@@ -171,14 +171,14 @@ d %>% lm(Amount~Subject_ethnicity*Recipient_Pairing*Recipient_ethnicity, data=.)
 #t-test for equal to 5 dif to t-test for equal to other group??
 ```
 
-**10. Replicate the simple T-test from Table 3 in Whitt (2014) for the difference-in-means of allocations between Croats and Serbs for Bosniak subjects. (I didn't get the same T-statistics as in Table 3).**
+**10. Replicate the simple t-test from Table 3 in Whitt (2014) for the difference-in-means of allocations between Croats and Serbs for Bosniak subjects. (I didn't get the same t-statistics as in Table 3, did you?).**
 
 ```{r,Q10}
 d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
   t.test(Amount ~ Recipient_ethnicity, data=.)
 ```
 
-**11. The T-test in Q9 seems too easy. The more recipient 1's allocation increases, the smaller recipient 2's allocation is *automatically* decreased (since they have to sum to 10). So all the rows in our data are not independent. As the mean allocation to one ethnicity goes up the mean to the other automatically goes down, producing a bigger 'gap'. To correct this, run the same comparison as in Q10 but this time one of either (i) a t-test of whether the first recipient's allocation is equal to 5, or (ii) a paired t-test that takes into account the fact that values in the first allocation are correlated with those in the second allocation. The two approaches should give the same answer. How does this change the t-statistics/p-values compared to Q10?**
+**11. The T-test in Q9 seems too easy. The more recipient 1's allocation increases, the smaller recipient 2's allocation is *automatically* (since they have to sum to 10). As the mean allocation to one ethnicity goes up the mean to the other automatically goes down, producing a bigger 'gap'. To correct this, run the same comparison as in Q10 (allocations between Croats and Serbs for Bosniak subjects) but this time one of either (i) a t-test of whether the first recipient's allocation is equal to 5, or (ii) a paired t-test that takes into account the fact that values in the first allocation are correlated with those in the second allocation. The two approaches should give the same answer. How does this change the t-statistics/p-values compared to Q10?**
 
 ```{r,Q11}
 Croat <- d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
@@ -198,7 +198,7 @@ d %>% lm_robust(Amount~Subject_ethnicity*Recipient_Pairing*Recipient_ethnicity, 
   texreg(include.ci=F)
 ```
 
-**13. How much does treating other ethnicities equally in the game predict whether subjects expect other ethnic groups to treat them fairly? Let's try to run a similar analysis to the first column of Table 6. Create a binary dummy variable indicating when the subject provides an 'equal' allocaion (5:5), filter the data to just the 'first' recipient to avoid duplicating the rows, and run the logit regression of 'Fairness' on this variable, with controls for subject ethnicity, gender and age. Compare the result to the first column of Table 6 (it may not be exactly the same, but it should be similar at about the second decimal place). **
+**13. How much does treating other ethnicities equally in the game predict whether subjects expect other ethnic groups to treat them fairly? Let's try to run a similar analysis to the first column of Table 6 in Whitt (2014). Create a binary dummy variable indicating when the subject makes an 'equal' allocation (5:5), then filter the data to just the 'first' recipient to avoid duplicating the rows, and run the logit regression of 'Fairness' on this equal allocation dummy variable, with controls for subject ethnicity, gender and age. Compare the result to the first column of Table 6 (it may not be exactly the same, but it should be similar at about the second decimal place). **
 
 ```{r, results='asis'}
 
