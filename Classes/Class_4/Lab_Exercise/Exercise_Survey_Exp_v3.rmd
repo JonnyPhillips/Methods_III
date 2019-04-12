@@ -78,7 +78,7 @@ ict.test(survey_no_na$list_response, survey_no_na$list_treated, J=3)
 
 6. Next, let's check for floor and ceiling effects. There is a complex statistical test for this in the `list` package (in R only): Try the code below and interpret the 'floor' and 'ceiling' parameters to see if they are statistically significant from zero. These are the estimates of whether anyone who should have answered '4' actually lied and answered '3', or who should have answered '1' actually lied and answered '0'. 
 
-```{r, eval=F, echo=T}
+```{r, eval=F, echo=T, include=T}
 ictreg(list_response~1,
        data=survey %>% as.data.frame(),
        treat="list_treated",
