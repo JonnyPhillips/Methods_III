@@ -21,6 +21,8 @@ navbar:
         href: Class_4.html
       - text: "5 - Natural Experiments"
         href: Class_5.html
+      - text: "6 - Instrumental Variables"
+        href: Class_6.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html
