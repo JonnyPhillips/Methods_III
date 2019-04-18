@@ -199,8 +199,6 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \frametitle{Verifying Randomization}
 \begin{itemize}
 \item How does Snow argue that households' assignment to water company is as-if random?
-\pause
-\item How do we know that Brazil's municipal audits are random?
 \end{itemize}
 \end{frame}
 
