@@ -1,0 +1,23 @@
+---
+title: 'Class 6 - Instrumental Variables'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+#### Required
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3]()**
+- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4]()**
+- **[Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development]()**
+
+#### Additional Readings
+- [Mostly Harmless Econometrics, Ch.4 ]()
+- [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23]()
+
+<br> </br>
+
+## [Lecture Slides](Classes/Class_6)
+
