@@ -9,13 +9,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3]()**
-- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4]()**
-- **[Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development]()**
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3](Classes/Class_6/Readings/Angrist and Pischke Ch.3.pdf)**
+- **[Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers' Guide, American Journal of Political Science](Sovey and Green.pdf)**
+- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4](Classes/Class_6/Readings/Dunning Natural Experiments IV.pdf)**
+- **[Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation](Classes/Class_6/Readings/AJR 2001.pdf)**
 
 #### Additional Readings
-- [Mostly Harmless Econometrics, Ch.4 ]()
-- [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23]()
+- [Mostly Harmless Econometrics, Ch.4 ](Classes/Class_6/Readings/Angrist and Pischke Ch.4.pdf)
+- [Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development](Classes/Class_6/Readings/Deaton 2009.pdf)
+- [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23](Classes/Class_6/Readings/Imbens and Rubin IV.pdf)
 
 <br> </br>
 
