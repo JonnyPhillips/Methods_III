@@ -42,6 +42,8 @@
 \newcommand{\<}[1]{\begin{column}{#1}}
 \renewcommand{\>}{\end{column}}
 
+\newcolumntype{L}{>{\centering\arraybackslash}m{.8cm}}
+
 \setbeamertemplate{navigation symbols}{} 
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -218,7 +220,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \item We can only compare those units \textit{that were part of the original randomization}
 \end{itemize}
 \pause
-\item \tetbf{That the treatment is the factor we actually want to study}
+\item \textbf{That the treatment is the factor we actually want to study}
 \pause
 \begin{itemize}
 \item We have to 'interpret' the treatment
@@ -232,7 +234,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \end{frame}
 
 \begin{frame}
-\includegraphics[scale=0.36]{Sekhon_redistricting_a.png}
+\includegraphics[scale=0.38]{Sekhon_redistricting_a.png}
 \end{frame}
 
 \begin{frame}
@@ -246,7 +248,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
     \hline
     2000 election context &       & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}\multicolumn{1}{p{2.4cm}}{Same} \bigstrut\\
     \hline
-    Duration of exposure to incumbent in district B &       & 4 years & \multicolumn{1}{p{2.4cm}}{10 years} \bigstrut\\
+    Duration of exposure to incumbent in district B &       & 4 years & \multicolumn{1}{p{2.4cm}}{12 years} \bigstrut\\
     \hline
     1996 and prior election context & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}Same  &  \bigstrut\\
     \hline
@@ -304,6 +306,44 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{frame}
 \frametitle{Ferraz and Finan (2008)}
 \begin{itemize}
+\item How do we know audits were random?
+\pause
+\item What about the content of reports? Isn't there more pressure just before an election?
+\pause
+\begin{itemize}
+\item Quantitative evidence?
+\pause
+\begin{itemize}
+\item Balance tests
+\pause
+\item Fixed effects to the state (auditing team)
+\pause
+\item $\text{Amount of corruption} = \alpha + \beta \text{Party in Government}$
+\pause
+  \item $\text{Amount of corruption} = \alpha + \beta \text{Vote Share Margin}$
+\end{itemize}
+\pause
+\item Qualitative evidence?
+\pause
+\begin{itemize}
+\item Hiring, salary and work conditions of auditors
+\pause
+\item Interviews with auditors
+\pause
+\end{itemize}
+\end{itemize}
+\item What about the timing of publication?
+\pause
+\begin{itemize}
+\item PMDB imbalance?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
 \item Methodology
 \begin{itemize}
 \item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + X_{ms} + FE_{s} + \epsilon_{ms}$
@@ -318,15 +358,13 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{itemize}
 \item The importance of a theoretical model:
 \pause
-\item Treatment is the release of information, but the \textit{theory} they seek to test is when voters \textit{learn something about candidates}
+\item Treatment is the release of audit information, but the \textit{theory} they seek to test is when voters \textit{learn something about candidates}
 \pause
-\item So we need treatment and control groups reflecting the theory
+\item The \textit{content} of the audit report information varies
 \pause
-\item Voters'\textit{priors} about how corrupt candidates are vary
+\item We need treatment and control groups reflecting this
 \pause
-\item And the \textit{content} of the information varies
-\pause
-\item It's the interaction of expectations and information content that matters
+\item Ideally, we would also incorporate voters'\textit{priors} about how corrupt candidates are vary, but they don't have data on that
 \end{itemize}
 \end{frame}
 
@@ -335,24 +373,9 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{itemize}
 \item Methodology
 \begin{itemize}
-\item So expected results are \textit{conditional on content of the audit report}
+\item So expected vote share change is \textit{conditional on the content of the audit report}
 \pause
 \item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + \beta_2 \text{Corruption}_{ms} + \beta_3 \text{Audited Early}_{ms}*\text{Corruption}_{ms} + X_{ms} + \text{FE}_{s} + \epsilon_{ms}$
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item Results
-\pause
-\begin{itemize}
-\item Strong corruption information (2 violations) reduces re-election by 7\% points
-\pause
-\item Stronger corruption information (3 violations) reduces re-election by 14\% points
-\pause
-\item Strong corruption information (2 violations) with local radio reduces re-election by 11\% points
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -363,6 +386,17 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \end{center}
 \end{frame}
 
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item Have we interpreted treatment correctly?
+\pause
+\item Audits may also have changed competition within the elite
+\pause
+\item Or campaign strategies - maybe parties ran 'cleaner' candidates before they knew the outcome of the audit report
+\end{itemize}
+\end{frame}
+
 \section{Non-Randomized Natural Experiments}
 
 \begin{frame}
@@ -370,7 +404,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{itemize}
 \item How can we achieve causal inference without randomization?
 \pause
-\item Our assumption is always "The Treatment Assignment Mechanism is independent of potential outcomes"
+\item Our necessary condition is always "The Treatment Assignment Mechanism is independent of potential outcomes"
 \pause
 \item Can we find real-world treatment assignments that ignored potential outcomes?
 \begin{itemize}
