@@ -1,0 +1,208 @@
+---
+title: "Exercise: Understanding Potential Outcomes"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = T, warning=F, error=F, message=F, fig.height=3, fig.width=3)
+library(tidyverse)
+library(stargazer)
+```
+
+Let's see how the presence of \textbf{non-compliance} affects our treatment effect estimates in some simple 'fake' data.
+
+1. First, let's generate an income variable for 1,000 people. The data should be drawn randomly from the normal distribution with mean 500 and standard deviation 50.
+
+```{r}
+N <- 1000
+d <- tibble(income=rnorm(N,500,50))
+```
+
+2. Now let's simulate potential outcomes (let's say they are 'attitudes to redistribution') for each person that depend on their income. Assume $y_0=N(10,2)+\frac{income}{100}$ and $y_1=y_0+2$ so there is a constant treatment effect of 2.
+
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100,
+                  y_1=y_0+2)
+```
+
+3. Remember that the key issue with non-compliance is that there is a difference between **treatment assignment** and actual **treatment**. Treatment assignment in our case will be completely random, so create a random binomial variable with 50\% chance of being assigned to treatment.
+
+```{r}
+d <- d %>% mutate(D_assign=rbinom(N,1,0.5))
+```
+
+4. For most people, treatment will be the same as treatment assignment, so make another 'treatment' variable that directly copies 'treatment assignment'.
+
+```{r}
+d <- d %>% mutate(D=D_assign)
+```
+
+5. To introduce non-compliance, let's adjust this 'treatment' variable so that rich people with an income above 570 are **'Never-takers'** - regardless of their value for treatment assignment, they never receive treatment (so treatment=0).
+
+```{r}
+d <- d %>% mutate(D=ifelse(income>570,0,D))
+```
+
+6. Now calculate the observed outcome based on potential outcomes and actual treatment status.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+7. Now let's calculate the standard Average Treatment Effect by running a regression of the observed outcomes on treatment (actual treatment, not treatment assignment). What is your estimate of the average treatment effect? How does this compare to the treatment effect we specified earlier?
+
+```{r}
+d %>% lm(y_obs ~ D, data=.) %>% summary()
+```
+
+8. Now let's imagine that people with an income below 430 are all **Always-Takers**, so regardless of treatment assignment they always receive treatment (treatment=1). Remember to re-calculate observed outcomes afterwards.
+
+```{r}
+d <- d %>% mutate(D=ifelse(income<430,1,D),
+                  y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+9. Re-run the regression from Q7 on our dataset that includes both never-takers and always-takers. How does this change our estimates of the Average Treatment Effect?
+
+```{r}
+d %>% lm(y_obs ~ D, data=.) %>% summary()
+```
+
+10. Given these biases, we can try to use treatment assignment as an instrumental variable for actual treatment. To do this, we first need to run the **First Stage** regression to show that treatment assignment explains treatment. ($D_i \sim Z_i$) Is treatment assignment a good instrument for treatment? Why?
+
+```{r}
+d %>% lm(D ~ D_assign, data=.) %>% summary()
+```
+
+11. Save the fitted values from this regression as a new column in your dataset.
+
+```{r}
+d <- d %>% mutate(First_stage_fitted=lm(D ~ D_assign, data=.)$fitted.values)
+```
+
+12. Now for the second stage of our instrumental variables analysis, use a regression to estimate how these fitted values explain the observed outcomes. ($y_{obs, i} \sim \hat{D_i}$) How does the result compare to our initial assumption about the size of the treatment effect?
+
+```{r}
+d %>% lm(y_obs ~ First_stage_fitted, data=.) %>% summary()
+```
+
+13. How should we interpret this estimate? What group does it apply to?
+
+14. The only thing wrong with our 2-Stage Least Squares Regression is that the standard errors are too small. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivregress_ in Stata. How do the standard errors change?
+
+```{r}
+library(AER)
+d %>% ivreg(y_obs ~ D|D_assign, data=.) %>% summary()
+```
+
+15. Finally, try introducing some defiers: Change your data so that anyone with income less than 430 who was assigned to control actually receives treatment AND so that anyone assigned to treatment actually receives control. Calculate observed outcomes again. Then run the Instrumental Variables regression (2SLS or the all-in-one) and compare the results.
+
+```{r}
+d <- d %>% mutate(D=case_when(income<430 & D_assign==0~1L,
+                      income<430 & D_assign==1~0L),
+             y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+d %>% filter(income<430) %>% group_by(D,D_assign) %>% tally()
+
+d %>% ivreg(y_obs ~ D|D_assign, data=.) %>% summary()
+```
+
+
+8. What is the average of the *real* indvidual treatment effects based on the potential outcomes, $E(y_1-y_0)$? 
+```{r}
+Actual_causal_effect <- data %>% 
+  summarize(Actual_ATE=mean(y1-y0))
+Actual_causal_effect
+```
+
+9. The Fundamental Problem of Causal Inference is that we *cannot* calculate (8.) above. Instead, we only observe one value: $y_{obs}$. Create a new variable $y_{obs}$ which equals $y_1$ if $D=1$ but which equals $y_0$ if $D=0$.
+```{r}
+data <- data %>% mutate(y_obs=case_when(D==1~y1,
+                                        D==0~y0))
+```
+
+10. Based on the observable data, run the basic regression of treatment ($D$) on observable outcomes ($y_{obs}$). Interpret the result. Is this an accurate estimate of the treatment effect that we assumed at the start?
+```{r, results='asis'}
+data %>% lm(y_obs~D,data=.) %>% stargazer(keep.stat=c("n"), header=F)
+```
+
+11. Re-run all your code above but this time with $c=0$ so we are assuming **NO** treatment effect. Run the regression in (10.) again - what is the result?
+
+```{r}
+data_no_effect <- tibble(x=rbinom(N,1,0.5),
+                         y0=x+rnorm(N,5,1),
+                         y1=y0+0,
+                         rnd=runif(N,0,1),
+                         D=ifelse(0.5*x+rnd>0.75,1,0)) %>% 
+  mutate(y_obs=case_when(D==1~y1,
+                         D==0~y0))
+
+data_no_effect %>% ggplot() +
+  geom_density(aes(x=y0), col="blue") +
+  geom_density(aes(x=y1),col="dark green") +
+  theme_classic()
+
+
+```
+
+```{r, results='asis'}
+data_no_effect %>% lm(y_obs~D,data=.) %>% stargazer(keep.stat=c("n"), header=F)
+```
+
+12. To see why, let's plot two density charts on the same figure - one for the distribution of observable $y_{obs}$ for the treated group ($y_{obs}|D==1$) and one for the distribution of observable $y_{obs}$ for the control group ($y_{obs}|D==0$).
+```{r}
+data_no_effect %>% ggplot() +
+  geom_density(data=data_no_effect %>% filter(D==0),aes(x=y_obs), col="blue") +
+  geom_density(data=data_no_effect %>% filter(D==1),aes(x=y_obs),col="dark green") +
+  theme_classic()
+```
+
+13. Run your code again for $c=0$, but this time assume a larger population of $N=1,000,000$. Does that solve the problem?
+
+```{r}
+N <- 1000000
+data_large_N <- tibble(x=rbinom(N,1,0.5),
+                         y0=x+rnorm(N,5,1),
+                         y1=y0+0,
+                         rnd=runif(N,0,1),
+                         D=ifelse(0.5*x+rnd>0.75,1,0)) %>% 
+  mutate(y_obs=case_when(D==1~y1,
+                         D==0~y0))
+
+data_large_N %>% ggplot() +
+  geom_density(aes(x=y0), col="blue") +
+  geom_density(aes(x=y1),col="dark green") +
+  theme_classic()
+```
+
+```{r, results='asis'}
+data_large_N %>% lm(y_obs~D,data=.) %>% stargazer(keep.stat=c("n"), header=F)
+```
+
+
+14. For $c=0$, run the regression of treatment on observable outcomes, but this time controlling for gender.
+```{r, results='asis'}
+data_no_effect %>% lm(y_obs~D + x,data=.) %>% stargazer(keep.stat=c("n"), header=F)
+```
+
+### Stata Code
+
+set obs 1000  
+gen x=rbinomial(1,0.5)  
+gen y0=rnormal(5,1)  
+replace y0=y0+x  
+gen y1=y0+2  
+kdensity y0, addplot(kdensity y1)  
+gen rnd=0.5*x+runiform(0,1)  
+gen D=0  
+replace D=1 if rnd>0.75  
+correlate x D  
+gen real_TE=y1-y0  
+mean real_TE  
+gen y_obs=y0  
+replace y_obs=y1 if D==1  
+regress y_obs D  
+regress y_obs D x  

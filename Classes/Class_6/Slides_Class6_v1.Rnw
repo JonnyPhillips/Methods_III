@@ -1,0 +1,510 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\newcolumntype{L}{>{\centering\arraybackslash}m{.8cm}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setbeamercolor{block title}{use=structure,fg=white,bg=structure.fg!75!orange}
+\setbeamercolor{block body}{parent=normal text,use=block title,bg=block title.bg!10!bg}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+library(purrr)
+library(DiagrammeR)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T)
+@
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 6 - Instrumental Variables}
+\author{Jonathan Phillips}
+\date{April 2019}
+
+\begin{document}  
+
+\frame{\titlepage}
+
+\section{Instrumental Variables}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item What can we do when the treatment assignment mechanism is not 'as-if' random?
+\pause
+\begin{itemize}
+\item Eg. Some people \textit{self-select} into treatment
+\end{itemize}
+\pause
+\item Natural experiments focus on a specific \textbf{component} of treatment assignment that is 'as-if' random
+\pause
+\item An 'instrument' is a variable which assigns treatment in an 'as-if' random way
+\pause
+\begin{itemize}
+\item I.e. Independent of potential outcomes
+\item Even if other variables \textbf{also} affect treatment
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+<<dag1,fig.keep='high',fig.height=2.5, fig.width=4>>=
+nodes <- tibble(id=1:3,
+                label=c("Treatment","Outcome","Omitted Variable"),
+                      color="aqua")
+
+edges <- tibble(from=c(1,3,3),
+                to=c(2,1,2))
+
+create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir', 'LR', 'graph') %>% 
+  set_edge_attrs(edge_attr=color, values="black") %>% 
+  render_graph()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+<<dag2,fig.keep='high',fig.height=2.5, fig.width=4>>=
+nodes <- create_node_df(n=4,
+                label=c("Instrument","Treatment","Outcome","Omitted Variable"),
+                      color="aqua")
+
+edges <- create_edge_df(from=c(1,2,4,4),
+                to=c(2,3,2,3))
+
+create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir', 'LR', 'graph') %>% 
+  set_edge_attrs(edge_attr=color, values="black") %>% 
+  render_graph()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+<<dag3,fig.keep='high',fig.height=2.5, fig.width=4>>=
+nodes <- create_node_df(n=4,
+                label=c("Instrument","Treatment","Outcome","Omitted Variable"),
+                      color="aqua")
+
+edges <- create_edge_df(from=c(1,2,4,4),
+                to=c(2,3,2,3),
+                label=c("As-If Random","Causal Effect","Bias",""))
+
+create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir', 'LR', 'graph') %>% 
+  set_edge_attrs(edge_attr=color, values="black") %>% 
+  render_graph()
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Example Instruments:
+\begin{itemize}
+\item Rainfall for conflict 
+\item Sex-composition for effect of third child
+\item Distance from the coast for exposure to slave trade
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables Assumption}
+\begin{multicols}{2}
+\begin{itemize}
+\item 1. \textbf{Strong 'First Stage':}
+\pause
+\item Instrument Predicts Treatment
+\pause
+\item We can assess this with a simple regression: $Treatment \sim Instrument$
+\pause
+\item The instrument should be a significant predictor of treatment
+\item Rule-of-thumb: $F-statistic > 10$
+\end{itemize}
+\columnbreak
+\begin{itemize}
+\item 2. \textbf{Exclusion Restriction} 
+\pause
+\item The Instrument \textit{ONLY} affects the outcome through its effect on treatment, and not directly
+\pause
+\item Formally, $cov(Instrument,\text{errors in main regression Y }\sim D)=0$
+\pause
+\item \textbf{We cannot test or prove this assumption!}
+\pause
+\item Theory and qualitative evidence needed
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables Methodologies}
+\begin{multicols}{2}
+\begin{itemize}
+\item 1. \textbf{2-Stage OLS:}
+\pause
+\item Isolate the variation in treatment caused by the instrument: $D \sim Instrument$
+\pause
+\item Save the predicted values from this regression: $\hat{D} = D \sim Instrument$
+\pause
+\item Estimate how the predicted values affect the outcome: $Y \sim \hat{D}$
+\pause
+\item Interpret the coefficient on $\hat{D}$
+\end{itemize}
+\columnbreak
+\begin{itemize}
+\item 2. \textbf{All-in-one Package} 
+\pause
+\item Use an all-in-one package, eg. \textit{ivreg} in the \textit{AER} package
+\pause
+\item Specify the formula: $Y ~ D | Instrument$
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Types of IV Regressions:
+\pause
+\begin{enumerate}
+\item \textbf{Biased Regression:} The regression ignoring omitted variable bias: $Y \sim D$
+\pause
+\item \textbf{First-Stage Regression:} Checking the instrument is valid: $D \sim IV$
+\pause
+\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $Y \sim D | IV$
+\pause
+\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $D \sim IV, Y \sim \hat{D}$
+\pause
+\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, ignoring treatment: $Y \sim IV$
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{LATE}
+\begin{itemize}
+\item IV Interpretation:
+\pause
+\begin{itemize}
+\item Your coefficient is a causal estimate ONLY for units that were actually treated \textbf{because of the instrument}
+\pause
+\item They don't tell us about the causal effect for other units that never responded to the instrument
+\end{itemize}
+\end{itemize}
+\pause
+\begin{block}{Local Average Treatment Effect (LATE)}
+The Average Treatment Effect among the subset of units who are treated because of the instrument \\
+$(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
+\end{block}
+\begin{itemize}
+\item Remember, those 'Local' units are not representative so we can't generalize
+\end{itemize}
+\end{frame}
+
+\section{Non-Compliance in Experiments}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{itemize}
+\item Sometimes field experiments don't work perfectly
+\pause
+\begin{itemize}
+\item Eg. We offer free health insurance to families at random, but some decline
+\pause
+\item What is the Treatment Assignment Mechanism?
+\pause
+\item Those that decline treatment are \textit{different} to those that accept (eg. richer)
+\pause
+\end{itemize}
+\item We cannot just compare units that actually received treatment to those that did not
+\pause
+\item Those groups are no longer 'balanced'
+\pause
+\item Omitted variable bias has returned!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{l|r|r}
+    Income & \multicolumn{1}{l}{Treatment Assignment} & \multicolumn{1}{l}{Treatment Status} \\
+    \hline
+    Rich  & 1     & 0 \\
+    Poor  & 0     & 0 \\
+    Poor  & 0     & 0 \\
+    Poor  & 1     & 1 \\
+    Rich  & 1     & 0 \\
+    Poor  & 0     & 0 \\
+    Poor  & 1     & 1 \\
+    Rich  & 0     & 0 \\
+    Poor  & 0     & 0 \\
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{itemize}
+\item With an instrument and treatment we can divide our units into four types:
+\end{itemize}
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+    \multicolumn{1}{|p{3cm}|}{\textbf{Treatment Status if Instrument=0}} & \multicolumn{1}{p{3cm}|}{\textbf{Treatment Status if Instrument=1}} & \textbf{Unit Type} \bigstrut\\
+    \hline
+    0     & 1     & Complier \bigstrut\\
+    \hline
+    0     & 0     & Never-taker \bigstrut\\
+    \hline
+    1     & 1     & Always-taker \bigstrut\\
+    \hline
+    1     & 0     & Defier \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\pause
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{c|c|c}
+    \multicolumn{1}{l}{$D_i(Z_i=0)$} & \multicolumn{1}{l}{$D_i(Z_i=1)$} & \multicolumn{1}{l}{Type?} \\
+    \hline
+    0     & 1     &  \\
+    0     & 0     &  \\
+    0     & 1     &  \\
+    1     & 0     &  \\
+    1     & 1     &  \\
+    0     & 0     &  \\
+    0     & 1     &  \\
+    1     & 0     &  \\
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{itemize}
+\item Simple difference-in-means estimates are biased
+\pause
+\item But we can still use the randomized component of treatment as an instrumental variable
+\pause
+\end{itemize}
+\begin{block}{Local Average Treatment Effect (LATE)}
+The Average Treatment Effect among compliers
+\end{block}
+\begin{itemize}
+\item LATE just means we don't learn anything about Never-takers and Always-takers from our Instrumental Variable
+\pause
+\item Because the instrument doesn't do anything to affect treatment for these units
+\pause
+\item Never-takers and Always-takers are balanced across treatment assignment and do not affect the difference-in-means
+\pause
+\item We also need to \textbf{assume} Defiers don't exist
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{itemize}
+\item Two methodologies for Experiments with Non-Compliance
+\end{itemize}
+\begin{multicols}{2}
+\begin{itemize}
+\item \textbf{1. Intention-to-Treat Analysis}
+\pause
+\item The Effect of Treatment Assignment (the Instrument) on the Outcome
+\pause
+\item $Y_i ~ \alpha + \beta Z_i + \epsilon_i$
+\pause
+\item A BIASED estimate (<LATE estimate)
+\pause
+\item For the FULL sample
+\end{itemize}
+\columnbreak
+\begin{itemize}
+\item \textbf{2. LATE Instrumental Variables Analysis}
+\pause
+\item The Effect of Treatment on the Outcome
+\pause
+\item $Y_i ~ \alpha + \beta D_i|Z_i + \epsilon_i$
+\pause
+\item An UNBIASED estimate
+\pause
+\item Only for COMPLIERS
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Compliance in Experiments}
+\begin{itemize}
+\item The \textbf{'Strong First-Stage'} assumption here requires that treatment assignment affects treatment for at least some people
+\pause
+\item The \textbf{'Exclusion Restriction'} assumption requires that potential outcomes depend on treatment and not treatment assignment
+\begin{itemize}
+\item Eg. An always-taker has the same outcome if they are assigned to treatment or control (because they are always actually treated)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section{Instrumenting for Institutions}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Acemoglu \& Robinson (2001)
+\begin{itemize}
+\item \textbf{Theory:} Non-electoral \textbf{institutions} (property rights, rule of law, checks and balances) cause accountability and growth
+\pause
+\end{itemize}
+\item What is the inferential problem here?
+\pause
+\item Can we run a field experiment?
+\pause
+\item Can we find a natural experiment?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item They need an Instrumental Variable that:
+\pause
+\begin{enumerate}
+\item \textbf{First Stage:} \pause Predicts Institutions
+\pause
+\item \textbf{Exclusion Restriction:} \pause Only affects growth through institutions
+\end{enumerate}
+\item They \textit{argue} that Settler (soldier) mortality rates are an appropriate instrument
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\item \textbf{Population:} \pause Ex-colonies
+\pause
+\item \textbf{Sample:} \pause Ex-colonies
+\pause
+\item \textbf{Treatment:} \pause 'Settler' Institutions in ex-colonies (measured by 'risk of expropriation' index 1985-95)
+\pause
+\item \textbf{Control:} \pause 'Extractive' institutions
+\pause
+\item \textbf{Instrument:} \pause Settler (soldier) mortality rates
+\pause
+\item \textbf{Treatment Assignment Mechniams:} \pause Messy! But high settler mortality rates led to extractive institutions
+\pause
+\item \textbf{Outcome:} \pause Growth rates in 1995
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item First Stage Supporting Evidence:
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Exclusion Restriction Supporting Evidence:
+\begin{itemize}
+\item Disease environment doesn't affect human capital/growth directly because locals have adapted
+\pause
+\item Control for possible correlates - geography, climate, etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Methodology:
+\begin{itemize}
+\item ${\color{blue}Institutions_i} = \alpha + \beta_0 Settler\_Mortality_i + \epsilon_i$
+\item $Growth_i = \alpha + \beta_1 {\color{blue}\hat{Institutions_i}} + \epsilon_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Results: Improving Nigeria's institutions to Chile's level would raise GDP 7-fold
+\end{itemize}
+\end{frame}
+
+\end{document}

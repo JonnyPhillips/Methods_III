@@ -1,0 +1,653 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 6 - Social Accountability, Information \& Instrumental Variables}
+\author{Jonathan Phillips}
+\date{September  2017}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Causal Inference}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item What can we do when the treatment assignment mechanism is not 'as-if' random?
+\pause
+\item Natural experiments focus on a specific \textbf{part} of treatment assignment that is 'as-if' random
+\pause
+\item An 'instrument' is a variable which assigns treatment in an 'as-if' random way
+\pause
+\begin{itemize}
+\item Or at least in a way which is 'exogenous' - not related to confounders
+\item Even if other confounding variables \textbf{also} affect treatment
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item We can use the instrument to isolate 'as-if' random variation in treatment, and use that to estimate the effect of treatment on the outcome
+\pause
+\item NOT the effect of the instrument on the outcome
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Example Instruments:
+\begin{itemize}
+\item Rainfall for conflict 
+\item Sex-composition for effect of third child
+\item Distance from the coast for exposure to slave trade
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instrumental Variables Assumptions
+\begin{itemize}
+\item \textbf{Strong First Stage:} The Instrument must \textbf{affect} the treatment
+\pause
+\item We can test this with a simple regression: $Treatment \sim Instrument$
+\pause
+\item The instrument should be a significant predictor of treatment
+\item Rule-of-thumb: $F-statistic > 10$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instrumental Variables Assumptions:
+\begin{itemize}
+\item \textbf{Exclusion Restriction:} The Instrument \textbf{ONLY} affects the outcome through its effect on treatment, and not directly
+\pause
+\item Formally, $cov(Instrument,\text{errors in main regression Y }\sim D)=0$
+\pause
+\item \textbf{We cannot test or prove this assumption!}
+\pause
+\item Theory and qualitative evidence needed to argue that the instrument is not correlated with any other factors affecting the outcome
+\item Sometimes, the exclusion restriction may be more credible if we include controls
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instrumental Variables Methodology:
+\pause
+\begin{enumerate}
+\item Use an all-in-one package, eg. \textit{ivreg} in the \textit{AER} package
+\begin{itemize}
+\item Specify the formula: $Y ~ D | Instrument$
+\pause
+\end{itemize}
+\item Conduct 2-Stage Least Squares: 
+\pause
+\begin{itemize}
+\item Isolate the variation in treatment caused by the instrument: $D \sim Instrument$
+\pause
+\item Save the predicted values from this regression: $\hat{D} = D \sim Instrument$
+\pause
+\item Estimate how the predicted values affect the outcome: $Y \sim \hat{D}$
+\pause
+\item Interpret the coefficient on $\hat{D}$
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item IV Interpretation:
+\pause
+\begin{itemize}
+\item Your coefficient is a causal estimate ONLY for units that were actually treated \textbf{because of the instrument}
+\pause
+\item They don't tell us about the causal effect for other units that never responded to the instrument
+\pause
+\item We call our causal effect estimate a 'Local Average Treatment Effect' (LATE)
+\item 'Local' to the units whose treatment status actually changed
+\pause
+\end{itemize}
+\item Remember, those 'Local' units are not representative so we can't generalize
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Types of IV Regressions:
+\pause
+\begin{enumerate}
+\item \textbf{Confounded Regression:} The mistaken regression: $Y \sim D$
+\pause
+\item \textbf{First-Stage Regression:} Checking the instrument is valid: $D \sim IV$
+\pause
+\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $Y \sim D | IV$
+\pause
+\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $D \sim IV, Y \sim \hat{D}$
+\pause
+\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, ignoring treatment mediation: $Y \sim IV$
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instruments for Non-compliance
+\pause
+\begin{itemize}
+\item With an instrument and treatment we can divide our units into four types:
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
+    \hline
+    \multicolumn{1}{|p{3cm}|}{\textbf{Treatment Status if Instrument=0}} & \multicolumn{1}{p{3cm}|}{\textbf{Treatment Status if Instrument=1}} & \textbf{Unit Type} \bigstrut\\
+    \hline
+    0     & 1     & Complier \bigstrut\\
+    \hline
+    0     & 0     & Never-taker \bigstrut\\
+    \hline
+    1     & 1     & Always-taker \bigstrut\\
+    \hline
+    1     & 0     & Defier \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\pause
+\end{itemize}
+\item LATE just means we don't learn anything about Never-takers and Always-takers from Instrumental Variables
+\begin{itemize}
+\item Because the instrument doesn't do anything to affect treatment for these units
+\pause
+\end{itemize}
+\item We also need to \textbf{assume} Defiers don't exist
+\item So LATE = Causal Effect for Compliers 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instruments for Non-compliance in Experiments
+\pause
+\begin{itemize}
+\item Normally we analyze experiments based on randomized treatment
+\item But what if \textbf{assignment} to treatment is different from \textbf{taking} the treatment?
+\begin{itemize}
+\item Eg. If government implementation failed in some places
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Instruments for Non-compliance in Experiments
+\pause
+\begin{itemize}
+\item We can still use randomization as an instrument for treatment
+\pause
+\item The causal effect estimate of our experiment is now LATE
+\begin{itemize}
+\item These estimates are \textbf{internally valid} for compliers
+\item But they are NOT \textbf{externally valid} for non-compliers
+\item Since whether you accepted treatment is probably confounded/subject to self-selection
+\end{itemize}
+\item We can also estimate the Intention-to-Treat effect, the effect of the instrument itself
+\begin{itemize}
+\item But this will be \textbf{conservative}, i.e. less than the LATE estimate 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{itemize}
+\item Critique (Deaton 2009):
+\pause
+\begin{itemize}
+\item Our causal models need to represent a theory, not just be an arbitrary equation
+\pause
+\item If we use 'convenient' instruments, our causal effect and complier population are out of our control and might not be interesting
+\pause
+\item LATE causal estimates are not a good guide to policy effects
+\pause
+\item 'External' to our model is not the same as 'Exogenous', and we can't test exogeneity
+\pause
+\item Where the instrument is an arbitrary rule, there is often sorting as people re-adjust
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Political Economy}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Elections are not the only way in which elites are responsive to citizens
+\pause
+\item Citizens can also exert \textbf{direct} pressure to change decision-making
+\begin{itemize}
+\item Protests, lobbying
+\item Checks and Balances through participatory institutions and the judiciary
+\item The short-route of accountability: Client power in demanding public service improvements
+\pause
+\end{itemize}
+\item Information \& Media also influence electoral accountability
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability}
+\begin{center}
+\includegraphics[scale=0.45]{WDR.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Reinikka and Svensson (2005)
+\begin{itemize}
+\item 1995: Only 24\% of grants to schools arrive
+\item 2002: 82\% of grants to schools arrive
+\pause
+\end{itemize}
+\item This wasn't elite corruption, but diversions within the bureaucracy (centre -> district -> school)
+\item What changed? A Government newspaper campaign to publicize grants
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Reinikka and Svensson (2005)
+\begin{itemize}
+\item Aim to understand the impact of information on governance
+\pause
+\item What is the challenge to inference here? 
+\pause
+\item Information is not randomly assigned; eg. checks and balances on the bureaucracy may also be stronger in places where headteachers have more information
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Reinikka and Svensson (2005)
+\begin{itemize}
+\item Schools close to Newspaper Seller -> + Information -> + \% Grant Received (-> + Enrollment, + Learning)
+\pause
+\end{itemize}
+\item \textbf{Population:} \pause Ugandan Schools
+\pause
+\item \textbf{Sample:} \pause 218 Schools (mostly rural, stratified random sample)
+\pause
+\item \textbf{Treatment:} \pause New information on grants from newspapers
+
+\item \textbf{Control:} \pause No new information on grants from newspapers
+\pause
+\item \textbf{Outcome:} \pause \% Grant Received (+Enrollment, Learning)
+\pause
+\item \textbf{Instrument:} \pause Distance to Newspaper Seller
+\pause
+\item \textbf{Treatment Assignment Mechanism:} \pause Messy! Influenced by confounders and instrument
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Instrumental Variables Assumptions:
+\pause
+\begin{itemize}
+\item \textbf{First-Stage:} \pause Closer to newspaper seller -> Headteacher knowledge of grant amount/timing
+\begin{itemize}
+\item Verifiable
+\pause
+\end{itemize}
+\item \textbf{Exclusion Restriction:} \pause Distance to newspaper seller ONLY affects grant access and learning through information, not directly
+\begin{itemize}
+\item Unverifiable
+\item But more likely when we include controls for distance to nearest bank, district headquarters etc.
+\end{itemize}
+\end{itemize}
+\pause
+\item They actually combine this with a difference-in-differences method to look at \textit{changes} in information and grant receipt over time.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Methodology:
+\begin{itemize}
+\item $Information_i = \alpha + \beta_0 Distance\_to\_Newspaper_i + \epsilon_i$
+\item $Grant\_Received_i = \alpha + \beta_1 \hat{Information_i} + \epsilon_i$
+\pause
+\end{itemize}
+\item Alternative:
+\begin{itemize}
+\item $Grant\_Received_i = \alpha + \beta_0 Distance\_to\_Newspaper_i + \epsilon_i$
+\item $Enrolment = \alpha + \beta_1 \hat{Grant\_Received_i} + \epsilon_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Results:
+\pause
+\item A one standard deviation increase in information leads to 
+\begin{itemize}
+\item 44.2\% points more funding received
+\item 297 students per school
+\item 6\% better in exams
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Critique?
+\pause
+\begin{itemize}
+\item Distance to a newspaper seller is not exogenous - likely correlated with many factors
+\pause
+\item What type of information? Does it matter who communicates the information?
+\begin{itemize}
+\item Grant details also published by radio
+\pause
+\end{itemize}
+\item Lots of other education system changes at the same time
+\begin{itemize}
+\item Enrollment doubled in 1997 when school became free
+\item WB support conditional on better systems, transparency
+\item Grants were also displayed on 90\% of school notice-boards
+\pause
+\end{itemize}
+\item Where did these headteachers gain the political power to demand their grants?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Enikolopov et al (2011)
+\begin{itemize}
+\item Does independent media encourage voting for the opposition?
+\pause
+\item Russia: Does watching NTV encourage voting against pro-governemnt 'Unity'?
+\pause
+\end{itemize}
+\item What is the inference problem?
+\pause
+\item People who watch NTV might be more anti-government in the first place
+\item Or NTV may choose to broadcast in anti-government areas
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Enikolopov et al (2011)
+\begin{itemize}
+\item Instrument watching NTV with the availability of the broadcast signal
+\pause
+\item \textbf{Population:} \pause All Russian voters
+\pause
+\item \textbf{Sample:} \pause All Russian voters (except Moscow, St. Petersburg and Chechnya) OR survey
+\pause
+\item \textbf{Treatment:} \pause Watching NTV
+\pause
+\item \textbf{Control:} \pause Not watching NTV
+\pause
+\item \textbf{Instrument:} \pause Availability of NTV broadcast signal
+\pause
+\item \textbf{Treatment Assignment Mechniams:} \pause Messy! Confounders, self-selection plus Instrument
+\pause
+\item \textbf{Outcome:} \pause Vote-share for each government/opposition party
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Instrumental Variables Assumptions:
+\begin{itemize}
+\item \textbf{First Stage:} \pause Availability of signal clearly correlated with watching NTV
+\pause
+\item \textbf{Exclusion Restriction:} \pause Availability of the signal only affects voting through watching NTV
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Exclusion Restriction Supporting Evidence:
+\begin{itemize}
+\item \textbf{History:} The transmitters were located for a Soviet education channel, not chosen by the opposition
+\pause
+\item \textbf{Controls:} Transmitters are correlated with socioeconomic characteristics, but we can control for this (urban, population, wage)
+\pause
+\item \textbf{Placebo:} If the instrument only operates through treatment, it should have no effect when treatment is impossible, eg. in 1995
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Estimate signal availability using Irregular Terrain Model and transmitter power/frequency
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability}
+\begin{center}
+\includegraphics[scale=0.55, page=3, trim=3cm 0 0 4cm]{EZ_map.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability}
+\begin{itemize}
+\item \textbf{Aggregate Level Data (effect of NTV availability):}
+\begin{itemize}
+\item $NTV\_available_i =  \alpha + \beta_0 + Signal\_Strength_i + \epsilon_i$
+\item $vote_i = \alpha + \beta_1 \hat{NTV\_available_i} + \beta_2 X_i + Region\_FEs + \epsilon_i$
+\end{itemize}
+\pause
+\item \textbf{Individual Level Data (effect of watching NTV):}
+\begin{itemize}
+\item $Watch\_NTV_i = \alpha + \beta_0 Signal\_Strength_i + \epsilon_i$
+\item $vote_i = \alpha + \beta_1 \hat{Watch\_NTV_i} + \beta_2 X_i + Region\_FEs + \epsilon_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Results:
+\pause
+\begin{itemize}
+\item NTV broadcast availability reduces pro-government 'Unity' voting by 8.9\% points (official results)
+\item NTV broadcast availability reduces turnout by 3.8\% points (official results)
+\item Watching NTV broadcast reduces pro-government 'Unity' voting by 26\% (survey results)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Acemoglu \& Robinson (2001)
+\begin{itemize}
+\item Non-electoral institutions (property rights, checks and balances) drive accountability and growth
+\pause
+\item Institutions depend on powerful elites, esp. colonial settlers
+\pause
+\item Extractive vs. Settler Institutions
+\pause
+\item Colonial Strategy -> Institutions -> Growth
+\end{itemize}
+\item What is the inferential problem here?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Acemoglu \& Robinson (2001)
+\begin{itemize}
+\item Instrument Institutions with settler mortality rates
+\end{itemize}
+\item \textbf{Population:} \pause Ex-colonies
+\pause
+\item \textbf{Sample:} \pause Ex-colonies
+\pause
+\item \textbf{Treatment:} \pause Settler institutions (measured by 'risk of expropriation' index 1985-95)
+\pause
+\item \textbf{Control:} \pause Extractive institutions
+\pause
+\item \textbf{Instrument:} \pause Settler (soldier...) mortality rates
+\pause
+\item \textbf{Treatment Assignment Mechniams:} \pause Messy! Confounders plus Instrument
+\pause
+\item \textbf{Outcome:} \pause Growth rates in 1995
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Instrumental Variables Assumptions:
+\pause
+\begin{itemize}
+\item \textbf{First Stage:} \pause Settler Mortality explains Current Institutions
+\pause
+\item \textbf{Exclusion Restriction:} \pause Settler Mortality only affects growth through institutions
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Exclusion Restriction Supporting Evidence:
+\begin{itemize}
+\item Disease environment doesn't affect human capital/growth directly because locals have adapted
+\pause
+\item Control for possible correlates - geography, climate, etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Methodology:
+\begin{itemize}
+\item $Institutions_i = \alpha + \beta_0 Settler\_Mortality_i + \epsilon_i$
+\item $Growth_i = \alpha + \beta_1 \hat{Institutions_i} + \epsilon_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item Results: Improving Nigeria's institutions to Chile's level would raise GDP 7-fold
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Social Accountability \& Information}
+\begin{itemize}
+\item 'Social' Accountability can dramatically affect public services, voting behaviour and growth
+\begin{itemize}
+\item Client Power to demand more from government
+\item Exposure to information/Media
+\item Checks and Balances on expropriation
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")
