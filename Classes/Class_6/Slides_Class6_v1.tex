@@ -142,6 +142,7 @@
 \pause
 \begin{itemize}
 \item I.e. Independent of potential outcomes
+\pause
 \item Even if other variables \textbf{also} affect treatment
 \end{itemize}
 \end{itemize}
@@ -174,6 +175,15 @@
 \end{knitrout}
 \end{frame}
 
+\begin{frame}
+\frametitle{Instrumental Variables}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/dag4-1} 
+
+\end{knitrout}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Instrumental Variables}
@@ -181,7 +191,7 @@
 \item Example Instruments:
 \begin{itemize}
 \item Rainfall for conflict 
-\item Sex-composition for effect of third child
+\item Gender of first two children for effect of having a third child
 \item Distance from the coast for exposure to slave trade
 \end{itemize}
 \end{itemize}
@@ -195,9 +205,12 @@
 \pause
 \item Instrument Predicts Treatment
 \pause
-\item We can assess this with a simple regression: $Treatment \sim Instrument$
+\item We can assess this with a simple regression:
+\pause
+\item $D_i = \alpha + \beta Z_i + \epsilon_i$
 \pause
 \item The instrument should be a significant predictor of treatment
+\pause
 \item Rule-of-thumb: $F-statistic > 10$
 \end{itemize}
 \columnbreak
@@ -206,7 +219,7 @@
 \pause
 \item The Instrument \textit{ONLY} affects the outcome through its effect on treatment, and not directly
 \pause
-\item Formally, $cov(Instrument,\text{errors in main regression Y }\sim D)=0$
+\item Formally, $cov(Z_i, \epsilon_i \text{ in } Y_i \sim D_i)=0$
 \pause
 \item \textbf{We cannot test or prove this assumption!}
 \pause
@@ -219,15 +232,17 @@
 \frametitle{Instrumental Variables Methodologies}
 \begin{multicols}{2}
 \begin{itemize}
-\item 1. \textbf{2-Stage OLS:}
+\item 1. \textbf{2-Stage Least Squares (2SLS):}
 \pause
-\item Isolate the variation in treatment caused by the instrument: $D \sim Instrument$
+\item Isolate the variation in treatment caused by the instrument: $D_i = \alpha + \beta_1 Z_i + \epsilon_i$
 \pause
-\item Save the predicted values from this regression: $\hat{D} = D \sim Instrument$
+\item Save the predicted values from this regression: $\hat{D_i} = \hat{\alpha} + \hat{\beta_1} Z_i$
 \pause
-\item Estimate how the predicted values affect the outcome: $Y \sim \hat{D}$
+\item Estimate how the predicted values affect the outcome: $Y_i = \alpha + \beta_2 \hat{D_i}$
 \pause
-\item Interpret the coefficient on $\hat{D}$
+\item Interpret the coefficient on $\hat{D_i}$
+\pause
+\item But our Standard Errors won't be accurate
 \end{itemize}
 \columnbreak
 \begin{itemize}
@@ -235,7 +250,9 @@
 \pause
 \item Use an all-in-one package, eg. \textit{ivreg} in the \textit{AER} package
 \pause
-\item Specify the formula: $Y ~ D | Instrument$
+\item Specify the formula: $Y_i \sim D_i | Z_i$
+\pause
+\item Interpret the coefficient on $D_i$
 \end{itemize}
 \end{multicols}
 \end{frame}
@@ -246,16 +263,71 @@
 \item Types of IV Regressions:
 \pause
 \begin{enumerate}
-\item \textbf{Biased Regression:} The regression ignoring omitted variable bias: $Y \sim D$
+\item \textbf{Biased Regression:} The regression ignoring omitted variable bias: $Y_i \sim D_i$
 \pause
-\item \textbf{First-Stage Regression:} Checking the instrument is valid: $D \sim IV$
+\item \textbf{First-Stage Regression:} Checking the instrument is valid: $D_i \sim Z_i$
 \pause
-\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $Y \sim D | IV$
+\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $Y_i \sim D_i | Z_i$
 \pause
-\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $D \sim IV, Y \sim \hat{D}$
+\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $D_i \sim Z_i, then Y_i \sim \hat{D_i}$
 \pause
-\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, ignoring treatment: $Y \sim IV$
+\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, \textit{ignoring treatment}: $Y_i \sim Z_i$
 \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does conflict affect economic growth?
+\pause
+\item \textbf{Our instrument for treatment:} Rainfall (lack of)
+\pause
+\item \textbf{First Stage Regression:} $Conflict_i \sim \alpha + \beta_1 Rainfall_i + \epsilon_i$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does conflict affect economic growth?
+\item \textbf{Our instrument for treatment:} Rainfall
+\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
+\pause
+\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.12 - 0.1^{*} 0.8 + \epsilon_i$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does conflict affect economic growth?
+\item \textbf{Our instrument for treatment:} Rainfall
+\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $0.07 = 0.12 - 0.1^{*} 0.5$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does conflict affect economic growth?
+\item \textbf{Our instrument for treatment:} Rainfall
+\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.07, 0.02, 0.06, 0.12, 0.03...$
+\pause
+\item \textbf{Second-Stage Regression:} $Growth_i = \alpha + \beta_2 \hat{Conflict_i} + \epsilon_i$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does conflict affect economic growth?
+\item \textbf{Our instrument for treatment:} Rainfall
+\item \textbf{First-Stage Regression:} $Conflict_i = 0.02 + 0.1^{*} Rainfall_i + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.07, 0.02, 0.06, 0.12, 0.03...$
+\item \textbf{Second-Stage Regression:} $Growth_i = 1.2 - 0.04^{*} \hat{Conflict_i} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -267,16 +339,125 @@
 \begin{itemize}
 \item Your coefficient is a causal estimate ONLY for units that were actually treated \textbf{because of the instrument}
 \pause
-\item They don't tell us about the causal effect for other units that never responded to the instrument
+\item They don't tell us about the causal effect for other units that \textit{never responded to the instrument}
+\pause
+\item Eg. For places where conflict started because of ethnic tensions or an accident
 \end{itemize}
 \end{itemize}
 \pause
 \begin{block}{Local Average Treatment Effect (LATE)}
-The Average Treatment Effect among the subset of units who are treated because of the instrument \\
+The Average Treatment Effect among the subset of units who are treated because of the instrument: \\
 $(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
 \end{block}
 \begin{itemize}
-\item Remember, those 'Local' units are not representative so we can't generalize
+\pause
+\item Remember, these 'Local' units might be very rare and unusual so we can't generalize
+\end{itemize}
+\end{frame}
+
+\section{Instrumenting for Institutions}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Acemoglu \& Robinson (2001)
+\begin{itemize}
+\item \textbf{Theory:} Non-electoral \textbf{institutions} (property rights, rule of law, checks and balances) cause economic growth
+\pause
+\end{itemize}
+\item What is the inferential problem here?
+\pause
+\item Can we run a field experiment?
+\pause
+\item Can we find a natural experiment?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item They need an Instrumental Variable that:
+\pause
+\begin{enumerate}
+\item \textbf{First Stage:} \pause Predicts Institutions
+\pause
+\item \textbf{Exclusion Restriction:} \pause Only affects growth through institutions
+\end{enumerate}
+\pause
+\item They \textit{argue} that Settler (soldier) mortality rates are an appropriate instrument for institutions
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item \textbf{Population:} \pause Ex-colonies
+\pause
+\item \textbf{Sample:} \pause Ex-colonies
+\pause
+\item \textbf{Treatment:} \pause 'Settler' Institutions in ex-colonies (measured by 'risk of expropriation' index 1985-95)
+\pause
+\item \textbf{Control:} \pause 'Extractive' institutions
+\pause
+\item \textbf{Outcome:} \pause Growth rates in 1995
+\pause
+\item \textbf{Treatment Assignment Mechniams:} \pause Messy! But high settler mortality rates led to extractive institutions
+\pause
+\item \textbf{Instrument:} \pause Settler (soldier) mortality rates
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item \textbf{First Stage:} \pause Settler mortality rates predict institutions
+\pause
+\item Supporting Evidence:
+\pause
+\item ``Mortality rates faced by the settlers more than 100 years ago explains over 25 percent of the variation in current institutions.''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\includegraphics[scale=0.38]{AJR_first_stage.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item \textbf{Exclusion Restriction:} \pause Settler mortality rates ONLY affect growth through institutions
+\pause
+\item Supporting Evidence:
+\begin{itemize}
+\item Mortality rates for locals are low and don't affect human capital/growth directly, due to local immunity
+\pause
+\item Control for other possible correlated variables - geography, climate, etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item Methodology:
+\begin{itemize}
+\item ${\color{blue}Institutions_i} = \alpha + \beta_0 Settler\_Mortality_i + \epsilon_i$
+\item $Growth_i = \alpha + \beta_1 {\color{blue}\hat{Institutions_i}} + \epsilon_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\includegraphics[scale=0.36]{AJR_results.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Instrumenting for Institutions}
+\begin{itemize}
+\item \textbf{Results:} Improving Nigeria's institutions to Chile's level would raise GDP 7-fold
 \end{itemize}
 \end{frame}
 
@@ -327,13 +508,13 @@ $(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
 \begin{frame}
 \frametitle{Non-Compliance in Experiments}
 \begin{itemize}
-\item With an instrument and treatment we can divide our units into four types:
+\item We can divide our units into four types depending on how they accept or reject treatment assignment:
 \end{itemize}
 \begin{table}[htbp]
   \centering
     \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
     \hline
-    \multicolumn{1}{|p{3cm}|}{\textbf{Treatment Status if Instrument=0}} & \multicolumn{1}{p{3cm}|}{\textbf{Treatment Status if Instrument=1}} & \textbf{Unit Type} \bigstrut\\
+    \multicolumn{1}{|p{3cm}|}{\textbf{If Assigned to Control}} & \multicolumn{1}{p{3cm}|}{\textbf{If Assgined to Treatment}} & \textbf{Unit Type} \bigstrut\\
     \hline
     0     & 1     & Complier \bigstrut\\
     \hline
@@ -346,7 +527,6 @@ $(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
     \end{tabular}%
   \label{tab:addlabel}%
 \end{table}%
-\pause
 \end{frame}
 
 \begin{frame}
@@ -354,7 +534,9 @@ $(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
 \begin{table}[htbp]
   \centering
     \begin{tabular}{c|c|c}
-    \multicolumn{1}{l}{$D_i(Z_i=0)$} & \multicolumn{1}{l}{$D_i(Z_i=1)$} & \multicolumn{1}{l}{Type?} \\
+    \multicolumn{1}{l}{$D_i(Z_i=0)$} & \multicolumn{1}{l}{$D_i(Z_i=1)$} & \multicolumn{1}{l}{} \\
+    \hline
+    \multicolumn{1}{l}{If Assigned to Control} & \multicolumn{1}{l}{If Assigned to Treatment} & \multicolumn{1}{l}{Type?} \\
     \hline
     0     & 1     &  \\
     0     & 0     &  \\
@@ -375,16 +557,18 @@ $(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
 \begin{itemize}
 \item Simple difference-in-means estimates are biased
 \pause
-\item But we can still use the randomized component of treatment as an instrumental variable
+\item But we can still use the randomized component of \textbf{treatment assignment as an instrumental variable}
 \pause
 \end{itemize}
 \begin{block}{Local Average Treatment Effect (LATE)}
-The Average Treatment Effect among compliers
+The Average Treatment Effect among Compliers
 \end{block}
 \begin{itemize}
 \item LATE just means we don't learn anything about Never-takers and Always-takers from our Instrumental Variable
 \pause
+\begin{itemize}
 \item Because the instrument doesn't do anything to affect treatment for these units
+\end{itemize}
 \pause
 \item Never-takers and Always-takers are balanced across treatment assignment and do not affect the difference-in-means
 \pause
@@ -401,7 +585,7 @@ The Average Treatment Effect among compliers
 \begin{itemize}
 \item \textbf{1. Intention-to-Treat Analysis}
 \pause
-\item The Effect of Treatment Assignment (the Instrument) on the Outcome
+\item The Effect of Treatment \textbf{Assignment} (the Instrument) on the Outcome
 \pause
 \item $Y_i ~ \alpha + \beta Z_i + \epsilon_i$
 \pause
@@ -429,100 +613,12 @@ The Average Treatment Effect among compliers
 \begin{itemize}
 \item The \textbf{'Strong First-Stage'} assumption here requires that treatment assignment affects treatment for at least some people
 \pause
-\item The \textbf{'Exclusion Restriction'} assumption requires that potential outcomes depend on treatment and not treatment assignment
+\item The \textbf{'Exclusion Restriction'} assumption requires that outcomes depend on treatment and not treatment assignment
 \begin{itemize}
-\item Eg. An always-taker has the same outcome if they are assigned to treatment or control (because they are always actually treated)
+\item So being labelled 'treatment' doesn't affect your attitude to redistribution
 \end{itemize}
 \end{itemize}
 \end{frame}
 
-
-\section{Instrumenting for Institutions}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item Acemoglu \& Robinson (2001)
-\begin{itemize}
-\item \textbf{Theory:} Non-electoral \textbf{institutions} (property rights, rule of law, checks and balances) cause accountability and growth
-\pause
-\end{itemize}
-\item What is the inferential problem here?
-\pause
-\item Can we run a field experiment?
-\pause
-\item Can we find a natural experiment?
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item They need an Instrumental Variable that:
-\pause
-\begin{enumerate}
-\item \textbf{First Stage:} \pause Predicts Institutions
-\pause
-\item \textbf{Exclusion Restriction:} \pause Only affects growth through institutions
-\end{enumerate}
-\item They \textit{argue} that Settler (soldier) mortality rates are an appropriate instrument
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\item \textbf{Population:} \pause Ex-colonies
-\pause
-\item \textbf{Sample:} \pause Ex-colonies
-\pause
-\item \textbf{Treatment:} \pause 'Settler' Institutions in ex-colonies (measured by 'risk of expropriation' index 1985-95)
-\pause
-\item \textbf{Control:} \pause 'Extractive' institutions
-\pause
-\item \textbf{Instrument:} \pause Settler (soldier) mortality rates
-\pause
-\item \textbf{Treatment Assignment Mechniams:} \pause Messy! But high settler mortality rates led to extractive institutions
-\pause
-\item \textbf{Outcome:} \pause Growth rates in 1995
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item First Stage Supporting Evidence:
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item Exclusion Restriction Supporting Evidence:
-\begin{itemize}
-\item Disease environment doesn't affect human capital/growth directly because locals have adapted
-\pause
-\item Control for possible correlates - geography, climate, etc.
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item Methodology:
-\begin{itemize}
-\item ${\color{blue}Institutions_i} = \alpha + \beta_0 Settler\_Mortality_i + \epsilon_i$
-\item $Growth_i = \alpha + \beta_1 {\color{blue}\hat{Institutions_i}} + \epsilon_i$
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Instrumenting for Institutions}
-\begin{itemize}
-\item Results: Improving Nigeria's institutions to Chile's level would raise GDP 7-fold
-\end{itemize}
-\end{frame}
 
 \end{document}
