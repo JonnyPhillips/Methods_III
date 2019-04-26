@@ -9,15 +9,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 4 (pp. 155-171)](Classes/Class_6/Readings/Angrist and Pischke Ch. 4.pdf)**
-- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 3](Classes/Class_6/Readings/Dunning_Ch3.pdf)**
-- **[Jacob, Robin and Pei Zhu 2012, A Practical Guide to Regression Discontinuity](Classes/Class_6/Readings/RDD Practical Guide.pdf)**
-- **[Boas, Taylor C. and Hidalgo, Daniel F. 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil, American Journal of Political Science, 55:4](Classes/Class_6/Readings/Boas and Hidalgo 2011.pdf)**
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 4 (pp. 155-171)](Classes/Class_7/Readings/Angrist and Pischke Ch. 4.pdf)**
+- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 3](Classes/Class_7/Readings/Dunning_Ch3.pdf)**
+- **[Jacob, Robin and Pei Zhu 2012, A Practical Guide to Regression Discontinuity](Classes/Class_7/Readings/RDD Practical Guide.pdf)**
+- **[Boas, Taylor C. and Hidalgo, Daniel F. 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil, American Journal of Political Science, 55:4](Classes/Class_7/Readings/Boas and Hidalgo 2011.pdf)**
 
 #### Additional Readings
-- [Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.6 ](Classes/Class_6/Readings/Angrist_Pischke_Ch6.pdf)
-- [Eggers et al (2013), On the Validity of the Regression Discontinuity Design for Estimating Electoral Effects: New Evidence from Over 40,000 Close Races](Classes/Class_6/Readings/Eggers et al on RDD elections.pdf)
-- [Cattaneo, Matias D., Nicolas Idrobo and Rocio Titiunik 2018, A Practical Introduction to Regression Discontinuity Design: Volume I](Classes/Class_6/Readings/Cattaneo et al Practical Guide to RDD VOl I.pdf) and [Volume II](Classes/Class_6/Readings/Cattaneo et al Practical Guide to RDD VOl II.pdf)
+- [Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.6 ](Classes/Class_7/Readings/Angrist_Pischke_Ch6.pdf)
+- [Eggers et al (2013), On the Validity of the Regression Discontinuity Design for Estimating Electoral Effects: New Evidence from Over 40,000 Close Races](Classes/Class_7/Readings/Eggers et al on RDD elections.pdf)
+- [Cattaneo, Matias D., Nicolas Idrobo and Rocio Titiunik 2018, A Practical Introduction to Regression Discontinuity Design: Volume I](Classes/Class_7/Readings/Cattaneo et al Practical Guide to RDD VOl I.pdf) and [Volume II](Classes/Class_7/Readings/Cattaneo et al Practical Guide to RDD VOl II.pdf)
 
 <br> </br>
 
