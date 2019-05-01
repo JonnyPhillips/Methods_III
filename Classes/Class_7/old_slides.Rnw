@@ -1,0 +1,765 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 7 - Incumbency Power \& Regression Discontinuities}
+\author{Jonathan Phillips}
+\date{October 2017}
+
+\begin{document}
+
+<<rdd_diag, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tidyverse)
+library(ggplot2)
+library(rdd)
+
+N <- 10000
+run_var <- rnorm(N,70,8)
+#plot(density(run_var))
+threshold <- 75
+
+data <- data.frame(run_var)
+data$treatment <- ifelse(data$run_var>=threshold,1,0)
+
+data$outcome <- data$run_var + 10*data$treatment + rnorm(N,0,10)
+
+chart_raw_data <- ggplot() + geom_point(data=data,aes(x=run_var,y=outcome), size=0.1) + geom_vline(xintercept=threshold,col="red") + theme_classic() + xlim(40,100)
+
+data <- data %>% mutate(run_var_lumpy=round(run_var/2)*2) %>% 
+  group_by(run_var_lumpy) %>% 
+  mutate(outcome_lumpy=mean(outcome,na.rm=TRUE))
+
+chart_binned_data <- ggplot() + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy)) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100)
+
+#Dif in means
+bw <- 5
+data_bw <- data %>% filter(run_var>threshold-bw & run_var<threshold+bw)
+
+dif_in_means <- data_bw %>% group_by(treatment) %>% summarise(mean_outcome=mean(outcome,na.rm=TRUE))
+
+dif_in_means$y_start <- dif_in_means$mean_outcome
+dif_in_means$y_end <- dif_in_means$mean_outcome
+dif_in_means$x_start <- c(threshold-bw,threshold)
+dif_in_means$x_end <- c(threshold,threshold+bw)
+
+chart_dif_in_means <- ggplot() + geom_point(data=data_bw,aes(x=run_var_lumpy,y=outcome_lumpy))  + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy),size=0.1) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100) + geom_vline(xintercept=threshold-bw,col="red", alpha=0.5) + geom_vline(xintercept=threshold+bw,col="red",alpha=0.5) + geom_segment(data=dif_in_means,aes(x=x_start,y=y_start,xend=x_end,yend=y_end)) + xlab("Running Variable (Test Score)") + ylab("Outcome") + ylim(40,120)
+
+chart_linear_param <- ggplot() + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy)) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100) + geom_smooth(data=data[data$run_var<threshold,],aes(x=run_var,y=outcome),method="lm") + geom_smooth(data=data[data$run_var>threshold,],aes(x=run_var,y=outcome),method="lm")+ ylim(40,120) + xlab("Running Variable (Test Score)") + ylab("Outcome")
+
+chart_non_linear_param <- ggplot() + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy)) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100) + geom_smooth(data=data[data$run_var<threshold,],aes(x=run_var,y=outcome),method="loess") + geom_smooth(data=data[data$run_var>threshold,],aes(x=run_var,y=outcome),method="loess")+ ylim(40,120) + xlab("Running Variable (Test Score)") + ylab("Outcome")
+
+chart_local_linear <- ggplot() + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy),size=0.1) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100) + geom_point(data=data_bw,aes(x=run_var_lumpy,y=outcome_lumpy))+ geom_vline(xintercept=threshold-bw,col="red", alpha=0.5) + geom_vline(xintercept=threshold+bw,col="red",alpha=0.5) + geom_smooth(data=data_bw[data_bw$run_var<threshold,],aes(x=run_var,y=outcome),method="lm") + geom_smooth(data=data_bw[data_bw$run_var>threshold,],aes(x=run_var,y=outcome),method="lm")
+
+#chart_local_non_linear <- ggplot() + geom_point(data=data,aes(x=run_var_lumpy,y=outcome_lumpy),size=0.1) + theme_classic() + geom_vline(xintercept=threshold,col="red") + xlim(40,100) + geom_point(data=data_bw,aes(x=run_var_lumpy,y=outcome_lumpy))+ geom_vline(xintercept=threshold-bw,col="red", alpha=0.5) + geom_vline(xintercept=threshold+bw,col="red",alpha=0.5) + geom_smooth(data=data_bw[data_bw$run_var<threshold,],aes(x=run_var,y=outcome),method="loess") + geom_smooth(data=data_bw[data_bw$run_var>threshold,],aes(x=run_var,y=outcome),method="loess")
+
+
+
+@
+
+
+\frame{\titlepage}
+
+\section{Causal Inference}
+
+\begin{frame}
+\frametitle{Regression Discontinuities}
+\begin{itemize}
+\item Natural Experiments
+\begin{itemize}
+\item As always, we need some 'as-if' random variation in assignment to treatment to get plausible counterfactuals
+\pause
+\item Regression discontinuities take advantage of social rules that \textbf{treat similar people differently}
+\pause
+\item Specifically, similar people with slightly different 'scores' are assigned to treatment/control
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Discontinuities}
+\begin{center}
+\includegraphics[scale=0.45]{Scale.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Regression Discontinuity
+\begin{itemize}
+\item Treatment assignment is 'as-if' random only \textbf{really close to the threshold}
+\pause
+\[
+D_i=
+\begin{cases}
+1 & \text{if }x_i \geq \bar{x} \\
+0 & \text{if }x_i < \bar{x}
+\end{cases}
+\]
+\pause
+\item For units just above and below the threshold:
+\begin{itemize}
+\item Their covariates are almost the same
+\item Their potential outcomes are (on average) almost the same
+\item They are plausible counterfactuals for each other
+\end{itemize}
+\pause
+\item So we can compare them directly
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Example thresholds:
+\begin{itemize}
+\item Exam cutoffs
+\item Age cutoffs
+\item Policy eligibility rules
+\item Close elections
+\item Adminsitrative boundaries
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Regresssion Discontinuity Variables:
+\begin{itemize}
+\item \textbf{Running Variable, $x_i$:} The \textit{continuous} variable to which the threshold/cutoff is applied, eg. exam score
+\pause
+\item \textbf{Treatment, $D_i$:} Binary 0/1 depending on whether the running variable is above or below the threshold ($x_i>=\bar{x}$)
+\pause
+\item \textbf{Outcome, $Y_i$:} Any subsequent outcome you have measured
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Regression Discontinuity Assumptions:
+\begin{itemize}
+\item Potential outcomes vary continuously (are independent of treatment) at the threshold
+\pause
+\item Units cannot precisely control their score and sort either side of the threshold
+\pause
+\item The threshold is not chosen strategically
+\pause
+\item No compound treatments
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Thresholds more likely to be exogenous if:
+\pause
+\begin{itemize}
+\item Units are not aware of the threshold
+\pause
+\item The threshold is decided after units make choices
+\pause
+\item The running variable is hard to manipulate precisely
+\pause
+\end{itemize}
+\item We need qualitative evidence to support these assumptions
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item We can check for sorting with a density test
+\item If units are bunched just above the threshold, this suggests manipulation
+\end{itemize}
+<<Density, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=2.5, warning=FALSE, message=FALSE, include=FALSE>>=
+DCdensity(data$run_var,cutpoint=threshold)
+abline(v=75,add=TRUE,col="red")
+@
+\begin{center}
+\includegraphics[scale=2]{figure/Density-2.pdf}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Three Regression Discontinuity Methodologies:
+\begin{enumerate}
+\item \textbf{Difference-in-means:} Define a small window either side of the threshold and compare average outcomes in this window
+\begin{itemize}
+\item But can be biased since the correlation of the running variable with the outcome will be ignored
+\pause
+\end{itemize}
+\item \textbf{'Parametric' regression discontinuity:} Uses all the data and estimates:
+$$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$$
+\begin{itemize}
+\item We just control for the 'smooth' variation in the running variable and estimate the 'jump' impact of treatment with a binary variable (dummy)
+\item We may need to make the running variable non-linear
+\pause
+\end{itemize}
+\item \textbf{Combined approach:} Focus on values close to the threshold, but use a (local) regression
+\begin{itemize}
+\item What bandwidth around the threshold do we use?
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Raw Data}
+\begin{center}
+<<chart1, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_raw_data
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{'Binned' Data}
+\begin{center}
+<<chart2, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_binned_data
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Difference-in-Means}
+\begin{center}
+<<chart3, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_dif_in_means
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{2a. Parametric Regression - Linear}
+\begin{center}
+<<chart4, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_linear_param
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{2b. Parametric Regression - Non-linear}
+\begin{center}
+<<chart5, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_non_linear_param
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Combined Approach - Local Linear}
+\begin{center}
+<<chart6, echo=FALSE,fig.keep='high',fig.height=3.2, fig.width=3.2, warning=FALSE, message=FALSE>>=
+chart_local_linear
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Which method?
+\pause
+\begin{itemize}
+\item Difference-in-means is probably biased, and we can easily do better
+\pause
+\item The parametric approach uses more data (+precision) but depends on the right model: linear, quadratic, etc. (+risk of bias)
+\pause
+\item The combined approach uses less data (-precision) but is less dependent on the right model (-risk of bias)
+\pause
+\end{itemize}
+\item In practice, apply all three as robustness checks
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Why does RD estimate a \textbf{Local} Average Treatment Effect?
+\pause
+\begin{itemize}
+\item Treatment assignment is only random at the threshold
+\pause
+\item Our estimates only apply to units close to the threshold
+\pause
+\item Units far from the threshold are very different for a reason, and causal effects are likely to be different
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{itemize}
+\item Limitations:
+\begin{itemize}
+\item Opportunistic regression discontinuities may not identify a useful causal effect or for a relevant group
+\pause
+\item Lots of alternative specifications so no single simple test
+\pause
+\item Less precise than a randomized trial, so we need more data
+\pause
+\item Risk of sorting/manipulation
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Close elections are one type of regression discontinuity in which political office is 'as-if' randomized
+\pause
+\item Particularly useful for understanding the effects of political power
+\pause
+\begin{itemize}
+\item \textbf{Running Variable: }Margin of victory
+\item \textbf{Treatment: }Winning a close election
+\item \textbf{Control: }Losing a close election
+\item \textbf{Outcome: }Anything that happens later...
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item How much faith should we have in 'close election' regression discontinuities?
+\pause
+\item Eggers et al (2013):
+\pause
+\begin{itemize}
+\item US House of Representatives elections show sorting in very close elections (<1\%)
+\pause
+\item Politicians (incumbents, the wealthy) can control whether they win, even when it's a tight race
+\pause
+\item They have extremely detailed information to predict vote results
+\pause
+\item So potential outcomes are not balanced
+\pause
+\item But no other case (9 countries) has this problem
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Political Economy}
+
+\begin{frame}
+\huge
+Political Economy: Incumbency Power
+\normalsize
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item One of the ways in which elites exert power is through control of the state (=incumbency)
+\pause
+\begin{itemize}
+\item Directing public resources to political allies or competitive places
+\pause
+\item Clientelism and patronage
+\pause
+\item Corruption for campaign financing
+\pause
+\item Media control
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\begin{itemize}
+\item Do Brazilian parties have an incumbency advantage?
+\pause
+\item Incumbent at time t -> Higher vote share at time t+1
+\pause
+\item We could just do the observational regression
+$$Vote\_Share_{t+1,i} = \alpha +\beta Incumbent_{t,i} + \epsilon_{i}$$
+\pause
+\item What is the challenge to causal inference?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\begin{itemize}
+\item We need 'as-if' random variation in incumbency status to balance potential outcomes
+\pause
+\item While politicians greatly influence electoral outcomes, there is also a big element of chance
+\begin{itemize}
+\item Rain in one part of the city
+\item A rumour that spreads on election day
+\item Undecided voters influenced by events in other countries
+\pause
+\end{itemize}
+\item These random factors \textbf{decide} close elections
+\pause
+\item Within 1-2\% points, elections are a coin flip
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\item Regression discontinuity on winning margin of each party
+\pause
+\begin{itemize}
+\item \textbf{Population:} \pause Elections in Brazil in 2000
+\pause
+\item \textbf{Sample:}  \pause Close elections for PMDB, PSDB and PFL (first-round)
+\pause
+\item \textbf{Treatment:} \pause Just winning a close election in 2000
+\pause
+\item \textbf{Control:} \pause Just losing a close election in 2000
+\pause
+\item \textbf{Treatment Assignment:} \pause Messy, but 'as-if' random in close elections
+\pause
+\item \textbf{Outcome:} \pause Vote share for party in 2004
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\begin{itemize}
+\item \textbf{The running variable:} \pause Winning Margin ($Z_i$)
+\pause
+\begin{itemize}
+\item If you won: By what \% did you beat the second-placed party? (Positive: $V_i - V_{2nd}$)
+\item If you lose: By what \% did you lose to the first-placed party? (Negative: $V_{1st} - V_i$)
+\pause
+\end{itemize}
+\item \textbf{Discontinuity/Threshold:} \pause At Winning Margin $Z_i=0$
+\pause
+\item \textbf{The treatment variable:} \pause Incumbency
+\begin{itemize}
+\item $D_i = 1$ if Winning Margin $Z_i >= 0$
+\item $D_i = 0$ if Winning Margin $Z_i < 0$
+\pause
+\end{itemize}
+\item \textbf{Outcome:} \pause Vote Share in 2004, $Y_i$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\begin{itemize}
+\item Close elections do seem to be 'as-if' random; there is balance close to the threshold
+\pause
+\item More balance the closer we get to the threshold
+\pause
+\item No sorting
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\item Results for being an incumbent:
+\begin{itemize}
+\item PMDB \textit{loses} about 4-7\% of vote share
+\item PFL \textit{loses} about 4-7\% of vote share
+\item No effect on PSDB
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\item Possible Interpretations:
+\pause
+\begin{itemize}
+\item Voters have control over politicians and punish consistent poor performers
+\pause
+\item Weak party system - mayors often switch parties and parties can't enforce better performance
+\pause
+\item Mayors more concerned with accumulating resources or running for higher office than being re-elected
+\pause
+\end{itemize}
+\item Negative incumbency effects are common in developing countries
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Titiunik (2011)
+\pause
+\item Critique:
+\begin{itemize}
+\item These effects are not 'normal' because they only reflect very close elections
+\pause
+\item More likely in prosperous urban areas
+\pause
+\item The study tells us nothing about rural 'redutos'
+\pause
+\item Candidate-level analysis likely to reveal greater incumbency bias, due to party-switching
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Boas and Hidalgo (2011)
+\pause
+\item How does incumbency affect control of the media?
+\pause
+\begin{itemize}
+\item Radio licencing process depends on ability to lobby the Ministry and Congress
+\pause
+\item Local radio systematically used to favour specific politicians
+\pause
+\item Incumbents better placed to initiate exchange between Mayors and legislators
+\pause
+\end{itemize}
+\item What is the challenge to causal inference here?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Boas and Hidalgo (2011)
+\pause
+\item \textbf{Population:} \pause Brazilian councillors
+\item \textbf{Sample:} \pause Brazilian councillors in close elections that made radio licence applications in 2000/2004
+\item \textbf{Running Variable:} \pause Vote margin
+\item \textbf{Treatment:} \pause Just winning close election
+\item \textbf{Control:} \pause Just losing close election
+\item \textbf{Treatment Assignment:} \pause 'As-if' random in close elections
+\item \textbf{Outcome:} \pause Approved radio licence application rate
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Boas and Hidalgo (2011) Methodology:
+\pause
+\item Local Linear regression within bandwidth of 165 votes
+\item Difference-in-Means within 10-40 vote bandwidth
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Boas and Hidalgo (2011)
+\item Results
+\pause
+\begin{itemize}
+\item Incumbent Vereadores are twice as likely (14-27 \% points) to have their radio licence applications approved
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\includegraphics[scale=0.35]{figure/BH_Results.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Boas and Hidalgo (2011)
+\item Critique:
+\pause
+\begin{itemize}
+\item Municipalities that are competitive are unusual, so we learn nothing about media control in dominated places
+\pause
+\item No real discussion of whether they're correctly modelling the relationship between vote margin and the outcome
+\pause
+\item Is it necessarily wrong that incumbents are more likely to get approval? Perhaps they learn valuable information or professionalism as soon as they come to office
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Phillips (2017)
+\pause
+\begin{itemize}
+\item Bihar is one of the poorest places on the planet and one of the worst goverened
+\pause
+\item 'Jungle raj': Clientelism, violence, corruption, caste bias
+\pause
+\item Bihar is a programmatic reform success case since 2005 under Nitish Kumar
+\pause
+\item But has top-down reform changed how politics works?
+\pause
+\item Are voters exposed to reform more likely to avoid clientelism, trust the state and vote for reformers?
+\end{itemize}
+\pause
+\item What is the challenge to causal inference? 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[scale=0.2]{figure/India_Map.jpg} 
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item People in Jharkhand are plausible counterfactuals to people in Bihar because:
+\pause
+\begin{itemize}
+\item Socioeconomic, geographic and national governance conditions are very similar at the border
+\pause
+\item Families have lived in their villages for decades
+\pause
+\item The two states were only created in 2001; before that they experienced the same relationship with government
+\pause
+\item The border was set according to old district borders, and not politically
+\pause
+\item Jharkhand did not experience the same governance improvements as Bihar
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\begin{itemize}
+\item Geographic Regression Discontinuity Design
+\begin{itemize}
+\item Exactly the same as a normal regression discontinuity, but in two dimensions (longitude and latitude)
+\pause
+\item \textbf{Population:} \pause Bihari citizens
+\pause 
+\item \textbf{Sample:} \pause Bihari and Jharkhand citizens within 4km of the border
+\pause 
+\item \textbf{The Running Variable:} \pause Longitude and latitude
+\pause 
+\item \textbf{Treatment:} \pause Residents on the Bihar side of the border
+\pause 
+\item \textbf{Control:} \pause Residents on the Jharkhand side of the border
+\pause 
+\item \textbf{Treatment Assignment:} \pause Family history, state separation in 2001, and migration
+\pause 
+\item \textbf{Outcome:} \pause Political attitudes and behaviour
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/Map_Border-1.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_01-1.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_map_incumb_dist_pg-1} \caption[Predicted Value Plot of Likelihood of Incumbent Providing Public Goods if Reelected]{Predicted Value Plot of Likelihood of Incumbent Providing Public Goods if Reelected}\label{fig:rdd_map_incumb_dist_pg}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_map_accountability_elite-1} \caption[Predicted Value Plot of Likelihood of Corrupt Elite being Caught]{Predicted Value Plot of Likelihood of Corrupt Elite being Caught}\label{fig:rdd_map_accountability_elite}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_map_net_government_size-1} \caption[Predicted Value Plot of Estimated Government Contacts Network Size]{Predicted Value Plot of Estimated Government Contacts Network Size}\label{fig:rdd_map_net_government_size}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_map_sabha_att-1} \caption[Predicted Value Plot of Gram Sabha Attendance]{Predicted Value Plot of Gram Sabha Attendance}\label{fig:rdd_map_sabha_att}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{figure}
+\includegraphics[width=\maxwidth]{figure/rdd_map_trust_civil_service-1} \caption[Predicted Value Plot for Trust in the Civil Service]{Predicted Value Plot for Trust in the Civil Service}\label{fig:rdd_map_trust_civil_service}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item Interpretation:
+\begin{itemize}
+\item Programmatic policy has changed voters' attitudes and expectations
+\pause
+\item Incumbents' policy has \textbf{political feedback effects}
+\pause
+\item Coordination among voters has helped re-elect the reformer twice
+\pause
+\item But no fundamental change in vulnerability or aversion to clientelism
+\pause
+\item A reduction in clientelism may also have reduced political participation/trust
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")
