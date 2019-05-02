@@ -25,6 +25,8 @@ navbar:
         href: Class_6.html
       - text: "7 - Discontinuities"
         href: Class_7.html
+      - text: "8 - Difference-in-Differences"
+        href: Class_8.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html

@@ -1,0 +1,23 @@
+---
+title: 'Class 8 - Difference-in-Differences'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+#### Required
+
+#### Additional Readings
+
+<br> </br>
+
+## [Lecture Slides](Classes/Class_8/)
+
+## [Lab Exercise to Complete during Class](Classes/Class_8/Lab Exercise/)
+
+
+
+

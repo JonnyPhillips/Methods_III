@@ -91,6 +91,15 @@
 \newcommand{\<}[1]{\begin{column}{#1}}
 \renewcommand{\>}{\end{column}}
 
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
 \setbeamertemplate{navigation symbols}{} 
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -155,12 +164,20 @@
 \item Where the 'as-if' random treatment assignment comes from \textit{discontinuities} in rules
 \pause
 \begin{itemize}
-\item Rules that \textbf{treat similar people differently}
+\item Rules that \textbf{treat very similar people very differently}
 \pause
 \item Small differences on a \textbf{continuous} variable create big differences on a \textbf{binary treatment} variable
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{center}
+\includegraphics[scale=0.55]{Scale.png}
+\end{center}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Discontinuities}
@@ -178,20 +195,13 @@
 
 \begin{frame}
 \frametitle{Discontinuities}
-\begin{center}
-\includegraphics[scale=0.55]{Scale.png}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Discontinuities}
 \begin{itemize}
 \item Why do discontinuities assign treatment 'as-if' random?
 \pause
 \item Maybe they don't! \pause It depends on how much \textbf{control} people have over their 'scores'
 \pause
 \begin{itemize}
-\item Could you get a score of exactly 10 in naming the Brazilian states?
+\item Could you get a score of exactly 10 in naming all the Brazilian states?
 \pause
 \item Could you get a score of exactly 150 on the GRE?
 \end{itemize}
@@ -199,6 +209,7 @@
 \item We need qualitative evidence that people cannot 'choose' their score perfectly
 \pause
 \item Then the factors that influence \textit{small} changes in score should be independent of potential outcomes
+\pause
 \begin{itemize}
 \item Weather
 \item Chance
@@ -212,7 +223,7 @@
 \begin{itemize}
 \item Regression Discontinuity
 \begin{itemize}
-\item Treatment assignment is 'as-if' random only \textbf{really close to the threshold}
+\item What is the Treatment Assignment Mechanism?
 \pause
 \[
 D_i=
@@ -222,17 +233,45 @@ D_i=
 \end{cases}
 \]
 \pause
+\item 'As-if' random only \textbf{really close to the threshold}
+\pause
 \item For units just above and below the threshold:
 \begin{itemize}
+\item Their potential outcomes are almost the same
+\pause
 \item Their covariates are almost the same
-\item Their potential outcomes are (on average) almost the same
+\pause
 \item They are plausible counterfactuals for each other
 \end{itemize}
-\pause
-\item So we can compare them directly
 \end{itemize}
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{itemize}
+\item Comparisons in a regression discontinuity are always \textit{imperfect}
+\pause
+\item \textbf{Field experiment:} For every value of $X$ we have both treated and control values
+\pause
+\item \textbf{Discontinuity:} We \textbf{cannot} have treated and control values with the same value of the running variable $x$
+\pause
+\item So we have to \textbf{extrapolate} to guess what the potential outcomes would be if unit $i$ was treated instead of control
+\pause
+\item So we need more assumptions (and more N)!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/chart2_binned-1} 
+
+\end{knitrout}
+\end{frame}
+
 
 \begin{frame}
 \frametitle{Discontinuities}
@@ -253,11 +292,13 @@ D_i=
 \begin{itemize}
 \item Regression Discontinuity Assumptions:
 \begin{enumerate}
-\item Potential outcomes vary continuously (are independent of treatment) at the threshold
+\item Potential outcomes vary continuously (are independent of treatment) \textbf{at} the threshold
+\begin{enumerate}
 \pause
 \item Units cannot precisely control their score and sort either side of the threshold
 \pause
 \item The threshold is not chosen strategically
+\end{enumerate}
 \pause
 \item No compound treatments
 \pause
@@ -269,7 +310,7 @@ D_i=
 \begin{frame}
 \frametitle{Discontinuities}
 \begin{itemize}
-\item Thresholds more likely to be 'exogenous' if:
+\item The threshold is more likely to be independent of potential outcomes if:
 \pause
 \begin{itemize}
 \item Units are not aware of the threshold
@@ -277,6 +318,8 @@ D_i=
 \item The threshold is decided after units make choices
 \pause
 \item The running variable is hard to manipulate precisely
+\pause
+\item The threshold is chosen before scores are known
 \pause
 \end{itemize}
 \item We need qualitative evidence to support these assumptions
@@ -286,59 +329,35 @@ D_i=
 \begin{frame}
 \frametitle{Discontinuities}
 \begin{itemize}
-\item Comparisons in a regression discontinuity are always \textit{imperfect}
-\pause
-\item With a field experiment, for every value of a potential confounder $X$ we have both treated and control values
-\pause
-\item With a discontinuity we explicitly \textbf{cannot} have treated and control values with the same value of the running variable $x$
-\pause
-\item So to make comparisons we have to \textbf{extrapolate} to guess what the potential outcomes would be if unit $i$ was treated instead of control
-\pause
-\item So we need more assumptions!
-\end{itemize}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/chart2_binned-1} 
-
-\end{knitrout}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{Discontinuities}
-\begin{itemize}
 \item We can check for sorting with a density test
 \item If units are bunched just above the threshold, this suggests manipulation
 \end{itemize}
 
-\begin{center}
-\includegraphics[scale=2]{figure/Density-2.pdf}
-\end{center}
 \end{frame}
 
 
-\section{Estimating Regrsesion Discontinuities}
+\section{Estimating Regression Discontinuities}
 
 \begin{frame}
 \frametitle{Estimating Discontinuities}
 \begin{itemize}
-\item Three Regression Discontinuity Methodologies:
+\item 3 Regression Discontinuity Methodologies:
 \begin{enumerate}
 \item \textbf{Difference-in-means:} Define a small window either side of the threshold and compare average outcomes in this window
 \begin{itemize}
-\item But can be biased since we're ignoring the confounding effect of the running variable on the outcome
+\item Can be biased since we're ignoring the omitted variable effect of the running variable on the outcome
 \pause
 \end{itemize}
-\item \textbf{'Full data' regression discontinuity:} Uses all the data and estimates:
+\item \textbf{'Full data' regression discontinuity:} Uses \textit{all} the data:
 $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$$
 \begin{itemize}
-\item We just control for the 'smooth' variation in the running variable and estimate the 'jump' impact of treatment with a binary variable (dummy)
-\item We may need to make the running variable non-linear
+\item Controls for the 'smooth' variation in the running variable
+\item Estimates the 'jump' impact of treatment with a binary variable (dummy)
 \pause
 \end{itemize}
-\item \textbf{'Limited-bandwidth' regression discontinuity:} Focus on values close to the threshold, but use a regression
+\item \textbf{'Limited-bandwidth' regression discontinuity:}  A regression only using only data close to the threshold
 \begin{itemize}
-\item What bandwidth around the threshold do we use?
+\item What \textit{bandwidth} around the threshold do we use?
 \end{itemize}
 \end{enumerate}
 \end{itemize}
@@ -408,7 +427,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{itemize}
 \item Difference-in-means is probably biased, and we can easily do better
 \pause
-\item The parametric approach uses more data (+precision) but depends on the right model: linear, quadratic, etc. (+risk of bias)
+\item The full-data approach gives more precision but depends on the right model: linear, quadratic, etc., so more risk of bias
 \pause
 \item The combined approach uses less data (-precision) but is less dependent on the right model (-risk of bias)
 \pause
@@ -432,7 +451,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Estimating Discontinuities}
 \begin{itemize}
-\item Why does RD estimate a \textbf{Local} Average Treatment Effect?
+\item Regression Discontinuity estimates a \textbf{Local Average Treatment Effect}
 \pause
 \begin{itemize}
 \item Treatment assignment is only random at the threshold
@@ -466,7 +485,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{itemize}
 \item Close elections are one type of regression discontinuity in which political office is 'as-if' randomized
 \pause
-\item Particularly useful for understanding the effects of political power
+\item Useful for understanding the effects of political power
 \pause
 \begin{itemize}
 \item \textbf{Running Variable: }Margin of victory
@@ -501,9 +520,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Close Elections}
 \begin{itemize}
-\item Boas and Hidalgo (2011)
-\pause
-\item How does incumbency affect control of the media?
+\item Boas and Hidalgo (2011): How does incumbency affect control of the media?
 \pause
 \begin{itemize}
 \item Radio licencing process depends on ability to lobby the Ministry and Congress
@@ -520,15 +537,13 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Close Elections}
 \begin{itemize}
-\item Boas and Hidalgo (2011)
-\pause
-\item \textbf{Population:} \pause Brazilian councillors
-\item \textbf{Sample:} \pause Brazilian councillors in close elections that made radio licence applications in 2000/2004
-\item \textbf{Running Variable:} \pause Vote margin
-\item \textbf{Treatment:} \pause Just winning close election
-\item \textbf{Control:} \pause Just losing close election
-\item \textbf{Treatment Assignment:} \pause 'As-if' random in close elections
-\item \textbf{Outcome:} \pause Approved radio licence application rate
+\item \textbf{Population:} Brazilian councillors
+\item \textbf{Sample:} Brazilian councillors in close elections that made radio licence applications in 2000/2004
+\item \textbf{Running Variable:} Vote margin
+\item \textbf{Treatment:} Just winning close election
+\item \textbf{Control:} Just losing close election
+\item \textbf{Treatment Assignment:} 'As-if' random in close elections
+\item \textbf{Outcome:} Approved radio licence application rate
 \end{itemize}
 \end{frame}
 
@@ -536,18 +551,17 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \frametitle{Close Elections}
 \begin{itemize}
 \item Boas and Hidalgo (2011) Methodology:
-\pause
+\begin{enumerate}
 \item Local Linear regression within bandwidth of 165 votes
 \item Difference-in-Means within 10-40 vote bandwidth
+\end{enumerate}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Close Elections}
 \begin{itemize}
-\item Boas and Hidalgo (2011)
 \item Results
-\pause
 \begin{itemize}
 \item Incumbent Vereadores are twice as likely (14-27 \% points) to have their radio licence applications approved
 \end{itemize}
@@ -557,24 +571,8 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Close Elections}
 \begin{center}
-\includegraphics[scale=0.35]{figure/BH_Results.png}
+\includegraphics[scale=0.33]{figure/BH_Results.png}
 \end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Close Elections}
-\begin{itemize}
-\item Boas and Hidalgo (2011)
-\item Critique:
-\pause
-\begin{itemize}
-\item Municipalities that are competitive are unusual, so we learn nothing about media control in dominated places
-\pause
-\item No real discussion of whether they're correctly modelling the relationship between vote margin and the outcome
-\pause
-\item Is it necessarily wrong that incumbents are more likely to get approval? Perhaps they learn valuable information or professionalism as soon as they come to office
-\end{itemize}
-\end{itemize}
 \end{frame}
 
 \section{Geographic Discontinuities}
@@ -582,21 +580,14 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Geographic Discontinuities}
 \begin{itemize}
-\item Phillips (2017)
+\item What is the effect of programmatic governance reform on voters' attitudes?
 \pause
-\begin{itemize}
 \item Bihar is one of the poorest places on the planet and one of the worst goverened
 \pause
-\item 'Jungle raj': Clientelism, violence, corruption, caste bias
+\item \textbf{Before 2005:} 'Jungle raj': Clientelism, violence, corruption, caste bias
 \pause
-\item Bihar is a programmatic reform success case since 2005 under Nitish Kumar
+\item \textbf{After 2005:} Bihar is a programmatic reform success case
 \pause
-\item But has top-down reform changed how politics works?
-\pause
-\item Are voters exposed to reform more likely to avoid clientelism, trust the state and vote for reformers?
-\end{itemize}
-\pause
-\item What is the challenge to causal inference? 
 \end{itemize}
 \end{frame}
 
@@ -626,6 +617,16 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Methodology}
+\begin{itemize}
+\item The 'running variable' is distance to the border, but in 2-dimensions:
+\begin{multline}
+y_i = \alpha + \beta Bihar_i + x_i + y_i \pause + x^2 + y^2 + x^3 + y^3 + x^4 + y^4 + x*y  \\+ x^2*y^2 + x^3*y^3 + x*y^2 + x*y^3 + x^2*y + x^3*y + \epsilon_i
+\end{multline}
+\item $\beta$ is our treatment effect of interest
+\end{itemize}
+\end{frame}
 
 \begin{frame}
 \frametitle{Geographic Discontinuities}
@@ -634,17 +635,13 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{itemize}
 \item Exactly the same as a normal regression discontinuity, but in two dimensions (longitude and latitude)
 \pause
-\item \textbf{Population:} \pause Bihari citizens
-\pause 
-\item \textbf{Sample:} \pause Bihari and Jharkhand citizens within 4km of the border
-\pause 
 \item \textbf{The Running Variable:} \pause Longitude and latitude
 \pause 
 \item \textbf{Treatment:} \pause Residents on the Bihar side of the border
 \pause 
 \item \textbf{Control:} \pause Residents on the Jharkhand side of the border
 \pause 
-\item \textbf{Treatment Assignment:} \pause Family history, state separation in 2001, and migration
+\item \textbf{Treatment Assignment:} \pause State separation in 2001, Family history, and migration
 \pause 
 \item \textbf{Outcome:} \pause Political attitudes and behaviour
 \end{itemize}
@@ -677,19 +674,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 
 \begin{frame}
 \begin{figure}
-\includegraphics[width=\maxwidth]{figure/rdd_map_net_government_size-1} \caption[Predicted Value Plot of Estimated Government Contacts Network Size]{Predicted Value Plot of Estimated Government Contacts Network Size}\label{fig:rdd_map_net_government_size}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\begin{figure}
 \includegraphics[width=\maxwidth]{figure/rdd_map_sabha_att-1} \caption[Predicted Value Plot of Gram Sabha Attendance]{Predicted Value Plot of Gram Sabha Attendance}\label{fig:rdd_map_sabha_att}
-\end{figure}
-\end{frame}
-
-\begin{frame}
-\begin{figure}
-\includegraphics[width=\maxwidth]{figure/rdd_map_trust_civil_service-1} \caption[Predicted Value Plot for Trust in the Civil Service]{Predicted Value Plot for Trust in the Civil Service}\label{fig:rdd_map_trust_civil_service}
 \end{figure}
 \end{frame}
 
@@ -699,15 +684,10 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \item Interpretation:
 \begin{itemize}
 \item Programmatic policy has changed voters' attitudes and expectations
-\pause
-\item Incumbents' policy has \textbf{political feedback effects}
-\pause
-\item Coordination among voters has helped re-elect the reformer twice
-\pause
-\item But no fundamental change in vulnerability or aversion to clientelism
-\pause
-\item A reduction in clientelism may also have reduced political participation/trust
 \end{itemize}
+\item But some imbalance at the border...
+\pause
+\item ...And compound treatment makes interpretation difficult
 \end{itemize}
 \end{frame}
 
