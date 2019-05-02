@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Readings
 #### Required
 - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics, Ch.5](Classes/Class_8/Readings/Angrist & Pischke Ch5.pdf)**
+- **[Chimeli, Ariaster D. and Rodrigo R. Soares 2017, The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon, American Economic Journal: Applied Economics, 9:4](Classes/Class_8/Readings/Chimeli_Soares.pdf)**
 
 
 
