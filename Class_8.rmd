@@ -9,8 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
+- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics, Ch.5](Classes/Class_8/Readings/Angrist & Pischke Ch5.pdf)**
+
+
 
 #### Additional Readings
+- [Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.5 ](Classes/Class_8/Readings/A&P_Ch5.pdf)
+- [Bertrand, Marianne, Esther Duflo and Sendhil Mullaninathan 2003, How much Should we Trust Difference-in-Differences Estimates?](Classes/Class_8/Readings/Bertrand et al 2003.pdf)
 
 <br> </br>
 
