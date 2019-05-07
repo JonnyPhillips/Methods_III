@@ -1,0 +1,154 @@
+---
+title: "Exercise: Difference-in-Differences"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = F, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=F)
+library(tidyverse)
+library(stargazer)
+library(estimatr)
+```
+
+This week, we will simulate a difference-in-differences methodology and see how well we recover the assumed treatment effect. 
+
+1. Let's create fake data for Brazil, working at the level of the 5570 municipalities. One characteristic of these municipalities is the presence of oil reserves. Note that this is a *time-invariant* characteristic; if municipality $i$ has oil reserves in year $t$ it also has oil reserves in year $t+10$. Let's generate a binomial 'oil' variable which gives each of our municipalities a 50\% chance of possessing oil. 
+
+```{r}
+N <- 5570
+set.seed(54321)
+d <- tibble(oil=rbinom(N,1,0.5))
+```
+
+2. This is a panel dataset so let's make sure that in our dataset we have (i) an indicator for each `municipality` (a number from 1 to 26), and (ii) an indicator for each time period. We will work with 3 time periods (years, $t=0$, $t=1$ and $t=2$), so create a column for `year` with entries 0, 1 and 2 so that each municipality has three rows in your dataset, one for each year. 
+
+```{r}
+d <- d %>% mutate(municipality=1:N) 
+
+d <- d %>% 
+  bind_rows(d,d) %>% 
+  group_by(municipality) %>%
+  mutate(year=0:2) %>%
+  ungroup() %>% 
+  arrange(municipality, year)
+```
+
+3. Now let's simulate potential outcomes - let's say the outcome is 'voter turnout' - for each municipality. We will assume that in general voter turnout is declining over time, and that the presence of oil reserves also reduces turnout. The treatment effect we will define as a 5\% extra voter turnout. 
+
+Assume:
+
+$$y_{0, year}=N(60,5) - 2*year - 3*oil$$ 
+
+$$y_{1, year}=y_{0, year}+5$$
+
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,60,5) - 2*year - 3*oil,
+                  y_1=y_0+5)
+```
+
+4. Treatment $D$ is that the municipality is enrolled in a government program that they receive between time periods $t=1$ and $t=2$. Only some municipalities receive this in time $t=2$. We will assume that only municipalities with oil receive treatment. Make an indicator variable where each municipality with oil is coded as in the treated group and the rest as control. (*Note* that we are not coding municipalities as treated only in $t=2$, we are coding for whether they are a treated 'unit' which applies even in $t=0$, $t=1$).
+
+```{r}
+d <- d %>% mutate(D=oil)
+```
+
+5. Now calculate the observed outcome based on the potential outcomes, treatment status *AND time period*.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1 & year<2~y_0,
+                                  D==1 & year==2~y_1))
+```
+
+6. First, let's run the 'naive' cross-sectional observational regression of observed outcomes on treatment. How does the result compare to our simulation assumptions? Why?
+
+```{r}
+d %>% lm(y_obs ~D, data=.) %>% summary()
+```
+
+7. Next, let's run the 'naive' before-after regression of observed outcomes on year, using the data from $t=1$ and $t=2$ only for the treated units.  How does the result compare to our simulation assumptions? Why?
+
+```{r}
+d %>% filter(year>0 & D==1) %>% 
+  lm(y_obs ~ year, data=.) %>% summary()
+```
+
+8. Now, using the data for $t=1$ and $t=2$, let's run a basic difference-in-differences regression of the observed outcomes on treatment, year, and the interaction of time and year. How do you interpret the results?
+
+```{r}
+d %>% filter(year>0) %>% 
+  lm(y_obs ~ D + year + D*year, data=.) %>% summary()
+```
+
+9. Our standard errors are wrong here. Cluster your errors by the cross-sectional unit (municipality). (In this case the difference is very small).
+
+```{r}
+d %>% filter(year>0) %>% 
+  lm_robust(y_obs ~ D + year + D*year, data=., cluster=municipality) %>% summary()
+```
+
+10. We can also do a simpler differences-in-differences-in-means estimate without a regression. Create a 2*2 table of average outcomes for the four groups as shown in the table below. Then calculate the differences in the rows and/or the columns, and finally the difference in the differences. Interpret your result.
+
+Treatment:    | D=0 | D=1
+----|-----|------
+t=1 |     | 
+t=2 |     | 
+
+```{r}
+d_in_d_means <- d %>% filter(year>0) %>% 
+  group_by(D, year) %>% 
+  summarize(mean_y=mean(y_obs,na.rm=T))
+
+d_in_d_means %>%
+  spread(key="year", value="mean_y") %>%
+  ungroup() %>%
+  mutate(Diff=`2`-`1`,
+         Diff_Diff=Diff-lag(Diff))
+```
+
+11. An assumption of Difference-in-Differences is that there are parallel trends before treatment occurs. Test whether the treated and countrol groups display parallel trends in the outcome variable between time $t=0$ and $t=1$. One way to do this is to run exactly the same difference-in-differences regression but excluding time $t=2$. Interpret your results.
+
+```{r}
+d %>% filter(year<2) %>% 
+  lm(y_obs ~ D + year + D*year, data=.) %>% summary()
+```
+
+12. Plot a classic difference-in-differences line graph of the average observed outcome, where the x-axis contains the three time periods, the y-axis the average outcome, and there is one line for the treatment group and one for the control group.
+
+```{r}
+d %>% group_by(D, year) %>% 
+  summarize(mean_y=mean(y_obs,na.rm=T)) %>% 
+  ggplot() +
+  geom_line(aes(x=year, y=mean_y, group=factor(D), colour=factor(D))) +
+  theme_classic()
+```
+
+
+13. Finally, let's try to see what estimate we recover when there are **non-parallel trends** produced by **time-varying confounders**. Recreate your dataset but with the following structure of potential outcomes, which only differs in that the falling turnout trend is only present in oil municipalities. (Remember to calculate observed outcomes again). Interpret the results of the difference-in-differences regression this time.
+
+$$y_{0, year}=N(60,5) - 2*year*oil - 3*oil$$ 
+
+$$y_{1, year}=y_{0, year}+5$$
+
+
+```{r}
+d2 <- d %>% mutate(y_0=rnorm(N,60,5) - 2*year*oil - 3*oil,
+                  y_1=y_0+5)  %>% 
+  mutate(y_obs=case_when(D==0~y_0,
+                         D==1 & year<2~y_0,
+                         D==1 & year==2~y_1))
+
+d2 %>% filter(year>0) %>% 
+  lm(y_obs ~ D + year + D*year, data=.) %>% summary()
+```
+
+14. Create the difference-in-differences line graph for this new dataset with time-varying confounders. (The same as in Q12).
+
+```{r}
+d2 %>% group_by(D, year) %>% 
+  summarize(mean_y=mean(y_obs,na.rm=T)) %>% 
+  ggplot() +
+  geom_line(aes(x=year, y=mean_y, group=factor(D), colour=factor(D))) +
+  theme_classic()
+```
