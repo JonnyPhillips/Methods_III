@@ -1,0 +1,777 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+<<DinD, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(tidyverse)
+
+Base_control <- 3
+Confounding <- 3
+Trend <- 2
+Effect <- 4
+
+data <- data.frame(c("Control","Treated"),c(Base_control,Base_control+Confounding),c(Base_control+Trend,Base_control+Confounding+Trend+Effect))
+colnames(data) <- c("Unit","Before","After")
+
+data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,After=Base_control+Confounding+Trend)
+@
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 8 - Violence \& Difference-in-Differences}
+\author{Jonathan Phillips}
+\date{October 2017}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Causal Inference}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Our basic causal inference problem is that confounding makes counterfactual cases implausible (biased)
+\pause
+\item If we compare separate treatment and control units when treatment assignment is not random:
+\begin{itemize}
+\item The control units have different levels of the outcome for many reasons, not just treatment
+\pause
+\end{itemize}
+\item If we compare the same unit before and after treatment:
+\begin{itemize}
+\item Other factors influencing the outcome might also have changed between our measurements (eg. any news event!)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item But what if we combine these approaches?
+\pause
+\item We can keep lots of variables fixed if we compare the same unit before and after treatment
+\pause
+\item We can measure how much other factors changed over time if we have units that were not exposed to treatment
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Example: How has Brexit affected the UK's growth rate?
+\pause
+\begin{itemize}
+\item Comparing with European growth rates is biased - UK growth is influenced by oil, different labour laws etc.
+\pause
+\item Comparing before and after Brexit is biased - the world economy improved around the same time as Brexit (coincidentally)
+\pause
+\item But compare how European growth changes (-0.05\%) and UK growth changed (-0.4\%)
+\pause
+\item The net effect of Brexit is -0.35\%
+\pause
+\item That's two differences
+\begin{itemize}
+\item \textbf{Difference 1:} Between before and after (over time)
+\item \textbf{Difference 2:} Between treated and control units
+\pause
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item We're now comparing \textit{changes} (differences), not \textit{levels} of the outcome
+\begin{itemize}
+\item Most confounders affect levels, so this makes our counterfactuals more plausible
+\begin{itemize}
+\item Eg. different laws affect growth rates, not the change in growth over time
+\end{itemize}
+\item And crucially, we can remove confounding even for \textit{unobserved} confounders
+\item So Diff-in-Diff is 'better' than controlling or matching, which only eliminate observed (measured) confounding
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item \textbf{BUT treatment assignment is still nowhere near random}
+\pause
+\item So this is not a natural experiment
+\pause
+\item Lots of confounders can still affect trends
+\pause
+\begin{itemize}
+\item That creates bias in our causal estimates
+\item Eg. the UK's growth rate was falling even before the Brexit vote, but Europe was improving
+\pause
+\end{itemize}
+\item Diff-in-Diff is 'worse' than natural experiments
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{center}
+\includegraphics[scale=0.3]{figure/UK_growth.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Difference-in-differences only removes \textbf{time-invariant confounders}
+\pause
+\item Factors that create differences in the \textbf{levels} of the outcome variable for treatment and control units
+\pause
+\item We still need to \textbf{make the assumption and argument} that there are no time-varying confounders
+\pause
+\item Factors that affect the \textbf{trend} in the outcome \textit{differentially} in treated and control units
+\pause
+\item Eg. The UK had falling consumer confidence while confidence in the eurozone was improving
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart1, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
+
+data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")))
+data2 %>% filter(Unit=="Control") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart1b, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data2 %>% filter(Unit!="Counterfactual") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart1c, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data2  %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Estimating Difference-in-Differences
+\pause
+\item Time (Before and after) and treatment status (treated and control) are just variables in our data
+\pause
+\item We know how to do a regression for the effect of treatment status on the outcome
+\end{itemize}
+$$ Y_{it} = \alpha + \gamma D_i$$
+\pause
+\begin{itemize}
+\item The difference-in-differences estimate is just the \textit{interaction} of time and treatment status
+\end{itemize}
+$$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
+\begin{itemize}
+\item $\beta$ is our causal effect estimate
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+$$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
+\pause
+\begin{itemize}
+\item Difference-in-Differences means:
+\end{itemize}
+\small
+$$ \big[ E(Y_{i,t=1}|D_i=1) - E(Y_{i,t=0}|D_i=1) \big] - \big[ E(Y_{i,t=1}|D_i=0) - E(Y_{i,t=0}|D_i=0) \big] $$
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\small
+$$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
+\pause
+$$ E(Y_{i,t=1}|D_i=1) = \alpha + \gamma + \delta + \beta $$
+\pause
+$$ E(Y_{i,t=0}|D_i=1) = \alpha + \gamma $$
+\pause
+$$ E(Y_{i,t=1}|D_i=0) = \alpha + \delta $$
+\pause
+$$ E(Y_{i,t=0}|D_i=0) = \alpha $$
+\pause
+$$ \big[ E(Y_{i,t=1}|D_i=1) - E(Y_{i,t=0}|D_i=1) \big] = \delta + \beta $$
+\pause
+$$ \big[ E(Y_{i,t=1}|D_i=0) - E(Y_{i,t=0}|D_i=0) \big] = \delta $$
+\pause
+\footnotesize
+$$ \big[ E(Y_{i,t=1}|D_i=1) - E(Y_{i,t=0}|D_i=1) \big] - \big[ E(Y_{i,t=1}|D_i=0) - E(Y_{i,t=0}|D_i=0) \big] = \beta $$
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item The other way of thinking about the difference-in-differences estimator is as controlling for variation over time and between treated and control units
+\pause
+\item Including a variable for time is a fixed effect for time
+\pause
+\item Including a variable for treated/control is a fixed effect for treatment status
+\pause
+\item These 'remove' the 'levels' of variation between the treated and control units, and the 'overall trend' in all the data over time...
+\pause
+\item ...the only variation left in our data is the \textbf{differential} change over time between treated and control units
+\pause
+\item That's our causal effect
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+Raw Data:
+<<DinD_chart2, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data3 <- data2 %>% filter(Unit!="Counterfactual")
+
+data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+Add a variable (fixed effect) for treated/control:
+<<DinD_chart3, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data3 <- data3 %>% mutate(Outcome=ifelse(Unit=="Control",Outcome+Confounding,Outcome))
+
+data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+Add a variable (fixed effect) for time:
+<<DinD_chart4, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data4 <- data3 %>% mutate(Outcome=ifelse(Time=="After",Outcome-Trend,Outcome))
+
+data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+Add a variable (fixed effect) for time:
+<<DinD_chart5, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+effect_line <- data.frame(x1 = 2, x2 = 2, y1 = 6, y2 = 10)
+
+
+data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13) + geom_segment(data=effect_line,aes(x=x1,y=y1,xend=x2,yend=y2),lty=2)
+
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item How do we know if there are time-varying confounders?
+\pause
+\item We really want the outcome for the treated group to have the same trend as the control group
+\pause
+\begin{itemize}
+\item So any difference in trend is only due to treatment
+\pause
+\end{itemize}
+\item One test of this is to check if \textbf{pre-treatment trends are parallel}
+\pause
+\item Then our counterfactual makes sense
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart6, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data5 <- data2 %>% filter(Unit!="Counterfactual") %>% 
+  add_row(Unit="Treated",Time="Earlier",Outcome=4) %>%
+  add_row(Unit="Control",Time="Earlier",Outcome=1)
+  
+data5$Time <- factor(data5$Time,c("Earlier","Before","After"))
+
+data5 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart7, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data6 <- data2 %>% 
+  add_row(Unit="Treated",Time="Earlier",Outcome=4) %>%
+  add_row(Unit="Control",Time="Earlier",Outcome=1)
+  
+data6$Time <- factor(data6$Time,c("Earlier","Before","After"))
+
+data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
+  theme_classic() + ylim(0,13)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Parallel trends (no time-varying confounders) is a difficult assumption
+\item Selection into treatment is usually not just due to mostly 'fixed' variables (eg. gender) but due to 'time-varying' variables (eg. income, employment etc.)
+\item Eg. training program participants' income has usually fallen a lot in the past few months
+\pause
+\item A good test is to see if there is an effect from 'placebos' - testing for treatment effects at times before treatment happened
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Even if pre-treatment trends are the same, treatment needs to be carefully defined:
+\pause
+\item Our estimate is based entirely on what affects treated units at a specific point in time
+\pause
+\item But many things may have changed at the same time
+\pause
+\item If these changes \textit{differentially} affect treated and control units, they change what we are estimating: a compound treatment
+\pause
+\item Eg. The UK also announced new rules to regulate the banking sector on the same day as Brexit
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{itemize}
+\item Our groups need to be stable and unaffected by treatment
+\item Eg. No migration due to treatment
+\pause
+\item Bertrand et al (2003):
+\begin{itemize}
+\item Careful with standard errors
+\item Especially if more than two time periods (auto-correlation)
+\item So cluster standard errors by each cross-sectional unit (eg. each country)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Political Economy}
+
+%Violence Intro
+
+\begin{frame}
+\frametitle{Dube and Vargas 2008}
+\begin{itemize}
+\item How do changes in income affect violence?
+\pause
+\item \textbf{Opportunity Cost:} People less likely to fight if higher returns from legal activity
+\item \textbf{Rapacity:} People more likely to fight if more to be stolen
+\pause
+\item Which dominates depends on whether the extra income is wages (can't be stolen) or capital
+\pause
+\begin{itemize}
+\item Labour-intensive income boost -> less conflict (Coffee)
+\item Capital-intensive income boost -> more conflict (Oil)
+\end{itemize}
+\pause
+\item What is the barrier to causal inference here?
+\pause
+\begin{itemize}
+\item Reverse causation: Less violence causes more income
+\item Confounding: More effective government raises income and lowers violence
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dube and Vargas 2008}
+\begin{itemize}
+\item Difference-in-Differences helps because:
+\pause
+\begin{itemize}
+\item Controls for all (observed and unobserved) non-time-varying confounders 
+\pause
+\item Prevents reverse causation: See how violence changes \textit{after} treatment
+\pause
+\item International prices are used for treatment, which are even more 'exogenous'
+\pause
+\end{itemize}
+\item Compare changes in violence in coffee-growing areas to changes in violence in non-growing areas
+\item They go beyond 'before' and 'after', using the long-term change in oil/coffee prices themselves (continuous treatment variable)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dube and Vargas 2008}
+\begin{itemize}
+\item \textbf{Population:} \pause Colombian municipalities 
+\pause
+\item \textbf{Sample:} \pause Colombian municipalities
+\pause 
+\item \textbf{Treatment:} \pause Coffee income falls (OR Oil income rises) 
+\pause 
+\item \textbf{Control:} \pause No change in income
+\pause 
+\item \textbf{Treatment Assignment Mechanism:} \pause NOT random: coffee- and oil-growing places are very different
+\pause 
+\item \textbf{Outcome:} \pause Attacks, casualties
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dube and Vargas 2008}
+\begin{itemize}
+\item Methodology:
+\end{itemize}
+$$ Casualties_{it} = \alpha + \gamma_t + \delta_i + \beta (Oil\_Price_t * Oil\_Production_i) + \epsilon_{it}  $$
+\pause
+$$ Casualties_{it} = \alpha + \gamma_t + \delta_i + \beta (Coffee\_Price_t * Coffee\_Production_i) + \epsilon_{it}  $$
+\pause
+\end{frame}
+
+\begin{frame}
+\frametitle{Dube and Vargas 2008}
+\begin{itemize}
+\item Results:
+\pause
+\begin{itemize}
+\item 13\% increase in attacks in oil-producing regions as oil prices rose
+\item 27\% increase in attacks in oil-pipeline regions as oil prices rose
+\item 9\% increase in attacks in coffee-producing regions as coffee prices \textbf{fell}
+\pause
+\item Supportive evidence that wages decrease as coffee prices fall and state revenues increase as oil prices rise
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item How does an activity being illegal affect violence?
+\pause
+\item How did Brazil's ban on mahogany affect homicides?
+\pause
+\item What are the barriers to causal inference?
+\pause
+\begin{itemize}
+\item Confounders, eg. State capacity
+\item Reverse causation, eg. Violence causes associated activities to be outlawed
+\item Other evidence only from drugs, which are directly connected to violence
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Diff-in-Diff helps here because:
+\pause
+\begin{itemize}
+\item Repeated measurement before and after treatment
+\item No risk of reverse causation: Change in violence measured after treatment
+\item No risk of confounding by 'fixed' (non-time-varying) confounders, eg. state capacity
+\end{itemize}
+\pause
+\item Comparing the \textit{change} in violence in mahogany-growing areas to the change in violence in non-growing areas
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item \textbf{Population:} \pause Brazilian municipalities
+\pause 
+\item \textbf{Sample:} \pause Brazilian municipalities
+\pause 
+\item \textbf{Treatment:} \pause Mahogany activites banned (post-1998 and in municipalities exporting mahogany)
+\pause 
+\item \textbf{Control:} \pause No mahogany activites to be banned (pre-1998 OR in municipalities without mahogany)
+\pause 
+\item \textbf{Treatment Assignment Mechanism:} \pause NOT random: Ban affects only mahogany-growing places, which are more rural and poorer
+\pause 
+\item \textbf{Outcome:} \pause Rate of Homicides
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Multiple treatment timings:
+\begin{itemize}
+\item 1st policy change
+\item 2nd policy change
+\item Reverse treatment: Better policing of mahogany regulations
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Methodology:
+\pause
+\end{itemize}
+$$ Homicides_{it} = \gamma_t + \delta_i + \beta (Post-1998_t *  Mahognay_i) + \epsilon_i$$
+\pause
+\begin{itemize}
+\item Apply more complex state-specific trends for covariates to minimize risk of non-parallel trends
+\pause
+\item Cluster standard errors by municipality
+\pause
+\item Supporting evidence: The 'extra' homicides were the type we'd expect from illegal activity
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{center}
+\includegraphics[scale=0.35]{figure/Mahogany.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Interpretation
+\begin{itemize}
+\item Illegal activity prevents 'peaceful' contract enforcement
+\item Competition between loggers
+\item Contract enforcement with buyers
+\item Intimidation of communities to not report logging
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bundervoet et al 2008}
+\begin{itemize}
+\item What is the impact of (the Burundian) civil war on children's health?
+\pause
+\item What is the challenge to causal inference here?
+\pause
+\begin{itemize}
+\item \textbf{Confounding:} Poorly governed places more likely to be at war and have poor health
+\pause
+\item \textbf{Selection:} Fighters target poorer places where children have poor health
+\pause
+\item \textbf{Confounding:} Older children are more exposed to conflict and have worse height-for-age mechanically
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bundervoet et al 2008}
+\begin{itemize}
+\item A difference-in-differences methodology helps because:
+\pause
+\begin{itemize}
+\item The war varied in location and timing
+\pause
+\item Eliminate geographical confounding: We compare children born after conflict to those born during conflict
+\pause
+\item Control for secular changes over time: Compare children in provinces with conflict and without
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item \textbf{Population:} \pause Burundi
+\pause 
+\item \textbf{Sample:} \pause 3,908 rural households (excluded some parts of the country)
+\begin{itemize}
+\item NOTE: They have to exclude places that always or never experienced war. Why?
+\end{itemize}
+\pause 
+\item \textbf{Treatment:} \pause Child exposed to conflict during life (number of months)
+\pause 
+\item \textbf{Control:} \pause Child not exposed to conflict during life
+\pause 
+\item \textbf{Treatment Assignment Mechanism:} \pause NOT random: Conflict based on military strategy, geography etc.
+\pause 
+\item \textbf{Outcome:} \pause Childrens' Height-for-Age Z-score
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bundervoet et al 2008}
+\begin{itemize}
+\item Methodology: 
+\pause
+\end{itemize}
+\tiny
+$$ Height\_for\_Age_{ijt} = \alpha + \gamma_t + \delta_j + \beta (Conflict\_in\_Province_{ij} * Alive\_during\_conflict_{it}) + \epsilon_{ijt} $$
+\normalsize
+\pause
+\begin{itemize}
+\item Add province time trends to limit risk of non-parallel trends
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bundervoet et al 2008}
+\begin{itemize}
+\item Results:
+\pause
+\begin{itemize}
+\item Exposure to civil war leads to half a standard deviation lower height-for-age among children
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lyall 2009}
+\begin{itemize}
+\item Does indiscriminate violence incite insurgent attacks?
+\pause
+\item What is the challenge to causal inference here?
+\pause
+\begin{itemize}
+\item \textbf{Reverse Causation:} Insurgent attacks encourage state violence
+\item \textbf{Selection:} States target places where they expect insurgent attacks to start
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lyall 2009}
+\begin{itemize}
+\item A difference-in-differences methodology helps:
+\begin{itemize}
+\item Correct sequencing of Russian artillery, then measuring change in rebel attacks
+\item Control for differences between places that did and did not have attacks
+\end{itemize}
+\item Comparing the change in attacks before and after shelling in shelled vs. non-shelled villages
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lyall 2009}
+\begin{itemize}
+\item \textbf{Population:} \pause Villages in Chechnya
+\pause 
+\item \textbf{Sample:} \pause All villages within 30km of two Russian artillery sites
+\pause 
+\item \textbf{Treatment:} \pause Village shelled
+\pause 
+\item \textbf{Control:} \pause Village not shelled
+\pause 
+\item \textbf{Treatment Assignment Mechanism:} \pause Somewhat random, drunken, but probably a bit strategic
+\pause 
+\item \textbf{Outcome:} \pause Number of rebel attacks within 90 days
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lyall 2009}
+\begin{itemize}
+\item Methodology:
+\pause
+\begin{itemize}
+\item Balance tests suggest randomization on observables holds, but \textit{not sufficient}
+\item Pre-Regression Matching to make sure we're comparing similar shelled and non-shelled villages
+\begin{itemize}
+\item Should help with ensuring parallel trends
+\end{itemize}
+\end{itemize}
+\item Then finally a difference-in-differences method
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lyall 2009}
+\begin{itemize}
+\item Results:
+\pause
+\begin{itemize}
+\item Shelling a village reduces insurgent attacks by 24\%
+\pause
+\item Shelling decreased by 5\% in control villages, and 29\% in shelled villages
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Summary}
+\begin{itemize}
+\item Causes of violence:
+\pause
+\begin{itemize}
+\item Commodity prices
+\item Illegal status of activities
+\pause
+\end{itemize}
+\item Effects of violence:
+\pause
+\begin{itemize}
+\item Malnutrition in children
+\item Fewer counter-attacks by rebels (sometimes...)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+%setwd('C:\\Users\\Jonny\\Google Drive\\Academic\\USP\\Class\\Week 1 - Intro\\Lecture Slides')
+%knitr::knit("Slides_Wk1_intro_5.Rnw")
