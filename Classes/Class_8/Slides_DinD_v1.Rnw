@@ -134,13 +134,13 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 \end{itemize}
 \pause
 \begin{enumerate}
-\item \textbf{Cross-sectional:} Compare across different units, \textbf{treated} and \textbf{control}
+\item \textbf{Cross-sectional:} Compare outcomes across different units, \textbf{treated} and \textbf{control}
 \pause
 \begin{itemize}
 \item BUT Omitted variable bias
 \end{itemize}
 \pause
-\item \textbf{Time-series:} Compare units \textbf{before} and \textbf{after} treatment
+\item \textbf{Time-series:} Compare outcomes of units \textbf{before} and \textbf{after} treatment
 \pause
 \begin{itemize}
 \item BUT Outcomes might change over time for reasons other than treatment ('Overall Trend Bias')
@@ -155,18 +155,18 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 \end{itemize}
 \pause
 \begin{enumerate}
-\item \textbf{Cross-sectional:} Compare across different units, \textbf{treated} and \textbf{control}
+\item \textbf{Cross-sectional:} Compare outcomes across different units, \textbf{treated} and \textbf{control}
 \pause
 \begin{itemize}
 \item Allows us to compare units at the same point in time, removing 'Overall Trend Bias'
 \end{itemize}
 \pause
-\item \textbf{Time-series:} Compare units \textbf{before} and \textbf{after} treatment
+\item \textbf{Time-series:} Compare outcomes of units \textbf{before} and \textbf{after} treatment
 \pause
 \begin{itemize}
-\item Allows us to keep the characteristics of the unit the same, removing Omitted Variable Bias
+\item Allows us to keep the fixed characteristics of the same unit, removing Omitted Variable Bias
 \pause
-\item Even \textit{unobserved} characteristics
+\item Even \textit{unobserved} fixed characteristics
 \end{itemize}
 \end{enumerate}
 \end{frame}
@@ -178,8 +178,47 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 \pause
 \item Comparing \textbf{across units} and \textbf{across time}
 \pause
+\item Comparing \textbf{changes} instead of \textbf{levels}
+\pause
 \item Removing the risks from both overall trends and omitted variables
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\tiny
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+          & \multicolumn{2}{p{12.43em}}{\textbf{Balances time-invariant 'fixed' unit characteristics}} & \multicolumn{2}{c}{\textbf{Balances time-varying characteristics}} \\
+              \hline
+          & \multicolumn{1}{l}{Observed} & \multicolumn{1}{l}{Unobserved} & \multicolumn{1}{l}{Overall trends} & \multicolumn{1}{l}{Unit-specific trends} \\
+              \hline
+    Field Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
+        \hline
+    Survey and Lab Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
+        \hline
+          &       &       &       &  \\
+              \hline
+    Natural Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
+        \hline
+    Instrumental Variables & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
+        \hline
+    Regression Discontinuity & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
+        \hline
+          &       &       &       &  \\
+              \hline
+    Cross-sectional comparisons & X     & X     & \checkmark     & X \\
+        \hline
+    Before-After comparisons & \checkmark     & \checkmark     & X     & X \\
+        \hline
+    Difference-in-Differences & \checkmark     & \checkmark     & \checkmark     & X \\
+        \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
 \end{frame}
 
 \begin{frame}
@@ -192,16 +231,9 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 \pause
 \item Comparing before and after the Brexit vote is biased - the world economy improved around the same time as Brexit (coincidentally)
 \pause
-\item But compare how European growth \textbf{changes} (+0.3\%) and UK growth \textbf{changed} (-0.4\%)
+\item But compare how European growth \textbf{changed} (+0.3\%) and UK growth \textbf{changed} (-0.4\%)
 \pause
 \item The net effect of Brexit is -0.7\%
-\pause
-\item That's two differences
-\begin{itemize}
-\item \textbf{Difference 1:} Between before and after (over time)
-\item \textbf{Difference 2:} Between treated and control units
-\pause
-\end{itemize}
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -226,6 +258,7 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 \item Diff-in-Diff does NOT control for \textbf{time-varying confounders}
 \pause
 \item We have to check for \textbf{Parallel pre-treatment trends}
+\pause
 \end{itemize}
 \item Maybe the UK passed other policies at the same time as Brexit?
 \pause
@@ -237,37 +270,14 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-\footnotesize
-\begin{table}[htbp]
-  \centering
-  \caption{Add caption}
-    \begin{tabular}{lcccc}
-          & \multicolumn{2}{p{12.43em}}{Balances time-invariant 'fixed' unit characteristics} & \multicolumn{2}{c}{Balances time-varying characteristics} \\
-          & \multicolumn{1}{l}{Observed} & \multicolumn{1}{l}{Unobserved} & \multicolumn{1}{l}{Overall trends} & \multicolumn{1}{l}{Unit-specific trends} \\
-    Field Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-    Survey and Lab Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-          &       &       &       &  \\
-    Natural Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-    Instrumental Variables & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-    Regression Discontinuity & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-          &       &       &       &  \\
-    Cross-sectional comparisons & X     & X     & \checkmark     & X \\
-    Before-After comparisons & \checkmark     & \checkmark     & X     & X \\
-    Difference-in-Differences & \checkmark     & \checkmark     & \checkmark     & X \\
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}%
-\normalsize
-\end{frame}
-
-\begin{frame}
-\frametitle{Difference-in-Differences}
 <<DinD_chart1, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
 data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
 
-data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")))
+data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
+                          Unit=factor(Unit,levels=c("Control","Treated","Counterfactual")))
 data2 %>% filter(Unit=="Control") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -276,7 +286,8 @@ data2 %>% filter(Unit=="Control") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,
 \frametitle{Difference-in-Differences}
 <<DinD_chart1b, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
 data2 %>% filter(Unit!="Counterfactual") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -284,7 +295,8 @@ data2 %>% filter(Unit!="Counterfactual") %>% ggplot() + geom_line(aes(x=Time,y=O
 \frametitle{Difference-in-Differences}
 <<DinD_chart1c, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
 data2  %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -298,13 +310,14 @@ $$ Y_{it} = \alpha + \gamma D_i$$
 \begin{itemize}
 \item Regression for the before-after treatment comparison
 \end{itemize}
-$$ Y_{it} = \alpha + \gamma T_i$$
-#pause
+$$ Y_{it} = \alpha + \delta T_i$$
+\pause
 \begin{itemize}
 \item The difference-in-differences estimate is just the \textit{interaction} of time and treatment status
 \end{itemize}
 $$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
 \begin{itemize}
+\pause
 \item $\beta$ is our \textbf{Average Treatment Effect} estimate
 \end{itemize}
 \end{frame}
@@ -338,7 +351,8 @@ Raw Data:
 data3 <- data2 %>% filter(Unit!="Counterfactual")
 
 data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -349,7 +363,8 @@ Add a variable (fixed effect) for treated/control:
 data3 <- data3 %>% mutate(Outcome=ifelse(Unit=="Control",Outcome+Confounding,Outcome))
 
 data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -360,7 +375,8 @@ Add a variable (fixed effect) for time:
 data4 <- data3 %>% mutate(Outcome=ifelse(Time=="After",Outcome-Trend,Outcome))
 
 data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -370,9 +386,9 @@ Add a variable (fixed effect) for time:
 <<DinD_chart5, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
 effect_line <- data.frame(x1 = 2, x2 = 2, y1 = 6, y2 = 10)
 
-
 data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) + geom_segment(data=effect_line,aes(x=x1,y=y1,xend=x2,yend=y2),lty=2)
+  theme_classic() + ylim(0,13) + geom_segment(data=effect_line,aes(x=x1,y=y1,xend=x2,yend=y2),lty=2) +
+  scale_colour_brewer(palette="Set2")
 
 @
 \end{frame}
@@ -380,9 +396,9 @@ data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \begin{frame}
 \frametitle{Estimating Difference-in-Differences}
 \begin{itemize}
-\item With time-series data, we haves temporal autocorrelation
+\item With time-series data, we have temporal autocorrelation
 \pause
-\item So crucial to cluster standard errors by each cross-sectional unit (eg. each country)
+\item Crucial to cluster standard errors by each cross-sectional unit (eg. each country)
 \end{itemize}
 \end{frame}
 
@@ -391,7 +407,7 @@ data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \begin{itemize}
 \item How do we know if there are \textbf{time-varying confounders}?
 \pause
-\item Selection into treatment is usually not just due to mostly 'fixed' variables (eg. gender) but due to 'time-varying' variables (eg. income, employment etc.)
+\item Selection into treatment is usually not just due to 'fixed' variables (eg. gender) but due to 'time-varying' variables (eg. income, employment etc.)
 \pause
 \item Eg. training program participants' income has usually fallen a lot in the past few months
 \pause
@@ -411,7 +427,8 @@ data5 <- data2 %>% filter(Unit!="Counterfactual") %>%
 data5$Time <- factor(data5$Time,c("Earlier","Before","After"))
 
 data5 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
@@ -425,24 +442,25 @@ data6 <- data2 %>%
 data6$Time <- factor(data6$Time,c("Earlier","Before","After"))
 
 data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13)
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2")
 @
 \end{frame}
 
 \begin{frame}
-\frametitle{Assumptions}
+\frametitle{Difference-in-Differences Assumptions}
 \begin{enumerate}
-\item Parallel pre-treatment trends between treated and control units
+\item \textbf{Parallel pre-treatment trends} between treated and control units
 \pause
-\item No compound treatment
+\item \textbf{No compound treatment}
 \pause
-\item No spillovers (SUTVA)
+\item \textbf{No spillovers} (SUTVA)
 \pause
-\item Group membership is stable (no migration from control to treatment)
+\item \textbf{Group membership is stable} (no migration from control to treatment)
 \end{enumerate}
 \end{frame}
 
-\section{Chimeli and Soares 2017}
+\section{The Effect of Illegal Activities on Violence}
 
 \begin{frame}
 \frametitle{Chimeli and Soares 2017}
@@ -457,8 +475,9 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \item Omitted variables, eg. State capacity
 \pause
 \item Overall trends, eg. national decrease in homicides
+\pause
 \end{itemize}
-\item Comparing the \textit{change} in violence in mahogany-growing areas to the change in violence in non-growing areas
+\item Comparing the \textit{change} in violence in mahogany-growing areas to the change in violence in non-mahogany areas
 \end{itemize}
 \end{frame}
 
@@ -475,11 +494,11 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \pause
 \item \textbf{Control:} \pause Municipalities \textbf{without} mahogany
 \pause
-\item \textbf{Before:} \pause Pre-1998
+\item \textbf{Before:} \pause Pre-1999
 \pause
-\item \textbf{After:} \pause Post-1998
+\item \textbf{After:} \pause Post-1999
 \pause 
-\item \textbf{Outcome:} \pause Rate of Homicides
+\item \textbf{Outcome:} \pause Homicides per 100,000 people
 \end{itemize}
 \end{frame}
 
@@ -488,27 +507,10 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \begin{itemize}
 \item Multiple treatment timings:
 \begin{itemize}
-\item 1st policy change
-\item 2nd policy change
-\item Reverse treatment: Better policing of mahogany regulations
+\item Partial Ban on Mahogany exports
+\item Full Ban on Mahogany exports
+\item 'Reverse' treatment: Better policing of mahogany regulations
 \end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Chimeli and Soares 2017}
-\begin{itemize}
-\item Methodology:
-\pause
-\end{itemize}
-$$ Homicides_{it} = \gamma_t + \delta_i + \beta (Post-1998_t *  Mahogany_i) + \epsilon_i$$
-\pause
-\begin{itemize}
-\item Cluster standard errors by municipality
-\pause
-\item Apply more complex state-specific trends for covariates to minimize risk of non-parallel trends
-\pause
-\item Supporting evidence: The 'extra' homicides were the type we'd expect from illegal activity
 \end{itemize}
 \end{frame}
 
@@ -522,7 +524,25 @@ $$ Homicides_{it} = \gamma_t + \delta_i + \beta (Post-1998_t *  Mahogany_i) + \e
 \begin{frame}
 \frametitle{Chimeli and Soares 2017}
 \begin{itemize}
+\item Methodology:
+\pause
+\end{itemize}
+$$ Homicides_{it} = \beta_1 Post-1999_t + \beta_2 Mahogany_i \\ + \beta_3 (Post-1999_t *  Mahogany_i) + \epsilon_i$$
+\pause
+\begin{itemize}
+\item Cluster standard errors by municipality
+\pause
+\item Apply more complex state-specific trends for covariates to minimize risk of non-parallel trends
+\pause
+\item Supporting evidence: The 'extra' homicides were the type we'd expect from illegal activity
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
 \item Interpretation
+\pause
 \begin{itemize}
 \item Illegal activity prevents 'peaceful' contract enforcement
 \item Competition between loggers
