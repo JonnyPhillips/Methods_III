@@ -21,7 +21,7 @@ set.seed(54321)
 d <- tibble(oil=rbinom(N,1,0.5))
 ```
 
-2. This is a panel dataset so let's make sure that in our dataset we have (i) an indicator for each `municipality` (a number from 1 to 26), and (ii) an indicator for each time period. We will work with 3 time periods (years, $t=0$, $t=1$ and $t=2$), so create a column for `year` with entries 0, 1 and 2 so that each municipality has three rows in your dataset, one for each year. 
+2. This is a panel dataset so let's make sure that in our dataset we have (i) an indicator for each `municipality` (a number from 1 to 5570), and (ii) an indicator for each time period. We will work with 3 time periods (years, $t=0$, $t=1$ and $t=2$), so create a column for `year` with entries 0, 1 and 2 so that each municipality has three rows in your dataset, one for each year. 
 
 ```{r}
 d <- d %>% mutate(municipality=1:N) 
@@ -34,9 +34,9 @@ d <- d %>%
   arrange(municipality, year)
 ```
 
-3. Now let's simulate potential outcomes - let's say the outcome is 'voter turnout' - for each municipality. We will assume that in general voter turnout is declining over time, and that the presence of oil reserves also reduces turnout. The treatment effect we will define as a 5\% extra voter turnout. 
+3. Now let's simulate potential outcomes - let's say the outcome is 'voter turnout' - for each municipality. We will assume that in general voter turnout is declining over time, and that the presence of oil reserves also reduces turnout. The treatment effect we assume will have a 5\% extra voter turnout. 
 
-Assume:
+Create variables so that:
 
 $$y_{0, year}=N(60,5) - 2*year - 3*oil$$ 
 
@@ -47,7 +47,7 @@ d <- d %>% mutate(y_0=rnorm(N,60,5) - 2*year - 3*oil,
                   y_1=y_0+5)
 ```
 
-4. Treatment $D$ is that the municipality is enrolled in a government program that they receive between time periods $t=1$ and $t=2$. Only some municipalities receive this in time $t=2$. We will assume that only municipalities with oil receive treatment. Make an indicator variable where each municipality with oil is coded as in the treated group and the rest as control. (*Note* that we are not coding municipalities as treated only in $t=2$, we are coding for whether they are a treated 'unit' which applies even in $t=0$, $t=1$).
+4. Treatment $D$ is participation by the municipality in a federal government program and occurs between time periods $t=1$ and $t=2$. We will assume that only municipalities with oil receive treatment. Make an indicator variable where each municipality with oil is coded as being in the treated group and the rest as control. (*Note* that we are not coding municipalities as treated only in $t=2$, we are coding for whether they are a treated 'unit' which applies even in $t=0$, $t=1$).
 
 ```{r}
 d <- d %>% mutate(D=oil)
@@ -61,13 +61,13 @@ d <- d %>% mutate(y_obs=case_when(D==0~y_0,
                                   D==1 & year==2~y_1))
 ```
 
-6. First, let's run the 'naive' cross-sectional observational regression of observed outcomes on treatment. How does the result compare to our simulation assumptions? Why?
+6. First, let's run the 'naive' \textbf{cross-sectional} observational regression of observed outcomes on treatment. How does the result compare to our simulation assumptions? Why?
 
 ```{r}
 d %>% lm(y_obs ~D, data=.) %>% summary()
 ```
 
-7. Next, let's run the 'naive' before-after regression of observed outcomes on year, using the data from $t=1$ and $t=2$ only for the treated units.  How does the result compare to our simulation assumptions? Why?
+7. Next, let's run the 'naive' \textbf{before-after} regression of observed outcomes on year, using the data from $t=1$ and $t=2$ only for the treated units.  How does the result compare to our simulation assumptions? Why?
 
 ```{r}
 d %>% filter(year>0 & D==1) %>% 
