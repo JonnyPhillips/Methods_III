@@ -1,0 +1,28 @@
+---
+title: 'Class 9 - Controlling for Confounding'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+#### Required
+- **[Morgan and Winship, Counterfactuals and Causal Inference, Chapter 3](Classes/Class_9/Readings/M&W.pdf)**
+- **[Rubin, Donald, For Objective Causal Inference, Design Trumps Analysis](Classes/Class_9/Readings/Rubin Design Trumps Analysis.pdf)**
+- **[Angrist & Pischke, Mastering 'Metrics, Ch. 2](Classes/Class_9/Readings/A&P_Ch.2.pdf)**
+
+#### Additional Readings
+- [Imbens and Rubin, Ch. 12](Classes/Class_9/Readings/Imbens and Rubin Ch.12.pdf)
+
+<br> </br>
+
+## [Lecture Slides](Classes/Class_9/)
+
+## [Lab Exercise to Complete during Class](Classes/Class_9/Lab Exercise/)
+
+## Replication Exercise
+- [Exercise](Classes/Class_9/Replication/)
+
+
