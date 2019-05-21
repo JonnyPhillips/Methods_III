@@ -1,0 +1,701 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 9 - Controlling for Confounding}
+\author{Jonathan Phillips}
+\date{May 2019}
+
+\begin{document}
+
+<<DinD, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(DiagrammeR)
+library(tidyverse)
+library(broom)
+library(webshot)
+@
+
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Classification of Research Designs}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+  \scalebox{0.7}{
+    \begin{tabular}{|p{2.2cm}|p{5cm}|c|c|}
+    \hline
+          &       & \multicolumn{1}{p{2.4cm}|}{\textbf{Independence of Treatment Assignment}} & \multicolumn{1}{p{3cm}|}{\textbf{Researcher Controls Treatment Assignment?}} \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{2}[4]{2.9cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
+\cline{2-4}          & Survey and Lab Experiments &  \checkmark     & \checkmark \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{3}[6]{2.9cm}{\textbf{Natural Experiments}}} & Natural Experiments &  \checkmark     &  \bigstrut\\
+\cline{2-4}          & Instrumental Variables & \checkmark      &  \bigstrut\\
+\cline{2-4}          & Discontinuities & \checkmark      &  \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{4}[8]{2.9cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
+\cline{2-4}          & Controlling for Confounding &       &  \bigstrut\\
+\cline{2-4}          & Matching &       &  \bigstrut\\
+\cline{2-4}          & Comparative Cases and Process Tracing &       &  \bigstrut\\
+    \hline
+    \end{tabular}}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\section{Controlling for Confounding} 
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\item Adding control variables changes the comparison we are making: \textbf{Treatment is associated with higher values of the Outcome...holding constant the values of X}
+\pause
+\item But when does controlling allow us to say: \textbf{Treatment \textit{causes} higher values of the Outcome}?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\item Up until now causal estimates have required treatment assignment to be \textbf{independent of potential outcomes}
+\pause
+$$(y_0,y_1) \perp D$$
+\pause
+\item But it's also acceptable if treatment assignment is \textbf{conditionally independent of potential outcomes}
+\pause
+$$(y_0,y_1) \perp D | X$$
+\pause
+\item After controlling for $X$, treatment is independent of potential outcomes: 'No unmeasured confounders'
+\pause
+\item This is an \textit{assumption} 
+\pause
+\begin{itemize} 
+\item We cannot directly test it
+\pause
+\item We have to make an argument and provide supporting evidence
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+<<egdata1,echo=FALSE,warning=FALSE,message=FALSE>>=
+set.seed(05410)
+N <- 1000
+gender <- rbinom(N,1,0.5)
+income <- gender*1000+rnorm(N,4000,800)
+redist <- gender*(-3)+rnorm(N,0,2)
+
+d <- data.frame(gender,income,redist)
+d$gender <- as.factor(d$gender)
+@
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+<<confound0a,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(data=d,aes(x=income,y=redist), size=0.7) + 
+  geom_smooth(aes(x=income, y=redist), method="lm", se=F, col="black") +
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+<<confound0b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+<<confound1a,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  geom_smooth(data=d[d$gender==0,], aes(x=income,y=redist),method="lm", se=FALSE, color="red") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+<<confound1b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  geom_smooth(data=d[d$gender==1,], aes(x=income,y=redist),method="lm",se=FALSE, color="blue") + 
+  geom_smooth(data=d[d$gender==0,], aes(x=income,y=redist),method="lm", se=FALSE, color="red") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+<<confound2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=5>>=
+d %>% ggplot() + 
+  geom_point(aes(x=income,y=redist, group=gender,color=gender), size=0.7) + 
+  geom_smooth(data=d[d$gender==1,], aes(x=income,y=redist),method="lm",se=FALSE, color="blue") + 
+  geom_smooth(data=d[d$gender==0,], aes(x=income,y=redist),method="lm", se=FALSE, color="red") + 
+  geom_smooth(data=d, aes(x=income,y=redist),method="lm", se=FALSE, col="black") + 
+  theme_classic() + xlab("Income") + ylab("Attitude to Redistribution") + xlim(2000,7000) + ylim(-8,6)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\footnotesize
+\item If we omit a confounding variable, we bias our regression estimate:
+\pause
+\item 'True' regression with all confounders: 
+\end{itemize}
+$$ Y_i = \alpha + \beta D_i + \gamma X_i + \epsilon_i$$
+\begin{itemize}
+\pause
+\footnotesize
+\item The 'wrong' regression with a missing confounder:
+\pause
+\end{itemize}
+$$ Y_i = \alpha + \beta D_i + \epsilon_i$$
+\pause
+\begin{itemize}
+\footnotesize
+\item What happens to our coefficient estimate?
+\pause
+\end{itemize}
+$$ X_i = \psi + \delta D_i + \epsilon_i$$
+\pause
+$$ Y_i = \alpha + \beta D_i + \gamma (\psi + \delta D_i + \epsilon_i) + \epsilon_i $$
+\pause
+$$ Y_i = \alpha + D_i (\beta + \gamma \delta) + \gamma (\psi  + \epsilon_i) + \epsilon_i $$
+\pause
+\begin{itemize}
+\footnotesize
+\item So the coefficient we estimate is wrong by this amount:
+\pause
+$$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
+\end{itemize}
+\normalsize
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\item What does controlling \textbf{do}?
+\begin{itemize}
+\pause 
+\item It means \textbf{removing the variation} in the data due to the confounder
+\pause
+\item Equivalently, it means separating our data for each value of the confounder: \textbf{Subclassification}
+\pause
+\item Then, within each group, the confounder is \textbf{constant} and can't affect the relationship between $D$ and $Y$.
+\pause
+\item We have \textbf{created balance} between the treated and control groups on all other characteristics
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\item We receive a dataset with twenty variables: $D$, $Y$ and 18 more. 
+\begin{itemize}
+\item Which variables should we include as controls?
+\end{itemize}
+\pause
+\item We usually should \textbf{NOT} include all of them
+\pause
+\begin{itemize}
+\item Only the variables \textbf{necessary} to stop confounding
+\pause
+\item Including unnecessary variables can produce bias
+\pause
+\item We lose power (degrees of freedom) for every control we add
+\pause
+\item And additional variables reduce overlap (increase model-dependence)
+\pause
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Which Variables to Control For}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+\begin{itemize}
+\item To know which variables to control for, it helps to draw a causal diagram
+\pause
+\begin{itemize}
+\item A \textbf{Directed Acyclical Graph} (DAG)
+\pause
+\item Arrows only in one direction
+\pause
+\item No circular loops!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+<<Dag1,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+
+    D->Y
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+\begin{itemize}
+\item Causation is like \textbf{Water}, flowing along the graph
+\begin{itemize}
+\item We want to focus on one 'flow' of causation from treatment to outcomes
+\pause
+\item Avoiding mixing with the other flows of causation in the network
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+<<Dag2,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'Confounder']
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+
+	  X->Y
+    D->Y
+    X->D
+	}", height=800)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+\begin{itemize}
+\item Three Rules to achieve Conditional Independence:
+\begin{enumerate}
+\item Include as controls enough variables to \textbf{block all back-door paths} from treatment to the outcome
+\pause
+\item Exclude any variables that are \textbf{post-treatment}
+\pause
+\item Exclude any variables that are \textbf{colliders}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Back-door Paths}
+\begin{itemize}
+\item To identify back-door paths:
+\pause
+\begin{itemize}
+\item Start with an arrow pointing at treatment
+\pause
+\item Trace the path 'backwards' (the direction of the arrows doesn't matter) until you reach the outcome
+\pause
+\item Repeat for every possible path from treatment to outcome
+\pause
+\end{itemize}
+\item \textbf{Block back-door paths} by controlling for any variable along the path
+\pause
+\item Identify the \textbf{Minimum set of controls} to achieve conditional independence
+\pause
+\begin{itemize}
+\item \textit{Any} set of variables which blocks \textit{All} back-door paths
+\pause
+\item Include these as control variables in our regression
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Back-door Paths}
+<<Dag2b,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.5\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'Confounder']
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+
+	  X->Y
+    D->Y
+    X->D
+	}", height=800)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Back-door Paths}
+<<Dag2c,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.5\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'X']
+	  X2 [label= 'X2']
+	  X3 [label='X3']
+	  X4 [label='X4']
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+
+	  X->Y
+    D->Y
+    X->D
+    X2->D
+    X2->Y
+    X3->D
+    X4->Y
+	}", height=800)
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Back-door Paths}
+<<Dag4_paths_b,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'Gender']
+	  D [label = 'Income', fontcolor='blue']
+    Y [label = 'Attitude to Redistribution', fontcolor='red']
+    X2 [label = 'Age']
+    X3 [label = 'Region']
+    X4 [label = 'Education']
+    X5 [label = 'Parents Income']
+    X6 [label = 'Genetics']
+
+    D->Y
+    X->D
+    X->Y
+    X2->D
+    X2->Y
+    X3->D
+    X3->Y
+    X4->D
+    X4->Y
+    X5->D
+    X5->X4
+    X6->X
+    X6->X2
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{1. Back-door Paths}
+<<Dag4_paths_c,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'Gender']
+	  D [label = 'Income', fontcolor='blue']
+    Y [label = 'Attitude to Redistribution', fontcolor='red']
+    X2 [label = 'Age']
+    X3 [label = 'Region']
+    X4 [label = 'Education']
+    X5 [label = 'Parents Income']
+    X6 [label = 'Genetics']
+
+    D->Y
+    X->X4
+    X->Y
+    X2->X4
+    X2->Y
+    X3->X4
+    X3->Y
+    X4->D
+    X4->Y
+    X5->X4
+    X6->X
+    X6->X2
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{2. Post-treatment Variables}
+\begin{itemize}
+\item Including \textbf{post-treatment} variables will introduce bias
+\pause
+\begin{itemize}
+\item Because variables measured 'after' treatment can also be affected by treatment
+\pause
+\item They're not confounders, but \textbf{mediating variables}
+\pause
+\item Controlling for them changes the definition of the causal effect we are estimating
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{2. Post-treatment Variables}
+<<Dag4,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'Gender']
+	  D [label = 'Income', fontcolor='blue']
+	  M [label = 'Education']
+    Y [label = 'Attitude to Redistribution', fontcolor='red']
+
+	  X->Y
+    D->Y
+    D->M
+    M->Y
+    X->D
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Colliders}
+\begin{itemize}
+\item Colliders are variables on back-door paths which have arrows pointing both into them and out of them
+\pause
+\item The water 'collides' in both directions but the source variables are not correlated, so produce no bias
+\pause
+\item But if we do 'control' for a collider we \textit{introduce} a bias in the relationship between $D$ and $Y$
+\pause
+\item So we must avoid controlling for them
+\pause
+\item Hard!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Colliders}
+<<Dag5,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'X']
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+    X2 [label='Collider',fontcolor='brown']
+    X3 [label='X3']
+
+	  D->Y
+    X->D
+    X->X2
+    X3->X2
+    X3->Y
+    X2->Y
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Colliders}
+\includegraphics[width=0.9\textwidth]{Collider.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{3. Colliders}
+<<Dag5b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  X [label = 'X']
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+    X2 [label='Collider',fontcolor='brown']
+    X3 [label='X3']
+
+	  D->Y
+    X->D
+    X->X2
+    X3->X2
+    X3->Y
+    X2->Y
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Example adapted from Morgan and Winship, p.72}
+<<Dag5_eg,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',out.width='2.4\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+	  D [label = 'Treatment', fontcolor='blue']
+    Y [label = 'Outcome', fontcolor='red']
+    B [label = 'B']
+    C [label = 'C']
+    A [label = 'A']
+    U [label = 'U']
+    V [label = 'V']
+    F [label = 'F']
+    G [label = 'G']
+    M [label='M']
+
+	  D->Y
+    B->D
+    C->D
+    A->D
+    U->A
+    U->B
+    V->A
+    V->F
+    F->Y
+    G->Y
+    D->M
+    M->Y
+	}")
+@
+\begin{enumerate}
+\footnotesize
+\item List all of the \textbf{back-door paths} from $D$ to $Y$
+\pause
+\item Identify any \textbf{post-treatment} variables: Do NOT include as controls
+\pause
+\item Identify any back-door paths with \textbf{collider} variables: Mark these as already blocked
+\pause
+\item Find a minimum set of variables that blocks all remaining back-door paths
+\pause
+\item Double-check your minimum set of control variables does not contain any post-treatment or collider variables
+\end{enumerate}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+\begin{itemize}
+\item Three Rules to achieve Conditional Independence:
+\begin{enumerate}
+\item Include as controls enough variables to \textbf{block all back-door paths} from treatment to the outcome
+\pause
+\begin{itemize}
+\item In practice, variables which theory and past studies identify as potential confounderss
+\end{itemize}
+\pause
+\item Exclude any variables that are \textbf{post-treatment}
+\pause
+\begin{itemize}
+\item In practice, know when your variables were measured
+\end{itemize}
+\pause
+\item Exclude any variables that are \textbf{colliders}
+\pause
+\begin{itemize}
+\item In practice, don't include unnecessary controls
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+
+\end{document}

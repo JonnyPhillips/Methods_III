@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Controlling for Confounding}{3}{0}{1}
+\beamer@sectionintoc {2}{Which Variables to Control For}{41}{0}{2}
