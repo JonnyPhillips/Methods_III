@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Replication Exercise
 - [Exercise](Classes/Class_7/Replication/Replication_Discontinuities_v2.pdf)
 - [Paper: Titiunik, Rocio 2011, Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections](Classes/Class_7/Replication/Titiunik_2011.pdf)
-- [Suggested Responses:](Classes/Class_7/Replication/Replication_Discontinuities_v2_Suggested_Responses.pdf)
+- [Suggested Responses](Classes/Class_7/Replication/Replication_Discontinuities_v2_Suggested_Responses.pdf)
 
 
 
