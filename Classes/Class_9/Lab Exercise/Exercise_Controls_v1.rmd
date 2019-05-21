@@ -1,5 +1,5 @@
 ---
-title: "Exercise: Difference-in-Differences"
+title: "Exercise: Controlling for Confounding"
 output: pdf_document
 fontsize: 16pt
 ---
@@ -11,41 +11,77 @@ library(stargazer)
 library(estimatr)
 ```
 
-This week, we will simulate a difference-in-differences methodology and see how well we recover the assumed treatment effect. 
+Let's simulate some fake data and see when we are able to recover the correct treatment effect just by controlling for covariates. 
 
-1. Let's create fake data for Brazil, working at the level of the 5570 municipalities. One characteristic of these municipalities is the presence of oil reserves. Note that this is a *time-invariant* characteristic; if municipality $i$ has oil reserves in year $t$ it also has oil reserves in year $t+10$. Let's generate a binomial 'oil' variable which gives each of our municipalities a 50\% chance of possessing oil. 
+1. First, let's generate two potential confounder variables for 10,000 people. 
+(a) The variable 'income' should be drawn randomly from the normal distribution with mean 500 and standard deviation 50.
+(b) The variable 'gender' should be drawn randomly from the binomial distribution with a 0.5 probability of being male or female.
 
 ```{r}
-N <- 5570
 set.seed(54321)
-d <- tibble(oil=rbinom(N,1,0.5))
+N <- 10000
+d <- tibble(income=rnorm(N,500,50),
+            gender=rbinom(N,1,0.5))
 ```
 
-2. This is a panel dataset so let's make sure that in our dataset we have (i) an indicator for each `municipality` (a number from 1 to 5570), and (ii) an indicator for each time period. We will work with 3 time periods (years, $t=0$, $t=1$ and $t=2$), so create a column for `year` with entries 0, 1 and 2 so that each municipality has three rows in your dataset, one for each year. 
+2. Our outcome is going to be attitudes to redistribution. Use the expressions below to simulate potential outcomes, with a treatment effect of 5.
+
+$$y_0=N(10,2)+\frac{income}{100} - 2*gender$$ 
+
+$$y_1=y_0+5$$
 
 ```{r}
-d <- d %>% mutate(municipality=1:N) 
-
-d <- d %>% 
-  bind_rows(d,d) %>% 
-  group_by(municipality) %>%
-  mutate(year=0:2) %>%
-  ungroup() %>% 
-  arrange(municipality, year)
-```
-
-3. Now let's simulate potential outcomes - let's say the outcome is 'voter turnout' - for each municipality. We will assume that in general voter turnout is declining over time, and that the presence of oil reserves also reduces turnout. The treatment effect we assume will have a 5\% extra voter turnout. 
-
-Create variables so that:
-
-$$y_{0, year}=N(60,5) - 2*year - 3*oil$$ 
-
-$$y_{1, year}=y_{0, year}+5$$
-
-```{r}
-d <- d %>% mutate(y_0=rnorm(N,60,5) - 2*year - 3*oil,
+d <- d %>% mutate(y_0=rnorm(N,10,2) + income/10 - 12*gender,
                   y_1=y_0+5)
 ```
+
+3. Treatment $D$ is receiving a government social program, but treatment is **not** randomly  assigned. Instead, treatment depends on income and gender. Binary (1/0) treatment is determined by the following expression:
+
+$$D=\cases{1 \text{ if } 100*gender + income>450 \\ 0 \text{ else }}$$
+
+```{r}
+d <- d %>% mutate(D=case_when(50*gender+income>525~1,
+                              T~0))
+```
+
+4. Calculate observed outcomes based on potential outcomes and treatment.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+
+```
+
+5. Let's start with the 'naive' regression of the outcome on treatment with no controls. How does the result compare to our assumed treatment effect? 
+
+```{r}
+d %>% lm(y_obs~D, data=.) %>% summary()
+```
+
+6. Is the result of the 'naive' regression larger or smaller than it should be? Why? Be specific and be concrete.
+
+7. Draw (by hand) the causal diagram (DAG) associated with the variables and equations we have generated above. 
+
+8. Identify the back-door paths connecting treatment ($D$) and the outcome ($Y$). To **block** these back-door paths, which variables do we need to control for?
+
+9. Run a regression that controls for the variables you identified in Q8. Compare the result to the 'correct' treatment effect we assumed at the start.
+
+```{r}
+d %>% lm(y_obs~D + gender + income, data=.) %>% summary()
+```
+
+10. That was the easy part. Now let's try a more complicated example.
+
+
+
+
+
+10. What happens if we run the regression which adds ZZZ as a control variable, even though it is 'post-treatment'?
+
+```{r}
+d %>% lm(y_obs~D + gender + income, data=.) %>% summary()
+```
+
 
 4. Treatment $D$ is participation by the municipality in a federal government program and occurs between time periods $t=1$ and $t=2$. We will assume that only municipalities with oil receive treatment. Make an indicator variable where each municipality with oil is coded as being in the treated group and the rest as control. (*Note* that we are not coding municipalities as treated only in $t=2$, we are coding for whether they are a treated 'unit' which applies even in $t=0$, $t=1$).
 
@@ -61,28 +97,24 @@ d <- d %>% mutate(y_obs=case_when(D==0~y_0,
                                   D==1 & year==2~y_1))
 ```
 
-6. First, let's run the 'naive' \textbf{cross-sectional} observational regression of observed outcomes on treatment, using the data from $t=2$ (when treatment is active and we have both control and treated units). How does the result compare to our simulation assumptions? Why?
+6. First, let's run the 'naive' \textbf{cross-sectional} observational regression of observed outcomes on treatment. How does the result compare to our simulation assumptions? Why?
 
 ```{r}
-d %>% filter(year==2) %>% 
-  lm(y_obs ~D, data=.) %>% 
-  summary()
+d %>% lm(y_obs ~D, data=.) %>% summary()
 ```
 
 7. Next, let's run the 'naive' \textbf{before-after} regression of observed outcomes on year, using the data from $t=1$ and $t=2$ only for the treated units.  How does the result compare to our simulation assumptions? Why?
 
 ```{r}
 d %>% filter(year>0 & D==1) %>% 
-  lm(y_obs ~ year, data=.) %>% 
-  summary()
+  lm(y_obs ~ year, data=.) %>% summary()
 ```
 
-8. Now, using the data for $t=1$ and $t=2$, let's run a basic difference-in-differences regression of the observed outcomes on treatment, year, and the interaction of treatment and year. How do you interpret the results?
+8. Now, using the data for $t=1$ and $t=2$, let's run a basic difference-in-differences regression of the observed outcomes on treatment, year, and the interaction of time and year. How do you interpret the results?
 
 ```{r}
 d %>% filter(year>0) %>% 
-  lm(y_obs ~ D + year + D*year, data=.) %>% 
-  summary()
+  lm(y_obs ~ D + year + D*year, data=.) %>% summary()
 ```
 
 9. Our standard errors are wrong here. Cluster your errors by the cross-sectional unit (municipality). (In this case the difference is very small).
