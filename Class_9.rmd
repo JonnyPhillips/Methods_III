@@ -23,6 +23,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## [Lab Exercise to Complete during Class](Classes/Class_9/Lab Exercise/Exercise_Controls_v6.pdf)
 
 ## Replication Exercise
-- [Exercise](Classes/Class_9/Replication/)
+- [Exercise](Classes/Class_9/Replication/Replication_Controls_v3.pdf)
+- [Paper](Classes/Class_9/Replication/Baldwin 2013.pdf)
+- [Data](Classes/Class_9/Replication/Baldwin_adjusted.csv)
 
 
