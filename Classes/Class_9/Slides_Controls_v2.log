@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  21 MAY 2019 13:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  22 MAY 2019 12:59
 entering extended mode
 **./Slides_Controls_v2.tex
 (Slides_Controls_v2.tex
@@ -1942,7 +1942,7 @@ Package pdftex.def Info: figure/Dag5_eg-1.pdf  used on input line 519.
 (pdftex.def)             Requested size: 850.0667pt x 493.06555pt.
 
 Overfull \hbox (495.87134pt too wide) in paragraph at lines 519--519
-[][]  
+[]  
  []
 
 
@@ -1958,7 +1958,7 @@ Package pdftex.def Info: figure/Dag5_eg-1.pdf  used on input line 519.
 (pdftex.def)             Requested size: 850.0667pt x 493.06555pt.
 
 Overfull \hbox (495.87134pt too wide) in paragraph at lines 519--519
-[][]  
+[]  
  []
 
 
@@ -1974,7 +1974,7 @@ Package pdftex.def Info: figure/Dag5_eg-1.pdf  used on input line 519.
 (pdftex.def)             Requested size: 850.0667pt x 493.06555pt.
 
 Overfull \hbox (495.87134pt too wide) in paragraph at lines 519--519
-[][]  
+[]  
  []
 
 
@@ -1990,7 +1990,7 @@ Package pdftex.def Info: figure/Dag5_eg-1.pdf  used on input line 519.
 (pdftex.def)             Requested size: 850.0667pt x 493.06555pt.
 
 Overfull \hbox (495.87134pt too wide) in paragraph at lines 519--519
-[][]  
+[]  
  []
 
 
@@ -2006,7 +2006,7 @@ Package pdftex.def Info: figure/Dag5_eg-1.pdf  used on input line 519.
 (pdftex.def)             Requested size: 850.0667pt x 493.06555pt.
 
 Overfull \hbox (495.87134pt too wide) in paragraph at lines 519--519
-[][]  
+[]  
  []
 
 
@@ -2066,7 +2066,7 @@ blique.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program 
 Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Controls_v2.pdf (88 pages, 1259465 bytes).
+Output written on Slides_Controls_v2.pdf (88 pages, 1259556 bytes).
 PDF statistics:
  3537 PDF objects out of 3580 (max. 8388607)
  180 named destinations out of 1000 (max. 500000)

@@ -623,6 +623,19 @@ grViz("
 
 \begin{frame}
 \frametitle{Example adapted from Morgan and Winship, p.72}
+\begin{enumerate}
+\footnotesize
+\item List all of the \textbf{back-door paths} from $D$ to $Y$
+\pause
+\item Identify any \textbf{post-treatment} variables: Do NOT include as controls
+\pause
+\item Identify any back-door paths with \textbf{collider} variables: Mark these as already blocked
+\pause
+\item Find a minimum set of variables that blocks all remaining back-door paths
+\pause
+\item Double-check your minimum set of control variables does not contain any post-treatment or collider variables
+\end{enumerate}
+\normalsize
 <<Dag5_eg,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',out.width='2.4\\linewidth'>>=
 grViz("
 	digraph rmarkdown {
@@ -656,19 +669,6 @@ grViz("
     M->Y
 	}")
 @
-\begin{enumerate}
-\footnotesize
-\item List all of the \textbf{back-door paths} from $D$ to $Y$
-\pause
-\item Identify any \textbf{post-treatment} variables: Do NOT include as controls
-\pause
-\item Identify any back-door paths with \textbf{collider} variables: Mark these as already blocked
-\pause
-\item Find a minimum set of variables that blocks all remaining back-door paths
-\pause
-\item Double-check your minimum set of control variables does not contain any post-treatment or collider variables
-\end{enumerate}
-\normalsize
 \end{frame}
 
 \begin{frame}
