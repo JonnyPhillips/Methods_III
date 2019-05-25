@@ -95,7 +95,7 @@ d %>% lm(Charity~D + gender + age + y_obs, data=.) %>% summary()
 d %>% lm(Charity~D + gender + age, data=.) %>% summary()
 ```
 
-14. Finally, create two more variables, Education and Income. Then redefine potential outcomes and recalculate observed outcomes.
+14. Finally, create two more variables, Education and Religion. Then redefine potential outcomes and recalculate observed outcomes.
 
 $$education = N(10,1)$$
 
