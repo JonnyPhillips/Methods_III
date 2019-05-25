@@ -29,7 +29,7 @@ navbar:
         href: Class_8.html
       - text: "9 - Controlling for Confounding"
         href: Class_9.html
-      - text: "10 - Controlling for Confounding"
+      - text: "10 - Matching"
         href: Class_10.html
     - text: "Project"
       icon: fa-book-open
