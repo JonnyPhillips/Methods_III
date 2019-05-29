@@ -19,10 +19,12 @@ knitr::opts_chunk$set(echo = TRUE)
 - [King, Gary et al, 2011, Comparative Effectiveness of Matching Methods for Causal Inference](Classes/Class_10/Readings/King et al 2011.pdf)
 <br> </br>
 
-## [Lecture Slides](Classes/Class_10/)
+## [Lecture Slides](Classes/Class_10/Slides_Matching_v1.pdf)
 
-## [Lab Exercise to Complete during Class](Classes/Class_10/Lab Exercise/)
+## [Lab Exercise to Complete during Class](Classes/Class_10/Lab Exercise/Exercise_Matching_v4.pdf)
 
 ## Replication Exercise
-- [Exercise](Classes/Class_10/Replication/)
+- [Exercise](Classes/Class_10/Replication/Replication_Matching_v2.pdf)
+- [Paper - Boas and Hidalgo 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil](Classes/Class_10/Replication/Boas_and_Hidalgo_2011.pdf)
+- [Data](Classes/Class_10/Replication/Boas_Hidalgo.csv)
 

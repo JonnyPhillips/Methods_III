@@ -1,0 +1,194 @@
+---
+title: "Exercise: Matching"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = F, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=F)
+library(tidyverse)
+library(stargazer)
+library(MatchIt)
+library(optmatch)
+library(rgenoud)
+library(cem)
+library(zeligverse)
+```
+
+Let's simulate some fake data and see whether we are able to recover the correct treatment effect using matching methods. 
+
+1. First, let's generate some confounder variables for 100 people.   
+(a) The variable 'age' should be drawn randomly from the normal distribution with mean 40 and standard deviation 7.  
+(b) The variable 'gender' should be drawn randomly from the binomial distribution with a 0.5 probability of being male or female.  
+(c) The variable 'income' should be drawn randomly from the normal distribution with mean 500 and standard deviation 50.  
+(d) The variable 'education' should be randomly drawn from one of four numerical categories with equal probability: 0 (None), 1 (Primary), 2 (Secondary), 3 (Tertiary).  
+
+```{r}
+set.seed(54321)
+N <- 100
+d <- tibble(age=rnorm(N,40,7),
+            gender=rbinom(N,1,0.5),
+            income=rnorm(N,500,50),
+            education=sample(c(0,1,2,3),N,
+                             prob=c(0.25,0.25,0.25,0.25), replace=T))
+```
+
+2. Our outcome is going to be attitudes to redistribution. Use the expressions below to simulate potential outcomes, with a treatment effect of 5.
+
+$$y_0=N(20,5)+\frac{age}{4} - 5*gender + \frac{income}{50} - 3*education$$ 
+
+$$y_1=y_0+5$$
+
+```{r}
+set.seed(54001)
+d <- d %>% mutate(y_0=rnorm(N,20,5) + age/4 - 5*gender + income/50 - education*3,
+                  y_1=y_0+5)
+```
+
+3. Treatment $D$ is receiving a government social program, but treatment is **not** randomly  assigned in any way. Instead, treatment depends on age, gender, income and education. Imagine we know the treatment assignment mechanism so that binary (1/0) treatment is determined by the following expression:
+
+$$D=\begin{cases}
+1 \text{ if } 2*gender + \frac{age}{8} + \frac{income}{50} + 2*education + N(0,3)>19 \\ 
+0 \text{ else }
+\end{cases}$$
+
+```{r}
+set.seed(54001)
+d <- d %>% mutate(D=case_when(2*gender+age/8+income/50+education*2 + rnorm(N,0,3)>19~1,
+                              T~0))
+#summary(2*d$gender + d$age/8 + d$income/50 + d$education*2)
+```
+
+4. Calculate observed outcomes based on potential outcomes and treatment.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+5. As always, as a benchmark, let's run the 'naive' regression of the outcome on the treatment with no controls. Why is the result different from our assumed treatment effect? Be specific.
+
+```{r}
+d %>% lm(y_obs ~ D, data=.) %>% summary()
+```
+
+6. Our first task is to try and do a 'manual' matching example - to try and 'match' one treated unit with one control unit so that the *only* thing that is different about them is their treatment status. Take the first treated unit in your dataset. What are its values of gender, age, income and education? Manually, by trial-and-error (not using any package or pre-prepared function), identify the most similar *control* unit. How different are your matched pair on these four variables?
+
+```{r}
+treated_unit <- d %>% filter(D==1) %>% slice(1)
+control_units <- d %>% filter(D==0 & gender==1 & education==1)
+control_unit <- control_units %>% filter(age>32 & age < 36 & income>500 & income<550)
+
+rbind(treated_unit, control_unit)
+```
+
+7. Compare the outcome between your matched treated unit and control unit. Is this consistent with our assumed treatment effect? Why is it similar? Why is it different?
+
+```{r}
+treated_unit$y_obs - control_unit$y_obs
+```
+
+8. Matching repeats this process for multiple units and then finds the average difference in outcomes between the treated and control units. Use the _matchit_ package to conduct 'nearest neighbour' (the default) matching method on your dataset for the two categorical confounder variables: gender and education. What is the result of the matching procedure - how many units were matched?
+
+```{r}
+d <- d %>% mutate(gender=factor(gender),
+                       education=factor(gender))
+matched_data_Q8 <- matchit(D ~ gender + education + age + income, data=d)
+```
+
+9. Use _match.data_ to extract the matched dataset and calculate the average difference in means between the treated and control groups. How does the result compare to the naive regression in Q5?
+
+```{r}
+matched_data_Q8 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+10. To understand how matching changed our dataset, check the _summary_ information about your matched data. On which variables did balance improve? Did balance deteriorate on any variables?
+
+```{r}
+matched_data_Q8 %>% summary()
+```
+
+11. Matching *ONLY* makes a difference if we throw away some data - the data for which we cannot find good matches. The more data we throw away, the better matched/balanced is our remaining data. Conduct your nearest neighbour matching procedure again, but this time use the _exact_ parameter to also require that matched treated and control units have exactly the same gender and education. How many units are matched now? Has balanced improved or deteriorated on any variables? What is the average difference in mean outcomes between treated and control groups?
+
+```{r}
+matched_data_Q11 <- matchit(D ~ gender + education + age + income, data=data.frame(d),exact=c("gender","education"))
+
+matched_data_Q11 %>% summary()
+
+matched_data_Q11 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+12. An alternative way of limiting the number of matches is to specify a maximum distance measure beyond which paired units are dropped. Run your matching procedure again, specifying a _caliper_ of 0.1 (or try other values if this doesn't work). How many units are matched now? Has balanced improved? What is the average difference in mean outcomes between treated and control groups?
+
+```{r}
+matched_data_Q12 <- matchit(D ~ gender + education + age + income, data=data.frame(d), caliper=0.1)
+matched_data_Q12 %>% summary()
+
+matched_data_Q12 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+13. One problem with this nearest neighbour matching procedure is that it is 'dumb', matching one pair, and then another, even if the distance between all paired units would be lower if the matches were switched around. Try using the 'optimal' and 'genetic' methods of _matchit_ to improve your analysis. Has balanced improved? What is the average difference in mean outcomes between treated and control groups?
+
+```{r}
+matched_data_Q13 <- matchit(D ~ gender + education + age + income, data=data.frame(d), method="optimal")
+matched_data_Q13 %>% summary()
+
+matched_data_Q13 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+
+matched_data_Q13_genetic <- matchit(D ~ gender + education + age + income, data=data.frame(d), method="genetic")
+matched_data_Q13_genetic %>% summary()
+
+matched_data_Q13_genetic %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+14. Try conducting matching with the Coarsened Exact Matching (`cem`) methodology. This turns continuous variables into categorical variables and then uses exact matching. 
+
+```{r}
+matched_data_Q14 <- matchit(D ~ gender + education + age + income, data=data.frame(d), method="cem")
+matched_data_Q14 %>% summary()
+
+matched_data_Q14 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+15. Finally, let's calculate the propensity score (the probability each unit was treated) and match on this new propensity score. First run a logit regression of treatment on your four confounding variables, save the fitted values from this regression, and match on these fitted values (the probability each unit was treated) using nearest-neighbour matching and a caliper of 0.1 of a standard deviation.
+
+```{r}
+d$prop_score <- d %>% glm(D ~ gender + education + age + income, data=., family="binomial") %>% fitted()
+
+matched_data_Q15 <- matchit(D ~ prop_score, data=as.data.frame(d), caliper=0.1)
+
+matched_data_Q15 %>% match.data() %>% 
+  group_by(D) %>%
+  summarize(y_obs=mean(y_obs,na.rm=T)) %>%
+  arrange(-D) %>%
+  mutate(diff_y_obs=y_obs-lead(y_obs))
+```
+
+16. The risk of using matching is that we have so many options that we can keep trying until we find a 'big' effect. So we should always be guided by a clear, measurable goal: improving balance. Which of the matching methods you used above maximize balance on the four confounding variables?
+
+
+

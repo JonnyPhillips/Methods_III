@@ -1,0 +1,1088 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<Setup,echo=FALSE,warning=FALSE,message=FALSE>>=
+library(tidyverse)
+library(broom)
+library(MatchIt)
+library(xtable)
+@
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 10 - Various \& Matching}
+\author{Jonathan Phillips}
+\date{October 2017}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Causal Inference}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item An alternative solution to the confounding problem
+\pause
+\item Matching \textbf{forces balance} between treated and control units
+\pause
+\item It does so by \textbf{dropping units} that don't have good counterfactuals
+\pause
+\begin{itemize}
+\item Matching should really be called \textbf{'pruning'}
+\pause
+\item That slightly changes the causal effect we're estimating (eg. 'Average Treatment Effect on the Treated')
+\pause
+\item But allows us to have more confidence our effects are causal
+\pause
+\end{itemize}
+\item As with regression, it succeeds only to the extent we \textbf{match on all confounders}
+\pause
+\item Unmeasured confounders are a big problem still
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Controlling in a regression is like separating our dataset into male and female, and comparing treated and control groups separately for each, so we are guaranteed balance
+\pause
+\item Matching is similar:
+\pause
+\end{itemize}
+\begin{enumerate}
+\item For each treated unit, find a control unit with very close values of confounding variables, and keep both
+\pause
+\item Repeat for every treated unit
+\pause
+\item Drop all the unmatched units (eg. 'extra' control units that are 'far away' from treated units)
+\pause
+\item Assess balance - re-run the matching process as many times as you can to maximize balance!
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Matching is \textbf{not} an analysis method, it's a \textbf{pre-processing stage}
+\pause
+\item After matching, we can either:
+\end{itemize}
+\begin{enumerate}
+\item Calculate the difference in means between treated and control groups
+\pause
+\item Conduct the normal regression: $Y \sim D$
+\begin{itemize}
+\item Option to include all our matching variables as controls
+\item This will help control for any \textbf{residual imbalance} (esp. for continuous variables)
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Which variables to match on?
+\pause
+\begin{itemize}
+\item Treatment variable? \pause \textbf{No!} We need treated and control units who are both male
+\pause
+\item Outcome variable? \pause \textbf{No!} That's selecting on the dependent variable - biased!
+\pause
+\item Post-treatment variables? \pause \textbf{No!} This will bias our causal effect, just as in regression
+\pause
+\item Confounders? \pause \textbf{Yes!} We want to remove imbalance due to confounders 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Matching's advantage over (only) regression is that it is \textbf{non-parametric}
+\begin{itemize}
+\item We don't need to make any assumptions about linearity, quadratic relationship etc. 
+\pause
+\begin{itemize}
+\item I.e. Reduced 'Model Dependence'
+\pause
+\end{itemize}
+\item And we get better overlap because we're not extrapolating outside of the data
+\pause
+\item True, there are lots of choices in matching, but our aim is just to increase balance, unlike regression which has no success measure
+\end{itemize}
+\item The disadvantages are:
+\begin{itemize}
+\item We may change our definition of the causal effect a little
+\item We might lose statistical power by discarding too many units
+\item A tricky trade-off between number of units and balance
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=}
+\includepdf[pages={13-18}]{Ho_Slides.pdf}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item To identify 'close' matches we need some measure of distance between units' covariates
+\pause
+\end{itemize}
+\begin{enumerate}
+\item Matching on few categorical variables: \textbf{Exact Matching}
+\pause
+\item Matching on continuous variables (sequential): \textbf{Nearest-Neighbour Matching}
+\pause
+\item Matching to maximize balance: \textbf{Optimal/Genetic Matching}
+\pause
+\item Matching on the probability of treatment: \textbf{Propensity Score Matching}
+\end{enumerate}
+\end{frame}
+
+<<exact_matching,echo=FALSE, warning=FALSE, message=FALSE>>=
+set.seed(05410)
+N <- 40
+treat <- rbinom(N,1,0.5)
+num_treated <- length(treat[treat==1])
+male <- NA
+data <- as.data.frame(cbind(treat,male))
+names(data) <- c("Treat","Male")
+data <- data %>% mutate(Male=ifelse(Treat==1,rbinom(num_treated,1,1/5),rbinom(num_treated,1,2/5)))
+data <- data %>% mutate(Outcome=Treat+Male*2+rnorm(10,2))
+
+#data %>% ggplot() + geom_jitter(aes(x=factor(Treat),y=factor(Male),color=factor(Treat)),width=0.1,height=0.1) + theme_classic()
+
+matched <- matchit(Treat~Male, data=data, method="nearest",exact="Male") #This makes more sense
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+data_jitter <- data %>% mutate(Treat=Treat+runif(dim(data)[1],-0.1,0.1), Male=Male+runif(dim(data)[1],-0.1,0.1))
+
+matches_T <- data_jitter[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data_jitter[as.numeric(as.character(matches$X1)),] %>% rownames_to_column()
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Male1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data_jitter %>% slice(unmatched_rows)
+
+#data_jitter %>% ggplot() + geom_point(aes(x=Treat,y=Male,color=Treat)) + theme_classic() + geom_segment(data=matches2,aes(x=Treat,y=Male,xend=Treat1,yend=Male1),lty=2)
+
+
+@
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{center}
+<<exact_matching_1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data_jitter %>% ggplot() + geom_point(data=data_jitter[data$Treat==1,],aes(x=Treat,y=Male),colour="Blue")  + geom_point(data=data_jitter[data$Treat==0,],aes(x=Treat,y=Male),colour="Red") + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{center}
+<<exact_matching_2a,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Male),colour="Blue") + geom_point(aes(x=Treat1,y=Male1),colour="Red")  + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Male),colour="Red",alpha=1) + geom_point(data=unmatched[unmatched$Treat>=0.5,],aes(x=Treat,y=Male),colour="Blue",alpha=1) + theme_classic() + geom_segment(data=matches2,aes(x=Treat,y=Male,xend=Treat1,yend=Male1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{center}
+<<exact_matching_2b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Male),colour="Blue") + geom_point(aes(x=Treat1,y=Male1),colour="Red")  + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Male),colour="Red",alpha=0.2) + geom_point(data=unmatched[unmatched$Treat>0.5,],aes(x=Treat,y=Male),colour="Blue",alpha=0.2) + theme_classic() + geom_segment(data=matches2,aes(x=Treat,y=Male,xend=Treat1,yend=Male1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{center}
+<<exact_matching_3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Male),colour="Blue") + geom_point(aes(x=Treat1,y=Male1),colour="Red") + theme_classic() + geom_segment(data=matches2,aes(x=Treat,y=Male,xend=Treat1,yend=Male1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{itemize}
+\item Exact matching defines clear counterfactuals:
+\begin{itemize}
+\item What is the difference in the outcome between treated and control units \textbf{for units of the same gender}
+\pause
+\end{itemize}
+\item After matching, we \textbf{prune/remove} unmatched units
+\pause
+\item \textbf{Then delete the link between the paired units, we don't need it any more}
+\pause
+\item Then compare the outcome of the \textbf{remaining} treated and control units
+\pause
+\begin{itemize}
+\item Difference in means
+\pause
+\item Or regression of outcome on treatment
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching}
+\begin{center}
+<<exact_matching_bal,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="Male") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis0,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Outcome),colour="Red",alpha=1) + geom_point(data=unmatched[unmatched$Treat>0.5,],aes(x=Treat,y=Outcome),colour="Blue",alpha=1)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis0b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Outcome),colour="Red",alpha=1) + geom_point(data=unmatched[unmatched$Treat>0.5,],aes(x=Treat,y=Outcome),colour="Blue",alpha=1) + geom_smooth(data=data,aes(x=Treat,y=Outcome),method="lm",se=FALSE,colour="black")
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Outcome),colour="Red",alpha=0.3) + geom_point(data=unmatched[unmatched$Treat>0.5,],aes(x=Treat,y=Outcome),colour="Blue",alpha=0.3) + geom_segment(data=matches2,aes(x=Treat,y=Outcome,xend=Treat1,yend=Outcome1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis1b,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_point(data=unmatched[unmatched$Treat<0.5,],aes(x=Treat,y=Outcome),colour="Red",alpha=0) + geom_point(data=unmatched[unmatched$Treat>0.5,],aes(x=Treat,y=Outcome),colour="Blue",alpha=0) + geom_segment(data=matches2,aes(x=Treat,y=Outcome,xend=Treat1,yend=Outcome1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches_true <- matches %>% filter(is.na(X1)==FALSE)
+
+data_matched <- data[c(as.numeric(matches_true$rowname),matches_true$X1),]
+
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_smooth(data=data_matched,aes(x=Treat,y=Outcome),method="lm",se=FALSE,colour="black")
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Exact Matching Analysis}
+\begin{center}
+<<exact_matching_analysis4,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Treat,y=Outcome),colour="Blue") + geom_point(aes(x=Treat1,y=Outcome1),colour="Red") + theme_classic() + geom_smooth(data=data_matched,aes(x=Treat,y=Outcome),method="lm",se=FALSE,colour="black")  + geom_smooth(data=data,aes(x=Treat,y=Outcome),method="lm",se=FALSE,colour="black",lty=2)
+@
+\end{center}
+\end{frame}
+
+<<nearest_matching,echo=FALSE, warning=FALSE, message=FALSE>>=
+set.seed(05410)
+N <- 150
+treat <- rbinom(N,1,0.3)
+num_treated <- length(treat[treat==1])
+age <- NA
+data <- as.data.frame(cbind(treat,age))
+names(data) <- c("Treat","Age")
+data <- data %>% mutate(Age=runif(N,18,70)+20*data$Treat)
+
+matched <- matchit(Treat~Age, data=data, method="nearest") #This makes more sense
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+#data_jitter <- data %>% mutate(Treat=Treat+runif(dim(data)[1],-0.1,0.1), Male=Male+runif(dim(data)[1],-0.1,0.1))
+
+matches_T <- data[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data[as.numeric(as.character(matches$X1)),] %>% rownames_to_column() 
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Age1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data %>% slice(unmatched_rows)
+@
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_2_pre,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic() + geom_segment(data=matches2[8,],aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2)
+@
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="Blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="Red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0.2) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_4,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="Blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="Red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{center}
+<<nearest_matching_bal,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="Age") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching}
+\begin{itemize}
+\item Two potential problems with nearest neighbour matching:
+\pause
+\begin{enumerate}
+\item \textbf{Nearest does not mean close:} The oldest treated units are matched with, but very different to, the oldest control units
+\pause
+\begin{itemize}
+\item We need some \textbf{absolute} limits on the distance we can match units within
+\pause
+\item We can add 'calipers' to matching to match only within a fixed range
+\pause
+\end{itemize}
+\item \textbf{The order of matching matters:} The first matches use up units that might make better matches for later treated units
+\pause
+\begin{itemize}
+\item To maximize balance we need to 'look ahead' and match in the right order
+\pause
+\item For this we can use optimal or genetic matching, which is fully automated
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+<<nearest_matching_caliper,echo=FALSE, warning=FALSE, message=FALSE>>=
+set.seed(05410)
+N <- 150
+treat <- rbinom(N,1,0.3)
+num_treated <- length(treat[treat==1])
+age <- NA
+data <- as.data.frame(cbind(treat,age))
+names(data) <- c("Treat","Age")
+data <- data %>% mutate(Age=runif(N,18,70)+20*data$Treat)
+
+matched <- matchit(Treat~Age, data=data, method="nearest",caliper=0.1)
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+#data_jitter <- data %>% mutate(Treat=Treat+runif(dim(data)[1],-0.1,0.1), Male=Male+runif(dim(data)[1],-0.1,0.1))
+
+matches_T <- data[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data[as.numeric(as.character(matches$X1)),] %>% rownames_to_column() 
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Age1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data %>% slice(unmatched_rows)
+@
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_1_caliper,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_2_pre_caliper,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic() + geom_segment(data=matches2[8,],aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_2_caliper,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_3_caliper,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="Blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="Red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0.2) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_4_caliper,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="Blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="Red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Nearest Neighbour Matching with Caliper}
+\begin{center}
+<<nearest_matching_bal_caliper,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="Age") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\begin{itemize}
+\item Note: p-values don't mean so much for balance tests
+\pause
+\item We always want to improve balance as much as possible
+\pause
+\item Better to compare (standardized) difference in means
+\end{itemize}
+\end{frame}
+
+<<optimal_matching,echo=FALSE, warning=FALSE, message=FALSE>>=
+library(optmatch)
+set.seed(05410)
+N <- 300
+treat <- rbinom(N,1,0.3)
+num_treated <- length(treat[treat==1])
+age <- NA
+data <- as.data.frame(cbind(treat,male))
+names(data) <- c("Treat","Age")
+data <- data %>% mutate(Age=runif(N,18,70)+20*data$Treat)
+
+matched <- matchit(Treat~Age, data=data, method="optimal") #This makes more sense
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+#data_jitter <- data %>% mutate(Treat=Treat+runif(dim(data)[1],-0.1,0.1), Male=Male+runif(dim(data)[1],-0.1,0.1))
+
+matches_T <- data[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data[as.numeric(as.character(matches$X1)),] %>% rownames_to_column() 
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Age1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data %>% slice(unmatched_rows)
+@
+
+\begin{frame}
+\frametitle{Optimal Matching}
+\begin{center}
+<<optimal_matching_1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Optimal Matching}
+\begin{center}
+<<optimal_matching_2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Optimal Matching}
+\begin{center}
+<<optimal_matching_3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0.2) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Optimal Matching}
+\begin{center}
+<<optimal_matching_4,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age),colour="blue") + geom_point(aes(x=factor(Treat1),y=Age1),colour="red") + theme_classic() + geom_segment(data=matches2,aes(x=factor(Treat),y=Age,xend=factor(Treat1),yend=Age1),lty=2) + geom_point(data=unmatched,aes(x=factor(Treat),y=Age,colour=factor(Treat)),alpha=0) 
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Optimal Matching}
+\begin{center}
+<<optimal_matching_bal,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="Age") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\end{frame}
+
+<<propscore_matching,echo=FALSE, warning=FALSE, message=FALSE>>=
+library(Zelig)
+library(ZeligChoice)
+set.seed(05410)
+N <- 150
+treat <- rbinom(N,1,0.3)
+num_treated <- length(treat[treat==1])
+age <- NA
+data <- as.data.frame(cbind(treat,age))
+names(data) <- c("Treat","Age")
+data <- data %>% mutate(Age=runif(N,18,70)+20*data$Treat)
+
+#Calc propscore
+data$pscores <- glm(Treat~Age, data=data, family="binomial")$fitted.values
+
+matched <- matchit(Treat~pscores, data=data, method="nearest")
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+matches_T <- data[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data[as.numeric(as.character(matches$X1)),] %>% rownames_to_column() 
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Age1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data %>% slice(unmatched_rows)
+@
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{itemize}
+\item With many covariates we have a dimensionality challenge
+\pause
+\begin{itemize}
+\item Overlap is almost zero
+\pause
+\item Counterfactuals are impossible to define
+\end{itemize}
+\item The propensity score collapses matching to a single dimension
+\pause
+\begin{itemize}
+\item Confounders only matter to the extent they affect treatment
+\pause
+\item So let's use the confounders to \textbf{predict treatment}
+\pause
+\item That's different to actual treatment status, with the remainder due to 'random' factors (if we include all confounders)
+\pause
+\end{itemize}
+\item Then use the propensity score (probability 0-1) to match treated and control units which have the same ex ante probability of treatment
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{itemize}
+\item But some concerns about drawbacks of propensity score matching
+\pause
+\item May have poor balance on individual confounders
+\pause
+\item Balance may get worse as we remove more units
+\pause
+\item We have to get the functional form of the treatment explanation right (linear, quadratic etc.) so we remain vulnerable to model dependence!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{itemize}
+\item Treatment: 1/0
+\item Confounder: Age
+\item Logit model predicting treatment:
+\end{itemize}
+$$Treat_i = \alpha + \beta Age_i +\epsilon_i$$
+\pause
+$$Predicted\_Treat_i = -7.19 + 0.116 Age_i +\epsilon_i$$
+\pause
+\begin{itemize}
+\item Match on the values of $Predicted\_Treat_i$ (fitted values of the regression)
+\pause
+\item I.e. match units with a similar \textit{probability} of treatment
+\pause
+\item ...Regardless of whether they actually get treated
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=factor(Treat),y=Age,colour=factor(Treat))) + theme_classic()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=Age,y=pscores)) + theme_classic() + xlab("Probability of Treatment | Age")
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour=factor(Treat))) + theme_classic() + xlab("Probability of Treatment | Age")
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_4,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour=factor(Treat))) + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_5,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour="Red"))+ geom_point(aes(x=Age1,y=pscores1,colour="Blue")) + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching}
+\begin{center}
+<<pscore_matching_bal,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="pscores") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\end{frame}
+
+<<propscore_matching_caliper,echo=FALSE, warning=FALSE, message=FALSE>>=
+library(Zelig)
+library(ZeligChoice)
+set.seed(05410)
+N <- 150
+treat <- rbinom(N,1,0.3)
+num_treated <- length(treat[treat==1])
+age <- NA
+data <- as.data.frame(cbind(treat,age))
+names(data) <- c("Treat","Age")
+data <- data %>% mutate(Age=runif(N,18,70)+20*data$Treat)
+
+#Calc propscore
+data$pscores <- glm(Treat~Age, data=data, family="binomial")$fitted.values
+
+matched <- matchit(Treat~pscores, data=data, method="nearest",caliper=0.2)
+
+matches <- data.frame(matched$match.matrix) %>% rownames_to_column()
+
+matches_T <- data[matches$rowname,] %>% rownames_to_column()
+
+matches_C <- data[as.numeric(as.character(matches$X1)),] %>% rownames_to_column() 
+
+matches2 <- matches_T %>% bind_cols(matches_C) %>% filter(is.na(Age1)==FALSE)
+
+unmatched_rows <- which(!(1:dim(data)[1] %in% as.numeric(c(matches2$rowname,matches2$rowname1))))
+
+unmatched <- data %>% slice(unmatched_rows)
+@
+
+\begin{frame}
+\frametitle{Propensity Score Matching with Caliper}
+\begin{center}
+<<pscore_matching_caliper_1,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+data %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour=factor(Treat))) + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching with Caliper}
+\begin{center}
+<<pscore_matching_caliper_2,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Age,y=pscores),colour="red") + geom_point(aes(x=Age1,y=pscores1),colour="blue") + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2) + geom_point(data=unmatched,aes(x=Age,y=pscores,colour=factor(Treat)),alpha=0.2)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching with Caliper}
+\begin{center}
+<<pscore_matching_caliper_3,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
+matches2 %>% ggplot() + geom_point(aes(x=Age,y=pscores),colour="red") + geom_point(aes(x=Age1,y=pscores1),colour="blue") + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2) + geom_point(data=unmatched,aes(x=Age,y=pscores,colour=factor(Treat)),alpha=0)
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Propensity Score Matching with Caliper}
+\begin{center}
+<<pscore_matching_bal_caliper,echo=FALSE,warning=FALSE,message=FALSE,results='asis'>>=
+summary(matched)$sum.all %>% 
+  rownames_to_column() %>% 
+  bind_rows(summary(matched)$sum.matched %>% rownames_to_column()) %>%
+  filter(rowname=="pscores") %>%
+  mutate(Units=c("All","Matched")) %>%
+  dplyr::select(Units,`Means Treated`,`Means Control`,`Mean Diff`) %>%
+  xtable()
+@
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item How much matching should we undertake?
+\pause
+\item We can always enforce \textbf{stricter} matching (eg. narrower calipers, more exact matching) to get better balance
+\pause
+\item But our N will approach zero, so little statistical power
+\pause
+\item A Bias-variance trade-off
+\pause
+\item Try alternative specifications
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Matching preferred to regression where:
+\pause
+\begin{itemize}
+\item Never! Do both!
+\end{itemize}
+\item Matching makes a big contribution where there's poor overlap
+\pause
+\item Matching + Regression = "Doubly Robust"
+\pause
+\begin{itemize}
+\item If \textbf{either} matching produces balance \textbf{OR} we have the correct functional form for regression, we can make causal inference
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Arceneaux, Gerber and Green (2005)
+\pause
+\item How does matching work on experimental (IV) data? (eg. for how to get voters to vote)
+\pause
+\item Matching is biased compared to the experimental results
+\pause
+\item Lots of controls 
+\pause
+\item But unobserved confounders mean matching can't recover causal estimates
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Matching}
+\begin{itemize}
+\item Bias was due to whether people actually answered phone calls
+\pause
+\item Huge N, \textbf{Perfect balance}
+\pause
+\item Experimental measure: 0.4
+\pause
+\item OLS estimate: 2.7
+\pause
+\item Matching estimate: 2.8
+\pause
+\item We can't control for likelihood of answering the phone using the (many) covariates they have
+\pause
+\item Matching still relies on \textbf{measuring all confounders}
+\end{itemize}
+\end{frame}
+
+\section{Political Economy}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item Boas and Hidalgo (2011)
+\pause
+\item They already used an RDD on close electoral victories to show incumbents are more likely to get media licences
+\pause
+\item But how do media licences affect performance in the next election?
+\pause
+\item No 'as-if' random variation in treatment
+\pause
+\item So they use an observational study with matching to create plausible counterfactuals
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item \textbf{Population: } \pause Brazilian councillors
+\pause
+\item \textbf{Sample: } \pause Brazilian councillors who apply for media licences (not in cities >2 million)
+\pause
+\item \textbf{Treatment: } \pause Approval for a licence before the election campaign
+\pause
+\item \textbf{Control: } \pause No approval before the election campaign (rejection or no decision)
+\pause
+\item \textbf{Treatment Assignment: } \pause Ministry's decision process (unknown)
+\begin{itemize}
+\item We know it's influenced by incumbency, for example
+\end{itemize}
+\pause
+\item \textbf{Outcome: } \pause Vote Share in next election
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item Confounders with imbalance: Application timing, competition, incumbency, municipality type, political bias, occupation
+\pause
+\item Try to balance treatment and control units on confounders using matching
+\pause
+\item Seek to maximize balance, using genetic matching
+\pause
+\item Units in dataset before matching: 1455
+\pause
+\item Units in dataset after matching: 622 (311 treated, 311 control)
+\pause
+\item Clear improvement in balance after matching
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item How matching changes our units may affect the definition of our treatment effect
+\pause
+\begin{itemize}
+\item Eg. if we keep all treated units and throw away some control units, this is an average treatment effect on the treated
+\pause
+
+\item If we keep all control units and throw away some treated units, this is an average treatment effect on the untreated
+\pause
+\end{itemize}
+\item Simple comparison of means between treated and control group
+\pause
+\item ATT causal effect estimate: 0.39\% points (17\%) increase in vote share if you have a media licence
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item Zucco (2013)
+\pause
+\item How does Bolsa Familia affect voting?
+\pause
+\item Similar to De La O (2010) but without the natural experiment
+\pause
+\item ``There were no randomized pilot programs, there are no obvious discontinuities to be exploited, and CCT eligibility and actual coverage are highly correlated with several other socioeconomic variables.''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item \textbf{Population: } \pause Brazilian municipalities
+\pause
+\item \textbf{Sample: } \pause Brazilian municipalities
+\pause
+\item \textbf{Treatment: } \pause High \% Families in municipality receiving Bolsa Familia
+\pause
+\item \textbf{Control: } \pause Low \% Families in municipality receiving Bolsa Familia
+\pause
+\item \textbf{Treatment Assignment: } \pause Complex, based on poverty, geography
+\pause
+\item \textbf{Outcome: } \pause Vote Share to Incumbent President in next election
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item \textbf{Overlap Problem:} If MDS used fixed rules to allocate Bolsa Familia, there would be no overlap and no plausible counterfactuals
+\pause
+\item Luckily, implementation does not follow perfectly fixed rules - so matching is feasible
+\pause
+\item But that also suggests other informal/unobserved factors affect treatment assignment - confounding!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item Matching Stage: 
+\pause
+\item (Generalized) Propensity Score Matching
+\pause
+\begin{enumerate}
+\item Regression of treatment on covariates ($Bolsa\_Familia \sim HDI + Population + Target\_BF\_Coverage...$)
+\pause
+\item Predict probability of treatment (propensity score) for each unit
+\pause
+\item Match treatment and control units on propensity score (in strata)
+\pause
+\item Regression of Outcome on propensity score by strata
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Political Economy}
+\begin{itemize}
+\item Results:
+\begin{itemize}
+\item 1\% point more families covered by Bolsa Familia increases vote share by 0.12-0.18\% points
+\pause
+\item Spending extra R\$100 per person through Bolsa Familia increases vote share by 7-15\% points
+\pause
+\item Consistent estimates from matching in survey data
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\end{document}
