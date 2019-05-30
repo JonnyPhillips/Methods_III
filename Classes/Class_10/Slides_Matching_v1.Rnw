@@ -1005,7 +1005,7 @@ summary(matched)$sum.all %>%
 
 \begin{frame}
 \frametitle{Matching}
-\includegraphics[width=0.7\textwidth]{Balance-N_trade-off.png}
+\includegraphics[width=0.58\textwidth]{Balance-N_trade-off.png}
 \end{frame}
 
 \begin{frame}

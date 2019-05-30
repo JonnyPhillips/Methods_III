@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  26 MAY 2019 14:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  30 MAY 2019 13:43
 entering extended mode
 **./Slides_Matching_v1.tex
 (Slides_Matching_v1.tex
@@ -2288,25 +2288,19 @@ Overfull \vbox (22.88217pt too high) detected at line 924
 ] [129
 
 ]
+<Balance-N_trade-off.png, id=9202, 454.51054pt x 407.08336pt>
+File: Balance-N_trade-off.png Graphic file (type png)
+<use Balance-N_trade-off.png>
+Package pdftex.def Info: Balance-N_trade-off.png  used on input line 972.
+(pdftex.def)             Requested size: 205.43394pt x 183.99953pt.
+ [130
 
-LaTeX Warning: File `Balance-N trade-off.png' not found on input line 972.
-
-<Balance-N trade-off.png, id=9202, 454.51054pt x 407.08336pt>
-File: Balance-N trade-off.png Graphic file (type png)
-<use Balance-N trade-off.png>
-Package pdftex.def Info: Balance-N trade-off.png  used on input line 972.
-(pdftex.def)             Requested size: 318.77365pt x 285.51544pt.
-
-Overfull \vbox (78.29405pt too high) detected at line 972
- []
-
-[130
-
- <./Balance-N trade-off.png>] [131
+ <./Balance-N_trade-off.png>] [131
 
 ] [132
 
-] [133
+]
+[133
 
 ] [134
 
@@ -2316,8 +2310,7 @@ Overfull \vbox (78.29405pt too high) detected at line 972
 
 ] [137
 
-]
-[138
+] [138
 
 ] [139
 
@@ -2331,7 +2324,8 @@ Overfull \vbox (78.29405pt too high) detected at line 972
 
 ] [144
 
-] [145
+]
+[145
 
 ] [146
 
@@ -2349,8 +2343,7 @@ Overfull \vbox (78.29405pt too high) detected at line 972
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1029.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 1029.
-
-(Slides_Matching_v1.aux)
+ (Slides_Matching_v1.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1029.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1029.
 
@@ -2362,8 +2355,8 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 23180 strings out of 492893
- 445772 string characters out of 3133367
+ 23181 strings out of 492893
+ 445786 string characters out of 3133367
  589058 words of memory out of 3000000
  26174 multiletter control sequences out of 15000+200000
  73550 words of font info for 127 fonts, out of 3000000 for 9000
@@ -2381,7 +2374,7 @@ TeX 2.9/fonts/type1/public/amsfonts/cm/cmssi9.pfb><C:/Program Files/MiKTeX 2.9/
 fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/math
 design/mdbch/md-chbma.pfb>
-Output written on Slides_Matching_v1.pdf (147 pages, 2816020 bytes).
+Output written on Slides_Matching_v1.pdf (147 pages, 2815987 bytes).
 PDF statistics:
  10580 PDF objects out of 10688 (max. 8388607)
  299 named destinations out of 1000 (max. 500000)
