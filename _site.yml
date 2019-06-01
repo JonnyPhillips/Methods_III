@@ -31,6 +31,8 @@ navbar:
         href: Class_9.html
       - text: "10 - Matching"
         href: Class_10.html
+      - text: "11 - Comparative Cases & Process Tracing"
+        href: Class_11.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html
