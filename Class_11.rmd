@@ -1,0 +1,26 @@
+---
+title: 'Class 11 - Comparative Case Studies & Process Tracing'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+#### Required
+- **[Collier, David, 1993, The Comparative Method](Classes/Class_11/Readings/Collier_1993.pdf)**
+- **[Slater, Dan and Ziblatt, Daniel, 2013, The Enduring Indispensability of the Controlled Comparison, Comparative Political Studies](Classes/Class_11/Readings/Slater and Ziblatt 2013.pdf)**
+- **[Hall, Peter, 2007, Systematic Process Tracing: When and How to Use it, European Political Science](Classes/Class_11/Readings/Hall on process tracing.pdf)**
+- **[Falleti, Tulia G., 2006, Theory-Guided Process-Tracing in Comparative Politics: Something Old, Something New](Classes/Class_11/Readings/Falleti Theory Guiding Process Tracing.pdf)**
+
+
+#### Additional Readings
+- [Geddes, Barbara, How the Cases you Choose Affect the Answers you get: Selection Bias in Comparative Politics](Classes/Class_11/Readings/Geddes.pdf)
+- [Seawright, Jason and Gerring, John, 2008, Case Selection Techniques in Case Study Research: A Menu of Qualitative and Quantitative Options](Classes/Class_11/Readings/Seawright and Gerring Case Selection.pdf)
+- [Bates et al 1997, 2000, The Analytical Narrative Project, American Political Science Review, 94:3](Classes/Class_11/Readings/Bates et al 1997.pdf)
+- [Collier, 2011, Understanding Process Tracing, Political Science and Politics 44:4](Classes/Class_11/Readings/Collier 2011.pdf)
+
+## [Lecture Slides](Classes/Class_11/)
+
+

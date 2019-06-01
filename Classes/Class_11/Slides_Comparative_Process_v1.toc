@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Comparative Case Studies}{3}{0}{1}
+\beamer@sectionintoc {2}{Process Tracing}{77}{0}{2}

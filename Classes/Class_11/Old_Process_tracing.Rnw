@@ -1,0 +1,450 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<Setup,echo=FALSE,warning=FALSE,message=FALSE>>=
+library(tidyverse)
+library(broom)
+library(MatchIt)
+library(xtable)
+library(stargazer)
+library(DiagrammeR)
+library(knitr)
+library(Zelig)
+library(ZeligChoice)
+library(kableExtra)
+@
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 11 - Collective Action \& Comparative Cases}
+\author{Jonathan Phillips}
+\date{November 2017}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Process Tracing}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Within-case analysis
+\pause
+\item Only a contribution if we can turn our single case into \textbf{multiple} observations - usually over time
+\pause
+\item Most effective when complementing large-N or comparative case study analysis
+\pause
+\item Theory-informed - the evidence must be useful for causal inference
+\begin{itemize}
+\item Evidence must support or undermine some theory
+\pause
+\item Particularly the causal mechanism - what connects $D$ to $Y$?
+\pause
+\item What observable implications are there of theory A?
+\pause
+\item Is the evidence consistent with theory A?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{enumerate}
+\item Identify all relevant theories to explain the outcome (Our Treatment variable and confounders)
+\pause
+\item Use a specific theory to identify clear implications if each theory is true
+\pause
+\item Gather data from the case on each observable implication
+\pause
+\item Compare the data to each theory
+\pause
+\item Can we eliminate all other theories (confounders) except our treatment?
+\begin{itemize}
+\item Sherlock Holmes' Method of Elimination
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item We know the value of treatment and outcome for our case - and it fits our theory
+\pause
+\item But we don't have any counterfactual to compare against
+\pause
+\item The outcome could instead have been caused by a confounder
+\end{itemize}
+<<Dag1,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+      X [label = 'Confounder', fontcolor='black']
+
+    D->Y
+    X->Y
+    X->D
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item One way to support our theory is to test the mechanisms along the causal path of treatment:
+\begin{itemize}
+\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
+\item Evidence of M occurring is consistent with $D$ having a causal effect
+\end{itemize}
+\end{itemize}
+<<Dag2,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+      X [label = 'Confounder', fontcolor='black']
+      M [label = 'Mechanism', fontcolor='black']
+
+    D->M
+    M->Y
+    X->Y
+    X->D
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item One way to support our theory is to test the mechanisms along the causal path of treatment:
+\begin{itemize}
+\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
+\item Evidence of M occurring is consistent with $D$ having a causal effect
+\begin{itemize}
+\item It could have been another confounder that also worked through that mechanism
+\end{itemize}
+\end{itemize}
+\item This is a 'hoop' test
+\end{itemize}
+<<Dag3,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+   X2 [label = 'Confounder 2', fontcolor='black']
+      M [label = 'Mechanism', fontcolor='black']
+   X [label = 'Confounder', fontcolor='black']
+
+    D->M
+    M->Y
+    X2->D
+    X2->M
+    X->Y
+    X->D
+    
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item One way to support our theory is to test the mechanisms along the causal path of treatment:
+\begin{itemize}
+\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
+\item Evidence of M occurring is consistent with $D$ having a causal effect
+\end{itemize}
+\item If there are no other possible confounders consistent with this mechanism, this is a 'Smoking Gun' test
+\end{itemize}
+<<Dag3b,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+      M [label = 'Mechanism', fontcolor='black']
+   X [label = 'Confounder', fontcolor='black']
+
+    D->M
+    M->Y
+    X->Y
+    X->D
+    
+	}")
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item We can also test mechanisms on the causal path of confounders:
+\begin{itemize}
+\item Evidence of Mechanism X NOT occurring can rule out this alternative theory
+\item Evidence of Mechanism X occurring is consistent with $D$ having a causal effect, but not proof
+\end{itemize}
+\item This is a 'straw in the wind' test
+\end{itemize}
+<<Dag4,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+      X [label = 'Confounder', fontcolor='black']
+      M [label = 'Mechanism X', fontcolor='black']
+
+    D->Y
+    M->Y
+    X->M
+    X->D
+    
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Unusually, a mechanism might explicitly separate two theories:
+\begin{itemize}
+\item $M=0$ if treatment is active
+\item $M=1$ if the confounder is active
+\end{itemize}
+\item This is a 'Doubly-Decisive' test
+\end{itemize}
+<<Dag5,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot,
+           rankdir = LR]
+
+    node [shape = plaintext]
+  	  D [label = 'Treatment', fontcolor='blue']
+      Y [label = 'Outcome', fontcolor='red']
+      X [label = 'Confounder', fontcolor='black']
+      M [label = 'Mechanism', fontcolor='black']
+
+    D->M
+    M->Y
+    X->M
+    X->D
+    
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item What happened to counterfactuals here?
+\pause
+\item We still don't know what would have happened if our case had not received the treatment
+\pause
+\item We're substituting assumptions/theory for a counterfactual
+\pause
+\begin{itemize}
+\item We 'assume' that the only way our treatment could work is through the mechanism we specify
+\pause
+\item And we assume the only way confounding works is through the mechanism we specify
+\end{itemize}
+\item So everything depends on how confident we are in our theory/assumptions about mechanisms
+\pause
+\item Note the pattern from least to most theoretical as we require more and more prior knowledge to make causal inference: Field experiments, natural experiments, observational studies, comparative cases, process tracing
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item In practice, process tracing is made harder by:
+\pause
+\begin{itemize}
+\item Imprecise, multiple or non-discriminating theory
+\pause
+\item Imperfect measurement and data availability
+\pause
+\item Subjective judgment on the weight of each piece of evidence
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item What are we really learning from process tracing?
+\pause
+\item That a treatment caused an outcome \textbf{in our specific case}
+\pause
+\item That is a form of causal inference - if $D$ has caused $Y$ then it must be capable of having some effect in a broader sample
+\pause
+\item But how representative is our case?
+\pause
+\item Will the same causal effect occur in other contexts?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item One advantage is that we can focus on individuals' preferences, behaviour, perceptions, expectations and decisions
+\pause
+\item Process tracing also more useful where causation is complex - with lots of interaction effects, context-specific causation, feedback effects and multiple equilibria
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Analytic Narratives
+\pause
+\begin{itemize}
+\item Using the causal mechanisms in formal theory (game theory) to generalize from case studies
+\pause
+\item Iterates between the case study and the theory
+\pause
+\item Case study defines the players, preferences and strategy set (options) in the game theory
+\pause
+\item Game theory predictions are compared to the outcomes in the case study
+\pause
+\end{itemize}
+\item The game theory then provides for causal inference - allows us to generalize a causal mechanism for how the treatment affects the outcome
+\pause
+\item The game might make bad predictions - that suggests this treatment/theory is wrong
+pause
+\item But the risk is we don't test alternative theories, we just amend our original model slightly
+\end{itemize}
+\end{frame}
+
+%Causal Process Observations
+%Framework relies on deterministic effects, not probabilistic ones (really means we've taken all the confounders into account)
+%Can also look at 'other' auxiliary outcomes
+%When to start an analysis? If theory-generating...
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Brady (2010)
+\pause
+\item Difference-in-differences evidence that the early announcement of a Democrat victory in Florida led to reduced Republican voting
+\pause
+\item Estimated 10,000 lost Republican votes
+\pause
+\item Is this a reasonable estimate? Process tracing goes beyond the treatment, outcome and confounder data to use evidence on the mechanisms
+\pause
+\item The only way the causal effect is true is if there is a causal mechanism connecting the treatment to the outcome:
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Brady (2010)
+\pause
+\begin{itemize}
+\item How long was left for the election after treatment? \pause 10 minutes
+\pause
+\item How many voters were \textbf{potentially influenced} \pause 4,200 voters
+\pause
+\item How many voters were \textbf{probably treated} \pause 560 voters
+\pause
+\item How many voters \textbf{likely complied with treatment} \pause 56 voters \pause \< 10,000
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item Brady (2010)
+\pause
+\begin{itemize}
+\item How long was left for the election after treatment? \pause 10 minutes
+\pause
+\item How many voters were \textbf{potentially influenced} \pause 4,200 voters
+\pause
+\item How many voters were \textbf{probably treated} \pause 560 voters
+\pause
+\item How many voters \textbf{likely complied with treatment} \pause 56 voters \pause \< 10,000
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+

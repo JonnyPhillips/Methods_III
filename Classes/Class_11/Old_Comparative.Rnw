@@ -1,0 +1,919 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<Setup,echo=FALSE,warning=FALSE,message=FALSE>>=
+library(tidyverse)
+library(broom)
+library(MatchIt)
+library(xtable)
+library(stargazer)
+library(DiagrammeR)
+library(knitr)
+library(Zelig)
+library(ZeligChoice)
+library(kableExtra)
+@
+
+
+\title{FLS 6415 - Causal Inference for the Political Economy of Development}
+\subtitle{Week 11 - Collective Action \& Comparative Cases}
+\author{Jonathan Phillips}
+\date{November 2017}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section{Review of Large-N Causal Inference}
+
+\begin{frame}
+\frametitle{Review of Large-N Causal Inference}
+\begin{itemize}
+\item How to analyze data for causal inference:
+\pause
+\begin{enumerate}
+\item Causal Inference logic -> Regression Structure
+\pause
+\item Outcome Type -> Regression Model
+\pause
+\item Treatment scale \& Outcome scale -> Interpretation
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Treatment Assignment Mechanisms}
+\begin{table}[htbp]
+  \centering
+  \caption{Analysis Types and Assumptions}
+    \resizebox*{1.1\textheight}{!}{\begin{tabular}{|r|l|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{6cm}|}
+    \hline
+    \multicolumn{1}{|r|}{\textbf{Week}} & \multicolumn{1}{|}{\textbf{Assumption:
+}} & \textbf{Researcher Controls Treatment Assignment?} & \textbf{Treatment Assignment Independent of Potential Outcomes} & \textbf{SUTVA} & \multicolumn{1}{p{2cm}|}{\textbf{Additional Assumptions}} \bigstrut\\
+    \hline
+          & \textbf{Controlled Experiments} &       &       &       &  \bigstrut\\
+    \hline
+    1     &    Field Experiments & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark &  \bigstrut\\
+    \hline
+    2     &    Survey and Lab Experiments &  \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & Controlled Environment for treatment exposure \bigstrut\\
+    \hline
+          & \textbf{Natural Experiments} &       &       &       &  \bigstrut\\
+    \hline
+    3     &    Randomized Natural Experiments & X     & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & Compliance with Randomization \bigstrut\\
+    \hline
+    4     &    Instrumental Variables & X     & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & First stage and Exclusion Restriction (Instrument explains treatment but not outcome) \bigstrut\\
+    \hline
+    5     &    Regression Discontinuity & X     & \cellcolor{teal}\checkmark & \cellcolor{teal}\checkmark & Continuity of covariates; No manipulation; No compounding discontinuities \bigstrut\\
+    \hline
+          & \textbf{Observational Studies} &       &       &       &  \bigstrut\\
+    \hline
+    6     &    Difference-in-Differences & X     & X     & \cellcolor{teal}\checkmark & No Time-varying confounders; Parallel Trends \bigstrut\\
+    \hline
+    7     &    Controlling for Confounding & X     & X     & \cellcolor{teal}\checkmark & Blocking all Back-door paths \bigstrut\\
+    \hline
+    8     &    Matching & X     & X     & \cellcolor{teal}\checkmark & Overlap in sample characteristics \bigstrut\\
+    \hline
+    \end{tabular}}%
+\end{table}%
+\end{frame}
+
+\begin{frame}
+\frametitle{Regression Structure}
+<<Dag1,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot]
+
+    node [shape = plaintext]
+	  TAM [label = 'What is the Treatment Assignment Mechanism?', fontcolor='blue']
+    Exp [label = 'Randomized (Experimental)', fontcolor='black']
+    Nat_Exp [label = 'As-If Random (at least in part)', fontcolor='balck']
+    Obs [label = 'Observational', fontcolor='black']
+    Exp2 [label = 'Y ~ D']
+    Nat_Exp_RDD [label = 'RDD \n (Y ~ R + D)']
+    Nat_Exp_IV [label = 'IV \n (D ~ Z; Y ~ D_hat)']
+    Obs_DinD [label = 'Diff-in-Diff \n (Y ~ D + T + T:D)']
+    Obs_Reg [label = 'Controlling \n (Y ~ D + X_1 + X_2)']
+    Obs_Match [label = 'Matching']
+
+    TAM -> Exp
+    TAM -> Nat_Exp
+    TAM -> Obs
+    Exp -> Exp2
+    Nat_Exp -> Nat_Exp_RDD
+    Nat_Exp -> Nat_Exp_IV
+    Obs -> Obs_Match
+    Obs_Match -> Obs_Reg
+    Obs -> Obs_DinD
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Outcome Variable Type}
+\begin{itemize}
+\item Continuous -> Ordinary Least Squares
+\begin{center}
+<<out1, echo=TRUE, eval=FALSE>>=
+zelig(Formula,data=data,model="ls")
+@
+\end{center}
+\item Binary -> Logit
+<<out2, echo=TRUE, eval=FALSE>>=
+zelig(Formula,data=data,model="logit")
+@
+\item Unordered categories -> Multinomial logit
+<<out3, echo=TRUE, eval=FALSE>>=
+zelig(Formula,data=data,model="mlogit")
+@
+\item Ordered categories -> Ordered logit
+<<out4, echo=TRUE, eval=FALSE>>=
+zelig(Formula,data=data,model="ologit")
+@
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+\begin{itemize}
+\item \textbf{For OLS regression:}
+\item A 1 [unit1] change in treatment [causes/is associated with] a $\beta$ [unit2] change in the outcome
+\item unit1 : Same units as treatment variable
+\begin{itemize}
+\item Unless treatment is log(), then unit1 is 1\% and unit2 is $\beta*ln(\frac{101}{100})$ (not \%)
+\item Which is almost the same as $\frac{\beta}{100}$ (not \%)
+\end{itemize}
+\item unit2 : Same units as outcome variable
+\begin{itemize}
+\item Unless outcome is log(), then unit2 is $100*(exp(\beta)-1)$\%
+\item Which is almost the same as $100*\beta$\%
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp1, echo=TRUE, eval=FALSE>>=
+zelig(mpg~wt,data=mtcars,model="ls")
+@
+<<interp1_tab, echo=FALSE, results='asis'>>=
+mtcars %>% zelig(mpg~wt,data=.,model="ls", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp1b, echo=TRUE, eval=FALSE>>=
+zelig(mpg~log(wt),data=mtcars,model="ls")
+@
+<<interp1_tabb, echo=FALSE, results='asis'>>=
+mtcars %>% zelig(mpg~log(wt),data=.,model="ls", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp1c, echo=TRUE, eval=FALSE>>=
+zelig(log(mpg)~wt,data=mtcars,model="ls")
+@
+<<interp1_tabc, echo=FALSE, results='asis'>>=
+mtcars %>% zelig(log(mpg)~wt,data=.,model="ls", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Interpretation}
+\begin{itemize}
+\item \textbf{For Logit regression:}
+\item A 1 [unit1] change in treatment [causes/is associated with] a $\beta$ change in the log-odds of the outcome
+\pause
+\item A 1 [unit1] change in treatment [causes/is associated with] a $100*(exp^{\beta}-1)$\% change in the odds (relative probability) of the outcome
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp1_logit, echo=TRUE, eval=FALSE>>=
+zelig(am~wt,data=mtcars,model="logit")
+mtcars
+@
+<<interp1_logit_tab, echo=FALSE, results='asis'>>=
+mtcars %>% zelig(am~wt,data=.,model="ls", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+@
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Interpretation}
+\begin{itemize}
+\item \textbf{For Ordered Logit regression:}
+\item A 1 [unit1] change in treatment [causes/is associated with] a $\beta$ change in the log-odds of moving up one unit on the outcome scale
+\pause
+\item A 1 [unit1] change in treatment [causes/is associated with] a $100*(exp^{\beta}-1)$\% change in the odds (relative probability) of moving up one unit on on the outcome scale
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp2, echo=TRUE, eval=FALSE, warning=FALSE, mesage=FALSE>>=
+zelig(cyl~wt,data=mtcars,model="ologit")
+@
+<<interp2_tab, echo=FALSE, results='asis'>>=
+mtcars$cyl <- factor(mtcars$cyl,levels=c("4","6","8"),ordered=TRUE)
+mtcars %>% zelig(cyl~wt,data=.,model="ologit", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+\begin{itemize}
+\item \textbf{For Unordered Logit regression:}
+\item If there are $C$ outcome categories, we get $C-1$ coefficients on each treatment variable
+\pause
+\item A 1 [unit1] change in treatment [causes/is associated with] a $\beta_C$ change in the log-odds of this outcome category compared to the base category
+\pause
+\item A 1 [unit1] change in treatment [causes/is associated with] a $100*(exp(\beta_C)-1)$ change in the odds (relative probability) of this outcome category compared to the base category
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Interpretation}
+<<interp3, echo=TRUE, eval=FALSE>>=
+zelig(color~wt,data=mtcars,model="mlogit")
+@
+<<interp3_tab, echo=FALSE, results='asis'>>=
+colors <- c("Red","Blue","Black","Silver")
+mtcars$color <- factor(rep(colors,8))
+levels(mtcars$color)
+
+#mtcars %>% zelig(gear~wt,data=.,model="mlogit", cite=FALSE) %>% from_zelig_model() %>% stargazer()
+mtcars %>% zelig(color~wt,data=.,model="mlogit", cite=FALSE) %>% from_zelig_model() %>% summary() %>% coef() %>% stargazer()
+@
+\end{frame}
+
+\section{Comparative Case Studies}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Necessary when there are few measurable cases of our treatment/outcome
+\pause
+\item \textbf{Exactly} the same causal inference logic as Large-N
+\pause
+\item We need counterfactuals to estimate treatment effects: \textbf{Comparative} Cases
+\pause
+\item Even if we can 'observe' the causal process, we can easily make mistakes
+\pause
+\item The aim is to go beyond description
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Why can't we achieve causal inference from single case studies?
+\pause
+\item If we truly have only one 'treated' observation, we \textit{cannot} know what would have happened in the absence of treatment
+\pause
+\item These case studies can help \textit{generate} hypotheses...
+\pause
+\item And they can maybe reject or weaken a theory...
+\pause
+\item But they cannot \textbf{confirm} a theory
+\pause
+\item We need variation in the dependent variable if we are to explain it
+\pause
+\item Common error: "research that tries to explain the outbreak of war with studies only of wars" (KKV)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Similarities with Large-N:
+\pause
+\begin{itemize}
+\item Same challenges to inference: confounding, selection, reverse causation
+\pause
+\item Same assumptions required: SUTVA, Balance on all confounders
+\pause
+\end{itemize}
+\item Differences with Large-N:
+\begin{itemize}
+\item Fewer comparisons: No uncertainty measure or confidence intervals. What's our standard of evidence?
+\pause
+\begin{itemize}
+\item p-values aren't the only source of credibility (Slater and Ziblatt 2013)
+\end{itemize}
+\pause
+\item Statistical Inference: Non-random cases, so generalization is harder
+\pause
+\item Harder to balance confounders: More variables than cases!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item In a small-N study, what causal inference technique is most useful?
+\pause
+\begin{itemize}
+\item Diff-in-diff plausible if we have time-series data
+\pause
+\item IV may be possible if there is some as-if random assignment, eg. leader death from cancer
+\pause
+\item Or an RDD, eg. just missing out on WB loans due to GDP measure
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item But most commonly, we are using a matching strategy:
+\pause
+\begin{itemize}
+\item Matching to ensure balance on confounders through case selection - prune unmatched cases
+\pause
+\item Clearly we can't match on everything, so focus on getting balance on key confounders/alternative theories
+\pause
+\end{itemize}
+\item \textbf{Our Large-N dataset after matching might look very similar to a comparative case study}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Case Selection:
+\pause
+\item Don't confuse two distinct considerations in choosing cases:
+\pause
+\begin{enumerate}
+\item Causal Inference (internal validity) - can our cases tell us with confidence that $D$ causes $Y$?
+\pause
+\item Population Inference (external validity) - How much can we generalize about this causal effect to a broader population?
+\end{enumerate}
+\item Ideally we want both: Control and representative variation
+\begin{itemize}
+\item Our goal is not to explain why revolution happened in Iran, but why it happens generally
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Case Selection:
+\pause
+\begin{itemize}
+\item Random sampling is fine! It directly helps us generalize
+\pause
+\item And it helps us avoid explicit bias in causal inference
+\pause
+\item But:
+\pause
+\begin{itemize}
+\item Randomization does not guarantee enough variation in the treatment and outcome in small samples
+\pause
+\item Randomization does not guarantee balance on confounders in small samples
+\pause
+\item Randomized sampling is not the same as randomized treatment
+\end{itemize}
+\item So even if we randomize, need to check for balance and variation
+\pause
+\item Probably easier to 'block' on key confounders and impose variation in treatment - purposive sampling
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Case Selection:
+\pause
+\begin{itemize}
+\item \textbf{DO NOT} select cases by the value of the outcome (Geddes)
+\pause
+\item If we only study success cases, we don't know the counterfactual
+\pause
+\item The 'treatment' may also have been present in the 'control' cases
+\pause
+\item We want to explain interesting things, so we often pick 'extreme' cases, but the extremeness might reflect confounders, not the treatment
+\pause
+\item But: If we select cases explicitly for a \textit{range} of values of the outcome, that's better
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Case Selection:
+\pause
+\begin{itemize}
+\item Case selection also requires properly defining our population/sample
+\pause
+\item We risk 'survival bias' if we only look at 'active' cases
+\pause
+\begin{itemize}
+\item Eg. cases where 'deterrence' fails coincide with poor communication
+\pause
+\item But communication is also poor every second that deterrence worked!
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Case Selection:
+\pause
+\begin{itemize}
+\item Achieving generalizability (population inference) depends on our cases being representative
+\pause
+\item If we want to compare mens and womens running speeds, \textbf{DO NOT} pick Usain Bolt and Florence Griffith-Joyner
+\pause
+\item Pick units with 'median' values - or a range of values - on the confounding and outcome variables
+\pause
+\item Do this at the same time as balancing confounders - hard!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item \textbf{Most similar cases:} Same covariates, different treatment value
+\pause
+\item BUT If there are many sets of 'most similar' paired cases, which should we pick?
+\pause
+\begin{itemize}
+\item \textbf{Typical cases:} Most representative paired cases on covariates, eg. Levitsky and Way
+\pause
+\item \textbf{Diverse cases:} Covering all values of treatment and covariates, eg. Slater
+\pause
+\item \textbf{Extreme cases:} Highest and lowest values of treatment, eg. Lieberman
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Methods for alternative objectives:
+\pause
+\begin{itemize}
+\item \textbf{Deviant cases:} If you want to disprove a theory or generate a new hypothesis
+\pause
+\item \textbf{Most different cases:} When searching for a hypothesis to explain $Y$
+\pause
+\item \textbf{Influential cases:} How sensitive is our relationship to mismeasurement of a key case?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Three forms of mixed methods:
+\pause
+\begin{enumerate}
+\item Large-N measurement supports case selection for Small-N analysis (Seawright and Gerring)
+\pause
+\item Small-N study to identify relationship, then tested for generalizability in Large-N sample (Lieberman)
+\pause
+\item Large-N analysis to show causal mechanism within-case, then generalized using comparative case studies (Ziblatt and Slater)
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Strategies for increasing the number of observations:
+\pause
+\begin{enumerate}
+\item Additional measurable implications of the causal theory
+\pause
+\item Subnational units
+\pause
+\item Time-series
+\pause
+\item Alternative mesaures
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+%Stress confounders as rival theories/explanations
+%Most-diff-systems really about hyp-gen - perhaps use this to stress dif between causes of effects and effects of causes...
+
+\section{Studies of Collective Action}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item How do individuals organize to achieve shared goals?
+\pause
+\item When do they succeed in achieving those goals?
+\pause
+\item Many processes of collective action are national in scope and have few cases
+\pause
+\begin{itemize}
+\item Elite loyalty
+\pause
+\item Protest
+\pause
+\item Tax compliance
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\begin{itemize}
+\item What is their theory?
+\pause
+\item How do the comparative cases provide supportive evidence?
+\pause
+\item How generalizable are the findings?
+\pause
+\item How did they select their cases?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\begin{itemize}
+\item When do authoritarian parties collapse? (No specific treatment variable)
+\pause
+\item Does a ruling party that emerged from violent revolution cause a lower risk of authoritarian party collapse? (Specific treatment variable)
+\pause 
+\item Does a \textcolor{red}{[ruling party that emerged from violent revolution]} cause a \textcolor{blue}{[lower risk of authoritarian party collapse]}?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\item Causal theory/mechanisms that affect collective action:
+\pause
+\begin{itemize}
+\item Clearer group boundaries and solidarity
+\pause
+\item Leader legitimacy
+\pause
+\item Raising the moral and social costs of defection
+\pause
+\item Greater 'stomach' for repression
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\begin{itemize}
+\item \textbf{Population:} \pause One-Party Competitive Authoritarian regimes during economic crisis (scope condition)
+\pause 
+\item \textbf{Sample: }\pause Kenya, Mozambique, Zimbabwe, Zambia
+\pause 
+\item \textbf{Treatment: }\pause Party formed by violent conflict
+\pause 
+\item \textbf{Control: }\pause Party not formed by violent conflict
+\pause 
+\item \textbf{Treatment Assignment: }\pause Complex historical processes
+\pause 
+\item \textbf{Outcome: }\pause Regime survival
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\item Estimating the causal effect is easy:
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|l|r|p{4cm}|}
+    \hline
+          & \multicolumn{1}{l|}{Control} & Treated \bigstrut\\
+    \hline
+    Regime collapse & \multicolumn{1}{l|}{Kenya, Zambia} &  \bigstrut\\
+    \hline
+    Regime survival &       & Mozambique, Zimbabwe \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\begin{itemize}
+\item The 'work' is in measuring the variables and controlling for alternative explanations
+\pause
+\item Is self-selection a concern? Not so much - hard for a leader to choose their party origins
+\pause
+\item Confounders are identified from alternative theories that explain the outcome
+\pause
+\item Our cases must be balanced on these variables:
+\pause
+\begin{itemize}
+\item Eg. Economic modernization might predict both violent origins and ruling party stability
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item \textbf{Economy -} \pause ``All four were poor (with per capita GDP below \$1000) and predominantly rural countries''
+\pause
+\item \textbf{Duration in power - }\pause ``in 1990, all of them had been in power for at least a decade''
+\pause
+\item \textbf{Strength of opposition - } \pause Kenya: ``a class of politicians with independent support bases''; Mozambique: ``Frelimo faced a unified opposition in Renamo''
+\pause
+\item \textbf{Fiscal crisis - } \pause Zambia: ``GDP contracted by nearly 20 percent between 1981 and 1986''; Zimbabwe: ``GDP contracted by 60 percent between 2000 and 2006''
+\pause
+\item \textbf{Party scope - } \pause ``All four ruling parties had extensive party structures and relatively stable patronage networks''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item OR the expected bias from the imbalance must make it \textbf{less likely} for us to find a treatment effect
+\pause
+\begin{itemize}
+\item Eg. Zimbabwe had higher income than Zambia and Kenya so modernization theory would predict regime collapse is \textbf{more likely}
+\pause
+\item And a worse economic crisis also suggests regime collapse more likely...
+\pause
+\item So if the Zimbabwe regime survives, that can't be due to these confounders
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Levitsky and Way (2003)
+\item Case Selection?
+\pause
+\begin{itemize}
+\item Not ex ante explicit
+\pause
+\item But designed to achieve balance
+\pause
+\end{itemize}
+\item Generalizability?
+\begin{itemize}
+\item How unusual are Zimbabwe and Mozambique?
+\pause
+\item Can't say much outside of Africa
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\begin{itemize}
+\item What is his theory?
+\pause
+\item How do the comparative cases provide supportive evidence?
+\pause
+\item How generalizable are the findings?
+\pause
+\item How did he select his cases?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\begin{itemize}
+\item Why is it so much harder to collect taxes in Brazil than South Africa?
+\pause
+\item Do salient racial cleavages increase willingness to pay taxes?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\begin{itemize}
+\item \textbf{Population:} \pause Developing countries
+\pause 
+\item \textbf{Sample: }\pause Brazil and South Africa
+\pause 
+\item \textbf{Treatment: }\pause Cross-class racial cleavage
+\pause 
+\item \textbf{Control: }\pause Non-racial class cleavage
+\pause 
+\item \textbf{Treatment Assignment: }\pause History of social relations, constitutional conventions, policies
+\pause 
+\item \textbf{Outcome: }\pause Compliance of the rich with direct taxation
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\item Balancing on Confounders
+\pause
+\begin{itemize}
+\item Authoritarian history/democratization
+\pause
+\item Development Strategy
+\pause
+\item Income levels
+\pause
+\item Income inequality
+\pause
+\item Ethnic diversity
+\pause
+\item Wars/International context
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\begin{itemize}
+\item Brazil and South Africa might be imbalanced on the amount of fish they catch
+\pause
+\item And there's always a chance that this might matter
+\pause
+\item But if we have balanced all \textbf{theoretically-relevant} confounders, that's pretty good
+\pause
+\end{itemize}
+\item Don't balance on recent indiciators of trust, corruption or culture. Why?
+\pause
+\begin{itemize}
+\item These variables are post-treatment - affected by the national political community
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Lieberman (2003)
+\begin{itemize}
+\item Complements the comparative case study with a cross-national regression
+\pause
+\item Measurement accuracy vs generalizability
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Slater (2009)
+\begin{itemize}
+\item What is his theory?
+\pause
+\item How do the comparative cases provide supportive evidence?
+\pause
+\item How generalizable are the findings?
+\pause
+\item How did he select his cases?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Slater (2009)
+\begin{itemize}
+\item When does protest occur?
+\pause
+\item When does protest succeed?
+\pause
+\item Theory: Economic crisis or modernization or a stronger middle-class is not enough: Democrats also have to overcome the collective action problem
+\pause
+\item Does the support of communal elites make mass protest more likely, and more likely to succeed?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item Slater (2009)
+\begin{itemize}
+\item Holding region constant
+\pause
+\item Balance cases on income / material interests (alternative theory)
+\pause
+\item Tries to correct a selection bias in the literature: Scholars measure protest but not the \textbf{absence of protest}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{itemize}
+\item \textbf{Population:} \pause Authoritarian regimes
+\pause 
+\item \textbf{Sample: }\pause 10 country-years in Southeast Asia 
+\pause 
+\item \textbf{Treatment: }\pause Communal elites support the opposition
+\pause 
+\item \textbf{Control: }\pause Communal elites support the regime/split
+\pause 
+\item \textbf{Treatment Assignment: }\pause Historical processes of colonialism, decolonisation, and authoritarianism
+\pause 
+\item \textbf{Outcome: }\pause No protests, failed protests or protest success
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Collective Action}
+\begin{center}
+\includegraphics[scale=0.3]{Slater_Table1.png}
+\end{center}
+\end{frame}
+
+\end{document}
