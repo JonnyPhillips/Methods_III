@@ -17,9 +17,10 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Additional Readings
 - [Geddes, Barbara, How the Cases you Choose Affect the Answers you get: Selection Bias in Comparative Politics](Classes/Class_11/Readings/Geddes.pdf)
 - [Seawright, Jason and Gerring, John, 2008, Case Selection Techniques in Case Study Research: A Menu of Qualitative and Quantitative Options](Classes/Class_11/Readings/Seawright and Gerring Case Selection.pdf)
+- [Sekhon, Jasjeet S., Quality Meets Quantity: Case Studies, Conditional Probability, and Counterfactuals](Classes/Class_11/Readings/Sekhon 2004 for Comparative Cases Week.pdf)
 - [Bates et al 1997, 2000, The Analytical Narrative Project, American Political Science Review, 94:3](Classes/Class_11/Readings/Bates et al 1997.pdf)
 - [Collier, 2011, Understanding Process Tracing, Political Science and Politics 44:4](Classes/Class_11/Readings/Collier 2011.pdf)
 
-## [Lecture Slides](Classes/Class_11/)
+## [Lecture Slides](Classes/Class_11/Slides_Comparative_Process_v1.pdf)
 
 

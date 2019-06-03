@@ -63,6 +63,7 @@
 \usepackage{amsmath} 
 \usepackage{xcolor,colortbl}
 \usepackage{amssymb}
+\usepackage{multicol}
 %\newcommand{\done}{\cellcolor{teal}#1}
 
 %% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,10 +164,6 @@
 \item \textbf{Exactly} the same causal inference logic as Large-N
 \pause
 \item We need counterfactuals to estimate treatment effects: \textbf{Comparative} Cases
-\pause
-\item Even if we can 'observe' the causal process, we can easily make mistakes
-\pause
-\item The aim is to go beyond description
 \end{itemize}
 \end{frame}
 
@@ -175,18 +172,120 @@
 \begin{itemize}
 \item Why can't we achieve causal inference from single case studies?
 \pause
-\item If we truly have only one 'treated' observation, we \textit{cannot} know what would have happened in the absence of treatment
+\item If we have only one 'treated' observation, we \textit{cannot} know what would have happened in the absence of treatment
+\begin{itemize}
+\item Exactly the same outcome could have occurred
+\end{itemize}
 \pause
 \item These case studies can help \textit{generate} hypotheses...
 \pause
-\item And they can maybe reject or weaken a theory...
+\item ...And they can maybe weaken a theory... eg. if the outcome is absent with treatment
 \pause
 \item But they cannot \textbf{confirm} a theory
 \pause
-\item We need variation in the dependent variable if we are to explain it
+\item We need variation in the dependent variable if we are to \textit{explain} it
 \pause
 \item Common error: "research that tries to explain the outbreak of war with studies only of wars" (KKV)
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item In a small-N study, what causal inference technique is most useful?
+\pause
+\begin{itemize}
+\item \textbf{Natural experiments:} Possible, but rare
+\pause
+\item \textbf{Diff-in-diff:} Maybe if we have time-series data
+\pause
+\item \textbf{Controlling:} Not enough observations
+\pause
+\item \textbf{Matching:} More useful
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Matching is the \textbf{'Comparative Method'}
+\begin{itemize}
+\item Don't look at the outcome variable
+\pause
+\item Split the sample on a single treatment variable
+\pause
+\item Balance on confounders through careful case selection - remove unmatched cases
+\pause
+\item We can't match on everything, so focus on getting balance on \textbf{key confounders/alternative theories}
+\pause
+\end{itemize}
+\item \textbf{Our Large-N dataset after matching might look very similar to comparative case studies}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Does Development cause Democracy?
+\pause
+\item We want cases which vary in level of development
+\pause
+\item But are identical in all other ways \pause \textbf{Impossible!}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{itemize}
+\item Does Development cause Democracy?
+\item We want cases which vary in level of development
+\item But are identical in the other variables theory suggests might be confounders \pause \textbf{Possible!}
+\begin{itemize}
+\item Or at least those variables which suggest the treated case would be \textit{less} democratic
+\end{itemize}
+\pause
+\item Alternative Theories of Democratization:
+\begin{enumerate}
+\item Geography
+\pause
+\item Religion/culture
+\pause
+\item Inequality
+\pause
+\item Slow economic growth
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{table}[htbp]
+  \centering
+  \caption{Does Development cause Democracy?}
+    \begin{tabular}{|r|l|c|c|}
+    \hline
+          & Variable & \multicolumn{1}{l|}{Case A} & \multicolumn{1}{l|}{Case B} \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Outcome} & Democracy & ?     & ? \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Treatment} & Development & Low   & High \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Controls} & Religion & Christian & Christian \bigstrut\\
+    \hline
+          & Continent & Europe & Europe \bigstrut\\
+    \hline
+          & Inequality & 0.45  & 0.44 \bigstrut\\
+    \hline
+          & Economic growth & 1.2\% & 5\% \bigstrut\\
+    \hline
+          & National dish & Pasta & Corn \bigstrut\\
+    \hline
+          & Length of Railways & 400km & 120km \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
 \end{frame}
 
 \begin{frame}
@@ -202,46 +301,16 @@
 \end{itemize}
 \item Differences with Large-N:
 \begin{itemize}
+\item Harder to balance confounders: More variables than cases!
+\pause
 \item Fewer comparisons: No uncertainty measure or confidence intervals. What's our standard of evidence?
 \pause
 \begin{itemize}
 \item p-values aren't the only source of credibility (Slater and Ziblatt 2013)
 \end{itemize}
 \pause
-\item Statistical Inference: Non-random cases, so generalization is harder
-\pause
-\item Harder to balance confounders: More variables than cases!
+\item Statistical Inference: Non-random case-selection, so generalization is harder
 \end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Comparative Case Studies}
-\begin{itemize}
-\item In a small-N study, what causal inference technique is most useful?
-\pause
-\begin{itemize}
-\item Diff-in-diff plausible if we have time-series data
-\pause
-\item IV may be possible if there is some as-if random assignment, eg. leader death from cancer
-\pause
-\item Or an RDD, eg. just missing out on WB loans due to GDP measure
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Comparative Case Studies}
-\begin{itemize}
-\item But most commonly, we are using a matching strategy:
-\pause
-\begin{itemize}
-\item Matching to ensure balance on confounders through case selection - prune unmatched cases
-\pause
-\item Clearly we can't match on everything, so focus on getting balance on key confounders/alternative theories
-\pause
-\end{itemize}
-\item \textbf{Our Large-N dataset after matching might look very similar to a comparative case study}
 \end{itemize}
 \end{frame}
 
@@ -250,16 +319,18 @@
 \begin{itemize}
 \item Case Selection:
 \pause
-\item Don't confuse two distinct considerations in choosing cases:
+\item Two distinct considerations:
 \pause
 \begin{enumerate}
-\item Causal Inference (internal validity) - can our cases tell us with confidence that $D$ causes $Y$?
+\item \textbf{Causal Inference} (internal validity) - can our cases tell us with confidence that $D$ causes $Y$?
 \pause
-\item Population Inference (external validity) - How much can we generalize about this causal effect to a broader population?
+\item \textbf{Statistical Inference} (external validity) - How much can we generalize about this causal effect to a broader population?
+\pause
 \end{enumerate}
 \item Ideally we want both: Control and representative variation
+\pause
 \begin{itemize}
-\item Our goal is not to explain why revolution happened in Iran, but why it happens generally
+\item Our goal is not to explain why outcome $Y$ happened in one case, but why it happens generally
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -272,19 +343,15 @@
 \begin{itemize}
 \item Random sampling is fine! It directly helps us generalize
 \pause
-\item And it helps us avoid explicit bias in causal inference
+\item And it helps us avoid researcher bias
 \pause
 \item But:
 \pause
 \begin{itemize}
-\item Randomization does not guarantee enough variation in the treatment and outcome in small samples
-\pause
 \item Randomization does not guarantee balance on confounders in small samples
 \pause
 \item Randomized sampling is not the same as randomized treatment
 \end{itemize}
-\item So even if we randomize, need to check for balance and variation
-\pause
 \item Probably easier to 'block' on key confounders and impose variation in treatment - purposive sampling
 \end{itemize}
 \end{itemize}
@@ -293,16 +360,18 @@
 \begin{frame}
 \frametitle{Comparative Case Studies}
 \begin{itemize}
-\item Case Selection:
+\item Can we really ignore the outcome variable??
 \pause
 \begin{itemize}
 \item \textbf{DO NOT} select cases by the value of the outcome (Geddes)
+\begin{itemize}
 \pause
-\item If we only study success cases, we don't know the counterfactual
+\item If we only study success cases, we don't know the outcome under control
 \pause
 \item The 'treatment' may also have been present in the 'control' cases
 \pause
 \item We want to explain interesting things, so we often pick 'extreme' cases, but the extremeness might reflect confounders, not the treatment
+\end{itemize}
 \pause
 \item But: If we select cases explicitly for a \textit{range} of values of the outcome, that's better
 \end{itemize}
@@ -312,35 +381,16 @@
 \begin{frame}
 \frametitle{Comparative Case Studies}
 \begin{itemize}
-\item Case Selection:
+\item Generalizability:
 \pause
 \begin{itemize}
-\item Case selection also requires properly defining our population/sample
+\item Depends on our cases being representative
 \pause
-\item We risk 'survival bias' if we only look at 'active' cases
-\pause
-\begin{itemize}
-\item Eg. cases where 'deterrence' fails coincide with poor communication
-\pause
-\item But communication is also poor every second that deterrence worked!
-\end{itemize}
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Comparative Case Studies}
-\begin{itemize}
-\item Case Selection:
-\pause
-\begin{itemize}
-\item Achieving generalizability (population inference) depends on our cases being representative
-\pause
-\item If we want to compare mens and womens running speeds, \textbf{DO NOT} pick Usain Bolt and Florence Griffith-Joyner
+\item If we want to compare men's and women's running speeds, \textbf{DO NOT} pick Usain Bolt and Florence Griffith-Joyner
 \pause
 \item Pick units with 'median' values - or a range of values - on the confounding and outcome variables
 \pause
-\item Do this at the same time as balancing confounders - hard!
+\item At the same time as balancing confounders - hard!
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -362,7 +412,6 @@
 \end{itemize}
 \end{frame}
 
-
 \begin{frame}
 \frametitle{Comparative Case Studies}
 \begin{itemize}
@@ -378,18 +427,21 @@
 \end{itemize}
 \end{frame}
 
+\section{Mixed Methods}
 
 \begin{frame}
-\frametitle{Comparative Case Studies}
+\frametitle{Mixed Methods}
 \begin{itemize}
+\item How do we combine our earlier quantitative methods with comparative cases?
+\pause
 \item Three forms of mixed methods:
 \pause
 \begin{enumerate}
-\item Large-N measurement supports case selection for Small-N analysis (Seawright and Gerring)
+\item Large-N measurement supports \textbf{case selection} for Small-N analysis (Seawright and Gerring)
 \pause
-\item Small-N study to identify relationship, then tested for generalizability in Large-N sample (Lieberman)
+\item Comparative cases to identify explanation, then \textbf{tested for generalizability} in Large-N sample (Lieberman)
 \pause
-\item Large-N analysis to show causal mechanism within-case, then generalized using comparative case studies (Ziblatt and Slater)
+\item Large-N analysis to show \textbf{causal effect within-case}, then generalized using comparative case studies (Ziblatt and Slater)
 \end{enumerate}
 \end{itemize}
 \end{frame}
@@ -411,30 +463,26 @@
 \end{itemize}
 \end{frame}
 
-%Stress confounders as rival theories/explanations
-%Most-diff-systems really about hyp-gen - perhaps use this to stress dif between causes of effects and effects of causes...
-
-
 \section{Process Tracing} 
 
 \begin{frame}
 \frametitle{Process Tracing}
 \begin{itemize}
-\item Within-case analysis
+\item Can we learn anything with a single case study?
 \pause
-\item Only a contribution if we can turn our single case into \textbf{multiple} observations - usually over time
+\item Yes: \textbf{Within-case analysis}
 \pause
-\item Most effective when complementing large-N or comparative case study analysis
+\item For testing \textbf{specific causal theories} - \textit{how} does $D$ affect $Y$?
 \pause
-\item Theory-informed - the evidence must be useful for causal inference
+\item Only possible if we can turn our \textbf{single case} into \textbf{multiple observations}
+\pause
+\item \textbf{Causal Process Observations:}
 \begin{itemize}
-\item Evidence must support or undermine some theory
+\item Evidence must support or undermine a specific theory
 \pause
-\item Particularly the causal mechanism - what connects $D$ to $Y$?
+\item What observable implications are there of theory A? How do they differ from the implications of theory B?
 \pause
-\item What observable implications are there of theory A?
-\pause
-\item Is the evidence consistent with theory A?
+\item Is the evidence consistent with theory A? Or inconsistent with theory B?
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -442,15 +490,15 @@
 \begin{frame}
 \frametitle{Process Tracing}
 \begin{enumerate}
-\item Identify all relevant theories to explain the outcome (Our Treatment variable and confounders)
+\item Identify all relevant theories to explain the outcome (treatment plus alternative theories)
 \pause
-\item Use a specific theory to identify clear implications if each theory is true
+\item For each theory what would the case look like if the theory was true?
 \pause
 \item Gather data from the case on each observable implication
 \pause
 \item Compare the data to each theory
 \pause
-\item Can we eliminate all other theories (confounders) except our treatment?
+\item Can we eliminate all other theories except our treatment?
 \begin{itemize}
 \item Sherlock Holmes' Method of Elimination
 \end{itemize}
@@ -478,8 +526,8 @@
 \begin{itemize}
 \item One way to support our theory is to test the mechanisms along the causal path of treatment:
 \begin{itemize}
-\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
-\item Evidence of M occurring is consistent with $D$ having a causal effect
+\item Evidence of M NOT occurring is proof Treatment did not have a causal effect
+\item Evidence of M occurring is consistent with Treatment having a causal effect
 \end{itemize}
 \end{itemize}
 \begin{knitrout}
@@ -494,10 +542,11 @@
 \begin{itemize}
 \item One way to support our theory is to test the mechanisms along the causal path of treatment:
 \begin{itemize}
-\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
-\item Evidence of M occurring is consistent with $D$ having a causal effect
+\item Evidence of M NOT occurring is proof Treatment did not have a causal effect
+\item Evidence of M occurring is consistent with Treatment having a causal effect
 \begin{itemize}
 \item It could have been another confounder that also worked through that mechanism
+\pause
 \end{itemize}
 \end{itemize}
 \item This is a 'hoop' test
@@ -514,8 +563,8 @@
 \begin{itemize}
 \item One way to support our theory is to test the mechanisms along the causal path of treatment:
 \begin{itemize}
-\item Evidence of M NOT occurring is proof $D$ did not have a causal effect
-\item Evidence of M occurring is consistent with $D$ having a causal effect
+\item Evidence of M NOT occurring is proof Treatment did not have a causal effect
+\item Evidence of M occurring is consistent with Treatment having a causal effect
 \end{itemize}
 \item If there are no other possible confounders consistent with this mechanism, this is a 'Smoking Gun' test
 \end{itemize}
@@ -531,9 +580,12 @@
 \frametitle{Process Tracing}
 \begin{itemize}
 \item We can also test mechanisms on the causal path of confounders:
+\pause
 \begin{itemize}
 \item Evidence of Mechanism X NOT occurring can rule out this alternative theory
-\item Evidence of Mechanism X occurring is consistent with $D$ having a causal effect, but not proof
+\pause
+\item Evidence of Mechanism X occurring is consistent with Treatment having a causal effect, but not proof
+\pause
 \end{itemize}
 \item This is a 'straw in the wind' test
 \end{itemize}
@@ -548,9 +600,12 @@
 \frametitle{Process Tracing}
 \begin{itemize}
 \item Unusually, a mechanism might explicitly separate two theories:
+\pause
 \begin{itemize}
 \item $M=0$ if treatment is active
+\pause
 \item $M=1$ if the confounder is active
+\pause
 \end{itemize}
 \item This is a 'Doubly-Decisive' test
 \end{itemize}
@@ -559,6 +614,56 @@
 \includegraphics[width=1.8\linewidth]{figure/Dag5-1} 
 
 \end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\footnotesize
+\item Does Development cause Democracy?
+\pause
+\item We only have knowledge about South Korea: It got much richer between 1960 and 1987 when it became a democracy
+\pause
+\begin{multicols}{2}
+\item But did higher income \textit{cause} democracy?
+\pause
+\item Higher incomes raise the demand for democracy, and diversify power away from the state
+\pause
+\item If this were true we should see:
+\begin{itemize}
+\item Opinion polls show increased support for democracy
+\pause
+\item Street protests, especially among the new middle-class
+\pause
+\item Private sector and civil society lobbying for democracy
+\end{itemize}
+\pause
+\columnbreak
+\item Or was it American pressure (alternative theory)?
+\pause
+\item South Korean elites faced costs to continuing dictatorship, and choose to democratize
+\pause
+\item If this were true we should see:
+\begin{itemize}
+\item Discussions (public or private) between US and Korean elites
+\pause
+\item Korean vulnerability to US pressure
+\pause
+\item Elites choosing the time and form of democratization
+\end{itemize}
+\end{multicols}
+\end{itemize}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item What does the evidence show?
+\pause
+\vspace{2cm}
+\includegraphics[width=0.9\linewidth]{South_Korea.jpg}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -576,8 +681,6 @@
 \item And we assume the only way confounding works is through the mechanism we specify
 \end{itemize}
 \item So everything depends on how confident we are in our theory/assumptions about mechanisms
-\pause
-\item Note the pattern from least to most theoretical as we require more and more prior knowledge to make causal inference: Field experiments, natural experiments, observational studies, comparative cases, process tracing
 \end{itemize}
 \end{frame}
 
@@ -587,7 +690,7 @@
 \item In practice, process tracing is made harder by:
 \pause
 \begin{itemize}
-\item Imprecise, multiple or non-discriminating theory
+\item Imprecise, or non-discriminating theory
 \pause
 \item Imperfect measurement and data availability
 \pause
@@ -603,50 +706,13 @@
 \pause
 \item That a treatment caused an outcome \textbf{in our specific case}
 \pause
-\item That is a form of causal inference - if $D$ has caused $Y$ then it must be capable of having some effect in a broader sample
-\pause
 \item But how representative is our case?
 \pause
 \item Will the same causal effect occur in other contexts?
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Process Tracing}
-\begin{itemize}
-\item One advantage is that we can focus on individuals' preferences, behaviour, perceptions, expectations and decisions
-\pause
-\item Process tracing also more useful where causation is complex - with lots of interaction effects, context-specific causation, feedback effects and multiple equilibria
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Process Tracing}
-\begin{itemize}
-\item Analytic Narratives
-\pause
-\begin{itemize}
-\item Using the causal mechanisms in formal theory (game theory) to generalize from case studies
-\pause
-\item Iterates between the case study and the theory
-\pause
-\item Case study defines the players, preferences and strategy set (options) in the game theory
-\pause
-\item Game theory predictions are compared to the outcomes in the case study
-\pause
-\end{itemize}
-\item The game theory then provides for causal inference - allows us to generalize a causal mechanism for how the treatment affects the outcome
-\pause
-\item The game might make bad predictions - that suggests this treatment/theory is wrong
-pause
-\item But the risk is we don't test alternative theories, we just amend our original model slightly
-\end{itemize}
-\end{frame}
-
-%Causal Process Observations
 %Framework relies on deterministic effects, not probabilistic ones (really means we've taken all the confounders into account)
-%Can also look at 'other' auxiliary outcomes
-%When to start an analysis? If theory-generating...
 
 \begin{frame}
 \frametitle{Process Tracing}
@@ -657,49 +723,18 @@ pause
 \pause
 \item Estimated 10,000 lost Republican votes
 \pause
-\item Is this a reasonable estimate? Process tracing goes beyond the treatment, outcome and confounder data to use evidence on the mechanisms
-\pause
 \item The only way the causal effect is true is if there is a causal mechanism connecting the treatment to the outcome:
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Process Tracing}
-\begin{itemize}
-\item Brady (2010)
 \pause
 \begin{itemize}
-\item How long was left for the election after treatment? \pause 10 minutes
+\item How long was left for the election after treatment?: \pause 10 minutes
 \pause
-\item How many voters were \textbf{potentially influenced} \pause 4,200 voters
+\item How many voters were \textbf{potentially influenced}: \pause 4,200 voters
 \pause
-\item How many voters were \textbf{probably treated} \pause 560 voters
+\item How many voters were \textbf{probably treated}: \pause 560 voters
 \pause
-\item How many voters \textbf{likely complied with treatment} \pause 56 voters \pause \< 10,000
+\item How many voters \textbf{likely complied with treatment}: \pause 56 voters \pause < 10,000
 \end{itemize}
 \end{itemize}
 \end{frame}
-
-\section{}
-
-\begin{frame}
-\frametitle{Process Tracing}
-\begin{itemize}
-\item Brady (2010)
-\pause
-\begin{itemize}
-\item How long was left for the election after treatment? \pause 10 minutes
-\pause
-\item How many voters were \textbf{potentially influenced} \pause 4,200 voters
-\pause
-\item How many voters were \textbf{probably treated} \pause 560 voters
-\pause
-\item How many voters \textbf{likely complied with treatment} \pause 56 voters \pause \< 10,000
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-
 
 \end{document}

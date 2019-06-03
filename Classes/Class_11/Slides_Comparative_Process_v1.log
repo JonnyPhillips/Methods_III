@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  1 JUN 2019 16:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  2 JUN 2019 15:45
 entering extended mode
 **./Slides_Comparative_Process_v1.tex
 (Slides_Comparative_Process_v1.tex
@@ -773,6 +773,55 @@ Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
 \everycr=\toks46
 \minrowclearance=\skip62
 )
+("C:\Program Files\MiKTeX 2.9\tex/latex/tools\multicol.sty"
+Package: multicol 2018/12/27 v1.8v multicolumn formatting (FMi)
+\c@tracingmulticols=\count171
+\mult@box=\box61
+\multicol@leftmargin=\dimen274
+\c@unbalance=\count172
+\c@collectmore=\count173
+\doublecol@number=\count174
+\multicoltolerance=\count175
+\multicolpretolerance=\count176
+\full@width=\dimen275
+\page@free=\dimen276
+\premulticols=\dimen277
+\postmulticols=\dimen278
+\multicolsep=\skip63
+\multicolbaselineskip=\skip64
+\partial@page=\box62
+\last@line=\box63
+\maxbalancingoverflow=\dimen279
+\mult@rightbox=\box64
+\mult@grightbox=\box65
+\mult@gfirstbox=\box66
+\mult@firstbox=\box67
+\@tempa=\box68
+\@tempa=\box69
+\@tempa=\box70
+\@tempa=\box71
+\@tempa=\box72
+\@tempa=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\c@columnbadness=\count177
+\c@finalcolumnbadness=\count178
+\last@try=\dimen280
+\multicolovershoot=\dimen281
+\multicolundershoot=\dimen282
+\mult@nat@firstbox=\box85
+\colbreak@box=\box86
+\mc@col@check@num=\count179
+)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamerouterthememiniframes.sty")
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamerfontthemeserif.sty")
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\Arev.sty"
@@ -1261,72 +1310,75 @@ Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count171
-\calc@Bcount=\count172
-\calc@Adimen=\dimen274
-\calc@Bdimen=\dimen275
-\calc@Askip=\skip63
-\calc@Bskip=\skip64
+\calc@Acount=\count180
+\calc@Bcount=\count181
+\calc@Adimen=\dimen283
+\calc@Bdimen=\dimen284
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count173
-\calc@Cskip=\skip65
+\calc@Ccount=\count182
+\calc@Cskip=\skip67
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.sty"
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 )
-\AM@pagewidth=\dimen276
-\AM@pageheight=\dimen277
+\AM@pagewidth=\dimen285
+\AM@pageheight=\dimen286
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.def"
 File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box61
+\AM@pagebox=\box87
 \AM@global@opts=\toks47
 \AM@toc@title=\toks48
-\c@AM@survey=\count174
-\AM@templatesizebox=\box62
+\c@AM@survey=\count183
+\AM@templatesizebox=\box88
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 101.
+Package hyperref Info: Option `colorlinks' set `true' on input line 102.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/upquote\upquote.sty"
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(Slides_Comparative_Process_v1.aux)
+(Slides_Comparative_Process_v1.aux
+
+LaTeX Warning: Label `tab:addlabel' multiply defined.
+
+)
 \openout1 = `Slides_Comparative_Process_v1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 117.
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 117.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 117.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 118.
 
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 117.
-LaTeX Font Info:    Try loading font information for MDA+cmr on input line 117.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 118.
+LaTeX Font Info:    Try loading font information for MDA+cmr on input line 118.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign\mdacmr.fd"
 File: mdacmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 117.
-LaTeX Font Info:    Try loading font information for T1+fav on input line 117.
+LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Try loading font information for T1+fav on input line 118.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\t1fav.fd"
 File: t1fav.fd 2006/05/30 Fontinst v1.929 font definitions for T1/fav.
@@ -1367,16 +1419,16 @@ File: t1fav.fd 2006/05/30 Fontinst v1.929 font definitions for T1/fav.
 
 ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count175
-\scratchdimen=\dimen278
-\scratchbox=\box63
-\nofMPsegments=\count176
-\nofMParguments=\count177
+\scratchcounter=\count184
+\scratchdimen=\dimen287
+\scratchbox=\box89
+\nofMPsegments=\count185
+\nofMParguments=\count186
 \everyMPshowfont=\toks49
-\MPscratchCnt=\count178
-\MPscratchDim=\dimen279
-\MPnumerator=\count179
-\makeMPintoPDFobject=\count180
+\MPscratchCnt=\count187
+\MPscratchDim=\dimen288
+\MPnumerator=\count188
+\makeMPintoPDFobject=\count189
 \everyMPtoPDFconversion=\toks50
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1392,8 +1444,8 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box64
-Package hyperref Info: Link coloring ON on input line 117.
+\AtBeginShipoutBox=\box90
+Package hyperref Info: Link coloring ON on input line 118.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1401,11 +1453,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count181
+\c@section@level=\count190
 )
-LaTeX Info: Redefining \ref on input line 117.
-LaTeX Info: Redefining \pageref on input line 117.
-LaTeX Info: Redefining \nameref on input line 117.
+LaTeX Info: Redefining \ref on input line 118.
+LaTeX Info: Redefining \pageref on input line 118.
+LaTeX Info: Redefining \nameref on input line 118.
 
 (Slides_Comparative_Process_v1.out) (Slides_Comparative_Process_v1.out)
 \@outlinefile=\write5
@@ -1446,78 +1498,78 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 pdftex/config/pdftex.map}
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+zavm on input line 154
+LaTeX Font Info:    Try loading font information for OT1+zavm on input line 155
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\ot1zavm.fd"
 File: ot1zavm.fd 2006/05/30 Fontinst v1.929 font definitions for OT1/zavm.
 )
-LaTeX Font Info:    Try loading font information for OML+zavm on input line 154
+LaTeX Font Info:    Try loading font information for OML+zavm on input line 155
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\omlzavm.fd"
 File: omlzavm.fd 2006/05/30 Fontinst v1.929 font definitions for OML/zavm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zavm on input line 154
+LaTeX Font Info:    Try loading font information for OMS+zavm on input line 155
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\omszavm.fd"
 File: omszavm.fd 2006/05/30 Fontinst v1.929 font definitions for OMS/zavm.
 )
 LaTeX Font Info:    Try loading font information for OMX+mdbch on input line 15
-4.
+5.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign/mdbch\omxmdbch.fd"
 File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
 )
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 8.64006pt on input line 154.
+(Font)              scaled to size 8.64006pt on input line 155.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 6.72005pt on input line 154.
+(Font)              scaled to size 6.72005pt on input line 155.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 4.80003pt on input line 154.
-LaTeX Font Info:    Try loading font information for U+msa on input line 154.
+(Font)              scaled to size 4.80003pt on input line 155.
+LaTeX Font Info:    Try loading font information for U+msa on input line 155.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 154.
+LaTeX Font Info:    Try loading font information for U+msb on input line 155.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for MDA+mdbch on input line 15
-4.
+5.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign/mdbch\mdamdbch.fd"
 File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
 )
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 8.64006pt on input line 154.
+(Font)              scaled to size 8.64006pt on input line 155.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 6.72005pt on input line 154.
+(Font)              scaled to size 6.72005pt on input line 155.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 4.80003pt on input line 154.
-LaTeX Font Info:    Try loading font information for U+zavm on input line 154.
+(Font)              scaled to size 4.80003pt on input line 155.
+LaTeX Font Info:    Try loading font information for U+zavm on input line 155.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\uzavm.fd"
 File: uzavm.fd 2006/05/30 Fontinst v1.929 font definitions for U/zavm.
 )
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <9> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 154.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 155.
 
-Overfull \hbox (3.2995pt too wide) in paragraph at lines 154--154
+Overfull \hbox (3.2995pt too wide) in paragraph at lines 155--155
 []|\T1/fav/b/n/9 Independence
  []
 
 
-Underfull \hbox (badness 4403) in paragraph at lines 154--154
+Underfull \hbox (badness 4403) in paragraph at lines 155--155
 \T1/fav/b/n/9 trols Treat-ment
  []
 
 
 LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
-(Font)              using `T1/fav/m/n' instead on input line 154.
+(Font)              using `T1/fav/m/n' instead on input line 155.
 
 [2
 
@@ -1525,26 +1577,35 @@ LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
 
 ]
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 171.
+(Font)              scaled to size 10.51207pt on input line 168.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 171.
+(Font)              scaled to size 7.68005pt on input line 168.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 171.
+(Font)              scaled to size 5.76004pt on input line 168.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 171.
+(Font)              scaled to size 10.51207pt on input line 168.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 171.
+(Font)              scaled to size 7.68005pt on input line 168.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 171.
+(Font)              scaled to size 5.76004pt on input line 168.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 171.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 168.
  [4
 
 ] [5
 
 ] [6
 
-] [7
+]
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 190.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 7.29605pt on input line 190.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 9.60007pt on input line 190.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 7.29605pt on input line 190.
+ [7
 
 ] [8
 
@@ -1558,20 +1619,14 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
 
 ] [13
 
-] [14
+]
+LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 207.
+ [14
 
 ] [15
 
-]
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 216.
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.29605pt on input line 216.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 216.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.29605pt on input line 216.
- [16
+] [16
 
 ] [17
 
@@ -1609,7 +1664,12 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 ]
 [33
 
-] [34
+]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.289 \end{frame}
+                  [34
 
 ] [35
 
@@ -1627,21 +1687,18 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 
 ] [42
 
-]
-LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 310.
- [43
+] [43
 
 ] [44
 
-] [45
+]
+[45
 
 ] [46
 
 ] [47
 
-]
-[48
+] [48
 
 ] [49
 
@@ -1665,14 +1722,14 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 
 ] [59
 
-] [60
+]
+[60
 
 ] [61
 
 ] [62
 
-]
-[63
+] [63
 
 ] [64
 
@@ -1696,14 +1753,14 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 
 ] [74
 
-] [75
+]
+[75
 
 ] [76
 
 ] [77
 
-]
-[78
+] [78
 
 ] [79
 
@@ -1728,619 +1785,418 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 ] [89
 
 ]
-<figure/Dag1-1.pdf, id=3380, 1003.75pt x 582.175pt>
+[90
+
+] [91
+
+] [92
+
+] [93
+
+] [94
+
+] [95
+
+] [96
+
+] [97
+
+]
+<figure/Dag1-1.pdf, id=4075, 1003.75pt x 582.175pt>
 File: figure/Dag1-1.pdf Graphic file (type pdf)
 <use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 474.
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 474--474
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
 []  
  []
 
 
-Overfull \vbox (215.93785pt too high) detected at line 474
+Overfull \vbox (215.93785pt too high) detected at line 522
  []
 
-[90
+[98
 
  <./figure/Dag1-1.pdf>]
 File: figure/Dag1-1.pdf Graphic file (type pdf)
 <use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 474.
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 474--474
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
 []  
  []
 
 
-Overfull \vbox (215.93785pt too high) detected at line 474
+Overfull \vbox (215.93785pt too high) detected at line 522
  []
 
-[91
+[99
 
 ]
 File: figure/Dag1-1.pdf Graphic file (type pdf)
 <use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 474.
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 474--474
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
 []  
  []
 
 
-Overfull \vbox (215.93785pt too high) detected at line 474
+Overfull \vbox (215.93785pt too high) detected at line 522
  []
 
-[92
+[100
 
 ]
-<figure/Dag2-1.pdf, id=3501, 1003.75pt x 582.175pt>
+<figure/Dag2-1.pdf, id=4207, 1003.75pt x 582.175pt>
 File: figure/Dag2-1.pdf Graphic file (type pdf)
 <use figure/Dag2-1.pdf>
-Package pdftex.def Info: figure/Dag2-1.pdf  used on input line 490.
+Package pdftex.def Info: figure/Dag2-1.pdf  used on input line 538.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 490--490
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 538--538
 []  
  []
 
 
-Overfull \vbox (219.92453pt too high) detected at line 490
+Overfull \vbox (219.92453pt too high) detected at line 538
  []
 
-[93
+[101
 
  <./figure/Dag2-1.pdf>]
-<figure/Dag3-1.pdf, id=3547, 1003.75pt x 582.175pt>
+<figure/Dag3-1.pdf, id=4257, 1003.75pt x 582.175pt>
 File: figure/Dag3-1.pdf Graphic file (type pdf)
 <use figure/Dag3-1.pdf>
-Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 510.
+Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 559.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 510--510
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 559--559
 []  
  []
 
 
-Overfull \vbox (255.58pt too high) detected at line 510
+Overfull \vbox (255.58pt too high) detected at line 559
  []
 
-[94
+[102
 
  <./figure/Dag3-1.pdf>]
-<figure/Dag3b-1.pdf, id=3593, 1003.75pt x 582.175pt>
+File: figure/Dag3-1.pdf Graphic file (type pdf)
+<use figure/Dag3-1.pdf>
+Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 559.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 559--559
+[]  
+ []
+
+
+Overfull \vbox (255.58pt too high) detected at line 559
+ []
+
+[103
+
+]
+<figure/Dag3b-1.pdf, id=4349, 1003.75pt x 582.175pt>
 File: figure/Dag3b-1.pdf Graphic file (type pdf)
 <use figure/Dag3b-1.pdf>
-Package pdftex.def Info: figure/Dag3b-1.pdf  used on input line 527.
+Package pdftex.def Info: figure/Dag3b-1.pdf  used on input line 576.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 527--527
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 576--576
 []  
  []
 
 
-Overfull \vbox (249.18001pt too high) detected at line 527
+Overfull \vbox (249.18001pt too high) detected at line 576
  []
 
-[95
+[104
 
  <./figure/Dag3b-1.pdf>]
-<figure/Dag4-1.pdf, id=3639, 1003.75pt x 582.175pt>
+<figure/Dag4-1.pdf, id=4399, 1003.75pt x 582.175pt>
 File: figure/Dag4-1.pdf Graphic file (type pdf)
 <use figure/Dag4-1.pdf>
-Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 545.
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 545--545
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
 []  
  []
 
 
-Overfull \vbox (233.53783pt too high) detected at line 545
+Overfull \vbox (233.53783pt too high) detected at line 597
  []
 
-[96
+[105
 
  <./figure/Dag4-1.pdf>]
-<figure/Dag5-1.pdf, id=3685, 1003.75pt x 582.175pt>
-File: figure/Dag5-1.pdf Graphic file (type pdf)
-<use figure/Dag5-1.pdf>
-Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 562.
+File: figure/Dag4-1.pdf Graphic file (type pdf)
+<use figure/Dag4-1.pdf>
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 562--562
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
 []  
  []
 
 
-Overfull \vbox (211.58pt too high) detected at line 562
+Overfull \vbox (233.53783pt too high) detected at line 597
  []
 
-[97
-
- <./figure/Dag5-1.pdf>] [98
-
-] [99
-
-] [100
-
-] [101
-
-] [102
-
-] [103
-
-] [104
-
-] [105
-
-]
 [106
 
-] [107
+]
+File: figure/Dag4-1.pdf Graphic file (type pdf)
+<use figure/Dag4-1.pdf>
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-] [108
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+[]  
+ []
 
-] [109
 
-] [110
+Overfull \vbox (233.53783pt too high) detected at line 597
+ []
 
-] [111
-
-] [112
-
-] [113
-
-] [114
-
-] [115
-
-] [116
-
-] [117
+[107
 
 ]
+File: figure/Dag4-1.pdf Graphic file (type pdf)
+<use figure/Dag4-1.pdf>
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+[]  
+ []
+
+
+Overfull \vbox (233.53783pt too high) detected at line 597
+ []
+
+[108
+
+]
+<figure/Dag5-1.pdf, id=4572, 1003.75pt x 582.175pt>
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 617
+ []
+
+[109
+
+ <./figure/Dag5-1.pdf>]
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 617
+ []
+
+[110
+
+]
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 617
+ []
+
+[111
+
+]
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 617
+ []
+
+[112
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
+[113
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
+[114
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
+[115
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
+[116
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
+[117
+
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
+
 [118
 
-] [119
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
 
-] [120
-
-] [121
-
-] [122
-
-] [123
-
-] [124
-
-] [125
-
-] [126
+[119
 
 ]
-! Undefined control sequence.
-\beamerx@\beamer@columnenv ...3->\beamer@colclose 
-                                                  \def \beamer@colclose {}\b...
-l.681 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-\@tempa ->\beamer@colmode 
-                          
-l.681 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! Undefined control sequence.
-\@tempa ->\beamer@colmode 
-                          
-l.681 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Package keyval Error:  undefined.
-
-See the keyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   !
-l.681 \end{frame}
-                 
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-! Undefined control sequence.
-\beamerx@\beamer@columnenv ...\beamer@colheadskip 
-                                                  \ignorespaces 
-l.681 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (27.60994pt too wide) in paragraph at lines 681--681
-[]\T1/fav/m/n/10 0,000  
+Overfull \vbox (3.48314pt too high) detected at line 657
  []
 
+[120
 
-! LaTeX Error: \begin{minipage} on input line 681 ended by \end{itemize}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{minipage} on input line 681 ended by \end{itemize}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.681 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: \begin{altenv} on input line 681 ended by \end{beamer@framepause
-s}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra }, or forgotten \endgroup.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.681 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-! LaTeX Error: \begin{uncoverenv} on input line 681 ended by \end{beamer@frames
-lide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.683 \section{}
-                
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Extra }, or forgotten \endgroup.
-\beamer@usebeamertemplatedos ...mpl@#1\endcsname }
-                                                  }
-l.683 \section{}
-                
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten \endgroup.
-\beamer@usebeamertemplatedos ...pl@#1\endcsname }}
-                                                  
-l.683 \section{}
-                
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Extra }, or forgotten \endgroup.
-<recently read> }
-                 
-l.683 \section{}
-                
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-Overfull \hbox (43.80011pt too wide) in paragraph at lines 683--683
-[][]|  
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
  []
 
-! Extra }, or forgotten \endgroup.
-<recently read> }
-                 
-l.683 \section{}
-                
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+[121
 
-! Extra }, or forgotten \endgroup.
-<recently read> }
-                 
-l.683 \section{}
-                
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing number, treated as zero.
-<to be read again> 
-                   }
-l.686 \frametitle
-                 {Process Tracing}
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   }
-l.686 \frametitle
-                 {Process Tracing}
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-
-! LaTeX Error: Too deeply nested.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.691 \item
-            How long was left for the election after treatment? \pause 10 mi...
-
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Undefined control sequence.
-\@tempa ->\beamer@colmode 
-                          
-l.697 ... treatment} \pause 56 voters \pause \< 10
-                                                  ,000
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! Undefined control sequence.
-\@tempa ->\beamer@colmode 
-                          
-l.697 ... treatment} \pause 56 voters \pause \< 10
-                                                  ,000
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Package keyval Error:  undefined.
-
-See the keyval package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.697 ... treatment} \pause 56 voters \pause \< 10
-                                                  ,000
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   !
-l.697 ... treatment} \pause 56 voters \pause \< 10
-                                                  ,000
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-! Undefined control sequence.
-\beamerx@\beamer@columnenv ...\beamer@colheadskip 
-                                                  \ignorespaces 
-l.697 ... treatment} \pause 56 voters \pause \< 10
-                                                  ,000
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (24.74893pt too wide) in paragraph at lines 697--698
-[]\T1/fav/m/n/9 0,000  
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
  []
 
+[122
 
-! LaTeX Error: \begin{minipage} on input line 697 ended by \end{itemize}.
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.698 \end{itemize}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+[123
 
+]
+Overfull \vbox (3.48314pt too high) detected at line 657
+ []
 
-! LaTeX Error: \begin{minipage} on input line 697 ended by \end{itemize}.
+[124
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.699 \end{itemize}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+]
+<South_Korea.jpg, id=5241, 642.4pt x 384.43625pt>
+File: South_Korea.jpg Graphic file (type jpg)
+<use South_Korea.jpg>
+Package pdftex.def Info: South_Korea.jpg  used on input line 667.
+(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.699 \end{itemize}
-                   
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+Overfull \vbox (27.61412pt too high) detected at line 667
+ []
 
-! Extra }, or forgotten \endgroup.
-\endframe ->\egroup 
-                    \begingroup \def \@currenvir {frame}
-l.700 \end{frame}
-                 
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
+[125
 
+ <./South_Korea.jpg>]
+File: South_Korea.jpg Graphic file (type jpg)
+<use South_Korea.jpg>
+Package pdftex.def Info: South_Korea.jpg  used on input line 667.
+(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
+
+Overfull \vbox (27.61412pt too high) detected at line 667
+ []
+
+[126
+
+] [127
+
+] [128
+
+] [129
+
+] [130
+
+] [131
+
+] [132
+
+] [133
+
+] [134
+
+] [135
+
+] [136
+
+] [137
+
+]
+[138
+
+] [139
+
+] [140
+
+] [141
+
+] [142
+
+] [143
+
+] [144
+
+] [145
+
+] [146
+
+] [147
+
+] [148
+
+] [149
+
+]
+[150
+
+] [151
+
+] [152
+
+]
 \tf@nav=\write6
 \openout6 = `Slides_Comparative_Process_v1.nav'.
 
@@ -2350,67 +2206,41 @@ deleted material, e.g., by typing `I$}'.
 \tf@snm=\write8
 \openout8 = `Slides_Comparative_Process_v1.snm'.
 
-
-! LaTeX Error: \begin{altenv} on input line 697 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.705 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 705.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 705.
-(Slides_Comparative_Process_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 705.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 705.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 740.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 740.
+ (Slides_Comparative_Process_v1.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 740.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 740.
 Package rerunfilecheck Info: File `Slides_Comparative_Process_v1.out' has not c
 hanged.
-(rerunfilecheck)             Checksum: 8C7519AA9CC398C9AD13F0BE5CBF2883;111.
+(rerunfilecheck)             Checksum: D49828B29C3869B5C392D0C1BC11ED39;160.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-! You can't use `\end' in internal vertical mode.
-\enddocument ...cumenthook \deadcycles \z@ \@@end 
-                                                  
-l.705 \end{document}
-                    
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
 
+LaTeX Warning: There were multiply-defined labels.
 
-! LaTeX Error: \begin{altenv} on input line 697 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.705 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-)
-! Emergency stop.
-<*> ./Slides_Comparative_Process_v1.tex
-                                       
-*** (job aborted, no legal \end found)
-
- 
+ ) 
 Here is how much of TeX's memory you used:
- 22878 strings out of 492893
- 437178 string characters out of 3133367
- 551298 words of memory out of 3000000
- 25952 multiletter control sequences out of 15000+200000
- 72379 words of font info for 123 fonts, out of 3000000 for 9000
+ 23075 strings out of 492893
+ 439911 string characters out of 3133367
+ 562803 words of memory out of 3000000
+ 26090 multiletter control sequences out of 15000+200000
+ 74256 words of font info for 125 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,889b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Fil
+es/MiKTeX 2.9/fonts/enc/dvips/arev/arevoml.enc}{C:/Program Files/MiKTeX 2.9/fon
+ts/enc/dvips/base/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/A
+revSans-Bold.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-
+Oblique.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
+Output written on Slides_Comparative_Process_v1.pdf (152 pages, 1537330 bytes).
+
+PDF statistics:
+ 6483 PDF objects out of 7423 (max. 8388607)
+ 309 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
+

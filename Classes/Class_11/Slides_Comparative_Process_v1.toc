@@ -1,2 +1,3 @@
 \beamer@sectionintoc {1}{Comparative Case Studies}{3}{0}{1}
-\beamer@sectionintoc {2}{Process Tracing}{77}{0}{2}
+\beamer@sectionintoc {2}{Mixed Methods}{74}{0}{2}
+\beamer@sectionintoc {3}{Process Tracing}{85}{0}{3}
