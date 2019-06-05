@@ -20,6 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - [Sekhon, Jasjeet S., Quality Meets Quantity: Case Studies, Conditional Probability, and Counterfactuals](Classes/Class_11/Readings/Sekhon 2004 for Comparative Cases Week.pdf)
 - [Bates et al 1997, 2000, The Analytical Narrative Project, American Political Science Review, 94:3](Classes/Class_11/Readings/Bates et al 1997.pdf)
 - [Collier, 2011, Understanding Process Tracing, Political Science and Politics 44:4](Classes/Class_11/Readings/Collier 2011.pdf)
+- [Brady, Henry E., 2010, Data-Set Observations versus Causal-Process Observations; The 2000 U.S. Presidential Election](Classes/Class_11/Readings/Brady 2010.pdf)
 
 ## [Lecture Slides](Classes/Class_11/Slides_Comparative_Process_v1.pdf)
 
