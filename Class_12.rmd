@@ -11,4 +11,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Additional Readings
 
-## [Lecture Slides](Classes/Class_12/Slides_Summary_v2.pdf)
+## [Lecture Slides](Classes/Class_12/Slides_Summary_v3.pdf)
