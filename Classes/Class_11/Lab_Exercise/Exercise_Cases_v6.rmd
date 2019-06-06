@@ -35,7 +35,7 @@ d <- tibble(inequality=rnorm(N,0.5,0.2),
 2. Our outcome is going to be a binary variable for whether the country is a democracy or not. Use the expressions below to simulate potential outcomes, with a treatment effect which boosts the chances of democratization by 50\% (so our treatment effect is 0.5). (`Europe` is an indicator for whether the country is in Europe).
 
 $$y_0= \begin{cases}
-1\text{ if } 2*inequality - \frac{growth}{10} + 1>0\\ 
+1\text{ if } 2*inequality - \frac{growth}{10} + Europe >1\\ 
 0 \text{ else}
 \end{cases}$$ 
 
