@@ -1,0 +1,534 @@
+% Font options: 10pm, 11pt, 12pt
+% Align headings left instead of center: nocenter
+\documentclass[xcolor=x11names,compress]{beamer}
+%\documentclass[xcolor=x11names,compress,handout]{beamer}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{dcolumn}
+\usepackage{bigstrut}
+\usepackage{amsmath} 
+\usepackage{xcolor,colortbl}
+\usepackage{amssymb}
+\usepackage{multicol}
+%\newcommand{\done}{\cellcolor{teal}#1}
+
+%% Beamer Layout %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\useoutertheme[subsection=false,shadow]{miniframes}
+\useinnertheme{default}
+\usefonttheme{serif}
+\usepackage{Arev}
+\usepackage{pdfpages}
+
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape, size=\normalsize}
+
+\definecolor{dkblue}{RGB}{0,0,102}
+
+\setbeamercolor*{lower separation line head}{bg=dkblue} 
+\setbeamercolor*{normal text}{fg=black,bg=white} 
+\setbeamercolor*{alerted text}{fg=red} 
+\setbeamercolor*{example text}{fg=black} 
+\setbeamercolor*{structure}{fg=black} 
+ 
+\setbeamercolor*{palette tertiary}{fg=black,bg=black!10} 
+\setbeamercolor*{palette quaternary}{fg=black,bg=black!10} 
+
+\renewcommand{\(}{\begin{columns}}
+\renewcommand{\)}{\end{columns}}
+\newcommand{\<}[1]{\begin{column}{#1}}
+\renewcommand{\>}{\end{column}}
+
+\AtBeginSection{\frame{\sectionpage}}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\setbeamertemplate{navigation symbols}{} 
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title{FLS 6441 - Methods III: Explanation and Causation}
+\subtitle{Week 12 - Review \& Frontiers}
+\author{Jonathan Phillips}
+\date{June 2019}
+
+\begin{document}
+
+<<Matching, echo=FALSE, warning=FALSE, message=FALSE>>=
+library(DiagrammeR)
+library(tidyverse)
+library(broom)
+library(webshot)
+library(MatchIt)
+library(xtable)
+@
+
+
+\frame{\titlepage}
+
+\section{Review}
+
+\begin{frame}
+\frametitle{Classification of Research Designs}
+\begin{itemize}
+\item Correlation is not causation
+\begin{itemize}
+\item And regresssion is just fancy correlation
+\end{itemize}
+\item So how do we provide evidence of causation?
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Classification of Research Designs}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+  \scalebox{0.7}{
+    \begin{tabular}{|p{2.2cm}|p{5cm}|c|c|}
+    \hline
+          &       & \multicolumn{1}{p{2.4cm}|}{\textbf{Independence of Treatment Assignment}} & \multicolumn{1}{p{3cm}|}{\textbf{Researcher Controls Treatment Assignment?}} \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{2}[4]{2.9cm}{\textbf{Controlled Experiments}}} & Field Experiments & \checkmark      & \checkmark  \bigstrut\\
+\cline{2-4}          & Survey and Lab Experiments &  \checkmark     & \checkmark \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{3}[6]{2.9cm}{\textbf{Natural Experiments}}} & Natural Experiments &  \checkmark     &  \bigstrut\\
+\cline{2-4}          & Instrumental Variables & \checkmark      &  \bigstrut\\
+\cline{2-4}          & Discontinuities & \checkmark      &  \bigstrut\\
+    \hline
+          &       &       &  \bigstrut\\
+    \hline
+    \multicolumn{1}{|p{2.9cm}|}{\multirow{4}[8]{2.9cm}{\textbf{Observational Studies}}} & Difference-in-Differences &       &  \bigstrut\\
+\cline{2-4}          & Controlling for Confounding &       &  \bigstrut\\
+\cline{2-4}          & Matching &       &  \bigstrut\\
+\cline{2-4}          & Comparative Cases and Process Tracing &       &  \bigstrut\\
+    \hline
+    \end{tabular}}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{Definitions}
+\begin{multicols}{2}
+\begin{enumerate}
+\item Potential Outcomes
+\pause
+\item Treatment Assignment Mechanism
+\pause
+\item Independence of Potential Outcomes from Treatment
+\pause
+\item Average Treatment Effect
+\pause
+\item Local Average Treatment Effect
+\pause
+\item Non-compliance
+\pause
+\columnbreak
+\item Hawthorne Effects
+\pause
+\item Time-invariant confounder
+\pause
+\item Exclusion Restriction
+\pause
+\item Back-door path
+\pause
+\item SUTVA
+\pause
+\item Overlap in sample characteristics
+\end{enumerate}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choosing a Method}
+<<Dag1,echo=FALSE,warning=FALSE,message=FALSE,out.width='2.7\\linewidth'>>=
+grViz("
+	digraph rmarkdown {
+
+    graph [layout = dot]
+
+    node [shape = plaintext]
+	  TAM [label = 'What is the Treatment Assignment Mechanism?', fontcolor='blue']
+    Exp [label = 'Randomized (Experimental)', fontcolor='black']
+    Nat_Exp [label = 'As-If Random (at least in part)', fontcolor='balck']
+    Obs [label = 'Observational', fontcolor='black']
+    Exp2 [label = 'Y ~ D']
+    Nat_Exp_RDD [label = 'RDD \n (Y ~ R + D)']
+    Nat_Exp_IV [label = 'IV \n (D ~ Z; Y ~ D_hat)']
+    Obs_DinD [label = 'Diff-in-Diff \n (Y ~ D + T + T:D)']
+    Obs_Reg [label = 'Controlling \n (Y ~ D + X_1 + X_2)']
+    Obs_Match [label = 'Matching']
+
+    TAM -> Exp
+    TAM -> Nat_Exp
+    TAM -> Obs
+    Exp -> Exp2
+    Nat_Exp -> Nat_Exp_RDD
+    Nat_Exp -> Nat_Exp_IV
+    Obs -> Obs_Match
+    Obs_Match -> Obs_Reg
+    Obs -> Obs_DinD
+	}")
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Choosing a Method}
+\begin{itemize}
+\item How do we decide which causal inference strategy to use?
+\pause
+\begin{enumerate}
+\item What is the treatment assignment mechanism?
+\pause
+\begin{itemize}
+\item Randomized: field experiment
+\item As-if random: natural experiment
+\item Messy: Observational study
+\end{itemize}
+\item Where is the as-if variation in treatment?
+\pause
+\begin{itemize}
+\item Across time: Diff-in-diff
+\item Across threshold: RDD
+\item Before treatment: IV 
+\end{itemize}
+\item How many units can we get accurate measures for?
+\pause
+\begin{itemize}
+\item One: Process tracing
+\item Small-N: Comparative Case Studies
+\item Large-N: Controls/Matching
+\end{itemize}
+\item Are the assumptions met?
+\pause
+\begin{itemize}
+\item Parallel trends, no sorting, balance...
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Choosing a Method}
+\begin{enumerate}
+\item Has experience with Obamacare increased electoral turnout?
+\pause
+\begin{itemize}
+\item Difference-in-differences between states that did/did not expand Obamacare
+\pause
+\end{itemize}
+\item Can playing a video game as a Roma character reduce anti-Roma prejudice in Hungary?
+\pause
+\begin{itemize}
+\item Online survey experiment
+\pause
+\end{itemize}
+\item Does peasant revolt in 19th century Russia lead to less representative local government?
+\pause
+\begin{itemize}
+\item Instrument peasant revolt with serfdom
+\pause
+\end{itemize}
+\item Do women govern differently from men? 
+\pause
+\begin{itemize}
+\item Regression discontinuity in close elections in Brazil
+\pause
+\end{itemize}
+\item Do US political contact campaigns change voters' choices?
+\pause
+\begin{itemize}
+\item Field experiment
+\pause
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Role of Theory}
+\begin{itemize}
+\item To avoid data mining: We have to test plausible, relevant theories
+\pause
+\item To tell us which experiments and research designs to run
+\pause
+\item To justify assumptions (exclusion restriction, confounders)
+\pause
+\item To help us interpret what we have learned
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Role of Qualitative Evidence}
+\begin{itemize}
+\item Vital for identifying natural experiments
+\pause
+\item To validate assumptions (no sorting, randomization worked, SUTVA)
+\pause
+\item To understand specific analysis requirements, eg. non-compliance, clustering
+\pause
+\item For Process Tracing: Causal Process Observations
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Limitations of Causal Methodologies}
+\begin{itemize}
+\item Usually a trade-off between avoiding bias and generalizability
+\pause
+\item Sure you have shown that $D$ affects $Y$, but how?? The connection is still a black box!
+\pause
+\item Causal effects are probably highly heteregeneous - who cares about the average?
+\pause
+\item They only tell us about 'unusual' parts of the population (eg. RDD)
+\pause
+\item Even if variable X has a causal effect, \textit{how much} of the real world does it explain?
+\pause
+\item Sometimes it's just not possible to show causation. That's OK!
+\begin{itemize}
+\item We just need to recognize the evidence we have is not representative of everything that happens in the real world
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Frontiers}
+
+\begin{frame}
+\frametitle{Frontiers of Strengthening Causal Arguments}
+\begin{itemize}
+\item Writing a paper means sustaining a convincing argument
+\pause
+\item Choosing and implementing an appropriate method is only the first step
+\pause
+\item We also need to show that our estimate is reliable and not a 'chance' finding
+\pause
+\item More importantly, that it is evidence in support of \textbf{specific} theory
+\pause
+\item You don't want to publish a paper that someone contradicts next week!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Robustness Tests}
+\begin{itemize}
+\item In general, we will trust our estimate more if it doesn't change even when we change our model
+\begin{itemize}
+\item Not just direction and significance, but in the substantive effect size
+\end{itemize}
+\item Alternative covariates/matching procedures
+\pause
+\item Alternative bandwidths/functional forms
+\pause
+\item Alternative (but conceptually equivalent) measures of key variables
+\pause
+\item Alternative samples (dropping outliers etc.)
+\pause
+\item Various formal tests, but best to plot overlap of confidence intervals from many models
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Sensitivity Analysis}
+\begin{itemize}
+\item An alternative is to ask - quantitatively - how much do our results change when we alter the model or its assumptions?
+\pause
+\item One example for observational studies:
+\begin{itemize}
+\item How much larger would \textbf{unmeasured} confounders have to be than \textbf{measured confounders} to remove the entire estimated treatment effect? (Altonji et al 2005)
+\pause
+\item Take a small set of covariates, run your regression and store $\beta_R$
+\pause
+\item Take a larger set of covariates, run your regression and store $\beta_F$ 
+\pause
+\item Calculate $\frac{\beta_F}{\beta_R - \beta_F}$
+\end{itemize}
+\item Eg. Nunn and Wantchekon (2011) argue that for unmeasured confounders to explain their estimated effect of the slave trade on trust, they would have to be 3 - 11 times larger than measured confounders
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Heterogeneity Tests}
+\begin{itemize}
+\item We have an average treatment effect
+\pause
+\item But theory may predict different groups are affected to different degrees
+\pause
+\item We can test for heterogeneous effects: \textbf{Conditional Average Treatment Effects (CATE)}
+\pause
+\item $Y_i ~ \beta_1 D_i + \beta_2 X_i + \beta_3 D_i*X_i + \epsilon_i$
+\pause
+\item $X_i$ MUST be a \textbf{pre-treatment} covariate we are testing for heterogeneous effects on
+\pause
+\item CRUCIAL: Our \textbf{covariate} is not randomly assigned, so the interpretation of causal effects is \textbf{not causal}, just descriptive
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Heterogeneity Tests}
+\begin{itemize}
+\item Ex. Ferraz and Finan (2008)
+\begin{itemize}
+\item Audits reduce corruption, they argue due to electoral accountability
+\pause
+\item The effects should therefore be stronger where more people know about the audits
+\pause
+\item And for first-term Mayors with re-eletion incentives
+\end{itemize}
+\item Are there other theories consistent with \textit{all} of this evidence?
+\pause
+\item Note this does not mean that being a first-term mayor \textit{causes} audits to be less effective
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Heterogeneity Tests}
+\begin{itemize}
+\item But what if we look for heterogeneous effects on 20 variables?
+\pause
+\item And then construct an appropriate theory based on the variables that show differential effects
+\pause
+\item Theory first! Avoid \textit{ex post} construction of theory and data-mining
+\pause
+\item At least correct p-values for multiple testing 
+\pause
+\item More details on this \href{https://egap.org/methods-guides/10-things-heterogeneous-treatment-effects}{egap page}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Placebo Tests}
+\begin{itemize}
+\item How likely is it that our treatment effect is just a product of messy data?
+\pause
+\item Normally we test for a treatment effect where we expect one
+\pause
+\item But we can also test for a treatment effect where we \textbf{don't} expect one
+\begin{itemize}
+\item Evidence of no treatment effect supports our interpretation
+\pause
+\item Evidence of a treatment effect suggests messy data
+\end{itemize}
+\pause
+\item Common for regression discontinuities (alternative thresholds) and difference-in-differences (alternative times of treatment)
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{placebo.png}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Generalizability}
+\begin{itemize}
+\item How 'weird' are the units we are measuring the Local Average Treatment Effect for?
+\pause
+\item We can try to \textit{describe} the characteristics of these compliers
+\pause
+\item We don't know if any single individual is a complier
+\pause
+\item But we can describe them \textbf{on average}
+\pause
+\item The first stage of the IV regression tells us about compliance with treatment
+\pause
+\item Relative likelihood that a complier has covariate X equals:
+\end{itemize}
+\pause
+$$\frac{\text{First Stage Effect for Units with Covariate X}}{\text{First Stage Effect for Everyone}}$$
+\pause
+$$\frac{Pr(D_i=1\text{ \& }Z_i=1 | X_i=1)}{Pr(D_i=1\text{ \& }Z_i=1)}$$
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=\linewidth]{twins_compliers.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalizability}
+\begin{itemize}
+\item Replication is crucial to our ability to generalize
+\pause
+\item Replication in different samples from the same population
+\pause
+\item Replication in different populations
+\pause
+\item Replication of different treatment implementations
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mechanisms}
+\begin{itemize}
+\item To avoid the critique that experiments are a black box, and to support specific theories, we need to start testing \textbf{causal mechanisms}
+\pause
+\item We have already seen how to use process tracing to 'test' specific mechanisms in individual cases
+\pause
+\item Quantitative tests also exist, exploiting 'post-treatment bias'
+\pause
+\item But require additional assumptions: \textbf{Sequential ignorability}
+\begin{itemize}
+\item That the mediator (mechanism) is independent of potential outcomes conditional on treatment
+\pause
+\item Hard!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Mechanisms}
+\begin{itemize}
+\item One practical approach is to run two regressions that recreates our DAG:
+\end{itemize}
+$$M_i = \alpha_1 + \beta_1 D_i + \epsilon_1$$ \\
+$$Y_i = \alpha_3 + \beta_3 D_i + \beta_4 M_i + \epsilon_3$$ \\
+\begin{itemize}
+\item This implies:
+\end{itemize}
+$$Y_i = \alpha_3 + D_i (\beta_3+\beta_4*\beta_1) + (\alpha_1 +\epsilon_1)*\beta_4 + \epsilon_3$$
+\pause
+\begin{itemize}
+\item Direct effect of treatment = $\beta_3$
+\pause
+\item Indirect effect of treatment = $\beta_4*\beta_1$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pre-Analysis Plans}
+\begin{itemize}
+\item There are a lot of tests and specifications we can run!
+\pause
+\item How do we know what is \textit{ex post} data-mining and what is a real test of a specific theory?
+\pause
+\item We can \textbf{constrain ourselves}
+\pause
+\item Submit a Pre-Analysis Plan, eg. to \href{https://egap.org/content/registration}{egap} or see \href{https://www.bitss.org/resource-tag/pre-analysis-plans/}{BITSS}
+\pause
+\item Document the theory and hypotheses you're using (to avoid fitting an explanation to the data)
+\pause
+\item Document the regressions you will run (to avoid data-mining)
+\pause
+\item If you need to change later, no problem! Just need to justify why
+\pause
+\item It's transparent how far away we have come from the original test of theory
+\end{itemize}
+\end{frame}
+
+
+\end{document}

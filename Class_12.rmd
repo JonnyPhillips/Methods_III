@@ -1,0 +1,14 @@
+---
+title: 'Class 12 - Review & Frontiers'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Readings
+
+#### Additional Readings
+
+## [Lecture Slides](Classes/Class_12/Slides_Summary_v2.pdf)
