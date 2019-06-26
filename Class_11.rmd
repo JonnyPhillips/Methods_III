@@ -28,4 +28,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Replication Exercise
 - [Exercise](Classes/Class_11/Replication/Replication_Comparative_v1.pdf)
-- [Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability](Classes/Class_11/Replication/Levitsky_and_Way.pdf)
+- [Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability](https://github.com/JonnyPhillips/Methods_III/blob/master/Classes/Class_11/Replication/Levitsky_and_Way.pdf)
