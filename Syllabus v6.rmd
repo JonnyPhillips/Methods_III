@@ -1,21 +1,13 @@
 ---
 title: 'Syllabus - Quantitative Methods III: Explanation and Causation'
 output: html_document
-date: "1st February, 2019"
+date: "February, 2020"
 subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-\begin{center}
-First Semester 2019, DCP, FFLCH, USP
-
-Thursdays, 14:00 - 17:30
-
-Jonathan Phillips
-\end{center}
 
 ## Objectives
 

@@ -8,33 +8,11 @@ navbar:
       href: index.html
     - text: "Syllabus"
       icon: fa-book-open
-      href: Syllabus_v6.html
+      href: Syllabus_v6_2020.html
     - text: "Classes"
       menu:
       - text: "1 - Review"
         href: Class_1.html
-      - text: "2 - Framework for Explanation"
-        href: Class_2.html
-      - text: "3 - Field Experiments"
-        href: Class_3.html
-      - text: "4 - Survey and Lab Experiments"
-        href: Class_4.html
-      - text: "5 - Natural Experiments"
-        href: Class_5.html
-      - text: "6 - Instrumental Variables"
-        href: Class_6.html
-      - text: "7 - Discontinuities"
-        href: Class_7.html
-      - text: "8 - Difference-in-Differences"
-        href: Class_8.html
-      - text: "9 - Controlling for Confounding"
-        href: Class_9.html
-      - text: "10 - Matching"
-        href: Class_10.html
-      - text: "11 - Comparative Cases & Process Tracing"
-        href: Class_11.html
-      - text: "12 - Review & Frontiers"
-        href: Class_12.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html

@@ -15,4 +15,4 @@ This is a review week where we solidify the fundamentals of regression and its w
 
 <br> </br>
 
-### [Lecture Slides](Classes/Class_1/Slides_Class1_v17.pdf)
+<!-- ### [Lecture Slides](Classes/Class_1/Slides_Class1_v17.pdf) -->

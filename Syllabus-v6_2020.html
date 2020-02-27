@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Syllabus - Quantitative Methods III: Explanation and Causation</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Methods III: Explanation</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Overview
+  </a>
+</li>
+<li>
+  <a href="Syllabus_v6_2020.html">
+    <span class="fa fa-book-open"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Classes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Class_1.html">1 - Review</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Project.html">
+    <span class="fa fa-book-open"></span>
+     
+    Project
+  </a>
+</li>
+<li>
+  <a href="Links.html">
+    <span class="fa fa-book-open"></span>
+     
+    Links
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Syllabus - Quantitative Methods III: Explanation and Causation</h1>
+<h3 class="subtitle">FLS6441: Métodos Quantitativos III: Explicação e Causação</h3>
+<h4 class="date">October 2019</h4>
+
+</div>
+
+
+
+<div id="objectives" class="section level1">
+<h1>Objectives</h1>
+<p>This course is the third course in a three course sequence, following Quantitative Methods I (Introductory Statistics) and Quantitative Methods II (Multivariate Regression). This is an applied course in how to <em>explain</em> the outcomes – public policies, democracy, peace, governance, corruption, inequality – we study in political science. It provides students with the skills, tools and confidence to implement a wide range of analyses commonly used in leading political science studies. By the end of this course you will be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Describe research questions in terms of counterfactual observations;</li>
+<li>Critique the assumptions, accuracy and generalizability of <em>any</em> quantitative research design;</li>
+<li>Replicate the core analysis of papers published in major political science journals;</li>
+<li>Apply (in R or Stata) empirical analyses using experimental, instrumental variables, difference-in-differences, regression discontinuity, matching, comparative case study and process tracing methods.</li>
+<li>Design compelling research projects that effectively answer important political science questions;</li>
+</ol>
+<p>Lots of these words are probably unfamiliar and intimidating. Don’t worry - the aim of this course is to overcome these barriers and give students the intuition, experience and confidence to regularly use these tools. You will get lots of hands-on practice in how to replicate major studies using their original datasets, so the techniques will make much more sense and you will understand what they can and cannot help us explain.</p>
+<p>More practically, this course is excellent preparation for students who want to understand and critique papers, develop their own research designs for dissertations, or be able to engage more in sandwich programs or at conferences.</p>
+</div>
+<div id="justification" class="section level1">
+<h1>Justification</h1>
+<p>All good political science research projects are causal - they do not just describe the world but seek to <em>explain</em> it: Do women govern better than men? Can corrupt politicians influence local media to get re-elected? How do authoritarian regimes survive during economic crises?</p>
+<p>But explanation is hard because societies are extremely complex and lots of processes are happening all at the same time. We simply do not - cannot - know what the alternative outcome would have been if Angela Merkel had lost at the last election or if Hilary Clinton had won.</p>
+<p>Even if we throw huge amounts of data and lots of control variables into a regression we would not be able to explain these outcomes convincingly. A range of problems prevent us saying that X causes Y - an omitted variable, some reverse causation, or a selection bias. Regression on its own cannot solve any of these problems. Instead, we need an alternative - smarter - strategy, which carefully selects the data we are comparing and identifies the most likely <em>counterfactual</em> observations.</p>
+<p>For example, instead of comparing all women and men in politics we could focus on India where some government positions are randomly-allocated by gender; instead of asking all voters what they think of corrupt politicians we could ask only those who live in places which are on the border of receiving local radio stations those politicians control; instead of comparing all authoritarian regimes we could focus on a paired comparison between two neighbouring countries which share similar histories, economies and institutions.</p>
+<p>The essential toolkit for empirical research in political science therefore includes being able to describe and identify appropriate counterfactuals, choose appropriate research designs to maximize causal inference, apply these research designs to real data, and provide compelling <em>explanations</em> for the patterns in the data.</p>
+</div>
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
+<p>Students are required to have completed FLS 6183, Quantitative Methods II, or equivalent.</p>
+</div>
+<div id="content" class="section level1">
+<h1>Content</h1>
+<p>Part I focuses on reviewing the core tools and ideas for understanding the variation in our data.</p>
+<ol style="list-style-type: decimal">
+<li>Review: What regression does and does not do. (05/03/20)</li>
+<li>A Framework for Explanation (12/03/20)</li>
+</ol>
+<p>Part II practices implementing key causal methodologies. Each week we discuss the methodology, read a high-profile paper that uses the methodology, and replicate the analysis ourselves using the raw data in R or Stata.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Field Experiments (19/03/20)</li>
+<li>Survey and Lab Experiments (26/03/20)</li>
+<li>Natural Experiments (02/04/20)</li>
+<li>Instrumental Variables (16/04/20)</li>
+<li>Discontinuities (23/04/20)</li>
+<li>Difference-in-Differences (30/04/20)</li>
+<li>Controlling for Confounding (07/05/20)</li>
+<li>Matching (14/05/20)</li>
+<li>Comparative Cases and Process Tracing (21/05/20)</li>
+<li>Generalizability, Reproducibility and Mechanisms (28/05/20)</li>
+</ol>
+</div>
+<div id="evaluation" class="section level1">
+<h1>Evaluation</h1>
+<ol style="list-style-type: decimal">
+<li><strong>Replication Tasks (40%)</strong> - Each week I will provide you with a pre-prepared dataset from a well-known political science paper that uses the methodology we are studying that week.
+<ul>
+<li>Rather than replicate the full paper, I will provide specific questions for you to answer to structure and guide you through the replication.</li>
+<li>You will be graded on the understanding you show in your responses to these questions and in implementing the core methodology, and not on how precisely you replicate the final result. I.e. it doesn’t matter at all if your standard errors are slightly different.</li>
+<li>I will provide clear instructions and examples of how to apply the methodologies in class so this will be accessible for all students.</li>
+<li>Students are required to submit at least 7 out of 9 replication tasks (your grade will be based on your 7 best submissions).</li>
+</ul></li>
+<li><strong>Short Research Paper (40%)</strong> - To apply your new skills you will pick a research question of interest to you (possibly your thesis/dissertation) and suggest a research design that would be effective at answering that question.
+<ul>
+<li>This should be a question for which data is available and you can provide a first attempt at applying the methodology - the results themselves don’t matter.</li>
+<li>Papers should be no more than 15 pages, and can be in English or Portuguese.</li>
+<li>The deadline for submission will be 24th July 2020.</li>
+</ul></li>
+<li><strong>Participation (20%)</strong> - Presence and constructive contribution in class.</li>
+</ol>
+</div>
+<div id="bibliography" class="section level1">
+<h1>Bibliography</h1>
+<p>The list below is a general list of reference texts that we will use repeatedly throughout the course. For a detailed breakdown of readings for each class, please see the course website.</p>
+<ul>
+<li>Joshua D Angrist and Steve Pischke. Mastering ’Metrics. 2015.</li>
+<li>Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015.</li>
+<li>Thad Dunning. Natural Experiments in the Social Sciences: A Design-Based Approach. Yale University Press, 2012.</li>
+<li>Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton University Press, 2009.</li>
+<li>Stephen L Morgan and Christopher Winship. Counterfactuals and Causal Inference: Methods and Principles for Social Research. Cambridge University Press, 2007.</li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

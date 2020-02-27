@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -69,7 +70,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -230,18 +230,6 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -277,7 +265,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="Syllabus_v6.html">
+  <a href="Syllabus_v6_2020.html">
     <span class="fa fa-book-open"></span>
      
     Syllabus
@@ -292,39 +280,6 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="Class_1.html">1 - Review</a>
-    </li>
-    <li>
-      <a href="Class_2.html">2 - Framework for Explanation</a>
-    </li>
-    <li>
-      <a href="Class_3.html">3 - Field Experiments</a>
-    </li>
-    <li>
-      <a href="Class_4.html">4 - Survey and Lab Experiments</a>
-    </li>
-    <li>
-      <a href="Class_5.html">5 - Natural Experiments</a>
-    </li>
-    <li>
-      <a href="Class_6.html">6 - Instrumental Variables</a>
-    </li>
-    <li>
-      <a href="Class_7.html">7 - Discontinuities</a>
-    </li>
-    <li>
-      <a href="Class_8.html">8 - Difference-in-Differences</a>
-    </li>
-    <li>
-      <a href="Class_9.html">9 - Controlling for Confounding</a>
-    </li>
-    <li>
-      <a href="Class_10.html">10 - Matching</a>
-    </li>
-    <li>
-      <a href="Class_11.html">11 - Comparative Cases &amp; Process Tracing</a>
-    </li>
-    <li>
-      <a href="Class_12.html">12 - Review &amp; Frontiers</a>
     </li>
   </ul>
 </li>
@@ -397,6 +352,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
