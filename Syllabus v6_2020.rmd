@@ -1,8 +1,10 @@
 ---
 title: 'Syllabus - Quantitative Methods III: Explanation and Causation'
 output:
-  pdf_document: 
-    number_sections: true
+  html_document:
+    df_print: paged
+  pdf_document:
+    number_sections: yes
 date: "October 2019"
 subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ---
@@ -10,14 +12,6 @@ subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-\begin{center}
-First Semester 2020, DCP, FFLCH, USP
-
-Thursdays, 14:00 - 17:30
-
-Jonathan Phillips
-\end{center}
 
 # Objectives
 
