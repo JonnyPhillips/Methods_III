@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 <div class="column-left">
 The research project is designed to give you an opportunity to practice implementing at least one of the methodologies studied in this course to answer your own research question. The paper should be no more than 15 pages and can be in English or Portuguese.
 
-Your paper and *all* of your data processing and analysis code should be submitted by email by 30th June 2020. Your analysis should be reproducible.
+Your paper and *all* of your data processing and analysis code should be submitted by email by 24th July 2020. Your analysis should be reproducible.
 
 Suggestions:  
     - Pick a simple, clear and interesting research question  
