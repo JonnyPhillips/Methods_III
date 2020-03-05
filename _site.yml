@@ -13,6 +13,8 @@ navbar:
       menu:
       - text: "1 - Review"
         href: Class_1.html
+      - text: "2 - Framework for Explanation"
+        href: Class_2.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html
