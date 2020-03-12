@@ -1550,7 +1550,7 @@ The Regression Model reflects the data type of the outcome variable:
 \end{enumerate}
 \item \textbf{OLS with Interaction:} $y_i = \alpha + \beta_1 D_i + \beta_2 X_i + \beta_3 D_i * X_i + \epsilon$
 \begin{itemize}
-\item $$ \frac{\partial y}{\partial D} = \beta_1 + \beta_3 X$$
+\item $ \frac{\partial y}{\partial D} = \beta_1 + \beta_3 X$
 \item \textcolor{blue}{$\beta_1$ is the effect of $D$ when $X=0$} : \textit{May not make sense!}
 \item Insert values for $X$ and see how the marginal effect changes
 \end{itemize}
@@ -1562,7 +1562,7 @@ The Regression Model reflects the data type of the outcome variable:
 \begin{multicols}{2}
 \footnotesize
 \textbf{OLS with Interaction:} \\
-$Redist_i = \alpha + \beta_1 Gender_i + \beta_2 Income_i \\+ \beta_3 Gender_i * Income_i + \epsilon_i$ \\
+$$Redist_i = \alpha + \beta_1 Gender_i + \beta_2 Income_i \\+ \beta_3 Gender_i * Income_i + \epsilon_i$$ \\
 \pause
 $$\frac{\partial Redist}{\partial Gender} = \beta_1 + \beta_3*Income$$ \\
 \pause
@@ -1888,6 +1888,7 @@ Observations & 1,000 \\
 \item Significant regression coefficients just reflect the values in our dataset moving together
 \pause
 \item Does the 'direction' of regression  matter? I.e. Does regression treat $D$ and $Y$ differently? \pause Yes! 
+\end{itemize}
 \begin{multicols}{2}
 
 % Table created by stargazer v.5.2.2 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
@@ -1942,6 +1943,7 @@ Observations & 1,000 \\
 
 \end{multicols}
 \pause
+\begin{itemize}
 \item Remember, regression measures the \textit{vertical} (not diagonal) distances to the regression line
 \begin{itemize}
 \item It minimizes the \textit{prediction errors} for $Y$
@@ -2028,8 +2030,7 @@ Observations & 1,000 \\
 \begin{itemize}
 \item There are four selection risks:
 \begin{enumerate}
-\setcounter{enumi}{1}
-\item \textbf{Selection into survival:}
+\item[2] \textbf{Selection into survival:}
 \pause
 \begin{itemize}
 \item Certain types of units disappear, so the units we see don't tell the full story
@@ -2055,8 +2056,7 @@ Observations & 1,000 \\
 \begin{itemize}
 \item There are four selection risks:
 \begin{enumerate}
-\setcounter{enumi}{2}
-\item \textbf{Selection into the dataset:}
+\item[3] \textbf{Selection into the dataset:}
 \pause
 \begin{itemize}
 \item Our dataset may not be representative
@@ -2079,8 +2079,7 @@ Observations & 1,000 \\
 \begin{itemize}
 \item There are four selection risks:
 \begin{enumerate}
-\setcounter{enumi}{3}
-\item \textbf{Selection into treatment:}
+\item[4] \textbf{Selection into treatment:}
 \pause
 \begin{itemize}
 \item All units are in our dataset, but they \textit{choose} their treatment value

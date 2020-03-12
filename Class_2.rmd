@@ -20,9 +20,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-<!-- ## [Lecture Slides](Classes/Class_2/Slides_Class2_v10.pdf) -->
+## [Lecture Slides](Classes/Class_2/Slides_Class2_v13.pdf)
 
 <!-- ## [Causal Relationships App](https://poliong.shinyapps.io/DAGs/) -->
 
-<!-- ## [Lab Exercise to Complete during Class](Classes/Class_2/Exercise_POs_v1.pdf) -->
-<!--  - [Suggested Responses to Lab Exercises](Classes/Class_2/Exercise_POs_v1_responses.pdf) -->
+## [Lab Exercise to Complete during Class](Classes/Class_2/Exercise_POs_v1.pdf)
+<!-- - [Suggested Responses to Lab Exercises](Classes/Class_2/Exercise_POs_v1_responses.pdf) -->
