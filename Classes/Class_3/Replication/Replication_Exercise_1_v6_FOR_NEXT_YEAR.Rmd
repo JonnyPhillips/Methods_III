@@ -1,0 +1,173 @@
+---
+title: "Methods III: Replication Exercise 1"
+#author: "Jonathan"
+date: "April, 2019"
+output:
+  pdf_document: default
+---
+
+```{r, warning=F, message=F, echo=F}
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+library(kableExtra)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T, include=T)
+```
+
+The data for Gerber, Green and Larimer (GGL, 2008) is available on the course website. You should first read through GGL 2008 quickly to understand the context of the field experiment.
+
+Download the data from the course website and answer the following questions in either R or Stata. You should submit (i) your code, and (ii) a document or PDF containing your answers to [jonnyphillips@gmail.com](jonnyphillips@gmail.com) by midnight on Wednesday 10th April. If you get stuck, please feel free to email me, or in the worst case skip that question and continue to the next. 
+
+For the replication, don't worry about copying the specific details or formatting of the tables - as long as the results are clear. If you are using R, I encourage you to use R markdown to make it easy to combine your code and answers. 
+
+Here is a table of variable names and descriptions from the dataset:
+
+Variable | Description
+---------|-----------------------------------
+hh_id    | Household Identifier
+hh_size  | Household Size
+cluster  | Block
+treatment| Treatment status
+g2000    | Voted in 2000 General Election
+g2002    | Voted in 2002 General Election
+p2000    | Voted in 2000 Primary Election
+p2002    | Voted in 2002 Primary Election
+p2004    | Voted in 2004 Primary Election
+sex      | Sex
+age      | Age
+voted    | Voted in 2006 Primary Election
+
+**1. What hypotheses are GGL testing? Where did they get these hypotheses from?**
+
+**2. What are the treatment and control conditions? What is the outcome variable?**
+
+**3. What is the unit of analysis? What is the level at which treatment is applied?**
+
+**4. Did randomization work? Let's reproduce Table 1 of GGL to conduct balance tests between the treatment and control groups on pre-treatment covariates. Note that GGL evaluate balance at the *household* level so you first need to aggregate the individual data to the household level by finding the household mean on each of the variables we want to assess balance for. Then calculate the mean across household separately for the control and treatment groups. What do we learn from the results?**
+
+```{r, results='asis'}
+#d <- read_csv("GerberGreenLarimer_APSR_2008_social_pressure.csv") %>%
+#  mutate_at(c("g2000","g2002","g2004","p2000","p2002","p2004","treatment","sex","voted"),as.factor) %>%
+#  mutate_at(c("g2000","g2002","g2004","p2000","p2002","p2004","sex","voted"),function(x) {as.numeric(x)-1}) #%>%
+#  mutate(age=2006-yob,
+#         sex=1-sex) %>%
+#  select(hh_id,hh_size,cluster,treatment,g2000,g2002,p2000,p2002,p2004,sex,age,voted)
+
+#d %>% write_csv("GGL_data_prepared.csv")
+
+d <- read_csv("GGL_data_prepared.csv")
+
+bal_vars <- c("hh_size","g2002","g2000","p2004","p2002","p2000","sex","age")
+
+d_hh <- d %>% group_by(hh_id,treatment) %>% summarize_at(c(bal_vars,"voted"),mean)
+
+d_hh %>% group_by(treatment) %>% summarize_at(bal_vars,mean) %>%
+  gather(key="Variable",value="value",-treatment) %>%
+  spread(key="treatment",value="value") %>%
+  select(Variable,Control,`Civic Duty`, Hawthorne,Self,Neighbors) %>%
+  arrange(factor(Variable,levels=c("hh_size","g2002","g2000","p2004","p2002","p2000","sex","age"))) %>%
+  kable(digits=4)%>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+```
+
+**5. GGL don't bother to do a t-test for the difference-in-means, but let's do it ourselves. Conduct a t-test for the difference in mean household age between the Control and 'Neighbors' conditions. Interpret the result.**
+
+```{r}
+d_hh %>% ungroup() %>% 
+  filter(treatment %in% c("Control","Neighbors")) %>%
+  t.test(age~treatment, data=.)
+```
+
+**6. Now let's look at the results of the experiment. Perform a simple difference-in-means t-test for voter turnout between the Control and 'Neighbors' groups in the individual data. Interpret the result.**
+
+```{r}
+d %>% filter(treatment %in% c("Control","Neighbors")) %>%
+  t.test(voted~treatment,data=.)
+```
+
+**7. Now run an OLS regression to understand the effect of each treatment on voter turnout, to replicate column (a) of Table 3. (If you prefer you can use treatment as a factor variable, not a series of dummies like the authors use. For this question do not adjust the standard errors). Interpret the results.**
+
+```{r, results='asis'}
+d %>% mutate(treatment=factor(treatment,levels=c("Control","Civic Duty","Hawthorne","Self","Neighbors"))) %>% 
+  zelig(voted~treatment,data=., model="ls", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(header=F, keep.stat=c("n"))
+```
+
+**9. Repeat your regression but this time with standard errors clustered to the household level. What difference does this make? Why do we do this?**
+
+```{r}
+library(estimatr)
+d %>% lm_robust(voted~treatment, data=.) %>%
+  tidy() %>%
+  select(term,estimate,std.error, p.value) %>%
+  kable(digits=4)%>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+```
+
+**10. Next, we want to add block-level fixed effects to our model to reproduce column (b) of Table 3. However, there are many (10,000) blocks so your computer probably doesn't have enough memory to run this regression directly. An equivalent methodology is to remove the between-group variation in the treatment variable manually and then run the same regression as in Q7. To do this for the 'Neighbors' treatment:**  
+    1. Create a dummy variable for individuals that received the 'Neighbors' treatment,  
+    2. Remove the other treatments from your dataset (so you are left with just 'Neighbors' and 'Control' units),  
+    3. For each 'cluster' group calculate the mean value of the binary 'Neighbors' treatment variable,  
+    4. Subtract the cluster mean from the individual values of the Neighbors treatment variable.  
+    5. Run the same regression as in Q8 but using the cluster-mean-centered treatment variable you just created as the explanatory variable.
+
+**How do the results change? How does this change the comparisons we are making in the regression? **
+
+```{r, results='asis'}
+d_block <- d %>% mutate(Neighbors=ifelse(treatment=="Neighbors",1,0)) %>%
+  group_by(cluster) %>%
+  mutate(Neighbors_cluster_avg=mean(Neighbors,na.rm=T)) %>%
+  ungroup() %>%
+  mutate(Neighbors=Neighbors-Neighbors_cluster_avg)
+
+d_block %>% filter(treatment %in% c("Neighbors","Control")) %>% 
+  zelig(voted~Neighbors,data=.,model="ls", cite=F) %>%  from_zelig_model() %>%
+  stargazer(header=F, keep.stat=c("n"))
+
+```
+
+**11. Add covariates (g2000,g2002,p2000,p2002,p2004) to your model from Q10 to reproduce column 3 of Table 3. How do the results change when we add covariates?**
+
+```{r, results='asis'}
+d_block %>% filter(treatment %in% c("Neighbors","Control")) %>% 
+  zelig(voted~Neighbors + g2000 + g2002 + p2000 + p2002 + p2004,data=., model="ls", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(header=F, keep.stat=c("n"))
+```
+
+**12. In place of an OLS regression, use a logit regression model to run the same model as in Q8. How would you interpret the results?**
+
+```{r, results='asis'}
+d %>% mutate(treatment=factor(treatment,levels=c("Control","Civic Duty","Hawthorne","Self","Neighbors"))) %>% 
+  zelig(voted~treatment,data=., model="logit", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(header=F, keep.stat=c("n"))
+```
+
+**13. Predict the mean first difference (the mean change) of the probability of voting when moving from the 'Control' to 'Neighbors' treatment category using your logit model from Q12. *Hint: Use Zelig in R and Clarify in Stata.* **
+
+```{r}
+d %>% mutate(Neighbors=ifelse(treatment=="Neighbors",1,0)) %>% 
+  filter(treatment %in% c("Neighbors","Control")) %>% 
+  zelig(voted~Neighbors,data=., model="logit", cite=F) %>%
+  setx(Neighbors=0) %>%
+  setx1(Neighbors=1) %>%
+  sim(num=10000) %>%
+  zelig_qi_to_df() %>%
+  group_by(setx_value) %>%
+  summarize(fds=mean(predicted_value)) %>%
+  spread(key="setx_value",value="fds") %>%
+  mutate(diff=x1-x) %>%
+  pull(diff)
+
+```
+
+**14. How does the data processing the authors conduct on p.36-37 (under 'Study Population') affect your interpretation of the conclusions?** 
+
+**15. How generalizable are the findings of this study to other elections? To the same set of elections in 2010? To neighbouring Indiana in the same year? To elections in Brazil?**

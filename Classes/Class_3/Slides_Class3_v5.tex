@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -238,9 +238,10 @@ E(Y_1|D=1)\text{ ,   }E(Y_0|D=0)
 \item With independence, $Y_1, Y_0 \perp D$:
 \end{itemize}
 \begin{eqnarray}
-E(Y_1|D=1) = E(Y_1) \text{ ,   }  \pause E(Y_0|D=0) = E(Y_0) \\
+E(Y_1|D=1) = E(Y_1) \\ 
+E(Y_0|D=0) = E(Y_0) \\
 \pause
-E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) \\
+E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0)
 \end{eqnarray}
 \pause
 \item Potential outcomes in the treatment and control groups are now \textbf{unbiased} and representative of \textit{all} the units
@@ -253,7 +254,7 @@ E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) \\
 \item What is the treatment assignment mechanism under \textbf{randomization}?
 \pause
 \begin{itemize}
-\item It has nothing to do with potential outcomes!
+\item \textit{By definition} it has nothing to do with potential outcomes!
 \pause
 \item So we get a representative sample of $Y_0$ and $Y_1$
 \pause
@@ -294,6 +295,7 @@ E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) \\
 \pause
 \end{itemize}
 $$ \hat{ATE} = E(Y_1|D=1) - E(Y_0|D=0)$$ \\ \pause
+$$ \hat{ATE} = E(Y_0+\alpha|D=1) - E(Y_0|D=0)$$ \\ \pause
 $$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} + \underbrace{E(Y_0|D=1) - E(Y_0|D=0)}_\text{Bias}$$ \\
 \pause
 \begin{itemize}
@@ -303,7 +305,7 @@ $$ E(Y_0|D=1) = E(Y_0|D=0)$$ \\ \pause
 $$ \hat{ATE} = \underbrace{\alpha}_\text{Real ATE} $$ \\
 \pause
 \begin{itemize}
-\item This works for observable \textit{and} unobservable variables
+\item This works for observable \textit{and} unobservable influences
 \end{itemize}
 \end{frame}
 
@@ -432,7 +434,11 @@ N=100000
 \frametitle{Analyzing Field Experiments}
 \begin{itemize}
 \item If treatment is random we know that:
-$$\hat{ATE} = E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) $$
+\begin{eqnarray}
+\hat{ATE} &= E(Y_1|D=1) - E(Y_0|D=0) \\
+& = E(Y_1) - E(Y_0) \\
+& = \text{Real ATE}
+\end{eqnarray}
 \pause
 \item What is $E(Y_1|D=1)$? 
 \pause 
@@ -456,10 +462,11 @@ $$\hat{ATE} = E(Y_1|D=1) - E(Y_0|D=0) = E(Y_1) - E(Y_0) $$
 \item Simple Regression $=$ Difference-in-means T-test
 \pause
 \item By definition: 
-$$Y_i = Y_{0i} + (Y_{1i} - Y_{0i}) D_i$$
+$$Y^{obs}_i = Y_{0i}(1-D_i) + Y_{1i}D_i$$
+$$Y^{obs}_i = Y_{0i} + (Y_{1i} - Y_{0i}) D_i$$
 \pause
 \item We can estimate:
-$$Y_i \sim \alpha + \beta D_i + \epsilon_i$$
+$$Y^{obs}_i = \alpha + \beta D_i + \epsilon_i$$
 \pause
 \item So:
 $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
@@ -534,13 +541,15 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \pause
 \item Clustered treatment: To reduce implementation costs, or to test specific theories
 \pause
+\begin{itemize}
 \item Eg. Holding Town Hall meetings does not make sense at the individual level
+\end{itemize}
 \pause
-\item If treatment (or sampling) are clustered, we will have dependencies in our errors - closer people are more similar
+\item If treatment (or sampling) are clustered, we will have \textit{dependencies} in our errors - closer people are more similar
 \pause
-\item So standard errors must be clustered at the level of treatment (eg. villages)
+\item So \textbf{standard errors must be clustered at the level of treatment/sampling} (eg. villages)
 \pause
-\item In general, inference is more efficient with more higher-level units (more villages, less people per village)
+\item In general, causal inference is more efficient with more higher-level units (more villages, less people per village)
 \pause
 \begin{itemize}
 \item But there is usually a cost trade-off
@@ -556,16 +565,16 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \item If randomization worked and the sample size is large, usually not
 \pause
 \item Three reasons to include controls:
-\begin{itemize}
-\item Small sample, but note causal inference is now model-dependent
+\begin{enumerate}
+\item \textbf{Small sample}, but note causal inference is now model-dependent
 \pause
-\item Chance/residual imbalance on a specific variable which we want to adjust for
+\item \textbf{Chance/residual imbalance} on a specific variable which we want to adjust for
 \pause
-\item To improve precision, i.e. reduce the standard errors on $\beta$
+\item \textbf{To improve precision}, i.e. reduce the standard errors on $\beta$
 \begin{itemize}
 \item The more variation in $Y$ we can explain with covariates, the more certain we can be on the effect of $D$
 \end{itemize}
-\end{itemize}
+\end{enumerate}
 \end{itemize}
 \end{frame}
 
@@ -575,9 +584,9 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \item Average Treatment Effects are just one summary statistic
 \begin{itemize}
 \item Treatment effects are not normally constant
-\end{itemize}
 \pause
 \item Averages can be influenced by outliers
+\end{itemize}
 \pause
 \item What if an average effect of +5\% income leaves half the population hugely rich and half very poor?
 \pause
@@ -613,10 +622,12 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \item \textbf{Result:} The health centre boosts health by 20\% in rich neighbourhoods and reduces health in poor neighbourhoods by 20\%
 \pause
 \item \textbf{Interpretation:} Does neighbourhood poverty cause health centres to have a negative impact?  
+\begin{itemize}
 \pause
 \item We cannot interpret the 'moderator' variable as having a causal effect, the different treatment effects could be due to omitted variables or selection
 \pause
 \item Only the health centre was randomly assigned, not neighbourhood income!
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -639,7 +650,7 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \begin{frame}
 \frametitle{1. Compliance with Randomization procedure}
 \begin{itemize}
-\item Randomization is unpopular
+\item Randomization is unpopular, political, and sometimes resisted
 \pause
 \item Need to verify treatment allocation
 \begin{itemize}
@@ -689,7 +700,7 @@ $$\hat{\beta} = E(Y_{1i} - Y_{0i})$$
 \item We have a large N, so we can detect very small differences
 \pause
 \end{enumerate}
-\item \textbf{Check:} For balance, \textbf{What matters are \textit{substantive} differences, not p-values}
+\item \textbf{Check:} For balance, what matters are \textit{substantive} differences, not so much p-values
 \pause
 \item Two safety nets:
 \begin{enumerate}
@@ -712,9 +723,11 @@ $$(Y_{1i}, Y_{0i}) \perp D_j$$
 \pause
 $$Y_i(D_i, D_j, D_k, D_l, D_m, D_n, D_o, D_p...) = Y_i(D_i)$$
 \pause
+\item Spillovers interfere with our control group, so the comparison does not measure the direct effect of a treatment on person $i$ 
+\pause
 \item But spillovers are common! If you get an award, I might feel more motivated or less motivated
 \pause
-\item Why are spillovers a problem?
+\item What should we do?
 \pause
 \begin{itemize}
 \item \textbf{Design:} Limit risk of spillovers, eg. leave 20 miles between each unit in sampling
@@ -731,7 +744,9 @@ $$Y_i(D_i, D_j, D_k, D_l, D_m, D_n, D_o, D_p...) = Y_i(D_i)$$
 \pause
 \item Assignment to treatment causes a \textbf{'parallel'} treatment
 \pause
+\begin{itemize}
 \item Eg. We decide to share information about specific politicians on the radio, but the politicians find out and counter with their own broadcasts
+\end{itemize}
 \pause
 \item Our treatment effect is no longer \textit{only} the effect of our information intervention
 \pause
@@ -750,9 +765,9 @@ $$Y_i(D_i, D_j, D_k, D_l, D_m, D_n, D_o, D_p...) = Y_i(D_i)$$
 \textbf{Downstream ('net') Consequences}
 \begin{itemize}
 \pause
-\item Eg. We give a cash handout to families, and they start paying taxes; what explains their changing attitudes to government?
+\item Eg. We give a cash handout to families, and then they also start paying taxes; which explains their changing attitudes to government?
 \pause
-\item We find zero effect of government investment of \$1000 in healthcare on health outcomes, because households responded by reducing their spending by exactly \$1000?
+\item We find zero effect of government investing \$1000 in healthcare on health outcomes, because households responded by reducing their spending by exactly \$1000
 \end{itemize}
 \columnbreak
 \pause
@@ -766,6 +781,7 @@ $$Y_i(D_i, D_j, D_k, D_l, D_m, D_n, D_o, D_p...) = Y_i(D_i)$$
 \end{multicols}
 \normalsize
 \begin{itemize}
+\pause
 \item \textbf{Design:} Careful specification of treatment and control
 \end{itemize}
 \end{frame} 
@@ -787,7 +803,7 @@ Parallel Treatment
 \includegraphics[width=\maxwidth]{figure/Excludability2-1} 
 
 \end{knitrout}
-\end{multicols}{2}
+\end{multicols}
 \end{frame}
 
 \section{Implementation}
@@ -837,6 +853,8 @@ Parallel Treatment
 \item What's the difference between these three options?
 \pause
 \item What \% treated? 50:50 is usually most efficient
+\pause
+\item To actually randomize, use the \href{https://cran.r-project.org/web/packages/randomizr/vignettes/randomizr_vignette.html}{`randomizr' package} 
 \end{itemize}
 \end{frame}
 
@@ -847,17 +865,42 @@ Parallel Treatment
 \pause
 \item Randomization is \textit{inefficient} and risky
 \pause
-\item We know we need balance on key covariates, eg. gender, democracy
+\item We know we need balance on key covariates, eg. gender, so why leave this to chance??
 \begin{itemize}
-\item So why leave this to chance??
+\item 
 \pause
 \item We can measure these variables and \textit{enforce} balance (50\% female in both treatment and control)
 \pause
 \item Blocking means randomizing \textit{within} fixed groups
 \pause
-\item Eg. We have 10 states and a total sample size of 5000 - so we fix 250 treated and 250 control in each state
+\item Eg. We have a sample size of 4000, half male, half female
+\pause
+\begin{multicols}{2}
+Without Blocking:
+\begin{table}[]
+\begin{tabular}{|l|l|l|}
+\hline
+        & M    & F    \\ \hline
+Treated & 1042 & 958  \\ \hline
+Control & 972  & 1028 \\ \hline
+\end{tabular}
+\end{table}
+\columnbreak
+With Blocking:
+\begin{table}[]
+\begin{tabular}{|l|l|l|}
+\hline
+        & M    & F    \\ \hline
+Treated & 1000 & 1000  \\ \hline
+Control & 1000 & 1000 \\ \hline
+\end{tabular}
+\end{table}
+\end{multicols}
 \end{itemize}
+\pause
 \item "Block what you can; randomize what you cannot"
+\pause
+\item We focus on within-block variation: $Y_i = \alpha + D_i + B_i + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -867,20 +910,20 @@ Parallel Treatment
 \item Random treatment vs. Random samples
 \end{itemize}
 \begin{multicols}{2}
+\textbf{Random Treatment}
 \begin{itemize}
-\item Random Treatment
 \pause
 \item Representative potential outcomes
 \pause
-\item Causal Inference
+\item \textit{Causal} Inference
 \end{itemize}
 \columnbreak
+\textbf{Random Samples}
 \begin{itemize}
-\item Random Samples
 \pause
 \item Sample representative of larger population
 \pause
-\item Statistical Inference
+\item \textit{Statistical} Inference
 \end{itemize}
 \end{multicols} 
 \pause
@@ -903,11 +946,15 @@ Parallel Treatment
 \begin{itemize}
 \item We know that $D$ causes $Y$ in this population. \pause So what? What did we learn about political science?
 \pause
-\item We know that giving citizens health insurance makes them more likely to vote. \pause Why??
+\begin{itemize}
+\item We know that giving citizens health insurance makes them more likely to vote. \pause Why?? How?? What is the mechanism?
+\pause
+\item Due to increased wealth? Increased trust in government? More mobility?
+\end{itemize}
 \pause
 \item What theory is this testing? \pause Does it reject any theory?
 \pause
-\item We want to learn about generalizable political processes.
+\item We want to test theories, not treatments
 \end{itemize}
 \end{frame}
 
@@ -928,7 +975,7 @@ Parallel Treatment
 \item What is the effect of university education?
 \end{itemize}
 \pause
-\item Yes, you randomly sampled and randomly assigned treatment, but not in the full population
+\item Yes, you randomly sampled and randomly assigned treatment, but not in the full population we want to learn about
 \pause
 \begin{itemize}
 \item The places that agree to field experiments are not representative
@@ -968,18 +1015,21 @@ Parallel Treatment
 \pause
 \item Mixed but positive results: crop yields increased 85-350\%, malaria reduced 50\% compared to controls
 \pause
-\item But sites were not representative (close to main roads and cities so they're easy to visit)
+\item But:
+\begin{enumerate}
+\item Sites were not representative (close to main roads and cities so they're easy to visit)
 \pause
 \item Treatment could not be scaled (Every village cannot get visits from Columbia professors twice a year)
 \pause
-\item And politics was ignored (No implementation unless you give locals responsibility, but then lose control)
+\item And politics was ignored (No implementation unless you give locals responsibility, but then you lose control)
+\end{enumerate}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{4. Skewed Learning}
 \begin{itemize}
-\item Research focuses on where experiments are most possible, not where it is most needed
+\item Research focuses on where experiments are most \textit{possible}, not where it is most needed
 \pause
 \item Selection bias in research findings
 \end{itemize}
