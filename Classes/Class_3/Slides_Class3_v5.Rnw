@@ -86,7 +86,7 @@ d <- data.frame(as.factor(treatment),outcome)
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 3 - Field Experiments}
 \author{Jonathan Phillips}
-\date{April 2019}
+\date{March 2020}
 
 \begin{document}
 
