@@ -17,6 +17,9 @@ navbar:
         href: Class_2.html
       - text: "3 - Field Experiments"
         href: Class_3.html
+      - text: "4 - Survey and Lab Experiments"
+        href: Class_4.html
+
     - text: "Project"
       icon: fa-book-open
       href: Project.html
