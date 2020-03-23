@@ -122,8 +122,8 @@ data_large_N <- tibble(x=rbinom(N,1,0.5),
                          D==0~y0))
 
 data_large_N %>% ggplot() +
-  geom_density(aes(x=y0), col="blue") +
-  geom_density(aes(x=y1),col="dark green") +
+  geom_density(data=data_large_N %>% filter(D==0),aes(x=y_obs), col="blue") +
+  geom_density(data=data_large_N %>% filter(D==1),aes(x=y_obs),col="dark green") +
   theme_classic()
 ```
 
