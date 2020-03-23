@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## [Lab Exercise to Complete during Class](Classes/Class_3/Exercise_Field_Exp_v2.pdf)
 
-<!--  - [Suggested Responses](Classes/Class_3/Exercise_Field_Exp_v1_Suggested.pdf) -->
+ - [Suggested Responses](Classes/Class_3/Exercise_Field_Exp_v2_responses.pdf)
 
 ## Replication Exercise
 - [Paper: Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.](Classes/Class_3/Replication/Gerber Green and Larimer 2008.pdf)
