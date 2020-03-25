@@ -2,9 +2,9 @@
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {0}{0}{2}{2/7}{}{0}}
 \headcommand {\beamer@framepages {2}{7}}
-\headcommand {\sectionentry {1}{Lab Experiments}{8}{Lab Experiments}{0}}
 \headcommand {\beamer@sectionpages {1}{7}}
 \headcommand {\beamer@subsectionpages {1}{7}}
+\headcommand {\sectionentry {1}{Lab Experiments}{8}{Lab Experiments}{0}}
 \headcommand {\slideentry {1}{0}{1}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
 \headcommand {\slideentry {1}{0}{2}{9/12}{}{0}}
@@ -27,9 +27,9 @@
 \headcommand {\beamer@framepages {41}{45}}
 \headcommand {\slideentry {1}{0}{11}{46/47}{}{0}}
 \headcommand {\beamer@framepages {46}{47}}
-\headcommand {\sectionentry {2}{Survey Experiments}{48}{Survey Experiments}{0}}
 \headcommand {\beamer@sectionpages {8}{47}}
 \headcommand {\beamer@subsectionpages {8}{47}}
+\headcommand {\sectionentry {2}{Survey Experiments}{48}{Survey Experiments}{0}}
 \headcommand {\slideentry {2}{0}{1}{48/48}{}{0}}
 \headcommand {\beamer@framepages {48}{48}}
 \headcommand {\slideentry {2}{0}{2}{49/53}{}{0}}
@@ -66,9 +66,9 @@
 \headcommand {\beamer@framepages {115}{120}}
 \headcommand {\slideentry {2}{0}{18}{121/123}{}{0}}
 \headcommand {\beamer@framepages {121}{123}}
-\headcommand {\sectionentry {3}{Generalizability}{124}{Generalizability}{0}}
 \headcommand {\beamer@sectionpages {48}{123}}
 \headcommand {\beamer@subsectionpages {48}{123}}
+\headcommand {\sectionentry {3}{Generalizability}{124}{Generalizability}{0}}
 \headcommand {\slideentry {3}{0}{1}{124/124}{}{0}}
 \headcommand {\beamer@framepages {124}{124}}
 \headcommand {\slideentry {3}{0}{2}{125/129}{}{0}}
@@ -87,4 +87,4 @@
 \headcommand {\beamer@subsectionpages {124}{153}}
 \headcommand {\beamer@sectionpages {124}{153}}
 \headcommand {\beamer@documentpages {153}}
-\headcommand {\def \inserttotalframenumber {38}}
+\headcommand {\gdef \inserttotalframenumber {38}}

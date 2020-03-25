@@ -86,7 +86,7 @@ d <- data.frame(as.factor(treatment),outcome)
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 4 - Survey and Lab Experiments}
 \author{Jonathan Phillips}
-\date{April 2019}
+\date{March 2020}
 
 \begin{document}
 
@@ -116,15 +116,32 @@ d <- data.frame(as.factor(treatment),outcome)
 \begin{frame}
 \frametitle{Lab Experiments}
 \begin{itemize}
-\item \textbf{Treatment Assignment}: Same as a Field Experiment
+\item \textbf{Location}: Inside a controlled laboratory, not in the real world
 \pause
-\item \textbf{Treatment}: Not a manipulation of real world political or economic processes, but establishing controlled 'lab' conditions
+\item \textbf{Treatment}: Not a manipulation of real world political or economic processes, but of one aspect of the artificial lab conditions
+\pause
+\item \textbf{Treatment Assignment}: Randomized, same as a Field Experiment
 \pause
 \begin{itemize}
-\item The advantage: Control over context helps isolate mechanisms
+\item The advantage: Control over context helps hold all else equal and focus on treatment-control comparison
 \pause
 \item The disadvantage: Can we generalize to the real world?
 \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lab Experiments}
+\begin{itemize}
+\item For example, we want to assess how race affects voting behaviour
+\pause
+\item We invite 100 participants to our university computer lab
+\pause
+\item All are shown the exact same hypothetical candidates with the same descriptions in the exact same room
+\pause
+\item Except half see a black candidate vs. a white candidate, and half two white candidates
+\pause
+\item We measure racial attitudes by comparing rates of voting between treatment and control groups
 \end{itemize}
 \end{frame}
 
@@ -195,7 +212,7 @@ d <- data.frame(as.factor(treatment),outcome)
 \item That's interesting in itself! We can manipulate the degree of scrutiny/anonymity etc.
 \end{itemize}
 \pause
-\item Lab experiments may be generalizable where norms/morality is less important (???)
+\item Lab experiments may be more generalizable where norms/morality is less important (???)
 \end{itemize}
 \end{frame}
 
@@ -257,7 +274,6 @@ d <- data.frame(as.factor(treatment),outcome)
 \item \textbf{Strategy Selection} - Does anonymity for the sender in the dictator game make a difference?
 \begin{itemize}
 \item Yes - offer more to co-ethnics when offerers believe they can be seen
-\pause
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -335,7 +351,9 @@ d <- data.frame(as.factor(treatment),outcome)
 \begin{enumerate}
 \item \textbf{Framing Experiments} - how responses vary to question content
 \pause
-\item \textbf{Priming Experiments} - to measure the effect of a prime on a response to a fixed question
+\item \textbf{Priming Experiments} - to measure the effect of an earlier prime on a response to a fixed question
+\pause
+\item \textbf{Endorsement Experiments} - to measure how the source of information affects responses
 \pause
 \item \textbf{List Experiments} - to reduce social desirability bias in measurement
 \pause
@@ -344,7 +362,7 @@ d <- data.frame(as.factor(treatment),outcome)
 \end{frame}
 
 \begin{frame}
-\frametitle{1. Framing}
+\frametitle{1. Framing Experiments}
 \begin{itemize}
 \item How much do details in the question ('wording') affect our responses?
 \pause
@@ -361,11 +379,15 @@ d <- data.frame(as.factor(treatment),outcome)
 \end{frame}
 
 \begin{frame}
-\frametitle{1. Framing}
+\frametitle{1. Framing Experiments}
 \begin{itemize}
 \item Within/Between Survey Experiments
 \pause
 \item Between: Treated and Control are different people
+\begin{itemize}
+\pause
+\item We compare response rates between Treated and Control groups
+\end{itemize}
 \pause
 \item Within: Treated and Control measures from the same person
 \begin{itemize}
@@ -381,7 +403,7 @@ d <- data.frame(as.factor(treatment),outcome)
 \end{frame}
 
 \begin{frame}
-\frametitle{2. Priming}
+\frametitle{2. Priming Experiments}
 \begin{itemize}
 \item The entire point of survey bias is that the questions we ask change the answers we get
 \pause
@@ -400,24 +422,46 @@ d <- data.frame(as.factor(treatment),outcome)
 \end{frame}
 
 \begin{frame}
-\frametitle{2. Priming}
+\frametitle{2. Priming Experiments}
 \begin{itemize}
 \item Eg. If we want to measure the effect of 'hope' vs. 'fear' on the demand for constitutional reform:
 \pause
-\item There are good reasons to be hopeful for democracy: More people voted than ever before in the 2018 election, suggesting strong citizen participation in democracy. Did you vote in 2018?
+\item \textbf{Treatment 1:} There are good reasons to be hopeful for democracy: More people voted than ever before in the 2018 election, suggesting strong citizen participation in democracy. 
 \pause
-\item Many people fear for the survival of democracy: The proportion of voters who turned out to vote fell again in the 2018 election, suggesting a critical problem of declining trust and engagement in democracy. Did you vote in 2018?
+\item \textbf{Treatment 2:} Many people fear for the survival of democracy: The proportion of voters who turned out to vote fell again in the 2018 election, suggesting a critical problem of declining trust and engagement in democracy.
+\pause
+\item [Other unrelated questions]
 \pause
 \item How much do you support constitutional reform?
+\pause
+\begin{itemize}
+\item We compare responses between Groups that saw Treatment 1 and Treatment 2
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{3. List Experiments}
+\frametitle{3. Endorsement Experiments}
 \begin{itemize}
-\item Most survey responses are biased to give the answer they think the researcher wants
+\item Not all information is equal - people process information based on their prior expectations and the perceived credibility of the source
+\pause
+\item Endorsement experiences actively manipulate who \textit{endorses} the information and compares how responses vary
+\pause
+\item Eg. LAPOP 2018: Control - Algumas pessoas acreditam que o governo brasileiro deveria privatizar a Petrobrás. Até que ponto concorda ou discorda desta proposta? 
+\pause
+\item Treatment - Algumas pessoas acreditam que o governo brasileiro deveria privatizar a Petrobrás. O Presidente Bolsonaro disse que é a favor desta proposta. E o sr./sra.? Até que ponto concorda ou discorda desta proposta? 
+\pause
+\item Comparing Treatment and Control responses we can measure how much Bolsonaro affects people's responses
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{4. List Experiments}
+\begin{itemize}
+\item Many survey responses are biased to give the answer they think the researcher wants
 \pause
 \begin{itemize}
+\item Eg. if someone from Greenpeace asks you if you recycle, you want to seem environmentally conscious
 \item \textbf{Social desirability bias} has \textit{differential} effects across respondents and topics
 \begin{itemize}
 \item Most people say they recycle, even though they do not
@@ -429,13 +473,13 @@ d <- data.frame(as.factor(treatment),outcome)
 \item List experiments make individual responses \textit{invisible} to the researcher
 \pause
 \begin{itemize}
-\item Knowing this, hopefully the respondent answers more accurately
+\item Knowing this, hopefully the respondent answers more honestly
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{3. List Experiments}
+\frametitle{4. List Experiments}
 I am now going to read out a list of activities. Please count the number of these activities that you have done in the past one year. Please do not tell me WHICH activities you have done, only the TOTAL NUMBER of them: 
 \begin{itemize}
 \item Voted
@@ -445,7 +489,7 @@ I am now going to read out a list of activities. Please count the number of thes
 \end{frame}
 
 \begin{frame}
-\frametitle{3. List Experiments}
+\frametitle{4. List Experiments}
  I am now going to read out a list of activities. Please count the number of these activities that you have done in the past one year. Please do not tell me WHICH activities you have done, only the TOTAL NUMBER of them:
 \begin{itemize}
 \item Voted
@@ -456,9 +500,9 @@ I am now going to read out a list of activities. Please count the number of thes
 \end{frame}
 
 \begin{frame}
-\frametitle{3. List Experiments}
+\frametitle{4. List Experiments}
 \begin{itemize}
-\item \item Eg. Gonzalez-Ocantos (2010) - list experiment on vote-buying in Nicaragua 2008 municipal elections
+\item Eg. Gonzalez-Ocantos (2010) - list experiment on vote-buying in Nicaragua 2008 municipal elections
 \item \textbf{Direct Question}: Have you received a gift or favour in exchange for your vote?
 \begin{itemize}
 \item 3\%
@@ -467,13 +511,13 @@ I am now going to read out a list of activities. Please count the number of thes
 \item \textbf{List experiment}:
 \begin{itemize}
 \item Just the difference in mean responses between treatment and control lists
-\item 24\% = 2.31 - 2.06
+\item 2.31 - 2.06 = 24\%
 \end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{3. List Experiments}
+\frametitle{4. List Experiments}
 \textbf{Assumptions:}
 \begin{enumerate}
 \item No Liars - People answer honestly in the presence of the sensitive item
@@ -494,20 +538,22 @@ I am now going to read out a list of activities. Please count the number of thes
 \end{frame}
 
 \begin{frame}
-\frametitle{4. Conjoint Survey Experiments}
+\frametitle{5. Conjoint Survey Experiments}
 \begin{itemize}
-\item How do people make choices between many options?
+\item How do people make choices/trade-offs between many options?
 \pause
 \item Treatments are often 'bundles' of characteristics, but which aspect matters most?
 \pause
-\item Also a problem of social desirability bias in which characteristics matter
+\item Eg. Black candidates are often poorer, male, older
+\pause
+\item Also a problem of social desirability bias if we ask directly which characteristics matter
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{4. Conjoint Survey Experiments}
+\frametitle{5. Conjoint Survey Experiments}
 \begin{itemize}
-\item Hainmueller et al 2013 - How do attitudes to immigrants depend on immigrant characteristics?
+\item Hainmueller et al (2013) - How do attitudes to immigrants depend on immigrant characteristics?
 \pause
 \item Vary education, profession, language, gender, national origin, etc.
 \pause
@@ -534,14 +580,14 @@ I am now going to read out a list of activities. Please count the number of thes
 \includepdf[pages={21}]{Jens.pdf}
 
 \begin{frame}
-\frametitle{4. Conjoint Survey Experiments}
+\frametitle{5. Conjoint Survey Experiments}
 \begin{itemize}
 \item Estimating results uses a simple regression of respondent choices on profile attribute-values
 \pause
 \item But each specific profile (treatment) may arise too rarely to make comparisons of individual attribute-values
 \pause
 \begin{itemize}
-\item So this is \textbf{not} an Average Treatment Effect for each profile
+\item So this is \textbf{not} an Average Treatment Effect for each profile or each value
 \pause
 \item Eg. the effect of gender when age, language etc. are held constant
 \pause
@@ -553,15 +599,15 @@ I am now going to read out a list of activities. Please count the number of thes
 \end{frame}
 
 \begin{frame}
-\frametitle{4. Conjoint Survey Experiments}
+\frametitle{5. Conjoint Survey Experiments}
 Assumptions:
-\begin{itemize}
+\begin{enumerate}
 \item We're still assuming people try to answer honestly
 \pause
 \item The ordering of attributes does not matter (or is randomized)
 \pause
 \item Profiles are randomized
-\end{itemize}
+\end{enumerate}
 \end{frame}
 
 \section{Generalizability}
@@ -571,7 +617,7 @@ Assumptions:
 \begin{itemize}
 \item Can we generalize from survey/lab responses to real-world behaviour?
 \pause
-\item \textbf{Non-Behavioural Measures:} 
+\item \textbf{1. Non-Behavioural Measures:} 
 \begin{itemize}
 \item What is at stake in the answer? Are there any actual consequences? 
 \pause
@@ -589,7 +635,7 @@ Assumptions:
 \begin{itemize}
 \item Can we generalize from survey/lab responses to real-world behaviour?
 \pause
-\item \textbf{Credibility:} 
+\item \textbf{2. Credibility:} 
 \begin{itemize}
 \pause
 \item 'Treatments' in survey experiments are just information or wording
@@ -609,7 +655,7 @@ Assumptions:
 \begin{itemize}
 \item Can we generalize from survey/lab responses to real-world behaviour?
 \pause
-\item \textbf{Context:} 
+\item \textbf{3. Context:} 
 \begin{itemize}
 \pause
 \item Our interpretation of treatments depends on subtle signals - someone telling you a Trump voter is moving in next door is very different to actually meeting that person
@@ -627,7 +673,7 @@ Assumptions:
 \begin{itemize}
 \item Can we generalize from survey/lab responses to real-world behaviour?
 \pause
-\item \textbf{Durability:} 
+\item \textbf{4. Durability:} 
 \begin{itemize}
 \pause
 \item We find that a nationalism prompt produces pro-statist attitudes five minutes later in a survey

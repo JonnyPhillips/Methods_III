@@ -20,15 +20,13 @@ library(knitr)
 
 ```{r, warning=F, message=F}
 survey <- read_csv("Survey_data.csv")
-
-#survey <- survey %>% filter(is.na(list_response)==F)
 ```
 
 ### Priming Experiment
 
 `Survey_data.csv`
 
-1. Respondents were primed with one of two questions ('hope' and 'anger'). How does this prime affect subsequent answers to the question about the need for constitutional reform? Calculate the difference-in-means estimate of the average treatment effect. Interpret the result.
+1. Respondents were primed with one of two questions ('hope' and 'anger', variable `Primed`). How does this prime affect subsequent answers to the question about the need for constitutional reform (variable `Constitution_Reform_Support`)? Calculate the difference-in-means estimate of the average treatment effect. Interpret the result.
 
 ```{r}
 survey %>% group_by(Primed) %>% 

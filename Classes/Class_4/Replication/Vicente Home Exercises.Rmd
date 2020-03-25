@@ -1,0 +1,145 @@
+---
+title: "Class 3, exercises"
+output: html_document
+---
+
+nome <- "Vicente G. Ferraro Jr."  
+programa <- "Doutorado em Ciência Política"  
+n_usp <- 6655905  
+data_entrega: "24/03/2020" 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=F, warning=F, message=F)
+```
+
+### 1. What hypotheses are GGL testing? Where did they get these hypotheses from?
+
+GGL are testing whether social pressure (mainly the disclosure of individual´s turnout) increase the turnout. They got these hypotheses from the literarure of political psychology and previous experiments based on smaller samples.
+
+### 2. What are the treatment and control conditions? What is the outcome variable?
+
+The control condition is not to receive any letter claiming to go to the polls, whereas the control conditions are to receive four types of letter with different levels of social pressure. The outcome variable is the voter turnout (the percentage of voting N of individuals). 
+
+
+### 3. What is the unit of analysis? What is the level at which treatment is applied?
+
+The unit of analysis is the individual and the treatment´s level is the household.
+
+
+### 4. Assumption (1): What evidence do they provide that random assignment was really implemented?
+
+The evidence is the difference of means between the control and treatment groups regarding household size, gender, age and previous turnouts - their means are highly similar.
+
+
+### 5. Assumption (2): What evidence do they provide that randomization produced balance on potential outcomes: Answer the questions below.
+
+### (a) Assess the balance of individuals’ age between the Control and ‘Self’ treatment. What is the average difference in age between the two groups?
+
+The average difference is lesser than 0.07%.
+
+### (b) Is this difference in (a) statistically significant using a t-test?
+
+No, the difference is not statistically significant (the p-value is 0.7945).
+
+```{r include=FALSE}
+# Needed packages
+
+if(!require(tidyverse)){
+  install.packages("tidyverse")
+  library(tidyverse)
+}
+
+# For clusters randomization
+if(!require(randomizr)){
+  install.packages("randomizr")
+  library(randomizr)
+}
+
+# For clustered standard errors
+if(!require(estimatr)){
+  install.packages("estimatr")
+  library(estimatr)
+}
+
+# For tables´ disclosure
+if(!require(knitr)){
+  install.packages("knitr")
+  library(knitr)
+}
+
+if(!require(kableExtra)){
+  install.packages("kableExtra")
+  library(kableExtra)
+}
+```
+
+
+```{r include=FALSE}
+
+url <- "https://jonnyphillips.github.io/Methods_III/Classes/Class_3/Replication/GGL_data_prepared.csv"
+
+download.file(url, destfile="GGL_data.csv")
+
+data <-  read.csv("GGL_data.csv",sep = ",",
+                            header = T,
+                            encoding = "UTF-8",
+                            stringsAsFactors = T)
+
+data_self <- data %>%  
+  filter(treatment == "Self")
+
+data_control <- data %>%  
+  filter(treatment == "Control")
+
+t.test_age <- t.test(data_self$age, data_control$age, alternative = "two.sided", var.equal = FALSE)
+
+```
+
+### (c) To assess balance in their paper, GGL first aggregate the data to household level averages.
+### Create a new household-level dataset by averaging the household size of each household.
+
+```{r include=FALSE}
+
+data_hh_level <- data %>% 
+  group_by(hh_id)
+
+```
+
+
+### (d) In the household-level dataset, calculate the average Household Size in each control/treatment condition to replicate the first line of Table 1 in GGL (2008).
+
+```{r}
+
+average_size <- data_hh_level %>% 
+  group_by(treatment) %>% 
+  summarise(hh_size = mean(hh_size, na.rm = T))
+  
+  average_size %>% kable(align=c(rep('c',times=7))) %>% 
+     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+```
+
+
+
+### (e) GGL do not bother to run a t-test, but let’s run one between the ‘Control’ and ‘Civic Duty’ conditions. Interpret the result.
+
+The means´ differences are not statistically significant, an evidence that the assignment was randomized and balanced. 
+
+```{r}
+
+data_control <- data_hh_level %>% 
+  filter(treatment == "Control")
+
+data_civic <- data_hh_level %>%
+  filter(treatment == "Civic Duty")
+
+t.test(data_control$hh_size, data_civic$hh_size, alternative = "two.sided", var.equal = FALSE)
+
+```
+
+
+
+6. Assumption (3): What is the risk of spillovers (violations of SUTVA) from treatment?
+
+7. Assumption (4): Is there a risk of any ‘parallel’ treatments that violate the excludability assumption?
+

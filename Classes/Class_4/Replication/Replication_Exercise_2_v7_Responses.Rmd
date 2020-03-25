@@ -1,0 +1,232 @@
+---
+title: "FLS 6415: Replication 2 - Survey and Lab Experiments"
+#author: "Jonathan"
+date: "March 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Wednesday 1st April.
+
+First read the paper by Whitt (2014) on the class website. 
+
+Then open the data file *Whitt_replication.csv* from the class website. Each 'game' is represented as two rows in the dataset, one for the first recipient and one for the second recipient. The key variables are:
+
+- **Game** - An index for each game/experiment with a new subject
+- **Subject_ethnicity** - the *subject*'s ethnicity
+- **Recipient_Pairing** - the pair of ethnicities that the subject had to allocate between
+- **Recipient** - For each recipient in the game, an indicator for whether they were first or second
+- **Recipient_ethnicity** - The ethnicity of that recipient in that game
+- **Amount** - The amount the subject allocated to that recipient in that game
+- **Fairness** - Whether the subject thought in a survey question that other ethnic groups would treat them fairly (1) or not (0). For Q13 only.
+- **Subject_Gender** - For Q13 only
+- **Subject_Age** - For Q13 only
+- **Subject_Education** - For Q13 only
+
+```{r, load_data, echo=FALSE,include=FALSE}
+library(tidyverse)
+library(haven)
+library(knitr)
+library(forcats)
+library(stargazer)
+library(estimatr)
+library(texreg)
+library(zeligverse)
+
+opts_chunk$set(echo=T, warning=F, message=F)
+```
+
+```{r, eval=F, include=F, echo=F}
+d <- read_dta("replication.dta")
+
+d <- d %>% select(ethnicity,d4ethnicity1,d4ethnicity2,d4amountsent1,d4amountsent2,q40, q1,age, education)  %>% 
+  rename(Fairness="q40",
+         Subject_Gender="q1",
+         Subject_Age="age",
+         Subject_Education="education") %>%
+  filter(d4ethnicity2!="") %>%
+  rownames_to_column("Game") %>%
+  mutate(Fairness=case_when(Fairness==2~1,
+                            Fairness==1~0),
+         Subject_Gender=case_when(Subject_Gender==2~1,
+                                  Subject_Gender==1~0),
+    Recipient_Pairing=paste(pmin(d4ethnicity1,d4ethnicity2),
+                       pmax(d4ethnicity1,d4ethnicity2)))
+
+d <- d %>% gather(key="Variable",value="Value",-Game,-ethnicity,-Recipient_Pairing,-Fairness, -Subject_Age, -Subject_Education, -Subject_Gender) %>% 
+  arrange(Game) %>%
+  separate(Variable,into=c("Type","Position"),sep=-1) %>%
+  spread(key="Type",value="Value") %>%
+  select(Game,ethnicity,Recipient_Pairing,Position,d4ethnicity,d4amountsent,Fairness,Subject_Gender, Subject_Age, Subject_Education) %>%
+  mutate(Game=factor(Game),
+         d4amountsent=as.numeric(d4amountsent)) %>%
+  arrange(Game) %>%
+  rename(Subject_ethnicity="ethnicity",
+         Recipient_ethnicity="d4ethnicity",
+         Amount="d4amountsent",
+         Recipient="Position")
+
+write_csv(d, "Whitt_replication.csv")
+```
+
+
+**1. Briefly describe what the 'treatment' is in this experiment.**
+
+The treatment is the ethnicity of the two recipients in the version of the dictator game that is presented to the subject. For the specific test of whether subjects treat co-ethnics differently, treatment is the presence of a recipient of the same ethnicity among the two recipients (while control is the absence of a co-ethnic). 
+
+**2. To describe how the players split the money in all the games, replicate a figure similar to Figure 1 (or an equivalent Table if a Figure is tricky).**
+
+```{r,Q2}
+
+d <- read_csv("Whitt_replication.csv")
+
+fig1 <- d %>% group_by(Game) %>% mutate(Split=case_when(any(Amount==5)~"5 and 5",
+                                                any(Amount==4)~"4 and 6",
+                                                any(Amount==3)~"3 and 7",
+                                                any(Amount==2)~"2 and 8",
+                                                any(Amount==1)~"1 and 9",
+                                                any(Amount==0)~"0 and 10")) %>%
+                                  group_by(Split) %>%
+                                  summarise(n=n()) %>%
+                                  mutate(pct=n/sum(n)*100)
+
+ggplot(fig1) + geom_col(aes(x=Split,y=pct)) + 
+  theme_classic() + 
+  xlab("Allocation Decision") + 
+  ylab("%")
+
+```
+
+**3. Calculate the average amount that each subject allocated to a co-ethnic (a respondent of the same ethnicity as the subject). What can we conclude from this number about co-ethnic bias? **
+
+```{r,Q3}
+co_ethnic_amount <- d %>% filter(Subject_ethnicity==Recipient_ethnicity) %>%
+  summarize(mean_coethnic=mean(Amount))
+```
+
+The average amount subjects transferred to co-ethnics is `r round(co_ethnic_amount,3)`. Since this is greater than an equal distribution of 5, this implies that there is a bias towards co-ethnics. 
+
+**4. Produce a 3x3 table showing the average allocation decision, with the *subject*'s ethnicity in the rows and the *recipient*'s ethnicity in the columns.**
+
+```{r,Q4}
+d %>% group_by(Subject_ethnicity,Recipient_ethnicity) %>%
+  summarize(Amount=mean(Amount)) %>%
+  spread(key="Recipient_ethnicity",value="Amount") %>%
+  kable(caption="Allocations from Subject Ethnicity (rows) to Recipient Ethnicity (columns)",digits=3)
+
+```
+
+**5. From the table you produced in Q4, which ethnicity exhibits the greatest co-ethnic favouritism (in-group bias)? Which ethnic pairing is most asymmetric (i.e. where A treats B better then B treats A)?**
+
+```{r, Q5}
+Most_coethnic_bias <- d %>% group_by(Subject_ethnicity,Recipient_ethnicity) %>%
+  summarize(Amount=mean(Amount)) %>%
+  filter(Subject_ethnicity==Recipient_ethnicity) %>%
+  ungroup() %>%
+  filter(Amount==max(Amount)) %>%
+  pull(Subject_ethnicity)
+
+most_asymm <- d %>% group_by(Subject_ethnicity,Recipient_ethnicity) %>%
+  summarize(Amount=mean(Amount)) %>%
+  filter(Subject_ethnicity!=Recipient_ethnicity) %>%
+  ungroup() %>%
+  mutate(Pairing=paste(pmin(Recipient_ethnicity,Subject_ethnicity),
+                       pmax(Recipient_ethnicity,Subject_ethnicity))) %>%
+  arrange(Pairing,Amount) %>% 
+  group_by(Pairing) %>%
+  summarise(Difference=diff(Amount)) %>% 
+  filter(Difference==max(Difference)) %>% 
+  pull(Pairing)
+
+```
+
+The amount transferred to co-ethnics is greatest among the ethnicity `r Most_coethnic_bias`.
+
+The most 'asymmetric' relationship is between `r most_asymm`. Bosniak subjects give much more to Croat recipients than Croat subjects give to Bosniak recipients.
+
+**6. Another way to analyse the data is with a regression. First, conduct an OLS regression to assess whether the recipient's ethnicity has a general effect on the amount they receive, *ignoring* the subject's ethnicity for now. Interpret the results of this regression.** 
+
+```{r, Q6,results='asis'}
+d %>% lm(Amount~Recipient_ethnicity, data=.) %>% 
+  stargazer(header=F, keep.stat=c("n"))
+```
+
+The regression shows that, relative to the base category of a Bosniak recipient, there is no statistically significant difference in the amount Croats or Serbs receive on average.
+
+**7. What about the subject's ethnicity? Does subject ethnicity affect the average allocation to recipients, ignoring recipient ethnicity? If you run this regression, the results will look strange. Why? *Hint: Look at the value of the interept and think about what's actually happening with the allocations in a single round of the game.* **
+
+```{r, Q7,results='asis'}
+d %>% lm(Amount~Subject_ethnicity, data=.) %>%
+  stargazer(header=F, keep.stat=c("n"))
+```
+
+In every game, however the subject chooses to allocate (5-5, 0-10) the average is always 5 (hence the intercept is exactly 5). So there is no difference at all between subject ethnicities and the regression can't differentiate the groups at all so the coefficient estimates are essentially zero. 
+
+**8. Now let's evaluate if the subject's ethnicity affects how they allocate the money depending on the recipient's ethnicity. Conduct a regression that interacts the recipient's ethnicity with the subject's ethnicity. Carefully interpret the results,  including how much each subject ethnicity is estimated to allocate on average to every recipient ethnicity.**
+
+```{r,Q8, results='asis'}
+d %>% lm(Amount~Subject_ethnicity*Recipient_ethnicity, data=.) %>% 
+  texreg()
+```
+
+The base category is for a Bosniak subject and Bosniak recipient. They allocate on average 5.71. Bosniaks offer Croats 0.79 less (4.92), and Serbs 1.34 less (4.37). 
+
+Croats offer Bosniaks 4.45 (5.71-1.26), Serbs 4.61 (5.71-1.26-1.34+1.50) and co-ethnic Croats 5.92 (5.71-1.26-0.79+2.26).
+
+Serbs offer Bosniaks 4.6 (5.71-1.11), Croats 4.73 (5.71-1.11-0.79+0.92), and co-ethnic Serbs 5.62 (5.71-1.11-1.34+2.36).
+
+**9. The estimates in Q8 and Q4 are different from those in Table 3 of Whitt (2014). So far we have assumed that the allocations only depend on the individual ethnicities of each recipient and not on the specific *pair* of recipients in each game (variable `Recipient_pairing`. For example, Bosniaks may have negative sentiments towards both Croats and Serbs, but what happens when they have to choose between allocating money in the specific pairing of Croats and Serbs together? How do they choose to allocate? **
+
+**Run a regression which includes a three-way interaction between subject ethnicity, recipient ethnicity and the *pair* of the recipients' ethnicity. Compare the results to Table 3 in Whitt 2004 (which just presents the averages, not the results of a regression, but should be comparable if we put in the effort to interpret our coefficients correctly).**
+
+```{r,Q9, results='asis'}
+### Correct
+d %>% lm(Amount~Subject_ethnicity*Recipient_Pairing*Recipient_ethnicity, data=.) %>%
+  texreg()
+```
+
+**10. Replicate the simple T-test from Table 3 in Whitt (2014) for the difference-in-means of allocations between the pairing of Croats and Serbs, for Bosniak subjects (the third line in Table 3). (I didn't get the same T-statistics as in Table 3).**
+
+```{r,Q10}
+d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
+  t.test(Amount ~ Recipient_ethnicity, data=.)
+```
+
+**11. The T-test in Q9 seems too 'easy' (too likely to find a significant result). The more recipient 1's allocation increases, the smaller recipient 2's allocation is *automatically* decreased (since they have to sum to 10). So all the rows in our data are not independent. As the mean allocation to one ethnicity goes up the mean to the other automatically goes down, producing a bigger 'gap'. To correct this, we have two options, adapting the comarison in Q10 but this time either:**
+**(i) a t-test of whether the first recipient's allocation is equal to 5,**
+**(ii) a paired t-test that takes into account the fact that values in the first allocation are correlated with those in the second allocation. **
+
+**Implement one of these two tests (they should both give the same answer). How does this change the t-statistics/p-values compared to Q10?**
+
+```{r,Q11}
+Croat <- d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
+  filter(Recipient_ethnicity=="Croat")
+
+t.test(Croat$Amount, mu=5)
+
+d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
+  t.test(Amount ~ Recipient_ethnicity, data=., paired=T)
+
+```
+
+**12. To address this same problem of dependent data in our regression from Q8, we need to cluster the standard errors for each game (every two rows in our data where the allocations sum to 10). Run the same regression as in Q8 but with clustered standard errors, and assess if it changes any of the conclusions.**
+
+```{r,Q12, results='asis', tidy=T}
+d %>% lm_robust(Amount~Subject_ethnicity*Recipient_Pairing*Recipient_ethnicity, data=., clusters=Game) %>% 
+  texreg(include.ci=F)
+```
+
+**13. How much does treating other ethnicities equally in the game predict whether subjects expect other ethnic groups to treat them fairly in their survey response? Let's try to run a similar analysis to the first column of Table 6 in the paper. Create a binary dummy variable `equal_allocation` indicating when the subject provides an 'equal' allocation (5:5), filter the data to just the 'first' recipient to avoid duplicating the rows, and run the logit regression of the 'Fairness' survey response variable on the variable `equal_allocation`, with controls for subject ethnicity, gender and age. Compare the result to the first column of Table 6 (it may not be exactly the same). **
+
+```{r, results='asis'}
+
+d %>% mutate(Equal_allocation=case_when(Amount==5~1,
+                                        TRUE~0),
+             Subject_ethnicity=factor(Subject_ethnicity, levels=c("Serb","Bosnjak","Croat"))) %>% 
+  filter(Recipient==1) %>% 
+  zelig(Fairness ~ Equal_allocation + Subject_ethnicity + Subject_Gender + Subject_Age + Subject_Education, data=., model="logit", cite=F) %>%
+  from_zelig_model() %>%
+  stargazer(header=F, keep.stat=c("n"))
+```
+
