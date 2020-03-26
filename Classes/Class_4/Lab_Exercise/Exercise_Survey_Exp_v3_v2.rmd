@@ -73,7 +73,7 @@ survey %>% lm(list_response~list_treated, data=.) %>%
 
 5. Now let's check the assumptions of the list experiment. First, check if there is a design effect using the function `ict.test` in the `list` package (for R only). (Note you will need to remove missing values of the `list_response` variable before running the test). Interpret the results based on the explanation in the outcome of `íct.test`.
 
-```{r}
+```{r, echo=T, include=T, eval=F}
 survey_no_na <- survey %>% filter(is.na(list_response)==F)
 
 ict.test(survey_no_na$list_response, survey_no_na$list_treated, J=3)
@@ -81,7 +81,7 @@ ict.test(survey_no_na$list_response, survey_no_na$list_treated, J=3)
 
 6. Next, let's check for floor and ceiling effects. There is a complex statistical test for this in the `list` package using the `ictreg` function (in R only): Try the code below and interpret the 'floor' and 'ceiling' parameters to see if they are statistically significant from zero. These are the estimates of whether anyone who should have answered '4' actually lied and answered '3', or who should have answered '1' actually lied and answered '0'. 
 
-```{r, eval=T, echo=T}
+```{r, eval=F, echo=T, include=T}
 ictreg(list_response~1,
        data=survey %>% as.data.frame(),
        treat="list_treated",
