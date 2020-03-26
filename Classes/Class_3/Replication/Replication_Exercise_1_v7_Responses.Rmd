@@ -14,7 +14,7 @@ library(xtable)
 library(zeligverse)
 library(broom)
 library(kableExtra)
-knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T, include=T, eval=T)
+knitr::opts_chunk$set(echo = T, warning=F, message=F, dev='png', dpi=144, cache=T, include=T, eval=T)
 ```
 
 The data for Gerber, Green and Larimer (GGL, 2008) is available on the course website. You should first read through the paper of GGL (2008) to understand the context of the field experiment.
@@ -42,19 +42,35 @@ voted    | Voted in 2006 Primary Election
 
 **1. What hypotheses are GGL testing? Where did they get these hypotheses from?**
 
+How social norms/pressure affect voting turnout. These hypotheses come from the existing literature about turnout and political psychology of behaviour; 'internalization of voting norms' etc. They use a formal model to derive specific predictions to be tested.
+
+The specific hypotheses involve whether turnout is increased by:  
+(i) Civic duty - reminder of responsibilities    
+(ii) Researcher pressure (Hawthorne effect) - pressure from researchers  
+(iii) Household pressure - sharing voting record with household  
+(iv) Neighbour pressure - sharing voting record with neighbours  
+
 **2. What are the treatment and control conditions? What is the outcome variable?**
 
+There are four treatment conditions (civi duty, Hawthorne, Self and Neighbour) that received mailings and one control condition (received nothing).
+
+The outcome variable is individual turnout in the August 2006 primary election.
+
 **3. What is the unit of analysis? What is the level at which treatment is applied?**
+
+The unit of analysis is the individual. The leval at which treatment was applied was the household.
 
 ### **Next we will evaluate the four assumptions of Field Experiments**
 
 **4. Assumption (1): What evidence do they provide that random assignment was really implemented? **
 
+On page 37 they describe the procedure implemented by the researchers, making it transparent.
+
 **5. Assumption (2): What evidence do they provide that randomization produced balance on potential outcomes: Answer the questions below.**
 
 **(a) Assess the balance of individuals' age between the Control and 'Self' treatment. What is the average difference in age between the two groups?**
 
-```{r}
+```{r, echo=F}
 #d <- read_csv("GerberGreenLarimer_APSR_2008_social_pressure.csv") %>%
 #  mutate_at(c("g2000","g2002","g2004","p2000","p2002","p2004","treatment","sex","voted"),as.factor) %>%
 #  mutate_at(c("g2000","g2002","g2004","p2000","p2002","p2004","sex","voted"),function(x) {as.numeric(x)-1}) #%>%
@@ -63,7 +79,10 @@ voted    | Voted in 2006 Primary Election
 #  select(hh_id,hh_size,block,treatment,g2000,g2002,p2000,p2002,p2004,sex,age,voted)
 
 #d %>% write_csv("GGL_data_prepared.csv")
+```
 
+
+```{r}
 d <- read_csv("GGL_data_prepared.csv")
 
 bal_vars <- c("hh_size","g2002","g2000","p2004","p2002","p2000","sex","age")
@@ -72,7 +91,11 @@ Q5a <- d %>% filter(treatment %in% c("Control", "Self"))
 Q5a %>% t.test(age ~ treatment, data=.)
 ```
 
+The average difference in age is 0.021 years, or about one week.
+
 **(b) Is this difference in (a) statistically significant using a t-test?**
+
+No, $p=0.795$.
 
 **(c) To assess balance in their paper, GGL first aggregate the data to household level averages. Create a new household-level dataset by averaging the household size of each household.**
 
@@ -94,9 +117,15 @@ Q5c %>% group_by(treatment) %>%
 Q5c %>% filter(treatment %in% c("Control","Civic Duty")) %>% t.test(hh_size ~treatment, data=.)
 ```
 
+The difference in mean household size between the Civic Duty and Control conditions is substantively small (0.002 members) and statistically insignificant ($p=0.771$). This suggests there is balance between the two conditions on this variable.
+
 **6. Assumption (3): What is the risk of spillovers (violations of SUTVA) from treatment? **
 
+It is possible that treating one household could affect the potential outcomes of neighbours, but since mailings are privately delivered to each household and sealed this risk is limited. It is possible that people would discuss receiving the mailings, altering the behaviour of their neighbours. 
+
 **7. Assumption (4): Is there a risk of any 'parallel' treatments that violate the excludability assumption?**
+
+This seems unlikely if only the researchers knew which households were treated, made no other contact with the households, and drew their outcome data from public records.
 
 ### **Now let's look at the results of the experiment.**
 
@@ -107,6 +136,8 @@ d %>% filter(treatment %in% c("Control","Neighbors")) %>%
   t.test(voted~treatment,data=.)
 ```
 
+Individuals in households receiving the neighbours treatment were about 8.1\% points more likely to vote than the control group. This difference is highly statistically significant ($p<0.001$).
+
 **9. GGL also run an OLS regression to understand the effect of each treatment on voter turnout. Table 3, column (a), shows the simple regression of treatment on turnout with no adjustments or controls. Run this regression and compare it to the findings in GGL. (Note: The authors include a series of dummies for each treatment condition, but this is equivalent to including the treatment variable as a factor variable with 'Control' as the first (baseline) level.) Interpret the results.**
 
 ```{r, results='asis'}
@@ -116,9 +147,13 @@ d %>% mutate(treatment=factor(treatment,levels=c("Control","Civic Duty","Hawthor
   stargazer(header=F, keep.stat=c("n"), digits=6)
 ```
 
+The results are identical to those in Table 3 of GGL. Increasing social pressure with each of the four treatments increases the magnitude of the turnout response.
+
 **10. The experimental design included blocking: randomization was conducted *within* blocks defined by 'cells' of geographically close together houses.** 
 
 **a. What is the gain the authors obtain from 'blocking' their randomization on local neighbourhood?**
+
+Blocking by neighbourhood imposes balance by local geography across treatment and control groups. It does not leave this to random chance, where we might get 'unlucky', clustering all treated units in particular locations which are less likely to vote, for example. While this on average will not affect the average treatment effect, it does reduce the uncertainty associated with our estimate, and therefore produces smaller standard errors. 
 
 **b. The blocking also allows us to add the blocks as fixed effects in the regression so we are comparing only households that live within the same cell. However, there are many (10,000) blocks so your computer probably doesn't have enough memory to run this regression directly. An equivalent methodology is to remove the between-block variation in the treatment variable manually and then run the same regression as in Q9. To do this for the 'Neighbors' treatment:**  
     1. Create a dummy variable (1/0) for individuals that received the 'Neighbors' treatment,  
@@ -139,7 +174,10 @@ d_block <- d %>% mutate(Neighbors=ifelse(treatment=="Neighbors",1,0)) %>%
 d_block %>% filter(treatment %in% c("Neighbors","Control")) %>% 
   zelig(voted~Neighbors,data=.,model="ls", cite=F) %>%  from_zelig_model() %>%
   stargazer(header=F, keep.stat=c("n"), digits=6)
+
 ```
+
+The results are comparable to those in Table 3 of GGL. The coefficient is slightly different from in Q9 and the standard errors are marginally smaller than in Q9.
 
 **11. In column (c) of Table 3, the authors add covariates (g2000,g2002,p2000,p2002,p2004) to the regression. How do the results change when we add covariates to your regression from Q10 (you may need to see lots of decimal places to see the difference)?**
 
@@ -150,7 +188,9 @@ d_block %>% filter(treatment %in% c("Neighbors","Control")) %>%
   stargazer(header=F, keep.stat=c("n"), digits=6)
 ```
 
-**12. Another feature of the randomized experiment is that treatment was randomized at the household, not the individual, level. So everyone in the same household has the same treatment status. This is clustering. Repeat your regression from Q9 (no blocking or control variables) for the comparison between the , but this time with standard errors clustered at the household level. What difference does this make? Why do we do this?**
+The covariates do not change the point estimate but do further reduce the standard errors, increasing precision.
+
+**12. Another feature of the randomized experiment is that treatment was randomized at the household, not the individual, level. So everyone in the same household has the same treatment status. This is clustering. Repeat your regression from Q9 (no blocking or control variables), but this time with standard errors clustered at the household level. What difference does this make? Why do we do this?**
 
 ```{r}
 library(estimatr)
@@ -161,6 +201,8 @@ d %>% mutate(treatment=factor(treatment,levels=c("Control","Civic Duty","Hawthor
   kable(digits=4)
 ```
 
+The standard errors are increased to reflect the dependency of the data within households, which effectively reduces the N and power of the study.
+
 **13. GGL are being a bit lazy - their outcome variable is binary but they still use an OLS regression. Use a logit regression model to run the same model as in Q9. How would you interpret the results?**
 
 ```{r, results='asis'}
@@ -170,7 +212,19 @@ d %>% mutate(treatment=factor(treatment,levels=c("Control","Civic Duty","Hawthor
   stargazer(header=F, keep.stat=c("n"))
 ```
 
+For example, receiving the Neighbours treatment compared to the control condition increases the odds (relative probability) of voting by `r round(100*(exp(0.365)-1),1)`\%. 
+
 **14. What is the population GGL estimate treatment effects for? (see p.36-37 under 'Study Population')**
 
+The population is for 180,000 households in the August 2006 primary election in Michigan. This is a subset of all households, excluding households with difficult addresses, or who do not have a ZIP code (more likely to exclude the poor, temporary residents, students etc.). They explicitly exclude streets with lots of apartments and with fewer than four addresses, so the population they can estimate treatment effects for excludes dense urban areas and sparse rural areas. They also exclude households likely to vote by absentee ballot, or likely to vote Democrat, or who did not vote in 2004, precisely because they are less likely to be affected by treatment, which clearly biases upwards the treatment effect they find. 
+
+In short, they can only estimate effects for people who were quite likely to vote anyway and lived in the suburbs. The treatment effect for other groups is unknown, but likely to be very different, and often much smaller. 
+
 **15. How generalizable are the findings of this study to the primary elections in Michigan four years later in 2010? To neighbouring Indiana in 2006? To elections in Brazil?**
+
+A lot can change in four years - the candidates may be different, the race may be more competitive, people may migrate, so the marginal effect of the treatment may be different. But without additional information, the results would seem to be a reasonable guide to the 2010 primaries. 
+
+The degree to which we can generalize to Indiana depends on how similar the states are socioeconomically and politically, so we would have to compare the data to evaluate this.
+
+Brazil has compulsory voting so the results are unlikely to provide a good guide.
 
