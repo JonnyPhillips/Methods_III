@@ -1,0 +1,189 @@
+---
+title: "FLS 6415: Replication 3 - Natural Experiments"
+#author: "Jonathan"
+date: "April 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Wednesday 8th April.
+
+First read the paper by De La O (2013) on the class website. 
+
+The replication data is in the file *DelaO.csv*, and the important variables are described below. Each row of this dataset is one electoral precinct, some of which are considered treated because they received *Progresa*. 
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(haven)
+library(tidyverse)
+library(knitr)
+library(broom)
+library(stargazer)
+library(estimatr)
+library(texreg)
+
+opts_chunk$set(echo=T, warning=F, message=F, include=T)
+```
+
+```{r variables, echo=F, include=F, message=FALSE, warning=FALSE}
+d <- read_dta("DeLaO_AJPS2013_rep_file.dta")
+
+d %>% write_csv("DeLaO.csv")
+d <- read_csv("DeLaO.csv")
+```
+
+```{r, echo=F, warning=FALSE, message=FALSE, include=T}
+vars <- data.frame(names(d)[c(7,8,9,5,4,6,13,20,22,24,26,16,15,17,18,19,21,23,25)],c("Whether the precinct received Progresa","Number of Treated Villages in Precinct","Number of Control Villages in Precinct","Poverty in 1995","Population in 1994/5","Population Eligible","Number of Villages in Precinct","Turnout % in 1994","PRI vote share 1994","PAN vote share 1994","PRD vote share 1994","Total Number of Votes in 1994","Number of PRI votes in 1994","Number of PAN votes in 1994","Number of PRD votes in 1994","Turnout % in 2000","PRI Vote Share in 2000","PAN Vote Share in 2000","PRD Vote Share in 2000"))
+colnames(vars) <- c("Variable","Description")
+
+kable(vars,caption="Key Variables in De La O (2013)")
+```
+
+
+**1. First, what is treatment in this study? What is control? What is the outcome being measured?**
+
+Treatment is receiving Progresa 'early', 21 months before the election. 
+
+Control is receiving Progresa 'late', 6 months before the election.
+
+The outcomes are turnout and party vote shares in the 2000 election.
+
+**2. To help assess the balance between treatment and control units, reproduce Table 2 in De La O (2013) (Don't worry about the standard errors in brackets in the 'Difference' column for now).**
+
+```{r, echo=TRUE, warning=FALSE}
+tab2_vars <- names(d)[c(5,4,6,13,10,11,20,22,24,26)]
+
+Q1 <- d %>% group_by(treatment) %>% 
+  summarise_at(tab2_vars,mean,na.rm=TRUE) %>% 
+  gather(key,value,-treatment) %>% 
+  spread(treatment,value) %>% 
+  rename(Variable="key",Early=`1`,Late=`0`) %>%
+  mutate(Difference=Late-Early)
+
+kable(Q1,caption="Q2: Balance in the Data", digits=3)
+
+```
+
+**3. Is the balance shown in this table (Table 2 in De La O) a necessary condition for causal inference? Is it a sufficient condition for causal inference?**
+
+Balance is a necessary condition for causal inference because systematic differences between the treatment and control groups on the covariates could be responsible for any diffences in the outcome variable and act as a confounder, preventing us from isolating the effect of treatment alone. However, balance is not a sufficient condition for causal inference. Even if we have balance on observed covariates, there may be imbalance on unobserved or unmeasurable covariates. For this reason it is also important to verify the *procedure* of treatment assignment could not have introduced any confounding. Other assumptions such as SUTVA (no spillovers) also matter.
+
+**4. The main analysis in De La O is conducted on a subset of the full dataset. Filter the data so that only precincts that have either one treatment village (`numerotreated`) or one control village (`numerocontrol`) inside them are included in your new dataset. What percentage of the original precincts are included in the new dataset?**
+
+```{r}
+subset_d <- d %>% filter(numerotreated==1|numerocontrol==1)
+
+pct_data <- round(dim(subset_d)[1]/dim(d)[1]*100,1)
+
+```
+
+After filtering for precincts that have only one treatment or control village in them, `r pct_data`% of the data remains.
+
+**5. One of De La O's conclusions is that treatment boosts turnout. Conduct a simple difference-in-means t-test on the filtered dataset from Q4 to assess this claim. What is the estimated difference-in-means and how statistically significant is the result? **
+
+```{r}
+subset_d %>% t.test(t2000~treatment, data=.) %>% 
+  tidy() %>%
+  kable(caption="Q5: Difference-in-Means")
+
+```
+
+The estimated difference in means is 4.56\% points, which is not significant. 
+
+**6. De La O's analysis of turnout is in the upper panel of Table 3, where she runs a regression, adding some controls. (We are going to focus on the 'ITT' estimates, we will talk about the 'IV' estimates next week). Replicate this turnout regression. The controls (listed under De La O's Table 3) are `avgpoverty,pobtot1994,votos_totales1994,pri1994,pan1994,prd1994` and there is a fixed effect for the *villages* variable. (Try to include the robust standard errors, but no problem if you cannot). Interpret the results. **
+
+Early receipt of Progresa is associated with a 5.3\% points higher turnout, which is significant at the 10\% but not the 5\% level, holding all the other variables constant.
+
+```{r, results='asis'}
+reg1 <- lm_robust(t2000~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages),data=subset_d, se_type="HC1")
+texreg(reg1, include.ci=F, digits=3, caption="Q6: With Fixed Effects")
+```
+
+
+**7. Now run the same regression but exclude the number-of-villages fixed effects (keep the other controls). How does this change the comparisons we are making between treated and control villages? How do the results change?**
+
+Before we were comparing between precincts that were treated or control but which could also vary in the number of villages in each precinct. To compare treated and control precincts only between precincts with the same number of villages she includes a fixed effect for the number of villages. The results become marginally weaker, with both the coefficient and the standard error changing.
+
+```{r, results='asis'}
+reg2 <- lm_robust(t2000~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994,data=subset_d, se_type="HC1")
+texreg(reg2, include.ci=F, digits=3, caption="Q7: Without village Fixed Effects")
+```
+
+**8. Replicate all four columns of the upper panel of Table 3 in De La O (2013). Interpret the results. **
+
+Early receipt of Progresa boosts vote share for the PRI by 3.7\% points, with a significant effect at the 1\% level after controlling for the various variables. It has a positive but not significant effect on the other parties. 
+
+```{r, results='asis'}
+dvs <- c("t2000","pri2000s","pan2000s","prd2000s")
+
+models <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages)")),
+                                 data=subset_d, 
+                                 se_type="HC1"))
+texreg(models, include.ci=F, digits=3, caption="Q8: De La O Table 3")
+```
+
+
+**9.Now let's look at some critiques of the paper. Normally, we measure turnout percentages and vote shares as being naturally bounded between 0 and 100% (or 0 and 1). Other numbers don't make sense. Use a boxplot or similar graphic to assess the distribution of values on the four dependent variables. What do you find?**
+
+```{r, fig.cap="Non-feasible values in the Dependent Variables"}
+subset_d %>% select(dvs) %>% 
+  gather(key="Variable",value="Value") %>% 
+  ggplot() +
+  geom_boxplot(aes(x=Variable, y=Value)) +
+  theme_classic()
+
+```
+
+There are lots of 'non-feasible'values larger than one. 
+
+**10. As a 'quick fix' replace all the unrealistic values above 100% (1) with `NA` for all the turnout percentage and vote share dependent variables. Re-run your regressions from question 8. Do your conclusions change? Why might this be?**
+
+The coefficient on treatment is no longer significant for both turnout and the PRI's vote share and the estimates are much lower. This may be because the extreme values exaggerate the turnout and vote share for the treatment units more than for control units, biasing the coefficient estimate upwards.
+
+```{r, echo=TRUE,results='asis'}
+corrected_d <- subset_d %>% mutate_at(dvs, function(x) {ifelse(x>1, NA,x)})
+
+models2 <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages)")),
+                                 data=corrected_d, 
+                                 se_type="HC1"))
+texreg(models2, include.ci=F, digits=3, caption="Q10: Feasible values for Dependent Variables")
+
+```
+
+**11. Next, examine the control variable for population in 1994 (`pobtot1994`). Use a graph or other method to identify any extreme outliers. Extreme values of control variables are not a problem if they are balanced across treatement and control groups. But are they in this case? Identify whether the extreme outliers are in the control or treatment group.**
+
+The plot identifies two extreme outliers far from the rest of the data. These two extreme values are both treatment values, which means neither can have a suitable counterfactual that is a control unit. 
+
+```{r, fig.cap="Q11: Outliers in Population Data"}
+subset_d %>% 
+  select(treatment, pobtot1994) %>% 
+  ggplot() +
+  geom_boxplot(aes(y=pobtot1994, group=treatment)) +
+  theme_classic()
+```
+
+**12. Remove the extreme outliers you identified in Q9 from the dataset (the dataset before you removed the infeasible values of the dependent variables). Re-run your regressions. Do your conclusions change? Why might this be?**
+
+The coefficients are again smaller and no longer significant. One possible reason could be because the outliers on high population were both treated and had unusually high levels of turnout and PRI vote share (perhaps because urban areas are confounded and systematically differnet in these ways). So their inclusion in the original regression biases the coefficients upwards. In fact, that's not actually happening here - the outliers have lower than normal turnout and PRI vote share. But because we are controlling for population, when we include these outliers in the regression the linear effect of population looks very different and changes our estimates of the 'controlled' effect of treatment for all the other units.
+
+```{r, echo=TRUE, results='asis'}
+popn_corrected_d <- subset_d %>% mutate(rank_popn=rank(-pobtot1994))  %>% 
+  filter(rank_popn>2)
+
+models3 <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages)")),
+                                 data=popn_corrected_d, 
+                                 se_type="HC1"))
+texreg(models3, include.ci=F, digits=3, caption="Q12: Removing Population Outliers")
+
+```
+
+**13. One more issue. The controls for the regressions you have conducted so far are the *absolute number* of votes for turnout, PRI, PAN and the PRD. But for the dependent variable, De La O is using the *percentage vote share of the population*. Arguably it might be more consistent to use the same measurement approach on both the left and right-hand sides of the regression. Try implementing the regressions using the controls `t1994, pri1994s, pan1994s, prd1994s` in place of `votos_totales1994, pri1994, pan1994, prd1994`. Ignore the other corrections you made in previous questions. Does this change your conclusions? Why might this be?**
+
+The Table shows the coefficients are again much lower, and no longer significant. This may be because the controls in absolute numbers controlled more for the size of the precinct than for the relative strength of the parties. So when using the relative measure of support for each party we are controlling for potential confounders and imbalance that reduces the treatment effect. Moreover, the interpretation of the regression is much more natural with the same format for vote share on the left hand side and the right hand side, because we can interpret the outcome now as the change in vote share between 1994 and 2000.
+
+```{r, echo=TRUE, results='asis'}
+models4 <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + t1994 + pri1994s + pan1994s + prd1994s + factor(villages)")),
+                                 data=popn_corrected_d, 
+                                 se_type="HC1"))
+texreg(models4, include.ci=F, digits=3, caption="Q13: Using Percentage Controls")
+```

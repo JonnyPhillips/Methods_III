@@ -285,7 +285,7 @@
 \pause
 \item \textbf{Treatment:} CGU Audit \textit{before} election
 \pause
-\item \textbf{Control:} CGU Audit \texit{after} election
+\item \textbf{Control:} CGU Audit \textit{after} election
 \pause
 \item \textbf{Treatment Assignment Mechanism:} Randomized (Caixa)
 \pause
@@ -491,6 +491,7 @@ How do we know audits were random?
 \item Same perceived differences between ethnic groups
 \end{itemize}
 \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -537,19 +538,30 @@ How do we know audits were random?
 \section{Lack of Control}
 
 \begin{frame}
+\frametitle{Lack of Control}
+\begin{itemize}
+\item We did not pick the study context, the population or the sample
+\pause
+\begin{itemize}
+\item Are they relevant for our research question? Eg. randomized policy experiments are more likely in developed countries, but we might care more about developing countries
+\pause
+\item Do we have access to the qualitative and quantitative data to verify the assumptions of a natural experiment?
+\pause
+\item Can we generalize from this case? Or is this an unusual case?
+\pause
+\item Natural experiments are \textbf{Opportunistic}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 \frametitle{The Problem of Not Controlling Treatment Assignment}
 \begin{itemize}
 \item ``Random assignment of the intervention is not sufficient to provide an unbiased estimate of the causal effect.'' (Sekhon and Titunik 2012)
 \pause
-\item Treatment and control groups are defined \textit{after} randomization - it's our responsibility to make sure:
+\item Treatment and control groups are identified \textit{after} randomization - it's our responsibility to make sure:
 \pause
 \begin{enumerate}
-\item \textbf{These two groups actually are comparable} (POs are independent of treatment)
-\pause
-\begin{itemize}
-\item We can only compare those units \textit{that were part of the original randomization}
-\end{itemize}
-\pause
 \item \textbf{That the treatment is the factor we actually want to study}
 \pause
 \begin{itemize}
@@ -559,41 +571,62 @@ How do we know audits were random?
 \pause
 \item Sometimes treatments are 'repeated', creating interactions or changing expectations
 \end{itemize}
+\item \textbf{These two groups actually are comparable} (POs are independent of treatment)
+\pause
+\begin{itemize}
+\item We can only compare those units \textit{that were part of the original randomization}
+\end{itemize}
 \end{enumerate}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
+\begin{columns}
+\begin{column}{0.6\textwidth}
 \includegraphics[scale=0.38]{Sekhon_redistricting_a.png}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item Ansolabehere et al (2000): Compare Switched Voters with B's Original Voters to estimate the personal vote for the incumbent
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\includegraphics[scale=0.34]{Sekhon_redistricting_b.png}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item Randomization guarantees potential outcomes are independent of treatment assignment \textit{for all the voters who were part of the randomization}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\includegraphics[scale=0.38]{Sekhon_redistricting_c.png}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{itemize}
+\item But Ansolabehere et al (2000) compare Switched voters with voters who were never part of the randomization: \textit{The wrong control group!}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
 
 \begin{frame}
 \frametitle{The Problem of Not Controlling Treatment Assignment}
 \footnotesize
 \begin{table}[htbp]
   \centering
-    \begin{tabular}{|p{3cm}|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
-    \hline
-          & \textbf{A's Original Voters} & \textbf{Switched Voters} & \multicolumn{1}{p{2.4cm}}{\textbf{B's Original Voters}} \bigstrut\\
-    \hline
-    2000 election context &       & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}\multicolumn{1}{p{2.4cm}}{Same} \bigstrut\\
-    \hline
-    Duration of exposure to incumbent in district B &       & 4 years & \multicolumn{1}{p{2.4cm}}{12 years} \bigstrut\\
-    \hline
-    1996 and prior election context & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}Same  &  \bigstrut\\
-    \hline
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}
-\normalsize
-\end{frame}
-
-\begin{frame}
-\frametitle{The Problem of Not Controlling Treatment Assignment}
-\footnotesize
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{|p{3.2cm}|p{2.6cm}|p{2.6cm}|}
+    \begin{tabular}{|L|L|L|}
     \hline
           & \textbf{A's Original Voters vs. Switched Voters} & \textbf{B's Original Voters vs. Switched Voters} \bigstrut\\
     \hline

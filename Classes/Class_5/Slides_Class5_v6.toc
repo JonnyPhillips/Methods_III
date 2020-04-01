@@ -1,4 +1,4 @@
 \beamer@sectionintoc {1}{Natural Experiments}{4}{0}{1}
 \beamer@sectionintoc {2}{Randomized Natural Experiments}{25}{0}{2}
 \beamer@sectionintoc {3}{Non-Randomized Natural Experiments}{60}{0}{3}
-\beamer@sectionintoc {4}{The Problem of Not Controlling Treatment Assignment}{89}{0}{4}
+\beamer@sectionintoc {4}{Lack of Control}{101}{0}{4}

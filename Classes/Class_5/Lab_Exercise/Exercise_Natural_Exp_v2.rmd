@@ -16,49 +16,48 @@ library(list)
 library(zeligverse)
 ```
 
-In groups of 3, you will be assigned one of the broad research questions and specific research settings below. Answer the following questions:
+In groups of 4, you will be assigned one of the broad research questions and specific research settings below. In a google doc, answer the questions that follow as a group.
 
 **1. Broad Research Question:** *How do national celebrations affect political behaviour?*
 
-> **Specific Research Setting:** *On 4th July in the USA, American school children generally participate in annual parades through their local streets, waving flags and singing the national anthem.*
+> **Specific Research Setting:** *On 4th July in the USA, American school children generally participate in annual parades through their local streets, waving flags and singing the national anthem. Children in some places participate more in some years than in others.*
 
 **2. Broad Research Question:** *How does the presence of election monitors affect electoral results?*
 
-> **Specific Research Setting:** *For Indonesia's election yesterday the EU monitoring mission organized 1,000 observation teams for 800,000 polling stations. No Indonesians were involved in the planning of the observation activities.*
-
+> **Specific Research Setting:** *For Indonesia's election in 2019 the EU monitoring mission organized 1,000 observation teams for 800,000 polling stations. Deployments were not randomized, and no Indonesians were involved in the planning of the observation activities.*
 
 **3. Broad Research Question:** *Does the gender of local leaders affect public policy choices?*
 
-> **Specific Research Setting:** *In India, one-third of all villages were randomly 'reserved' so only women can compete in the election. At the next election, the reservation rotates on to a different village (so each village has a reservation every 12 years).*
+> **Specific Research Setting:** *In India, one-third of all villages were randomly 'reserved' so only women can compete in the election. At the next election, the reservation rotates to a different village (so each village has a reservation every 12 years).*
 
 
 **4. Broad Research Question:** *Does bombing villages encourage or deter rebel attacks?*
 
-> **Specific Research Setting:** *In the 2000 to 2005 Chechnya conflict, Russian artillery fired on some Chechen villages but not others using an unpredictable military strategy designed to disrupt rebel activities. Russian soldiers were often drunk on duty.*
+> **Specific Research Setting:** *In the 2000 to 2005 Chechnya conflict, Russian artillery fired on some Chechen villages but not others using a military strategy designed to disrupt rebel activities. Soldiers were poorly trained and discipline was low.*
 
 ## Questions
 
-1. What is the treatment assignment mechanism in this specific research setting?
+1. What is the treatment assignment mechanism in this specific research setting? Describe it in as much detail as you can.
 
 2. Who controls treatment assignment?
 
-2. Identify a component of the treatment assignment mechanism that is independent of potential outcomes. Is this component random or 'as-if' random?
+3. Identify a component of the treatment assignment mechanism that is likely to be independent of potential outcomes (not connected to them). Is this component truly random or 'as-if' random?
 
-3. What *quantitative* evidence could we use to assess whether this component of treatment assignment is truly independent of potential outcomes?
+4. What *quantitative* evidence could we use to assess whether this component of treatment assignment is truly independent of potential outcomes? Be specific.
 
-4. What *qualitative* evidence could we use to assess whether this component of treatment assignment is truly independent of potential outcomes?
+5. What *qualitative* evidence could we use to assess whether this component of treatment assignment is truly independent of potential outcomes? Provide some examples.
 
-5. If we used this component of treatment assignment as a natural experiment, how would the treatment and control groups be defined? 
+6. If we used this component of treatment assignment you identified in as a natural experiment, how would the treatment and control groups be defined? 
     (a) Is this the treatment we are really interested in to understand our broad research question?
     (b) Is this the comparison we really want to make to understand our broad research question?
 
-6. In your proposed natural experiment, what data sources could we use to measure treatment and the outcome?
+7. In your proposed natural experiment, what data sources could we use to measure (a) treatment and (b) the outcome?
 
-7. In your proposed natural experiment, what are the sample and the population? Is this a relevant population for understanding our broad research question?
+8. In your proposed natural experiment, what are the sample and the population? Is this a relevant population for understanding our broad research question?
 
-8. How would you propose to analyze the data from your natural experiment? (What regression would you run?)
+9. How would you propose to analyze the data from your natural experiment? (What regression would you run?)
 
-9. What is the risk of spillovers or interference between treated and control units (SUTVA)?
+10. What is the risk of spillovers or interference between treated and control units (SUTVA)?
 
-10. How generalizable are the results of your proposed analysis?
+11. How generalizable are the results of your proposed analysis to other populations?
 

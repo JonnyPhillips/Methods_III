@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  1 APR 2020 10:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  1 APR 2020 11:09
 entering extended mode
-**./Exercise_Natural_Exp_v2.tex
-(Exercise_Natural_Exp_v2.tex
+**./Replication_Exercise_3_v2_Suggested_Responses.tex
+(Replication_Exercise_3_v2_Suggested_Responses.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/base\article.cls"
 Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
@@ -471,7 +471,63 @@ Package: geometry 2018/04/16 v5.8 Page Geometry
 \Gm@layoutvoffset=\dimen124
 \Gm@dimlist=\toks24
 ("C:\Program Files\MiKTeX 2.9\tex/latex/geometry\geometry.cfg")) ("C:\Program F
-iles\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
+iles\MiKTeX 2.9\tex/latex/fancyvrb\fancyvrb.sty"
+Package: fancyvrb 2019/01/15
+Style option: `fancyvrb' v3.2a <2019/01/15> (tvz)
+\FV@CodeLineNo=\count117
+\FV@InFile=\read1
+\FV@TabBox=\box29
+\c@FancyVerbLine=\count118
+\FV@StepNumber=\count119
+\FV@OutFile=\write3
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/framed\framed.sty"
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip48
+\fb@frw=\dimen125
+\fb@frh=\dimen126
+\FrameRule=\dimen127
+\FrameSep=\dimen128
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\longtable.sty"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
+\LTleft=\skip49
+\LTright=\skip50
+\LTpre=\skip51
+\LTpost=\skip52
+\LTchunksize=\count120
+\LTcapwidth=\dimen129
+\LT@head=\box30
+\LT@firsthead=\box31
+\LT@foot=\box32
+\LT@lastfoot=\box33
+\LT@cols=\count121
+\LT@rows=\count122
+\c@LT@tables=\count123
+\c@LT@chunks=\count124
+\LT@p@ftn=\toks25
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/booktabs\booktabs.sty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen130
+\lightrulewidth=\dimen131
+\cmidrulewidth=\dimen132
+\belowrulesep=\dimen133
+\belowbottomsep=\dimen134
+\aboverulesep=\dimen135
+\abovetopsep=\dimen136
+\cmidrulesep=\dimen137
+\cmidrulekern=\dimen138
+\defaultaddspace=\dimen139
+\@cmidla=\count125
+\@cmidlb=\count126
+\@aboverulesep=\dimen140
+\@belowrulesep=\dimen141
+\@thisruleclass=\count127
+\@lastruleclass=\count128
+\@thisrulewidth=\dimen142
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/footnotehyper\footnotehyper.sty"
+Package: footnotehyper 2018/01/23 v1.1 hyperref aware footnote.sty (JFB)
+\FNH@notes=\box34
+\FNH@width=\dimen143
+) ("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\graphicx.sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/graphics\graphics.sty"
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
@@ -482,49 +538,61 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 )
-\Gin@req@height=\dimen125
-\Gin@req@width=\dimen126
+\Gin@req@height=\dimen144
+\Gin@req@width=\dimen145
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\grffile.sty"
 Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
 Package grffile Info: Option `multidot' is set to `true'.
 Package grffile Info: Option `extendedchars' is set to `false'.
 Package grffile Info: Option `space' is set to `true'.
 Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 494.
+) (Replication_Exercise_3_v2_Suggested_Responses.aux
+
+LaTeX Warning: Label `table:coefficients' multiply defined.
+
+
+LaTeX Warning: Label `table:coefficients' multiply defined.
+
+
+LaTeX Warning: Label `table:coefficients' multiply defined.
+
+
+LaTeX Warning: Label `table:coefficients' multiply defined.
+
+
+LaTeX Warning: Label `table:coefficients' multiply defined.
+
 )
+\openout1 = `Replication_Exercise_3_v2_Suggested_Responses.aux'.
 
-LaTeX Warning: Unused global option(s):
-    [16pt].
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 121.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 121.
 
-(Exercise_Natural_Exp_v2.aux)
-\openout1 = `Exercise_Natural_Exp_v2.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 78.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 78.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 78.
-LaTeX Font Info:    ... okay on input line 78.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 78.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 121.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 78.
+LaTeX Info: Redefining \microtypecontext on input line 121.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -539,17 +607,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 ) ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count117
-\scratchdimen=\dimen127
-\scratchbox=\box29
-\nofMPsegments=\count118
-\nofMParguments=\count119
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count120
-\MPscratchDim=\dimen128
-\MPnumerator=\count121
-\makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks26
+\scratchcounter=\count129
+\scratchdimen=\dimen146
+\scratchbox=\box35
+\nofMPsegments=\count130
+\nofMParguments=\count131
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count132
+\MPscratchDim=\dimen147
+\MPnumerator=\count133
+\makeMPintoPDFobject=\count134
+\everyMPtoPDFconversion=\toks27
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\grfext.sty"
@@ -562,18 +630,18 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\AtBeginShipoutBox=\box30
-Package hyperref Info: Link coloring OFF on input line 78.
+\AtBeginShipoutBox=\box36
+Package hyperref Info: Link coloring OFF on input line 121.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count123
+\c@section@level=\count135
 )
-LaTeX Info: Redefining \ref on input line 78.
-LaTeX Info: Redefining \pageref on input line 78.
-LaTeX Info: Redefining \nameref on input line 78.
+LaTeX Info: Redefining \ref on input line 121.
+LaTeX Info: Redefining \pageref on input line 121.
+LaTeX Info: Redefining \nameref on input line 121.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -582,15 +650,15 @@ LaTeX Info: Redefining \nameref on input line 78.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(57.81621pt, 498.66258pt, 57.81621pt)
-* v-part:(T,H,B)=(57.81621pt, 679.33757pt, 57.81621pt)
+* h-part:(L,W,R)=(72.26999pt, 469.75502pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 650.43001pt, 72.26999pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=498.66258pt
-* \textheight=679.33757pt
-* \oddsidemargin=-14.45378pt
-* \evensidemargin=-14.45378pt
-* \topmargin=-51.45378pt
+* \textwidth=469.75502pt
+* \textheight=650.43001pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=10.0pt
@@ -608,67 +676,139 @@ LaTeX Info: Redefining \nameref on input line 78.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 80.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 123.
+
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 80.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 123.
+
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 80.
-
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 123
+.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 80.
-
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 123
+.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 80.
+(Font)              <12> on input line 123.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 80.
+(Font)              <8> on input line 123.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 80.
-LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+(Font)              <6> on input line 123.
+LaTeX Font Info:    Try loading font information for U+msa on input line 123.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/microtype\mt-msa.cfg"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+LaTeX Font Info:    Try loading font information for U+msb on input line 123.
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/microtype\mt-msb.cfg"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 179.
+
+("C:\Program Files\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 180.
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 184
+.
+("C:\Program Files\MiKTeX 2.9\tex/latex/lm\ts1lmtt.fd"
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [1
 
 {C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 181.
+Overfull \hbox (142.60622pt too wide) in alignment at lines 257--263
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (142.60622pt too wide) in alignment at lines 263--268
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (142.60622pt too wide) in alignment at lines 268--273
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 181.
-(Exercise_Natural_Exp_v2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 181.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 181.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 302.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 302.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 302.
+[3] [4] [5] [6]
+<Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-chunk
+-8-1.pdf, id=51, 469.755pt x 325.215pt>
+File: Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-
+chunk-8-1.pdf Graphic file (type pdf)
+<use Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-c
+hunk-8-1.pdf>
+Package pdftex.def Info: Replication_Exercise_3_v2_Suggested_Responses_files/fi
+gure-latex/unnamed-chunk-8-1.pdf  used on input line 512.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[7 <./Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-
+chunk-8-1.pdf>] [8]
+<Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-chunk
+-10-1.pdf, id=68, 469.755pt x 325.215pt>
+File: Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-
+chunk-10-1.pdf Graphic file (type pdf)
+<use Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-c
+hunk-10-1.pdf>
+Package pdftex.def Info: Replication_Exercise_3_v2_Suggested_Responses_files/fi
+gure-latex/unnamed-chunk-10-1.pdf  used on input line 622.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[9 <./Replication_Exercise_3_v2_Suggested_Responses_files/figure-latex/unnamed-
+chunk-10-1.pdf>] [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 806.
+[11] [12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 806.
+(Replication_Exercise_3_v2_Suggested_Responses.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 806.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 806.
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 12914 strings out of 492893
- 187357 string characters out of 3133367
- 303609 words of memory out of 3000000
- 16599 multiletter control sequences out of 15000+200000
- 38015 words of font info for 58 fonts, out of 3000000 for 9000
+ 13727 strings out of 492893
+ 200254 string characters out of 3133367
+ 329412 words of memory out of 3000000
+ 17359 multiletter control sequences out of 15000+200000
+ 55314 words of font info for 80 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 35i,5n,38p,824b,412s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/t
-ype1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lm
-r10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb>
-Output written on Exercise_Natural_Exp_v2.pdf (2 pages, 137431 bytes).
+ 35i,11n,38p,846b,373s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/M
+iKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX 2.9/fonts/e
+nc/dvips/lm/lm-mathsy.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm
+.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}<C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/lm/lmbxi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+lm/lmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmmi7.pfb><C:/
+Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/lm/lmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/lm/lmsy5.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm
+/lmsy7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb>
+Output written on Replication_Exercise_3_v2_Suggested_Responses.pdf (12 pages, 
+288528 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 18 named destinations out of 1000 (max. 500000)
- 10249 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 151 PDF objects out of 1000 (max. 8388607)
+ 24 named destinations out of 1000 (max. 500000)
+ 12299 words of extra memory for PDF output out of 14400 (max. 10000000)
 

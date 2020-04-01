@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  30 MAR 2020 11:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  1 APR 2020 09:31
 entering extended mode
 **./Slides_Class5_v6.tex
 (Slides_Class5_v6.tex
@@ -1346,6 +1346,9 @@ tim
 
 LaTeX Warning: Label `tab:addlabel' multiply defined.
 
+
+LaTeX Warning: Label `tab:addlabel' multiply defined.
+
 )
 \openout1 = `Slides_Class5_v6.aux'.
 
@@ -1494,23 +1497,13 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-(Slides_Class5_v6.nav)
-Overfull \hbox (110.54265pt too wide) detected at line 124
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+(Slides_Class5_v6.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config
+/pdftex.map}
 
 ]
 LaTeX Font Info:    Try loading font information for OT1+zavm on input line 147
 .
-
-("C:\Program Files\MiKTeX 2.9\tex/latex/arev\ot1zavm.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\ot1zavm.fd"
 File: ot1zavm.fd 2006/05/30 Fontinst v1.929 font definitions for OT1/zavm.
 )
 LaTeX Font Info:    Try loading font information for OML+zavm on input line 147
@@ -1610,11 +1603,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 147--147
 LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
 (Font)              using `T1/fav/m/n' instead on input line 147.
 
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [2
 
 ]
@@ -1632,19 +1620,9 @@ pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel}
 <to be read again> 
                    \relax 
 l.180 \end{frame}
-                 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+                  [3
 
-[3
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[4
+] [4
 
 ]
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
@@ -1661,47 +1639,17 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 (Font)              scaled to size 7.68005pt on input line 206.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 (Font)              scaled to size 5.76004pt on input line 206.
+ [5
 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [6
 
-[5
+] [7
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [8
 
-[6
+] [9
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[7
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[8
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[9
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[10
+] [10
 
 ]
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
@@ -1714,586 +1662,164 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 (Font)              scaled to size 9.60007pt on input line 224.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 (Font)              scaled to size 7.29605pt on input line 224.
+ [11
 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [12
 
-[11
+] [13
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[12
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[13
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[14
+] [14
 
 ]
 LaTeX Font Info:    Font shape `T1/fav/bx/it' in size <10> not available
 (Font)              Font shape `T1/fav/b/it' tried instead on input line 254.
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[15
+ [15
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [16
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [17
 
-[17
+] [18
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [19
 
-[18
+] [20
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [21
 
-[19
+] [22
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [23
 
-[20
+] [24
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [25
 
-[21
+] [26
+
+] [27
+
+] [28
+
+] [29
+
+] [30
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[22
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[23
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[24
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[25
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[26
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[27
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[28
-
-]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[29
-
-]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[30
-
-]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [31
 
-]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+] [32
 
+] [33
 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [34
 
-[32
+] [35
 
-]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+] [36
 
+] [37
 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [38
 
-[33
+] [39
+
+] [40
+
+] [41
+
+] [42
+
+] [43
+
+] [44
+
+] [45
 
 ]
-! Undefined control sequence.
-\beamer@doifinframe ...Control:} CGU Audit \texit 
-                                                  {after} election \pause \i...
-l.294 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[34
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[35
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[36
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[37
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[38
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[39
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[40
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[41
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[42
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[43
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[44
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[45
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [46
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [47
 
-[47
+] [48
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [49
 
-[48
+] [50
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [51
 
-[49
+] [52
+
+] [53
+
+] [54
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[50
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[51
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[52
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[53
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[54
-
-]
-<Chart_FF.png, id=2091, 733.3628pt x 505.89pt>
+<Chart_FF.png, id=2375, 733.3628pt x 505.89pt>
 File: Chart_FF.png Graphic file (type png)
 <use Chart_FF.png>
 Package pdftex.def Info: Chart_FF.png  used on input line 381.
 (pdftex.def)             Requested size: 330.01021pt x 227.64839pt.
+ [55
 
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[55
-
- <./Chart_FF.png>]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[56
+ <./Chart_FF.png>] [56
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [57
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [58
 
-[58
+] [59
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [60
 
-[59
+] [61
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [62
 
-[60
+] [63
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [64
 
-[61
+] [65
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [66
 
-[62
+] [67
+
+] [68
+
+] [69
+
+] [70
+
+] [71
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[63
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[64
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[65
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[66
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[67
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[68
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[69
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[70
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[71
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [72
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [73
 
-[73
+] [74
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [75
 
-[74
+] [76
 
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
+] [77
 
-[75
+] [78
+
+] [79
+
+] [80
+
+] [81
 
 ]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[76
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[77
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[78
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[79
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[80
-
-]
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
-[81
-
-]
-<Arbitrary_borders.jpg, id=3090, 540.0175pt x 505.89pt>
+<Arbitrary_borders.jpg, id=3511, 540.0175pt x 505.89pt>
 File: Arbitrary_borders.jpg Graphic file (type jpg)
 <use Arbitrary_borders.jpg>
 Package pdftex.def Info: Arbitrary_borders.jpg  used on input line 473.
@@ -2302,15 +1828,10 @@ Package pdftex.def Info: Arbitrary_borders.jpg  used on input line 473.
 Overfull \vbox (24.46626pt too high) detected at line 473
  []
 
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [82
 
  <./Arbitrary_borders.jpg>]
-<Posner_map.png, id=3127, 671.75557pt x 631.47394pt>
+<Posner_map.png, id=3553, 671.75557pt x 631.47394pt>
 File: Posner_map.png Graphic file (type png)
 <use Posner_map.png>
 Package pdftex.def Info: Posner_map.png  used on input line 477.
@@ -2319,38 +1840,168 @@ Package pdftex.def Info: Posner_map.png  used on input line 477.
 Overfull \vbox (58.66351pt too high) detected at line 477
  []
 
-
-Overfull \hbox (110.54265pt too wide) has occurred while \output is active
-  [] [][][][][][] [][][][][][][][][][] [][][][][][][][][][] [][][][][][]  
- []
-
 [83
 
- <./Posner_map.png>])
-Runaway argument?
-\let \AtEndDocument \@firstofone \@enddocumenthook \@checkend {docume\ETC.
-! File ended while scanning use of \beamer@collect@@body.
-<inserted text> 
-                \par 
-<*> ./Slides_Class5_v6.tex
-                          
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+ <./Posner_map.png>] [84
 
-! Emergency stop.
-<*> ./Slides_Class5_v6.tex
-                          
-*** (job aborted, no legal \end found)
+] [85
 
- 
+] [86
+
+] [87
+
+] [88
+
+] [89
+
+] [90
+
+] [91
+
+]
+<Posner_results.png, id=3932, 886.19606pt x 586.45328pt>
+File: Posner_results.png Graphic file (type png)
+<use Posner_results.png>
+Package pdftex.def Info: Posner_results.png  used on input line 514.
+(pdftex.def)             Requested size: 354.19536pt x 234.38922pt.
+ [92
+
+ <./Posner_results.png>]
+<Posner_table.png, id=3975, 958.93742pt x 409.53pt>
+File: Posner_table.png Graphic file (type png)
+<use Posner_table.png>
+Package pdftex.def Info: Posner_table.png  used on input line 518.
+(pdftex.def)             Requested size: 354.19536pt x 151.26752pt.
+ [93
+
+ <./Posner_table.png>] [94
+
+] [95
+
+] [96
+
+] [97
+
+] [98
+
+] [99
+
+] [100
+
+]
+[101
+
+] [102
+
+] [103
+
+] [104
+
+] [105
+
+] [106
+
+] [107
+
+] [108
+
+] [109
+
+] [110
+
+] [111
+
+] [112
+
+]
+[113
+
+]
+<Sekhon_redistricting_a.png, id=4858, 619.62639pt x 523.66132pt>
+File: Sekhon_redistricting_a.png Graphic file (type png)
+<use Sekhon_redistricting_a.png>
+Package pdftex.def Info: Sekhon_redistricting_a.png  used on input line 594.
+(pdftex.def)             Requested size: 235.46046pt x 198.99336pt.
+
+Overfull \hbox (22.9411pt too wide) in paragraph at lines 594--594
+[][]  
+ []
+
+[114
+
+ <./Sekhon_redistricting_a.png>]
+<Sekhon_redistricting_b.png, id=4901, 553.1064pt x 467.346pt>
+File: Sekhon_redistricting_b.png Graphic file (type png)
+<use Sekhon_redistricting_b.png>
+Package pdftex.def Info: Sekhon_redistricting_b.png  used on input line 607.
+(pdftex.def)             Requested size: 188.05368pt x 158.89552pt.
+ [115
+
+ <./Sekhon_redistricting_b.png>]
+<Sekhon_redistricting_c.png, id=4945, 553.1064pt x 467.346pt>
+File: Sekhon_redistricting_c.png Graphic file (type png)
+<use Sekhon_redistricting_c.png>
+Package pdftex.def Info: Sekhon_redistricting_c.png  used on input line 620.
+(pdftex.def)             Requested size: 210.1826pt x 177.59332pt.
+
+[116
+
+ <./Sekhon_redistricting_c.png>]
+
+Package array Warning: Column L is already defined on input line 622.
+
+pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel}
+) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.641 \end{frame}
+                  [117
+
+]
+\tf@nav=\write6
+\openout6 = `Slides_Class5_v6.nav'.
+
+\tf@toc=\write7
+\openout7 = `Slides_Class5_v6.toc'.
+
+\tf@snm=\write8
+\openout8 = `Slides_Class5_v6.snm'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 645.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 645.
+ (Slides_Class5_v6.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 645.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 645.
+Package rerunfilecheck Info: File `Slides_Class5_v6.out' has not changed.
+(rerunfilecheck)             Checksum: 3F1F51C3D68B2FAA3A79A88028C72955;242.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 22914 strings out of 492893
- 437515 string characters out of 3133367
- 555623 words of memory out of 3000000
- 26065 multiletter control sequences out of 15000+200000
- 79006 words of font info for 129 fonts, out of 3000000 for 9000
+ 23018 strings out of 492893
+ 439049 string characters out of 3133367
+ 561588 words of memory out of 3000000
+ 26096 multiletter control sequences out of 15000+200000
+ 80883 words of font info for 131 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,876b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/arev/arevoms.enc}{C:/Program Fil
+es/MiKTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Files/MiKTeX 2.9/fon
+ts/enc/dvips/arev/arevoml.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base
+/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Bold.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-BoldOblique.pfb><
+C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Oblique.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
+Output written on Slides_Class5_v6.pdf (117 pages, 1785077 bytes).
+PDF statistics:
+ 5112 PDF objects out of 5155 (max. 8388607)
+ 240 named destinations out of 1000 (max. 500000)
+ 115 words of extra memory for PDF output out of 10000 (max. 10000000)
+
