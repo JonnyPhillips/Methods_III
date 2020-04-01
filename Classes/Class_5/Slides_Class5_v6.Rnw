@@ -1,56 +1,6 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
-\documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-% maxwidth is the original width if it is less than linewidth
-% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-\let\hlipl\hlkwb
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
+\documentclass[xcolor=x11names,compress]{beamer}
 %\documentclass[xcolor=x11names,compress,handout]{beamer}
 \usepackage[]{graphicx}
 \usepackage[]{color}
@@ -114,13 +64,23 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
+<<setup, echo=F, warning=F, message=F>>=
+library(knitr)
+library(tidyverse)
+library(stargazer)
+library(xtable)
+library(zeligverse)
+library(broom)
+library(purrr)
+library(DiagrammeR)
+knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=T)
+@
 
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 5 - Natural Experiments}
 \author{Jonathan Phillips}
-\date{April 2019}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\date{April 2020}
+
 \begin{document}  
 
 \frame{\titlepage}
@@ -198,7 +158,7 @@
 \begin{itemize}
 \item We can never be sure randomization really worked
 \pause
-\item We don't get to choose the treatments we want to evaluate, just 'discover' them
+\item We don't get to \textit{choose} the treatments we want to evaluate, just 'discover' them
 \pause
 \item We don't get to choose the population and sample
 \end{itemize}
@@ -206,21 +166,39 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Verifying Randomization}
+\frametitle{Natural Experiments}
 \begin{itemize}
-\item If it's an important treatment, \textit{someone} had an incentive to try and alter it
+\item Natural Experiments can be:
 \pause
-\item The burden of proof is on us: How can we increase confidence that assignment was (as-if) random?
+\begin{enumerate}
+\item \textbf{Randomized} - Treatment assignment a genuine 'experiment', just not run by the researcher
+\pause
+\item \textbf{Non-Randomized} - Treatment assignment NOT randomized but unlikely to be linked to potential outcomes - 'As-if' random
+\pause
+\end{enumerate}
+\item In both cases treatment assignment is \textit{independent of potential outcomes}
+\begin{itemize}
+\item More precisely, \textit{a part} of treatment assignment is independent of potential outcomes
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Verifying Independence of Treatment Assignment from POs}
+\begin{itemize}
+\item If it's an important treatment that has real effects, \textit{someone} had an incentive to try and alter it
+\pause
+\item The burden of proof is on us: How can we increase confidence that treatment assignment was (as-if) random?
 \pause
 \item Two strategies:
 \pause
 \begin{enumerate}
-\item Check balance on lots of variables
+\item \textbf{Check balance} on lots of variables
 \begin{itemize}
 \item Especially variables that are potential omitted variables
 \end{itemize}
 \pause
-\item \textbf{Causal Process Observations}
+\item \textbf{Causal \textit{Process} Observations}
 \pause
 \begin{itemize}
 \item Documents/code/video evidence
@@ -238,11 +216,285 @@
 \begin{frame}
 \frametitle{Verifying Randomization}
 \begin{itemize}
-\item How does Snow argue that households' assignment to water company is as-if random?
+\item How does John Snow argue that households' assignment to water company is as-if random (p.13-14 of Dunning 2012)?
 \end{itemize}
 \end{frame}
 
 %[Ask about Snow example of water companies - how worked out treatment assignment independent of POs]
+
+
+\section{Randomized Natural Experiments}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item Do voters punish corrupt politicians?
+\pause
+\item Corruption is hard to manipulate (ethically)
+\pause
+\item We can also look at voters' \textit{information} about corruption 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item \textbf{Population:} Brazilian municipalities with population less than 450,000
+\pause
+\item \textbf{Sample:} 373 Municipalities with audits either side of 2004 elections and first-term mayors
+\pause
+\item \textbf{Treatment:} CGU Audit \textit{before} election
+\pause
+\item \textbf{Control:} CGU Audit \texit{after} election
+\pause
+\item \textbf{Treatment Assignment Mechanism:} Randomized (Caixa)
+\pause
+\item \textbf{Outcome:} Vote Share for the Incumbent in 2004 election
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+How do we know audits were random?
+\pause
+\begin{itemize}
+\item Balance tests
+\begin{itemize}
+\item On municipal characteristics
+\item On mayor's characteristics
+\item On political characteristics
+\begin{itemize}
+\item 3/90 variables imbalanced
+\end{itemize}
+\item On level of corruption
+\pause
+\item PMDB imbalance; more likely to be audited pre-election?
+\pause
+\item Corruption \textit{level} not explained by political party being in state/national government
+\pause
+\item Fixed effects to the state (auditing team)
+\end{itemize}
+\pause
+\item Qualitative process evidence?
+\pause
+\begin{itemize}
+\item Hiring, salary and work conditions of auditors
+\pause
+\item Interviews with auditors
+\pause
+\item CGU documents/procedures
+\pause
+\end{itemize}
+\item What about the timing of publication?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item Methodology
+\begin{itemize}
+\item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + X_{ms} + FE_{s} + \epsilon_{ms}$
+\pause
+\item Result: No Effect
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item The importance of a theoretical model:
+\begin{itemize}
+\item What is treatment in this regression? What was the theory they sought to test?
+\pause
+\item Treatment is the release of audit information, but the \textit{theory} they seek to test is when voters \textit{learn new information about corruption}
+\pause
+\item The \textit{content} of the audit report information varies
+\pause
+\item We need treatment and control groups reflecting this
+\pause
+\item Ideally, we would also incorporate voters' \textit{priors} about corruption, but they don't have data on that
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item Methodology
+\begin{itemize}
+\item So we want to compare municipalities audited before and after the election \textit{with the same level of corruption}
+\pause
+\item Treatment interacted with the level of corruption in the report
+\pause
+\item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + \beta_2 \text{Corruption}_{ms} + \beta_3 \text{Audited Early}_{ms}*\text{Corruption}_{ms} + X_{ms} + \text{FE}_{s} + \epsilon_{ms}$
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+\includegraphics[scale=0.45]{Chart_FF.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Ferraz and Finan (2008)}
+\begin{itemize}
+\item Have we interpreted the mechanism correctly?
+\pause
+\begin{itemize}
+\item Audits may also have changed competition within the elite
+\pause
+\item Or campaign strategies - maybe parties ran 'cleaner' candidates before they knew the outcome of the audit report
+\pause
+\item So Ferraz and Finan test if the impact also depends on the presence of local radio
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Non-Randomized Natural Experiments}
+
+\begin{frame}
+\frametitle{Non-Randomized Natural Experiments}
+\begin{itemize}
+\item How can we achieve causal inference without randomization?
+\pause
+\item Our necessary condition is \textbf{always} "The Treatment Assignment Mechanism is independent of potential outcomes"
+\pause
+\item Can we find real-world treatment assignments that ignored potential outcomes?
+\begin{itemize}
+\pause
+\item "As good as random", "As-if random"
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Non-Randomized Natural Experiments}
+\begin{itemize}
+\item There are good reasons to be skeptical: Humans are \textit{strategic} and anticipate potential outcomes 
+\begin{itemize}
+\item Acting without bias (conscious or unconscious) is hard
+\end{itemize}
+\pause
+\item But sometimes they are trying to alter outcomes \textit{different to the potential outcomes we care about}
+\pause
+\begin{itemize}
+\item If these outcomes are not correlated with (/'orthogonal to'/'independent of') our own potential outcomes, we might be okay
+\pause
+\item But we cannot test this
+\pause
+\item We have to rely on qualitative evidence of the treatment assignment mechanism
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Posner (2004)}
+\begin{itemize}
+\item \textbf{Hypothesis:} Cultural differences become political cleavages when the cultural groups are large portions of the population
+\pause
+\item \textbf{Treatment: } Smaller country (relative to size of ethnic group)
+\pause
+\item \textbf{Control: } Larger country
+\pause
+\item \textbf{Potential Outcomes:} Degree of political conflict between ethnic groups in smaller/larger countries
+\pause
+\item \textbf{Treatment Assignment Mechanism:} African borders that cross ethnic group boundaries
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Posner (2004)}
+\begin{itemize}
+\item Is Treatment Assignment Independent of Potential Outcomes?
+\pause
+\item Causal Process Observations:
+\pause
+\begin{itemize}
+\item African colonial borders assigned people to be 'Zambian' or 'Malawian'. 
+\pause
+\item Straight lines drawn with a ruler in Berlin
+\pause
+\item No knowledge of local populations
+\pause
+\item Zambia-Malawi border defined by geography: by the watershed of the hills
+\pause
+\item Splitting the Chewa and Tumbuka groups in half
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=0.8\textwidth]{Arbitrary_borders.jpg}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=0.9\textwidth]{Posner_map.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Posner (2004)}
+\begin{itemize}
+\item Balance Tests:
+\begin{itemize}
+\item Qualitative: The same ethnic groups with the same culture (ethnographic literature)
+\pause
+\item Quantitative: Compare paired villages either side of the border
+\pause
+\begin{itemize}
+\item Same cultural practices within ethnic groups
+\pause
+\item Same perceived differences between ethnic groups
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Posner (2004)}
+\begin{itemize}
+\item Despite similar cultural practices, \textit{political relations} between the two groups are very different in Malawi:
+\pause
+\begin{itemize}
+\item They would not vote for a Presidential candidate from the other group
+\pause
+\item They would not inter-marry
+\pause
+\item Even controlling for age, gender etc.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=1\textwidth]{Posner_results.png}
+\end{frame}
+
+\begin{frame}
+\includegraphics[width=1\textwidth]{Posner_table.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{Posner (2004)}
+\begin{itemize}
+\item But what is treatment here? \pause Being in Zambia/Malawi
+\pause 
+\item What is Posner interested in? \pause Large ethnic groups relative to country size
+\pause
+\item But lots of things are different about Zambia!
+\pause
+\begin{itemize}
+\item Eg. Zambia is \textit{much} richer than Malawi due to copper revenues - maybe politics doesn't 'need' to be as conflictual
+\end{itemize}
+\item The argument is internally consistent \textit{for Malawi-Zambia}, but we don't know if it would generalize to other countries
+\pause
+\item So it is hard to test \textit{the theory}
+\end{itemize}
+\end{frame}
+
+\section{Lack of Control}
 
 \begin{frame}
 \frametitle{The Problem of Not Controlling Treatment Assignment}
@@ -316,213 +568,6 @@
 \end{frame}
 
 
-\section{Randomized Natural Experiments}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item Do voters punish corrupt politicians?
-\pause
-\item Corruption is hard to manipulate (ethically)
-\pause
-\item We can also look at voters' \textit{information} about corruption 
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item \textbf{Population:} Brazilian municipalities with population less than 450,000
-\item \textbf{Sample:} 373 Municipalities with audits either side of 2004 elections and first-term mayors
-\item \textbf{Treatment:} CGU Audit before election
-\item \textbf{Control:} CGU Audit after election
-\item \textbf{Treatment Assignment Mechanism:} Randomized (Caixa)
-\item \textbf{Outcome:} Vote Share for the Incumbent in 2004 election
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item How do we know audits were random?
-\pause
-\item What about the content of reports? Isn't there more pressure just before an election?
-\pause
-\begin{itemize}
-\item Quantitative evidence?
-\pause
-\begin{itemize}
-\item Balance tests
-\pause
-\item Fixed effects to the state (auditing team)
-\pause
-\item $\text{Amount of corruption} = \alpha + \beta \text{Party in Government}$
-\pause
-  \item $\text{Amount of corruption} = \alpha + \beta \text{Vote Share Margin}$
-\end{itemize}
-\pause
-\item Qualitative evidence?
-\pause
-\begin{itemize}
-\item Hiring, salary and work conditions of auditors
-\pause
-\item Interviews with auditors
-\pause
-\end{itemize}
-\end{itemize}
-\item What about the timing of publication?
-\pause
-\begin{itemize}
-\item PMDB imbalance?
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item Methodology
-\begin{itemize}
-\item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + X_{ms} + FE_{s} + \epsilon_{ms}$
-\pause
-\item Result: No Effect
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item The importance of a theoretical model:
-\pause
-\item Treatment is the release of audit information, but the \textit{theory} they seek to test is when voters \textit{learn something about candidates}
-\pause
-\item The \textit{content} of the audit report information varies
-\pause
-\item We need treatment and control groups reflecting this
-\pause
-\item Ideally, we would also incorporate voters'\textit{priors} about how corrupt candidates are vary, but they don't have data on that
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item Methodology
-\begin{itemize}
-\item So expected vote share change is \textit{conditional on the content of the audit report}
-\pause
-\item $VS_{ms} = \alpha + \beta \text{Audited Early}_{ms} + \beta_2 \text{Corruption}_{ms} + \beta_3 \text{Audited Early}_{ms}*\text{Corruption}_{ms} + X_{ms} + \text{FE}_{s} + \epsilon_{ms}$
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\begin{center}
-\includegraphics[scale=0.45]{Chart_FF.png}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Ferraz and Finan (2008)}
-\begin{itemize}
-\item Have we interpreted treatment correctly?
-\pause
-\item Audits may also have changed competition within the elite
-\pause
-\item Or campaign strategies - maybe parties ran 'cleaner' candidates before they knew the outcome of the audit report
-\end{itemize}
-\end{frame}
-
-\section{Non-Randomized Natural Experiments}
-
-\begin{frame}
-\frametitle{Non-Randomized Natural Experiments}
-\begin{itemize}
-\item How can we achieve causal inference without randomization?
-\pause
-\item Our necessary condition is always "The Treatment Assignment Mechanism is independent of potential outcomes"
-\pause
-\item Can we find real-world treatment assignments that ignored potential outcomes?
-\begin{itemize}
-\pause
-\item "As good as random", "As-if random"
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Non-Randomized Natural Experiments}
-\begin{itemize}
-\item There are good reasons to be skeptical: Humans are \textit{strategic} and anticipate potential outcomes 
-\pause
-\item But sometimes they are trying to alter outcomes \textit{different to the potential outcomes we care about}
-\pause
-\begin{itemize}
-\item If these outcomes are not correlated with (/'orthogonal to'/'independent of') our own potential outcomes, we might be okay
-\pause
-\item But we cannot test this
-\pause
-\item We have to rely on qualitative evidence of the treatment assignment mechanism
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Posner (2004)}
-\begin{itemize}
-\item \textbf{Hypothesis:} Cultural differences become political cleavages when the cultural groups are large portions of the population
-\pause
-\item \textbf{Treatment: } Smaller country (relative to size of ethnic group)
-\pause
-\item \textbf{Control: } Larger country
-\pause
-\item \textbf{Potential Outcomes:} Degree of political conflict between ethnic groups in larger/smaller countries
-\pause
-\item \textbf{Treatment Assignment Mechanism:} African borders that cross ethnic group boundaries
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Posner (2004)}
-\begin{itemize}
-\item African colonial borders assigned people to be 'Zambian' or 'Malawian'. 
-\pause
-\item Straight lines drawn with a ruler in Berlin
-\pause
-\item Little knowledge of local geography or populations
-\pause
-\item Zambia-Malawi border defined by geography: by the watershed of the hills
-\pause
-\item Splitting the Chewa and Tumbuka groups
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\includegraphics[width=0.8\textwidth]{Arbitrary_borders.jpg}
-\end{frame}
-
-\begin{frame}
-\includegraphics[width=0.9\textwidth]{Posner_map.png}
-\end{frame}
-
-\begin{frame}
-\includegraphics[width=1\textwidth]{Posner_results.png}
-\end{frame}
-
-\begin{frame}
-\frametitle{Posner (2004)}
-\begin{itemize}
-\item What is treatment here? \pause Being in Zambia/Malawi
-\pause 
-\item What is Posner interested in? \pause Large ethnic groups relative to country size
-\pause
-\item But lots of things are different about Zambia!
-\pause
-\item Eg. Zambia is \textit{much} richer than Malawi due to copper revenues - maybe politics doesn't need to be as conflictual
-\end{itemize}
-\end{frame}
 
 \end{document}
 

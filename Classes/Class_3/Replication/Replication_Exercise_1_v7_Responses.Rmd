@@ -58,7 +58,7 @@ The outcome variable is individual turnout in the August 2006 primary election.
 
 **3. What is the unit of analysis? What is the level at which treatment is applied?**
 
-The unit of analysis is the individual. The leval at which treatment was applied was the household.
+The unit of analysis is the individual. The level at which treatment was applied was the household.
 
 ### **Next we will evaluate the four assumptions of Field Experiments**
 

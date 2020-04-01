@@ -79,7 +79,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 5 - Natural Experiments}
 \author{Jonathan Phillips}
-\date{April 2019}
+\date{March 2020}
 
 \begin{document}  
 
@@ -158,7 +158,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{itemize}
 \item We can never be sure randomization really worked
 \pause
-\item We don't get to choose the treatments we want to evaluate, just 'discover' them
+\item We don't get to \textit{choose} the treatments we want to evaluate, just 'discover' them
 \pause
 \item We don't get to choose the population and sample
 \end{itemize}
@@ -166,21 +166,36 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \end{frame}
 
 \begin{frame}
-\frametitle{Verifying Randomization}
+\frametitle{Natural Experiments}
 \begin{itemize}
-\item If it's an important treatment, \textit{someone} had an incentive to try and alter it
+\item Natural Experiments can be:
+\begin{enumerate}
+\item \textbf{Randomized} - Treatment assignment a genuine 'experiment', just not run by the researcher
+\item \textbf{As-if Randomized} - Treatment assignment not randomized but unlikely to be linked to potential outcomes
+\end{enumerate}
+\item In both cases treatment assignment is \textit{independent of potential outcomes}
+\begin{itemize}
+\item More precisely, at least a \textit{part} of treatment assignment is independent of potential outcomes
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Verifying Independence of Treatment Assignment from POs}
+\begin{itemize}
+\item If it's an important treatment that has real effects, \textit{someone} had an incentive to try and alter it
 \pause
-\item The burden of proof is on us: How can we increase confidence that assignment was (as-if) random?
+\item The burden of proof is on us: How can we increase confidence that treatment assignment was (as-if) random?
 \pause
 \item Two strategies:
 \pause
 \begin{enumerate}
-\item Check balance on lots of variables
+\item \textbf{Check balance} on lots of variables
 \begin{itemize}
 \item Especially variables that are potential omitted variables
 \end{itemize}
 \pause
-\item \textbf{Causal Process Observations}
+\item \textbf{Causal \textit{Process} Observations}
 \pause
 \begin{itemize}
 \item Documents/code/video evidence
@@ -198,82 +213,11 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{frame}
 \frametitle{Verifying Randomization}
 \begin{itemize}
-\item How does Snow argue that households' assignment to water company is as-if random?
+\item How does John Snow argue that households' assignment to water company is as-if random (p.13-14 of Dunning 2012)?
 \end{itemize}
 \end{frame}
 
 %[Ask about Snow example of water companies - how worked out treatment assignment independent of POs]
-
-\begin{frame}
-\frametitle{The Problem of Not Controlling Treatment Assignment}
-\begin{itemize}
-\item ``Random assignment of the intervention is not sufficient to provide an unbiased estimate of the causal effect.'' (Sekhon and Titunik 2012)
-\pause
-\item Treatment and control groups are defined \textit{after} randomization - it's our responsibility to make sure:
-\pause
-\begin{enumerate}
-\item \textbf{These two groups actually are comparable} (POs are independent of treatment)
-\pause
-\begin{itemize}
-\item We can only compare those units \textit{that were part of the original randomization}
-\end{itemize}
-\pause
-\item \textbf{That the treatment is the factor we actually want to study}
-\pause
-\begin{itemize}
-\item We have to 'interpret' the treatment
-\pause
-\item Sometimes treatments are 'bundles'
-\pause
-\item Sometimes treatments are 'repeated', creating interactions or changing expectations
-\end{itemize}
-\end{enumerate}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\includegraphics[scale=0.38]{Sekhon_redistricting_a.png}
-\end{frame}
-
-\begin{frame}
-\frametitle{The Problem of Not Controlling Treatment Assignment}
-\footnotesize
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{|p{3cm}|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
-    \hline
-          & \textbf{A's Original Voters} & \textbf{Switched Voters} & \multicolumn{1}{p{2.4cm}}{\textbf{B's Original Voters}} \bigstrut\\
-    \hline
-    2000 election context &       & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}\multicolumn{1}{p{2.4cm}}{Same} \bigstrut\\
-    \hline
-    Duration of exposure to incumbent in district B &       & 4 years & \multicolumn{1}{p{2.4cm}}{12 years} \bigstrut\\
-    \hline
-    1996 and prior election context & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}Same  &  \bigstrut\\
-    \hline
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}
-\normalsize
-\end{frame}
-
-\begin{frame}
-\frametitle{The Problem of Not Controlling Treatment Assignment}
-\footnotesize
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{|p{3.2cm}|p{2.6cm}|p{2.6cm}|}
-    \hline
-          & \textbf{A's Original Voters vs. Switched Voters} & \textbf{B's Original Voters vs. Switched Voters} \bigstrut\\
-    \hline
-    Potential Outcomes Independent of Treatment Assignment? & \multicolumn{1}{c|}{\cellcolor[rgb]{ .776,  .878,  .706} Yes} & \multicolumn{1}{c|}{No} \bigstrut\\
-    \hline
-    What is 'Treatment'? & Different election context, different candidates & \cellcolor[rgb]{ .776,  .878,  .706} Difference in duration of exposure to incumbent \bigstrut\\
-    \hline
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}%
-\normalsize
-\end{frame}
 
 
 \section{Randomized Natural Experiments}
@@ -483,6 +427,81 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \item Eg. Zambia is \textit{much} richer than Malawi due to copper revenues - maybe politics doesn't need to be as conflictual
 \end{itemize}
 \end{frame}
+
+\section{The Problem of Not Controlling Treatment Assignment}
+
+\begin{frame}
+\frametitle{The Problem of Not Controlling Treatment Assignment}
+\begin{itemize}
+\item ``Random assignment of the intervention is not sufficient to provide an unbiased estimate of the causal effect.'' (Sekhon and Titunik 2012)
+\pause
+\item Treatment and control groups are defined \textit{after} randomization - it's our responsibility to make sure:
+\pause
+\begin{enumerate}
+\item \textbf{These two groups actually are comparable} (POs are independent of treatment)
+\pause
+\begin{itemize}
+\item We can only compare those units \textit{that were part of the original randomization}
+\end{itemize}
+\pause
+\item \textbf{That the treatment is the factor we actually want to study}
+\pause
+\begin{itemize}
+\item We have to 'interpret' the treatment
+\pause
+\item Sometimes treatments are 'bundles'
+\pause
+\item Sometimes treatments are 'repeated', creating interactions or changing expectations
+\end{itemize}
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\includegraphics[scale=0.38]{Sekhon_redistricting_a.png}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Problem of Not Controlling Treatment Assignment}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|p{3cm}|p{2.4cm}|p{2.4cm}|p{2.4cm}|}
+    \hline
+          & \textbf{A's Original Voters} & \textbf{Switched Voters} & \multicolumn{1}{p{2.4cm}}{\textbf{B's Original Voters}} \bigstrut\\
+    \hline
+    2000 election context &       & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}\multicolumn{1}{p{2.4cm}}{Same} \bigstrut\\
+    \hline
+    Duration of exposure to incumbent in district B &       & 4 years & \multicolumn{1}{p{2.4cm}}{12 years} \bigstrut\\
+    \hline
+    1996 and prior election context & \cellcolor[rgb]{ .776,  .878,  .706}Same  & \cellcolor[rgb]{ .776,  .878,  .706}Same  &  \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}
+\normalsize
+\end{frame}
+
+\begin{frame}
+\frametitle{The Problem of Not Controlling Treatment Assignment}
+\footnotesize
+\begin{table}[htbp]
+  \centering
+    \begin{tabular}{|p{3.2cm}|p{2.6cm}|p{2.6cm}|}
+    \hline
+          & \textbf{A's Original Voters vs. Switched Voters} & \textbf{B's Original Voters vs. Switched Voters} \bigstrut\\
+    \hline
+    Potential Outcomes Independent of Treatment Assignment? & \multicolumn{1}{c|}{\cellcolor[rgb]{ .776,  .878,  .706} Yes} & \multicolumn{1}{c|}{No} \bigstrut\\
+    \hline
+    What is 'Treatment'? & Different election context, different candidates & \cellcolor[rgb]{ .776,  .878,  .706} Difference in duration of exposure to incumbent \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\normalsize
+\end{frame}
+
+
 
 \end{document}
 

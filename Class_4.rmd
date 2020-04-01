@@ -30,8 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## [Lab Exercise to Complete during Class](Classes/Class_4/Lab_Exercise/Exercise_Survey_Exp_v3_v2.pdf)
   - [Survey_data.csv](Classes/Class_4/Lab_Exercise/Survey_data.csv)
   - [Conjoint_data.csv](Classes/Class_4/Lab_Exercise/Conjoint_data.csv)
-
-<!-- - [Suggested Responses](Classes/Class_4/Lab_Exercise/Exercise_Survey_Exp_v3_Suggested_Responses.pdf)  -->
+  - [Suggested Responses](Classes/Class_4/Lab_Exercise/Exercise_Survey_Exp_v3_Suggested_Responses_v2.pdf)
 
 ## Replication Exercise
  - [Exercise](Classes/Class_4/Replication/Replication_Exercise_2_v7.pdf) 
