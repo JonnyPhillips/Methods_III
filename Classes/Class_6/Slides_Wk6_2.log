@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  2 APR 2020 12:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  2 APR 2020 12:28
 entering extended mode
-**./Slides_Class6_v1.tex
-(Slides_Class6_v1.tex
+**./Slides_Wk6_2.tex
+(Slides_Wk6_2.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamer.cls"
 Document Class: beamer 2018/12/02 v3.55 A class for typesetting presentations
@@ -752,67 +752,18 @@ Package: multirow 2019/01/01 v2.4 Span multiple rows of a table
 \multirow@dima=\skip59
 \bigstrutjot=\dimen271
 )
-("C:\Program Files\MiKTeX 2.9\tex/latex/tools\multicol.sty"
-Package: multicol 2018/12/27 v1.8v multicolumn formatting (FMi)
-\c@tracingmulticols=\count171
-\mult@box=\box59
-\multicol@leftmargin=\dimen272
-\c@unbalance=\count172
-\c@collectmore=\count173
-\doublecol@number=\count174
-\multicoltolerance=\count175
-\multicolpretolerance=\count176
-\full@width=\dimen273
-\page@free=\dimen274
-\premulticols=\dimen275
-\postmulticols=\dimen276
-\multicolsep=\skip60
-\multicolbaselineskip=\skip61
-\partial@page=\box60
-\last@line=\box61
-\maxbalancingoverflow=\dimen277
-\mult@rightbox=\box62
-\mult@grightbox=\box63
-\mult@gfirstbox=\box64
-\mult@firstbox=\box65
-\@tempa=\box66
-\@tempa=\box67
-\@tempa=\box68
-\@tempa=\box69
-\@tempa=\box70
-\@tempa=\box71
-\@tempa=\box72
-\@tempa=\box73
-\@tempa=\box74
-\@tempa=\box75
-\@tempa=\box76
-\@tempa=\box77
-\@tempa=\box78
-\@tempa=\box79
-\@tempa=\box80
-\@tempa=\box81
-\@tempa=\box82
-\c@columnbadness=\count177
-\c@finalcolumnbadness=\count178
-\last@try=\dimen278
-\multicolovershoot=\dimen279
-\multicolundershoot=\dimen280
-\mult@nat@firstbox=\box83
-\colbreak@box=\box84
-\mc@col@check@num=\count179
-)
 ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\dcolumn.sty"
 Package: dcolumn 2014/10/28 v1.06 decimal alignment package (DPC)
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\array.sty"
 Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
-\col@sep=\dimen281
-\ar@mcellbox=\box85
-\extrarowheight=\dimen282
+\col@sep=\dimen272
+\ar@mcellbox=\box59
+\extrarowheight=\dimen273
 \NC@list=\toks45
-\extratabsurround=\skip62
-\backup@length=\skip63
-\ar@cellbox=\box86
+\extratabsurround=\skip60
+\backup@length=\skip61
+\ar@cellbox=\box60
 ))
 ("C:\Program Files\MiKTeX 2.9\tex/latex/multirow\bigstrut.sty"
 Package: bigstrut 2019/01/01 v2.4 Provide larger struts in tabulars
@@ -820,7 +771,7 @@ Package: bigstrut 2019/01/01 v2.4 Provide larger struts in tabulars
 ("C:\Program Files\MiKTeX 2.9\tex/latex/colortbl\colortbl.sty"
 Package: colortbl 2018/12/12 v1.0d Color table columns (DPC)
 \everycr=\toks46
-\minrowclearance=\skip64
+\minrowclearance=\skip62
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamerouterthememiniframes.sty")
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamerfontthemeserif.sty")
@@ -1310,78 +1261,68 @@ Package: pdfpages 2017/10/31 v0.5l Insert pages of external PDF documents (AM)
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count180
-\calc@Bcount=\count181
-\calc@Adimen=\dimen283
-\calc@Bdimen=\dimen284
-\calc@Askip=\skip65
-\calc@Bskip=\skip66
+\calc@Acount=\count171
+\calc@Bcount=\count172
+\calc@Adimen=\dimen274
+\calc@Bdimen=\dimen275
+\calc@Askip=\skip63
+\calc@Bskip=\skip64
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count182
-\calc@Cskip=\skip67
+\calc@Ccount=\count173
+\calc@Cskip=\skip65
 )
 ("C:\Program Files\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.sty"
 Package: eso-pic 2018/04/12 v2.0h eso-pic (RN)
 )
-\AM@pagewidth=\dimen285
-\AM@pageheight=\dimen286
+\AM@pagewidth=\dimen276
+\AM@pageheight=\dimen277
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.def"
 File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box87
+\AM@pagebox=\box61
 \AM@global@opts=\toks47
 \AM@toc@title=\toks48
-\c@AM@survey=\count183
-\AM@templatesizebox=\box88
+\c@AM@survey=\count174
+\AM@templatesizebox=\box62
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 110.
-
 ("C:\Program Files\MiKTeX 2.9\tex/latex/upquote\upquote.sty"
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-)
-(Slides_Class6_v1.aux
+) (Slides_Wk6_2.aux)
+\openout1 = `Slides_Wk6_2.aux'.
 
-LaTeX Warning: Label `tab:addlabel' multiply defined.
-
-
-LaTeX Warning: Label `tab:addlabel' multiply defined.
-
-)
-\openout1 = `Slides_Class6_v1.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 124.
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 124.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 124.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 108.
 
  ("C:\Program Files\MiKTeX 2.9\tex/latex/base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 124.
-LaTeX Font Info:    Try loading font information for MDA+cmr on input line 124.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 108.
+LaTeX Font Info:    Try loading font information for MDA+cmr on input line 108.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign\mdacmr.fd"
 File: mdacmr.fd 
 )
-LaTeX Font Info:    ... okay on input line 124.
-LaTeX Font Info:    Try loading font information for T1+fav on input line 124.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Try loading font information for T1+fav on input line 108.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\t1fav.fd"
 File: t1fav.fd 2006/05/30 Fontinst v1.929 font definitions for T1/fav.
@@ -1422,16 +1363,16 @@ File: t1fav.fd 2006/05/30 Fontinst v1.929 font definitions for T1/fav.
 
 ("C:\Program Files\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count184
-\scratchdimen=\dimen287
-\scratchbox=\box89
-\nofMPsegments=\count185
-\nofMParguments=\count186
+\scratchcounter=\count175
+\scratchdimen=\dimen278
+\scratchbox=\box63
+\nofMPsegments=\count176
+\nofMParguments=\count177
 \everyMPshowfont=\toks49
-\MPscratchCnt=\count187
-\MPscratchDim=\dimen288
-\MPnumerator=\count188
-\makeMPintoPDFobject=\count189
+\MPscratchCnt=\count178
+\MPscratchDim=\dimen279
+\MPnumerator=\count179
+\makeMPintoPDFobject=\count180
 \everyMPtoPDFconversion=\toks50
 ) ("C:\Program Files\MiKTeX 2.9\tex/latex/oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1447,8 +1388,8 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box90
-Package hyperref Info: Link coloring ON on input line 124.
+\AtBeginShipoutBox=\box64
+Package hyperref Info: Link coloring OFF on input line 108.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1456,15 +1397,15 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ("C:\Program Files\MiKTeX 2.9\tex/generic/oberdiek\gettitlestring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count190
+\c@section@level=\count181
 )
-LaTeX Info: Redefining \ref on input line 124.
-LaTeX Info: Redefining \pageref on input line 124.
-LaTeX Info: Redefining \nameref on input line 124.
+LaTeX Info: Redefining \ref on input line 108.
+LaTeX Info: Redefining \pageref on input line 108.
+LaTeX Info: Redefining \nameref on input line 108.
 
-(Slides_Class6_v1.out) (Slides_Class6_v1.out)
+(Slides_Wk6_2.out) (Slides_Wk6_2.out)
 \@outlinefile=\write5
-\openout5 = `Slides_Class6_v1.out'.
+\openout5 = `Slides_Wk6_2.out'.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/translator\translator-basic-dictionary-
@@ -1497,86 +1438,86 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-(Slides_Class6_v1.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config
-/pdftex.map}
-
-] [2
+(Slides_Wk6_2.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdf
+tex.map}
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+zavm on input line 149
+LaTeX Font Info:    Try loading font information for OT1+zavm on input line 128
 .
  ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\ot1zavm.fd"
 File: ot1zavm.fd 2006/05/30 Fontinst v1.929 font definitions for OT1/zavm.
 )
-LaTeX Font Info:    Try loading font information for OML+zavm on input line 149
+LaTeX Font Info:    Try loading font information for OML+zavm on input line 128
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\omlzavm.fd"
 File: omlzavm.fd 2006/05/30 Fontinst v1.929 font definitions for OML/zavm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zavm on input line 149
+LaTeX Font Info:    Try loading font information for OMS+zavm on input line 128
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\omszavm.fd"
 File: omszavm.fd 2006/05/30 Fontinst v1.929 font definitions for OMS/zavm.
 )
-LaTeX Font Info:    Try loading font information for OMX+mdbch on input line 14
-9.
+LaTeX Font Info:    Try loading font information for OMX+mdbch on input line 12
+8.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign/mdbch\omxmdbch.fd"
 File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
 )
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 149.
+(Font)              scaled to size 10.51207pt on input line 128.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 149.
+(Font)              scaled to size 7.68005pt on input line 128.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 149.
-LaTeX Font Info:    Try loading font information for U+msa on input line 149.
+(Font)              scaled to size 5.76004pt on input line 128.
+LaTeX Font Info:    Try loading font information for U+msa on input line 128.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 149.
+LaTeX Font Info:    Try loading font information for U+msb on input line 128.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for MDA+mdbch on input line 14
-9.
+LaTeX Font Info:    Try loading font information for MDA+mdbch on input line 12
+8.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/mathdesign/mdbch\mdamdbch.fd"
 File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
 )
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 149.
+(Font)              scaled to size 10.51207pt on input line 128.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 149.
+(Font)              scaled to size 7.68005pt on input line 128.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 149.
-LaTeX Font Info:    Try loading font information for U+zavm on input line 149.
+(Font)              scaled to size 5.76004pt on input line 128.
+LaTeX Font Info:    Try loading font information for U+zavm on input line 128.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/arev\uzavm.fd"
 File: uzavm.fd 2006/05/30 Fontinst v1.929 font definitions for U/zavm.
 )
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 149.
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.29605pt on input line 149.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 149.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.29605pt on input line 149.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 149.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 128.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 128.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 7.29605pt on input line 128.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 9.60007pt on input line 128.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 7.29605pt on input line 128.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 149.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 128.
 
 
 LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
-(Font)              using `T1/fav/m/n' instead on input line 149.
+(Font)              using `T1/fav/m/n' instead on input line 128.
 
-[3
+[2
+
+] [3
 
 ] [4
 
@@ -1588,51 +1529,39 @@ LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
 
 ] [8
 
-]
-<figure/dag1-1.png, id=436, 501.875pt x 291.0875pt>
-File: figure/dag1-1.png Graphic file (type png)
-<use figure/dag1-1.png>
-Package pdftex.def Info: figure/dag1-1.png  used on input line 158.
-(pdftex.def)             Requested size: 354.19536pt x 205.44322pt.
- [9
+] [9
 
- <./figure/dag1-1.png>]
-<figure/dag2-1.png, id=480, 501.875pt x 291.0875pt>
-File: figure/dag2-1.png Graphic file (type png)
-<use figure/dag2-1.png>
-Package pdftex.def Info: figure/dag2-1.png  used on input line 167.
-(pdftex.def)             Requested size: 354.19536pt x 205.44322pt.
- [10
+] [10
 
- <./figure/dag2-1.png>]
-<figure/dag3-1.png, id=523, 501.875pt x 291.0875pt>
-File: figure/dag3-1.png Graphic file (type png)
-<use figure/dag3-1.png>
-Package pdftex.def Info: figure/dag3-1.png  used on input line 176.
-(pdftex.def)             Requested size: 354.19536pt x 205.44322pt.
+] [11
 
-[11
+] [12
 
- <./figure/dag3-1.png>]
-<figure/dag4-1.png, id=566, 501.875pt x 291.0875pt>
-File: figure/dag4-1.png Graphic file (type png)
-<use figure/dag4-1.png>
-Package pdftex.def Info: figure/dag4-1.png  used on input line 185.
-(pdftex.def)             Requested size: 354.19536pt x 205.44322pt.
- [12
-
- <./figure/dag4-1.png>] [13
+] [13
 
 ] [14
 
 ] [15
 
-] [16
+]
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 8.64006pt on input line 207.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 207.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 207.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 8.64006pt on input line 207.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 6.72005pt on input line 207.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 4.80003pt on input line 207.
+ [16
+
+] [17
 
 ]
-[17
-
-] [18
+[18
 
 ] [19
 
@@ -1644,75 +1573,83 @@ Package pdftex.def Info: figure/dag4-1.png  used on input line 185.
 
 ] [23
 
-]
-Overfull \vbox (12.12466pt too high) detected at line 258
- []
+] [24
 
-[24
+] [25
 
-]
-Overfull \vbox (12.12466pt too high) detected at line 258
- []
+] [26
 
-[25
+] [27
 
-]
-Overfull \vbox (12.12466pt too high) detected at line 258
- []
+] [28
 
-[26
+] [29
 
-]
-Overfull \vbox (12.12466pt too high) detected at line 258
- []
+] [30
 
-[27
+] [31
+
+] [32
 
 ]
-Overfull \vbox (12.12466pt too high) detected at line 258
- []
-
-[28
+[33
 
 ]
-Overfull \vbox (12.12466pt too high) detected at line 258
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
  []
 
-[29
+
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
+ []
+
+[34
 
 ]
-Overfull \vbox (12.12466pt too high) detected at line 258
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
  []
 
-[30
+
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
+ []
+
+[35
 
 ]
-Overfull \vbox (12.12466pt too high) detected at line 258
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
  []
 
-[31
+
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
+ []
+
+[36
 
 ]
-Overfull \vbox (12.12466pt too high) detected at line 258
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
  []
 
-[32
 
-] [33
+Underfull \hbox (badness 4647) in paragraph at lines 280--280
+\T1/fav/b/n/10 tus if In-stru-
+ []
 
-] [34
-
-] [35
-
-] [36
-
-] [37
+[37
 
 ] [38
 
 ] [39
 
-] [40
+]
+LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <9> not available
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 317.
+ [40
 
 ] [41
 
@@ -1726,8 +1663,7 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [46
 
-]
-[47
+] [47
 
 ] [48
 
@@ -1737,7 +1673,26 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [51
 
-] [52
+]
+
+LaTeX Warning: File `WDR.jpg' not found on input line 361.
+
+
+! Package pdftex.def Error: File `WDR.jpg' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.361 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Try loading font information for T1+fvm on input line 361.
+("C:\Program Files\MiKTeX 2.9\tex/latex/bera\t1fvm.fd"
+File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
+) [52
 
 ] [53
 
@@ -1745,7 +1700,8 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [55
 
-] [56
+]
+[56
 
 ] [57
 
@@ -1757,8 +1713,7 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [61
 
-]
-[62
+] [62
 
 ] [63
 
@@ -1776,7 +1731,8 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [70
 
-] [71
+]
+[71
 
 ] [72
 
@@ -1788,8 +1744,7 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [76
 
-]
-[77
+] [77
 
 ] [78
 
@@ -1801,43 +1756,22 @@ Overfull \vbox (12.12466pt too high) detected at line 258
 
 ] [82
 
-]
-<AJR_first_stage.png, id=3552, 768.58571pt x 575.8657pt>
-File: AJR_first_stage.png Graphic file (type png)
-<use AJR_first_stage.png>
-Package pdftex.def Info: AJR_first_stage.png  used on input line 425.
-(pdftex.def)             Requested size: 292.0656pt x 218.83124pt.
- [83
+] [83
 
- <./AJR_first_stage.png>] [84
+] [84
 
 ] [85
 
-] [86
-
 ]
-[87
+[86
+
+] [87
 
 ] [88
 
-]
-<AJR_results.png, id=3804, 1020.95714pt x 644.69429pt>
-File: AJR_results.png Graphic file (type png)
-<use AJR_results.png>
-Package pdftex.def Info: AJR_results.png  used on input line 455.
-(pdftex.def)             Requested size: 367.5443pt x 232.08975pt.
+] [89
 
-Overfull \hbox (13.34894pt too wide) in paragraph at lines 455--455
-[][]  
- []
-
-
-Overfull \vbox (9.07289pt too high) detected at line 455
- []
-
-[89
-
- <./AJR_results.png>] [90
+] [90
 
 ] [91
 
@@ -1857,19 +1791,10 @@ Overfull \vbox (9.07289pt too high) detected at line 455
 
 ] [99
 
-]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
-}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.530 \end{frame}
-                  [100
+] [100
 
-]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
-}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.553 \end{frame}
-                  [101
+]
+[101
 
 ] [102
 
@@ -1887,16 +1812,32 @@ l.553 \end{frame}
 
 ] [109
 
-]
-[110
+] [110
 
 ] [111
 
 ] [112
 
-] [113
+]
+[113
 
-] [114
+]
+
+LaTeX Warning: File `EZ_map.pdf' not found on input line 572.
+
+
+! Package pdftex.def Error: File `EZ_map.pdf' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.572 \end{frame}
+                 
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[114
 
 ] [115
 
@@ -1906,51 +1847,106 @@ l.553 \end{frame}
 
 ] [118
 
+] [119
+
+] [120
+
+] [121
+
+] [122
+
+] [123
+
+] [124
+
+] [125
+
+]
+[126
+
+] [127
+
+] [128
+
+] [129
+
+] [130
+
+] [131
+
+] [132
+
+] [133
+
+] [134
+
+] [135
+
+] [136
+
+] [137
+
+]
+[138
+
+] [139
+
+] [140
+
+] [141
+
+] [142
+
+] [143
+
+] [144
+
+] [145
+
+] [146
+
 ]
 \tf@nav=\write6
-\openout6 = `Slides_Class6_v1.nav'.
+\openout6 = `Slides_Wk6_2.nav'.
 
 \tf@toc=\write7
-\openout7 = `Slides_Class6_v1.toc'.
+\openout7 = `Slides_Wk6_2.toc'.
 
 \tf@snm=\write8
-\openout8 = `Slides_Class6_v1.snm'.
+\openout8 = `Slides_Wk6_2.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 624.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 624.
- (Slides_Class6_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 624.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 624.
-Package rerunfilecheck Info: File `Slides_Class6_v1.out' has not changed.
-(rerunfilecheck)             Checksum: FED2E5E309170665EF81230536CEA10F;189.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 699.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 699.
+ (Slides_Wk6_2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 699.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 699.
+Package rerunfilecheck Info: File `Slides_Wk6_2.out' has not changed.
+(rerunfilecheck)             Checksum: EAFDCFF6846FEA8148A7C88181455CAC;105.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 22961 strings out of 492893
- 437701 string characters out of 3133367
- 555623 words of memory out of 3000000
- 26038 multiletter control sequences out of 15000+200000
- 65603 words of font info for 106 fonts, out of 3000000 for 9000
+ 22889 strings out of 492893
+ 436025 string characters out of 3133367
+ 551662 words of memory out of 3000000
+ 25914 multiletter control sequences out of 15000+200000
+ 78390 words of font info for 134 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,19n,55p,876b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/arev/arevoms.enc}{C:/Program Fil
-es/MiKTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Files/MiKTeX 2.9/fon
-ts/enc/dvips/arev/arevoml.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base
-/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Bold.pfb>
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Oblique.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Class6_v1.pdf (118 pages, 1448983 bytes).
+ 56i,19n,58p,872b,770s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Program Files/Mi
+KTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Files/MiKTeX 2.9/fonts/en
+c/dvips/arev/arevoml.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/A
+revSans-Bold.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-
+Oblique.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/bera/fvmr8a.pfb><C:/Program Files
+/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/MiKTeX 
+2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/mathdesign/mdbch/md-chbma.pfb>
+Output written on Slides_Wk6_2.pdf (146 pages, 1391455 bytes).
 PDF statistics:
- 5147 PDF objects out of 5155 (max. 8388607)
- 241 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6468 PDF objects out of 7423 (max. 8388607)
+ 296 named destinations out of 1000 (max. 500000)
+ 59 words of extra memory for PDF output out of 10000 (max. 10000000)
 

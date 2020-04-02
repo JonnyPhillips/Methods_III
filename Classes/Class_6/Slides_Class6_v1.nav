@@ -1,8 +1,8 @@
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
-\headcommand {\sectionentry {1}{Instrumental Variables}{2}{Instrumental Variables}{0}}
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\sectionentry {1}{Instrumental Variables}{2}{Instrumental Variables}{0}}
 \headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
 \headcommand {\slideentry {1}{0}{2}{3/8}{}{0}}
@@ -35,9 +35,9 @@
 \headcommand {\beamer@framepages {47}{47}}
 \headcommand {\slideentry {1}{0}{16}{48/53}{}{0}}
 \headcommand {\beamer@framepages {48}{53}}
-\headcommand {\sectionentry {2}{Instrumenting for Institutions}{54}{Instrumenting for Institutions}{0}}
 \headcommand {\beamer@sectionpages {2}{53}}
 \headcommand {\beamer@subsectionpages {2}{53}}
+\headcommand {\sectionentry {2}{Instrumenting for Institutions}{54}{Instrumenting for Institutions}{0}}
 \headcommand {\slideentry {2}{0}{1}{54/54}{}{0}}
 \headcommand {\beamer@framepages {54}{54}}
 \headcommand {\slideentry {2}{0}{2}{55/58}{}{0}}
@@ -58,9 +58,9 @@
 \headcommand {\beamer@framepages {89}{89}}
 \headcommand {\slideentry {2}{0}{10}{90/90}{}{0}}
 \headcommand {\beamer@framepages {90}{90}}
-\headcommand {\sectionentry {3}{Non-Compliance in Experiments}{91}{Non-Compliance in Experiments}{0}}
 \headcommand {\beamer@sectionpages {54}{90}}
 \headcommand {\beamer@subsectionpages {54}{90}}
+\headcommand {\sectionentry {3}{Non-Compliance in Experiments}{91}{Non-Compliance in Experiments}{0}}
 \headcommand {\slideentry {3}{0}{1}{91/91}{}{0}}
 \headcommand {\beamer@framepages {91}{91}}
 \headcommand {\slideentry {3}{0}{2}{92/98}{}{0}}
@@ -81,4 +81,4 @@
 \headcommand {\beamer@subsectionpages {91}{118}}
 \headcommand {\beamer@sectionpages {91}{118}}
 \headcommand {\beamer@documentpages {118}}
-\headcommand {\def \inserttotalframenumber {35}}
+\headcommand {\gdef \inserttotalframenumber {35}}
