@@ -37,4 +37,4 @@ knitr::opts_chunk$set(echo = TRUE)
  - [Paper: Whitt, Sam, 2014, Social Norms in the Aftermath of Ethnic Violence: Ethnicity and Fairness in Non-Costly Decision Making, Journal of Conflict Resolution, 58:1](Classes/Class_4/Readings/Whitt 2014.pdf) 
      - [Supplementary Appendix to Paper](Classes/Class_4/Replication/Supplementary_Appendix_final.pdf) 
  - [Data](Classes/Class_4/Replication/Whitt_replication.csv) 
-<!-- - [Suggested Responses](Classes/Class_4/Replication/Replication_Exercise_2_v7_Responses.pdf) -->
+ - [Suggested Responses](Classes/Class_4/Replication/Replication_Exercise_2_v7_Responses.pdf)

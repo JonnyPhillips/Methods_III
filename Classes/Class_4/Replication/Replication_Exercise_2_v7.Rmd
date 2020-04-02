@@ -168,14 +168,14 @@ d %>% lm(Amount~Subject_ethnicity*Recipient_Pairing*Recipient_ethnicity, data=.)
   texreg()
 ```
 
-**10. Replicate the simple T-test from Table 3 in Whitt (2014) for the difference-in-means of allocations between the pairing of Croats and Serbs, for Bosniak subjects (the third line in Table 3). (I didn't get the same T-statistics as in Table 3).**
+**10. Replicate the simple t-test from Table 3 in Whitt (2014) for the difference-in-means of allocations between the pairing of Croats and Serbs, for Bosniak subjects (the third line in Table 3). (I didn't get the same T-statistics as in Table 3).**
 
 ```{r,Q10}
 d %>% filter(Subject_ethnicity=="Bosnjak" & Recipient_Pairing=="Croat Serb") %>%
   t.test(Amount ~ Recipient_ethnicity, data=.)
 ```
 
-**11. The T-test in Q9 seems too 'easy' (too likely to find a significant result). The more recipient 1's allocation increases, the smaller recipient 2's allocation is *automatically* decreased (since they have to sum to 10). So all the rows in our data are not independent. As the mean allocation to one ethnicity goes up the mean to the other automatically goes down, producing a bigger 'gap'. To correct this, we have two options, adapting the comarison in Q10 but this time either:**  
+**11. The t-test in Q10 seems too 'easy' (too likely to find a significant result). The more recipient 1's allocation increases, the smaller recipient 2's allocation is *automatically* decreased (since they have to sum to 10). So all the rows in our data are not independent. As the mean allocation to one ethnicity goes up the mean to the other automatically goes down, producing a bigger 'gap'. To correct this, we have two options, adapting the comparison in Q10 but this time either:**  
 **(i) a t-test of whether the first recipient's allocation is equal to 5,**  
 **(ii) a paired t-test that takes into account the fact that values in the first allocation are correlated with those in the second allocation. **
 
