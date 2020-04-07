@@ -81,7 +81,7 @@ After filtering for precincts that have only one treatment or control village in
 
 **5. One of De La O's conclusions is that treatment (receiving Progresa) boosts turnout. Conduct a simple difference-in-means t-test on the filtered dataset from Q4 to assess this claim. What is the estimated difference-in-means and how statistically significant is the result? **
 
-```{r}
+```{r, tidy=F}
 subset_d %>% t.test(t2000~treatment, data=.) %>% 
   tidy() %>%
   kable(caption="Q5: Difference-in-Means")
@@ -94,7 +94,7 @@ The estimated difference in means is 4.56\% points, which is not significant.
 
 Early receipt of Progresa is associated with a 5.3\% points higher turnout, which is significant at the 10\% but not the 5\% level, holding all the other variables constant.
 
-```{r, results='asis'}
+```{r, results='asis', tidy.opts=list(width.cutoff=60)}
 reg1 <- lm_robust(t2000~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages),data=subset_d, se_type="HC1")
 texreg(reg1, include.ci=F, digits=3, caption="Q6: With Fixed Effects")
 ```
@@ -105,7 +105,7 @@ texreg(reg1, include.ci=F, digits=3, caption="Q6: With Fixed Effects")
 
 Before we were comparing between precincts that were treated or control but which could also vary in the number of villages in each precinct. To compare treated and control precincts only between precincts with the same number of villages she includes a fixed effect for the number of villages. The results become marginally weaker, with both the coefficient and the standard error changing.
 
-```{r, results='asis'}
+```{r, results='asis', tidy.opts=list(width.cutoff=60)}
 reg2 <- lm_robust(t2000~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994,data=subset_d, se_type="HC1")
 texreg(reg2, include.ci=F, digits=3, caption="Q7: Without village Fixed Effects")
 ```
@@ -114,7 +114,7 @@ texreg(reg2, include.ci=F, digits=3, caption="Q7: Without village Fixed Effects"
 
 Early receipt of Progresa boosts vote share for the PRI by 3.7\% points, with a significant effect at the 1\% level after controlling for the various variables. It has a positive but not significant effect on the other parties. 
 
-```{r, results='asis'}
+```{r, results='asis', tidy.opts=list(width.cutoff=20)}
 dvs <- c("t2000","pri2000s","pan2000s","prd2000s")
 
 models <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages)")),
@@ -140,7 +140,7 @@ There are lots of 'non-feasible'values larger than one.
 
 The coefficient on treatment is no longer significant for both turnout and the PRI's vote share and the estimates are much lower. This may be because the extreme values exaggerate the turnout and vote share for the treatment units more than for control units, biasing the coefficient estimate upwards.
 
-```{r, echo=TRUE,results='asis'}
+```{r, echo=TRUE,results='asis', tidy.opts=list(width.cutoff=20)}
 corrected_d <- subset_d %>% mutate_at(dvs, function(x) {ifelse(x>1, NA,x)})
 
 models2 <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + votos_totales1994 + pri1994 + pan1994 + prd1994 + factor(villages)")),
@@ -162,11 +162,11 @@ subset_d %>%
   theme_classic()
 ```
 
-**12. Remove the extreme outliers you identified in Q9 from the dataset (the dataset before you removed the infeasible values of the dependent variables). Re-run your regressions. Do your conclusions change? Why might this be?**
+**12. Remove the extreme outliers you identified in Q11 from the dataset (the dataset before you removed the infeasible values of the dependent variables). Re-run your regressions. Do your conclusions change? Why might this be?**
 
 The coefficients are again smaller and no longer significant. One possible reason could be because the outliers on high population were both treated and had unusually high levels of turnout and PRI vote share (perhaps because urban areas are confounded and systematically differnet in these ways). So their inclusion in the original regression biases the coefficients upwards. In fact, that's not actually happening here - the outliers have lower than normal turnout and PRI vote share. But because we are controlling for population, when we include these outliers in the regression the linear effect of population looks very different and changes our estimates of the 'controlled' effect of treatment for all the other units.
 
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', tidy.opts=list(width.cutoff=20)}
 popn_corrected_d <- subset_d %>% mutate(rank_popn=rank(-pobtot1994))  %>% 
   filter(rank_popn>2)
 
@@ -181,7 +181,7 @@ texreg(models3, include.ci=F, digits=3, caption="Q12: Removing Population Outlie
 
 The Table shows the coefficients are again much lower, and no longer significant. This may be because the controls in absolute numbers controlled more for the size of the precinct than for the relative strength of the parties. So when using the relative measure of support for each party we are controlling for potential confounders and imbalance that reduces the treatment effect. Moreover, the interpretation of the regression is much more natural with the same format for vote share on the left hand side and the right hand side, because we can interpret the outcome now as the change in vote share between 1994 and 2000.
 
-```{r, echo=TRUE, results='asis'}
+```{r, echo=TRUE, results='asis', tidy.opts=list(width.cutoff=20)}
 models4 <- dvs %>% map(~lm_robust(formula(paste(.x, "~treatment + avgpoverty + pobtot1994 + t1994 + pri1994s + pan1994s + prd1994s + factor(villages)")),
                                  data=popn_corrected_d, 
                                  se_type="HC1"))

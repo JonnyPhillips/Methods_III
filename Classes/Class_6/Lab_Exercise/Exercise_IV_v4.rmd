@@ -8,6 +8,7 @@ fontsize: 16pt
 knitr::opts_chunk$set(echo = F, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=F)
 library(tidyverse)
 library(stargazer)
+library(knitr)
 ```
 
 Let's see how the presence of \textbf{non-compliance} with treatment affects our treatment effect estimates in some simple 'fake' data. And how \textbf{instrumental variables} can help us estimate an accurate average treatment effect even when there is non-compliance.
@@ -51,31 +52,29 @@ d <- d %>% mutate(D=Z)
 d <- d %>% mutate(D=ifelse(income>550,0,D))
 ```
 
-6. Now calculate the observed outcome $y_obs$ based on the potential outcomes ($y_1, y_0$) and actual treatment status ($D$).
+6. Now let's adjust the data so that people with an income below 450 are all **Always-Takers**, so regardless of treatment assignment $Z$ they always receive treatment ($D$=1).
+
+```{r}
+d <- d %>% mutate(D=ifelse(income<450,1,D))
+```
+
+7. Create a 2x2 table showing the number of people in your sample disaggregated by treatment assignment ($Z$) and treatment ($D$).
+
+```{r}
+table(d$Z, d$D) %>% kable(col.names=c("Actual Control","Actual Treated"))
+```
+
+8. Now calculate the observed outcome $y_{obs}$ based on the potential outcomes ($y_1, y_0$) and actual treatment status ($D$).
 
 ```{r}
 d <- d %>% mutate(y_obs=case_when(D==0~y_0,
                                   D==1~y_1))
 ```
 
-7. Now let's calculate the 'naive' Average Treatment Effect, ignoring the non-compliance by running a regression of the observed outcomes on treatment (actual treatment, not treatment assignment). What is your estimate of the average treatment effect? How does this compare to the treatment effect we specified earlier?
+9. Now let's calculate the 'naive' Average Treatment Effect, ignoring the non-compliance, by running a regression of the observed outcomes on treatment (actual treatment, not treatment assignment). What is your estimate of the average treatment effect? How does this compare to the treatment effect we specified earlier?
 
 ```{r, results='asis'}
 d %>% lm(y_obs ~ D, data=.) %>% stargazer(single.row=T, header=F, title="Q7")
-```
-
-8. Now let's adjust the data so that people with an income below 450 are all **Always-Takers**, so regardless of treatment assignment they always receive treatment (treatment=1). Remember to re-calculate observed outcomes afterwards.
-
-```{r}
-d <- d %>% mutate(D=ifelse(income<450,1,D),
-                  y_obs=case_when(D==0~y_0,
-                                  D==1~y_1))
-```
-
-9. Re-run the regression from Q7 on our dataset that includes both never-takers and always-takers. How does this change our estimate of the Average Treatment Effect?
-
-```{r, results='asis'}
-d %>% lm(y_obs ~ D, data=.) %>% stargazer(single.row=T, header=F, title="Q9")
 ```
 
 10. Given this bias in our estimate, we can try to use treatment assignment as an **instrumental variable** for actual treatment. To do this, we first need to run the **First Stage** regression to show that treatment assignment explains treatment. ($D_i \sim Z_i$) Is treatment assignment a strong instrument for treatment? What evidence do you have?
@@ -84,7 +83,7 @@ d %>% lm(y_obs ~ D, data=.) %>% stargazer(single.row=T, header=F, title="Q9")
 d %>% lm(D ~ Z, data=.) %>% stargazer(single.row=T, header=F, title="Q10")
 ```
 
-11. Save the fitted values from this regression in Q10 as a new column in your dataset.
+11. Save the predicted/fitted values, $\hat{D_i}$, from this regression in Q10 as a new column in your dataset.
 
 ```{r}
 d <- d %>% mutate(First_stage_fitted=lm(D ~ Z, data=.)$fitted.values)
@@ -98,14 +97,14 @@ d %>% lm(y_obs ~ First_stage_fitted, data=.) %>% stargazer(single.row=T, header=
 
 13. How should we interpret this estimate? What group does it apply to?
 
-14. The only thing wrong with our 2-Stage Least Squares Regression above is that the standard errors are not accurate. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivregress_ in Stata. How do the standard errors change?
+14. The only thing wrong with our 2-Stage Least Squares Regression above is that the standard errors are not accurate. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivregress_ in Stata. Run this all-in-one model. Is the coefficient on treatment the same? How do the standard errors change?
 
 ```{r, results='asis'}
 library(AER)
 d %>% ivreg(y_obs ~ D|Z, data=.) %>% stargazer(single.row=T, header=F, title="Q14")
 ```
 
-15. Finally, let's see how our treatment effect estimate changes when we introduce some \textbf{defiers}: Change your data so that anyone with income less than 480 who was assigned to control actually receives treatment AND so that anyone assigned to treatment actually receives control. Calculate observed outcomes again. Then run the Instrumental Variables regression (2SLS or the all-in-one) and interpret the results.
+15. Finally, let's see how our treatment effect estimate changes when we introduce some \textbf{defiers}: Change your data so that anyone with income less than 480 who was assigned to control actually receives treatment AND so that anyone with income less than 480 who was assigned to treatment actually receives control. Calculate observed outcomes again. Then run the Instrumental Variables regression (either 2SLS or the all-in-one) and interpret the results.
 
 ```{r, results='asis'}
 d <- d %>% mutate(D=case_when(income<480 & Z==0~1,

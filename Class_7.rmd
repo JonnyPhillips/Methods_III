@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 4 (pp. 155-171)](Classes/Class_7/Readings/Angrist and Pischke Ch. 4.pdf)**
 - **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 3](Classes/Class_7/Readings/Dunning_Ch3.pdf)**
 - **[Jacob, Robin and Pei Zhu 2012, A Practical Guide to Regression Discontinuity](Classes/Class_7/Readings/RDD Practical Guide.pdf)**
+- **[Paper: Titiunik, Rocio 2011, Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections](Classes/Class_7/Replication/Titiunik_2011.pdf)**
 - **[Boas, Taylor C. and Hidalgo, Daniel F. 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil, American Journal of Political Science, 55:4](Classes/Class_7/Readings/Boas and Hidalgo 2011.pdf)**
 
 #### Additional Readings
@@ -21,14 +22,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-## [Lecture Slides](Classes/Class_7/Slides_RDD_v1.pdf)
+<!-- ## [Lecture Slides](Classes/Class_7/Slides_RDD_v1.pdf) -->
 
-## [Lab Exercise to Complete during Class](Classes/Class_7/Lab Exercise/Exercise_RD_v5.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_7/Lab Exercise/Exercise_RD_v5.pdf) -->
 
-## Replication Exercise
-- [Exercise](Classes/Class_7/Replication/Replication_Discontinuities_v2.pdf)
-- [Paper: Titiunik, Rocio 2011, Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections](Classes/Class_7/Replication/Titiunik_2011.pdf)
-- [Suggested Responses](Classes/Class_7/Replication/Replication_Discontinuities_v2_Suggested_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!-- - [Exercise](Classes/Class_7/Replication/Replication_Discontinuities_v2.pdf) -->
+<!-- - [Paper: Titiunik, Rocio 2011, Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections](Classes/Class_7/Replication/Titiunik_2011.pdf) -->
+<!-- - [Suggested Responses](Classes/Class_7/Replication/Replication_Discontinuities_v2_Suggested_Responses.pdf) -->
 
 
 

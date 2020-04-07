@@ -137,7 +137,7 @@ subset_d %>%
   theme_classic()
 ```
 
-**12. Remove the extreme outliers you identified in Q9 from the dataset (the dataset before you removed the infeasible values of the dependent variables). Re-run your regressions. Do your conclusions change? Why might this be?**
+**12. Remove the extreme outliers you identified in Q11 from the dataset (the dataset before you removed the infeasible values of the dependent variables). Re-run your regressions. Do your conclusions change? Why might this be?**
 
 ```{r, echo=TRUE, results='asis'}
 popn_corrected_d <- subset_d %>% mutate(rank_popn=rank(-pobtot1994))  %>% 

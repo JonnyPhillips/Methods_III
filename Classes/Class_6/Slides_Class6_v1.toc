@@ -1,3 +1,3 @@
 \beamer@sectionintoc {1}{Instrumental Variables}{2}{0}{1}
-\beamer@sectionintoc {2}{Instrumenting for Institutions}{54}{0}{2}
-\beamer@sectionintoc {3}{Non-Compliance in Experiments}{91}{0}{3}
+\beamer@sectionintoc {2}{Instrumenting for Institutions}{58}{0}{2}
+\beamer@sectionintoc {3}{Non-Compliance in Experiments}{95}{0}{3}

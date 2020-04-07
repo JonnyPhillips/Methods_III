@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  7 APR 2020 16:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  7 APR 2020 17:24
 entering extended mode
-**./Slides_Class6_v1.tex
-(Slides_Class6_v1.tex
+**./Slides_Class6_v3.tex
+(Slides_Class6_v3.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamer.cls"
 Document Class: beamer 2018/12/02 v3.55 A class for typesetting presentations
@@ -1342,15 +1342,12 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 109.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(Slides_Class6_v1.aux
-
-LaTeX Warning: Label `tab:addlabel' multiply defined.
-
+(Slides_Class6_v3.aux
 
 LaTeX Warning: Label `tab:addlabel' multiply defined.
 
 )
-\openout1 = `Slides_Class6_v1.aux'.
+\openout1 = `Slides_Class6_v3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
 LaTeX Font Info:    ... okay on input line 123.
@@ -1462,9 +1459,9 @@ LaTeX Info: Redefining \ref on input line 123.
 LaTeX Info: Redefining \pageref on input line 123.
 LaTeX Info: Redefining \nameref on input line 123.
 
-(Slides_Class6_v1.out) (Slides_Class6_v1.out)
+(Slides_Class6_v3.out) (Slides_Class6_v3.out)
 \@outlinefile=\write5
-\openout5 = `Slides_Class6_v1.out'.
+\openout5 = `Slides_Class6_v3.out'.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/translator\translator-basic-dictionary-
@@ -1497,7 +1494,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-(Slides_Class6_v1.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config
+(Slides_Class6_v3.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config
 /pdftex.map}
 
 ] [2
@@ -1807,18 +1804,18 @@ Overfull \vbox (12.12466pt too high) detected at line 257
 
 ] [85
 
-] [86
-
 ]
-<AJR_first_stage.png, id=3721, 768.58571pt x 575.8657pt>
+<AJR_first_stage.png, id=3679, 768.58571pt x 575.8657pt>
 File: AJR_first_stage.png Graphic file (type png)
 <use AJR_first_stage.png>
-Package pdftex.def Info: AJR_first_stage.png  used on input line 430.
+Package pdftex.def Info: AJR_first_stage.png  used on input line 428.
 (pdftex.def)             Requested size: 292.0656pt x 218.83124pt.
- [87
+ [86
 
  <./AJR_first_stage.png>]
-[88
+[87
+
+] [88
 
 ] [89
 
@@ -1826,26 +1823,26 @@ Package pdftex.def Info: AJR_first_stage.png  used on input line 430.
 
 ] [91
 
-] [92
-
 ]
-<AJR_results.png, id=3973, 1020.95714pt x 644.69429pt>
+<AJR_results.png, id=3931, 1020.95714pt x 644.69429pt>
 File: AJR_results.png Graphic file (type png)
 <use AJR_results.png>
-Package pdftex.def Info: AJR_results.png  used on input line 460.
+Package pdftex.def Info: AJR_results.png  used on input line 458.
 (pdftex.def)             Requested size: 367.5443pt x 232.08975pt.
 
-Overfull \hbox (13.34894pt too wide) in paragraph at lines 460--460
+Overfull \hbox (13.34894pt too wide) in paragraph at lines 458--458
 [][]  
  []
 
 
-Overfull \vbox (9.07289pt too high) detected at line 460
+Overfull \vbox (9.07289pt too high) detected at line 458
  []
 
-[93
+[92
 
- <./AJR_results.png>] [94
+ <./AJR_results.png>] [93
+
+] [94
 
 ] [95
 
@@ -1861,24 +1858,25 @@ Overfull \vbox (9.07289pt too high) detected at line 460
 
 ] [101
 
-] [102
-
 ]
-[103
+<figure/unnamed-chunk-1-1.png, id=4351, 289.08pt x 180.675pt>
+File: figure/unnamed-chunk-1-1.png Graphic file (type png)
+<use figure/unnamed-chunk-1-1.png>
+Package pdftex.def Info: figure/unnamed-chunk-1-1.png  used on input line 499.
+(pdftex.def)             Requested size: 289.07928pt x 180.68282pt.
+
+[102
+
+ <./figure/unnamed-chunk-1-1.png>] [103
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.535 \end{frame}
+l.550 \end{frame}
                   [104
 
-]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
-}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.558 \end{frame}
-                  [105
+] [105
 
 ] [106
 
@@ -1894,10 +1892,10 @@ l.558 \end{frame}
 
 ] [112
 
-] [113
-
 ]
-[114
+[113
+
+] [114
 
 ] [115
 
@@ -1913,24 +1911,22 @@ l.558 \end{frame}
 
 ] [121
 
-] [122
-
 ]
 \tf@nav=\write6
-\openout6 = `Slides_Class6_v1.nav'.
+\openout6 = `Slides_Class6_v3.nav'.
 
 \tf@toc=\write7
-\openout7 = `Slides_Class6_v1.toc'.
+\openout7 = `Slides_Class6_v3.toc'.
 
 \tf@snm=\write8
-\openout8 = `Slides_Class6_v1.snm'.
+\openout8 = `Slides_Class6_v3.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 629.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 629.
- (Slides_Class6_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 629.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 629.
-Package rerunfilecheck Info: File `Slides_Class6_v1.out' has not changed.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 621.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 621.
+ (Slides_Class6_v3.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 621.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 621.
+Package rerunfilecheck Info: File `Slides_Class6_v3.out' has not changed.
 (rerunfilecheck)             Checksum: FED2E5E309170665EF81230536CEA10F;189.
 
 
@@ -1941,10 +1937,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 22969 strings out of 492893
- 437785 string characters out of 3133367
+ 22982 strings out of 492893
+ 438138 string characters out of 3133367
  555962 words of memory out of 3000000
- 26038 multiletter control sequences out of 15000+200000
+ 26052 multiletter control sequences out of 15000+200000
  65603 words of font info for 106 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,55p,876b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1957,9 +1953,9 @@ rogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program
 Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Class6_v1.pdf (122 pages, 1487351 bytes).
+Output written on Slides_Class6_v3.pdf (121 pages, 1482553 bytes).
 PDF statistics:
- 5317 PDF objects out of 6186 (max. 8388607)
- 249 named destinations out of 1000 (max. 500000)
- 97 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5277 PDF objects out of 6186 (max. 8388607)
+ 247 named destinations out of 1000 (max. 500000)
+ 102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

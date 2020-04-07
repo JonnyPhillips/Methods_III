@@ -62,7 +62,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 7 - Discontinuities}
 \author{Jonathan Phillips}
-\date{May 2019}
+\date{April 2020}
 
 \begin{document}
 

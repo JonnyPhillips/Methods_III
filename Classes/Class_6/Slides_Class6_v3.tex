@@ -278,68 +278,66 @@
 \begin{frame}
 \frametitle{Example}
 \begin{itemize}
-\item \textbf{Our research question:} How does conflict affect economic growth?
+\item \textbf{Our research question:} How does \textcolor{blue}{economic growth} affect \textcolor{yellow}{conflict}?
 \pause
-\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{Our instrument for treatment:} \textcolor{purple}{Low Rainfall}
 \pause
 \begin{enumerate}
-\item \textbf{First Stage:} Low Rainfall -> + Conflict \pause \checkmark
+\item \textbf{First Stage:} \textcolor{purple}{Low Rainfall} -> \textcolor{blue}{-Growth} \pause \checkmark
 \pause
-\item \textbf{Exclusion Restriction:} Low Rainfall \textit{only} affects Economic Growth through Conflict \pause \checkmark?
+\item \textbf{Exclusion Restriction:} \textcolor{purple}{Low Rainfall} \textit{only} affects \textcolor{yellow}{Conflict} through \textcolor{blue}{Economic Growth} \pause ?
 \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does \textcolor{blue}{economic growth} affect \textcolor{yellow}{conflict}?
+\item \textbf{Our instrument for treatment:} \textcolor{purple}{Low Rainfall}
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Growth_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
 \pause
-\item \textbf{First Stage Regression:} $\textcolor{blue}{Conflict_i} \sim \alpha + \beta_1 \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Growth_i}} = 0.12 - 0.1^{*} \textcolor{purple}{0.5} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Example}
 \begin{itemize}
-\item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Low Rainfall
-\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Our research question:} How does \textcolor{blue}{economic growth} affect \textcolor{yellow}{conflict}?
+\item \textbf{Our instrument for treatment:} \textcolor{purple}{Low Rainfall}
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Growth_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{0.07} = 0.12 - 0.1^{*} \textcolor{purple}{0.5}$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\begin{itemize}
+\item \textbf{Our research question:} How does \textcolor{blue}{economic growth} affect \textcolor{yellow}{conflict}?
+\item \textbf{Our instrument for treatment:} \textcolor{purple}{Low Rainfall}
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Growth_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\hat{\textcolor{blue}{Growth}} = \textcolor{purple}{0.07, 0.02, 0.06, 0.12, 0.03...}$
 \pause
-\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Conflict_i}} = 0.12 - 0.1^{*} 0.5 + \epsilon_i$
+\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Conflict_i} = \alpha + \beta_2 \textcolor{blue}{\hat{Growth_i}} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Example}
 \begin{itemize}
-\item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Low Rainfall
-\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
-\item \textbf{Fitted values from First-Stage Regression:} $0.07 = 0.12 - 0.1^{*} 0.5$
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Example}
-\begin{itemize}
-\item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Low Rainfall
-\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
-\item \textbf{Fitted values from First-Stage Regression:} $\hat{\textcolor{blue}{Conflict_i}} = 0.07, 0.02, 0.06, 0.12, 0.03...$
-\pause
-\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Growth_i} = \alpha + \beta_2 \textcolor{blue}{\hat{Conflict_i}} + \epsilon_i$
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{Example}
-\begin{itemize}
-\item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{Our research question:} How does \textcolor{blue}{economic growth} affect \textcolor{yellow}{conflict}?
+\item \textbf{Our instrument for treatment:} \textcolor{purple}{Low Rainfall}
 \item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.02 + 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
-\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Conflict_i}} = 0.07, 0.02, 0.06, 0.12, 0.03...$
-\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Growth_i} = 1.2 - 0.04^{*} \textcolor{blue}{\hat{Conflict_i}} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Conflict_i}} = \textcolor{purple}{0.07, 0.02, 0.06, 0.12, 0.03...}$
+\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Conflict_i} = 1.2 - 0.04^{*} \textcolor{blue}{\hat{Growth_i}} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{LATE}
 \begin{itemize}
-\item IV Interpretation:
+\item IV \textbf{Interpretation}:
 \pause
 \begin{itemize}
 \item Your coefficient is a causal estimate ONLY for units that were actually treated \textbf{because of the instrument}
@@ -356,7 +354,7 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \end{block}
 \begin{itemize}
 \pause
-\item Remember, these 'Local' units might be very rare and unusual so we can't generalize
+\item Remember, these 'Local' units might be very rare and unusual so our estimate might be very difficult to generalize
 \end{itemize}
 \end{frame}
 
@@ -386,10 +384,10 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \begin{enumerate}
 \item \textbf{First Stage:} \pause Predicts Institutions
 \pause
-\item \textbf{Exclusion Restriction:} \pause Only affects growth through institutions
+\item \textbf{Exclusion Restriction:} \pause \textit{Only} affects growth through institutions
 \end{enumerate}
 \pause
-\item They \textit{argue} that Settler (soldier) mortality rates are an appropriate instrument for institutions
+\item They make the \textit{argument} that Settler (soldier) mortality rates are an appropriate instrument for institutions
 \end{itemize}
 \end{frame}
 
@@ -401,22 +399,22 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \pause
 \item \textbf{Sample:} \pause Ex-colonies
 \pause
-\item \textbf{Treatment:} \pause 'Settler' Institutions in ex-colonies (measured by 'risk of expropriation' index 1985-95)
+\item \textbf{Treatment:} \pause \textcolor{blue}{'Settler' Institutions} in ex-colonies (measured by 'risk of expropriation' index 1985-95)
 \pause
 \item \textbf{Control:} \pause 'Extractive' institutions
 \pause
-\item \textbf{Outcome:} \pause Growth rates in 1995
+\item \textbf{Outcome:} \pause \textcolor{yellow}{Growth rates} in 1995
 \pause
 \item \textbf{Treatment Assignment Mechniams:} \pause Messy! But high settler mortality rates led to extractive institutions
 \pause
-\item \textbf{Instrument:} \pause Settler (soldier) mortality rates
+\item \textbf{Instrument:} \pause \textcolor{purple}{Settler (soldier) mortality rates}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Instrumenting for Institutions}
 \begin{itemize}
-\item \textbf{First Stage:} \pause Settler mortality rates predict institutions
+\item \textbf{First Stage:} \pause \textcolor{purple}{Settler mortality rates} predict \textcolor{blue}{institutions}
 \pause
 \item Supporting Evidence:
 \pause
@@ -432,11 +430,11 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \begin{frame}
 \frametitle{Instrumenting for Institutions}
 \begin{itemize}
-\item \textbf{Exclusion Restriction:} \pause Settler mortality rates ONLY affect growth through institutions
+\item \textbf{Exclusion Restriction:} \pause \textcolor{purple}{Settler mortality rates} ONLY affect \textcolor{yellow}{growth} through \textcolor{blue}{institutions}
 \pause
 \item Supporting Evidence:
 \begin{itemize}
-\item Mortality rates for locals are low and don't affect human capital/growth directly, due to local immunity
+\item \textcolor{purple}{Mortality rates} for locals are low and don't affect human capital or \textcolor{yellow}{growth} directly, due to local immunity
 \pause
 \item Control for other possible correlated variables - geography, climate, etc.
 \end{itemize}
@@ -448,8 +446,8 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \begin{itemize}
 \item Methodology:
 \begin{itemize}
-\item ${\color{blue}Institutions_i} = \alpha + \beta_0 Settler\_Mortality_i + \epsilon_i$
-\item $Growth_i = \alpha + \beta_1 {\color{blue}\hat{Institutions_i}} + \epsilon_i$
+\item $\textcolor{blue}{Institutions_i} = \alpha + \beta_0 \textcolor{purple}{Settler\_Mortality_i} + \epsilon_i$
+\item $\textcolor{yellow}{Growth_i} = \alpha + \beta_1 \textcolor{blue}{\hat{Institutions_i}} + \epsilon_i$
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -474,14 +472,14 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \item Sometimes field experiments don't work perfectly
 \pause
 \begin{itemize}
-\item Eg. We offer free health insurance to families at random, but some decline
+\item Eg. We offer free health insurance to families at random, but some reject the offer
 \pause
-\item What is the Treatment Assignment Mechanism?
+\item Who rejects treatment?
 \pause
 \item Those that decline treatment are \textit{different} to those that accept (eg. richer)
 \pause
 \end{itemize}
-\item We cannot just compare units that actually received treatment to those that did not
+\item We cannot just compare units that \textit{actually} received treatment to those that did not
 \pause
 \item Those groups are no longer 'balanced'
 \pause
@@ -491,23 +489,13 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 
 \begin{frame}
 \frametitle{Non-Compliance in Experiments}
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{l|r|r}
-    Income & \multicolumn{1}{l}{Treatment Assignment} & \multicolumn{1}{l}{Treatment Status} \\
-    \hline
-    Rich  & 1     & 0 \\
-    Poor  & 0     & 0 \\
-    Poor  & 0     & 0 \\
-    Poor  & 1     & 1 \\
-    Rich  & 1     & 0 \\
-    Poor  & 0     & 0 \\
-    Poor  & 1     & 1 \\
-    Rich  & 0     & 0 \\
-    Poor  & 0     & 0 \\
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}%
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-1-1} 
+
+\end{knitrout}
+
 \end{frame}
 
 \begin{frame}
@@ -517,9 +505,10 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \end{itemize}
 \begin{table}[htbp]
   \centering
+  \caption{Treatment Status: }
     \begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|}
     \hline
-    \multicolumn{1}{|p{3cm}|}{\textbf{If Assigned to Control}} & \multicolumn{1}{p{3cm}|}{\textbf{If Assgined to Treatment}} & \textbf{Unit Type} \bigstrut\\
+    \multicolumn{1}{|p{3cm}|}{\textbf{If Assigned to Control}} & \multicolumn{1}{p{3cm}|}{\textbf{If Assigned to Treatment}} & \textbf{Unit Type} \bigstrut\\
     \hline
     0     & 1     & Complier \bigstrut\\
     \hline
@@ -532,6 +521,9 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
     \end{tabular}%
   \label{tab:addlabel}%
 \end{table}%
+\begin{itemize}
+\item Assignment to Treatment is now a separate step prior to treatment - so we can consider it like an instrument, $Z_i$
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -539,9 +531,9 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \begin{table}[htbp]
   \centering
     \begin{tabular}{c|c|c}
-    \multicolumn{1}{l}{$D_i(Z_i=0)$} & \multicolumn{1}{l}{$D_i(Z_i=1)$} & \multicolumn{1}{l}{} \\
+    \multicolumn{1}{p{3cm}}{$D_i(Z_i=0)$} & \multicolumn{1}{p{3cm}}{$D_i(Z_i=1)$} & \multicolumn{1}{l}{} \\
     \hline
-    \multicolumn{1}{l}{If Assigned to Control} & \multicolumn{1}{l}{If Assigned to Treatment} & \multicolumn{1}{l}{Type?} \\
+    \multicolumn{1}{p{3cm}|}{Treatment Status If Assigned to Control} & \multicolumn{1}{p{3cm}|}{Treatment Status If Assigned to Treatment} & \multicolumn{1}{p{3cm}}{Type?} \\
     \hline
     0     & 1     &  \\
     0     & 0     &  \\
@@ -560,19 +552,19 @@ $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D
 \begin{frame}
 \frametitle{Non-Compliance in Experiments}
 \begin{itemize}
-\item Simple difference-in-means estimates are biased
+\item Simple difference-in-means estimates of treatment are biased
 \pause
 \item But we can still use the randomized component of \textbf{treatment assignment as an instrumental variable}
 \pause
 \end{itemize}
 \begin{block}{Local Average Treatment Effect (LATE)}
-The Average Treatment Effect among Compliers
+The Average Treatment Effect \textit{among Compliers}
 \end{block}
 \begin{itemize}
-\item LATE just means we don't learn anything about Never-takers and Always-takers from our Instrumental Variable
+\item LATE just means we \textit{cannot} learn anything about Never-takers and Always-takers from our Instrumental Variable
 \pause
 \begin{itemize}
-\item Because the instrument doesn't do anything to affect treatment for these units
+\item Because the instrument \textit{can't} do anything to affect treatment for these units
 \end{itemize}
 \pause
 \item Never-takers and Always-takers are balanced across treatment assignment and do not affect the difference-in-means
@@ -592,7 +584,7 @@ The Average Treatment Effect among Compliers
 \pause
 \item The Effect of Treatment \textbf{Assignment} (the Instrument) on the Outcome
 \pause
-\item $Y_i ~ \alpha + \beta Z_i + \epsilon_i$
+\item $\textcolor{yellow}{Y_i} ~ \alpha + \beta \textcolor{purple}{Z_i} + \epsilon_i$
 \pause
 \item A BIASED estimate (<LATE estimate)
 \pause
@@ -604,7 +596,7 @@ The Average Treatment Effect among Compliers
 \pause
 \item The Effect of Treatment on the Outcome
 \pause
-\item $Y_i ~ \alpha + \beta D_i|Z_i + \epsilon_i$
+\item $\textcolor{yellow}{Y_i} ~ \alpha + \beta \textcolor{blue}{D_i}|\textcolor{purple}{Z_i} + \epsilon_i$
 \pause
 \item An UNBIASED estimate
 \pause
@@ -620,7 +612,7 @@ The Average Treatment Effect among Compliers
 \pause
 \item The \textbf{'Exclusion Restriction'} assumption requires that outcomes depend on treatment and not treatment assignment
 \begin{itemize}
-\item So being labelled 'treatment' doesn't affect your attitude to redistribution
+\item So being labelled 'treatment group' (without treatment) doesn't affect your outcome
 \end{itemize}
 \end{itemize}
 \end{frame}

@@ -12,7 +12,7 @@
 \usepackage{dcolumn}
 \usepackage{bigstrut}
 \usepackage{amsmath} 
-\usepackage{xcolor,colortbl}
+\usepackage{colortbl}
 \usepackage{amssymb}
 %\newcommand{\done}{\cellcolor{teal}#1}
 
@@ -51,7 +51,6 @@
 \setbeamersize{text margin left=5pt,text margin right=5pt}
 
 \AtBeginSection{\frame{\sectionpage}}
-\usepackage{xcolor}
 \hypersetup{
     colorlinks,
     linkcolor={red!50!black},
@@ -79,7 +78,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 6 - Instrumental Variables}
 \author{Jonathan Phillips}
-\date{April 2019}
+\date{April 2020}
 
 \begin{document}  
 
@@ -93,7 +92,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \item What can we do when the treatment assignment mechanism is not 'as-if' random?
 \pause
 \begin{itemize}
-\item Eg. Some people \textit{self-select} into treatment
+\item Eg. An omitted variable affects both treatment and the outcome
 \end{itemize}
 \pause
 \item Natural experiments focus on a specific \textbf{component} of treatment assignment that is 'as-if' random
@@ -103,7 +102,7 @@ knitr::opts_chunk$set(echo = F, warning=F, message=F, dev='png', dpi=144, cache=
 \begin{itemize}
 \item I.e. Independent of potential outcomes
 \pause
-\item Even if other variables \textbf{also} affect treatment
+\item Even if other variables linked to potential outcomes \textbf{also} affect treatment
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -162,7 +161,7 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 <<dag4,fig.keep='high',fig.height=2.5, fig.width=4>>=
 nodes <- create_node_df(n=4,
                 label=c("Z","D","Y","X"),
-                      color="aqua")
+                      color=c("purple","blue","yellow","black"))
 
 edges <- create_edge_df(from=c(1,2,4,4),
                 to=c(2,3,2,3),
@@ -197,7 +196,7 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \pause
 \item We can assess this with a simple regression:
 \pause
-\item $D_i = \alpha + \beta Z_i + \epsilon_i$
+\item $\textcolor{blue}{D_i} = \alpha + \beta \textcolor{purple}{Z_i} + \epsilon_i$
 \pause
 \item The instrument should be a significant predictor of treatment
 \pause
@@ -209,7 +208,7 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \pause
 \item The Instrument \textit{ONLY} affects the outcome through its effect on treatment, and not directly
 \pause
-\item Formally, $cov(Z_i, \epsilon_i \text{ in } Y_i \sim D_i)=0$
+\item Formally, $cov(\textcolor{purple}{Z_i}, \epsilon_i \text{ in } \textcolor{yellow}{Y_i} \sim \textcolor{blue}{D_i})=0$
 \pause
 \item \textbf{We cannot test or prove this assumption!}
 \pause
@@ -224,13 +223,13 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \begin{itemize}
 \item 1. \textbf{2-Stage Least Squares (2SLS):}
 \pause
-\item Isolate the variation in treatment caused by the instrument: $D_i = \alpha + \beta_1 Z_i + \epsilon_i$
+\item Isolate the variation in treatment caused by the instrument: $\textcolor{blue}{D_i} = \alpha + \beta_1 \textcolor{purple}{Z_i} + \epsilon_i$
 \pause
-\item Save the predicted values from this regression: $\hat{D_i} = \hat{\alpha} + \hat{\beta_1} Z_i$
+\item Save the predicted values from this regression: $\textcolor{blue}{\hat{D_i}} = \hat{\alpha} + \hat{\beta_1} \textcolor{purple}{Z_i}$
 \pause
-\item Estimate how the predicted values affect the outcome: $Y_i = \alpha + \beta_2 \hat{D_i}$
+\item Estimate how the predicted values affect the outcome: $\textcolor{yellow}{Y_i} = \alpha + \beta_2 \textcolor{blue}{\hat{D_i}}$
 \pause
-\item Interpret the coefficient on $\hat{D_i}$
+\item Interpret the coefficient on $\textcolor{blue}{\hat{D_i}}$
 \pause
 \item But our Standard Errors won't be accurate
 \end{itemize}
@@ -240,9 +239,9 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \pause
 \item Use an all-in-one package, eg. \textit{ivreg} in the \textit{AER} package
 \pause
-\item Specify the formula: $Y_i \sim D_i | Z_i$
+\item Specify the formula: $\textcolor{yellow}{Y_i} \sim \textcolor{blue}{D_i} | \textcolor{purple}{Z_i}$
 \pause
-\item Interpret the coefficient on $D_i$
+\item Interpret the coefficient on $\textcolor{blue}{D_i}$
 \end{itemize}
 \end{multicols}
 \end{frame}
@@ -253,15 +252,15 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \item Types of IV Regressions:
 \pause
 \begin{enumerate}
-\item \textbf{Biased Regression:} The regression ignoring omitted variable bias: $Y_i \sim D_i$
+\item \textbf{Biased Regression:} The regression ignoring omitted variable bias: $\textcolor{yellow}{Y_i} \sim \textcolor{blue}{D_i}$
 \pause
-\item \textbf{First-Stage Regression:} Checking the instrument is valid: $D_i \sim Z_i$
+\item \textbf{First-Stage Regression:} Checking the instrument is valid: $\textcolor{blue}{D_i} \sim \textcolor{purple}{Z_i}$
 \pause
-\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $Y_i \sim D_i | Z_i$
+\item \textbf{IV Regression:} All-in-one estimate of the effect of treatment on the outcome: $\textcolor{yellow}{Y_i} \sim \textcolor{blue}{D_i} | \textcolor{purple}{Z_i}$
 \pause
-\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $D_i \sim Z_i, then Y_i \sim \hat{D_i}$
+\item \textbf{2-Stage Least Squares:} Two linear regressions: correct coefficient, wrong p-value: $\textcolor{blue}{D_i} \sim \textcolor{purple}{Z_i}$, then $\textcolor{yellow}{Y_i} \sim \textcolor{blue}{\hat{D_i}}$
 \pause
-\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, \textit{ignoring treatment}: $Y_i \sim Z_i$
+\item \textbf{Reduced-Form Regression:} Estimate of the Instrument on the Outcome, \textit{ignoring treatment}: $\textcolor{yellow}{Y_i} \sim \textcolor{purple}{Z_i}$
 \end{enumerate}
 \end{itemize}
 \end{frame}
@@ -271,9 +270,15 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \begin{itemize}
 \item \textbf{Our research question:} How does conflict affect economic growth?
 \pause
-\item \textbf{Our instrument for treatment:} Rainfall (lack of)
+\item \textbf{Our instrument for treatment:} Low Rainfall
 \pause
-\item \textbf{First Stage Regression:} $Conflict_i \sim \alpha + \beta_1 Rainfall_i + \epsilon_i$
+\begin{enumerate}
+\item \textbf{First Stage:} Low Rainfall -> + Conflict \pause \checkmark
+\pause
+\item \textbf{Exclusion Restriction:} Low Rainfall \textit{only} affects Economic Growth through Conflict \pause ?
+\end{enumerate}
+\pause
+\item \textbf{First Stage Regression:} $\textcolor{blue}{Conflict_i} \sim \alpha + \beta_1 \textcolor{purple}{Rainfall_i} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -281,10 +286,10 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \frametitle{Example}
 \begin{itemize}
 \item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Rainfall
-\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
+\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
 \pause
-\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.12 - 0.1^{*} 0.8 + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Conflict_i}} = 0.12 - 0.1^{*} 0.5 + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -292,8 +297,8 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \frametitle{Example}
 \begin{itemize}
 \item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Rainfall
-\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
+\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
 \item \textbf{Fitted values from First-Stage Regression:} $0.07 = 0.12 - 0.1^{*} 0.5$
 \end{itemize}
 \end{frame}
@@ -302,11 +307,11 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \frametitle{Example}
 \begin{itemize}
 \item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Rainfall
-\item \textbf{First-Stage Regression:} $Conflict_i = 0.12 - 0.1^{*} Rainfall_i + \epsilon_i$
-\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.07, 0.02, 0.06, 0.12, 0.03...$
+\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.12 - 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\hat{\textcolor{blue}{Conflict_i}} = 0.07, 0.02, 0.06, 0.12, 0.03...$
 \pause
-\item \textbf{Second-Stage Regression:} $Growth_i = \alpha + \beta_2 \hat{Conflict_i} + \epsilon_i$
+\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Growth_i} = \alpha + \beta_2 \textcolor{blue}{\hat{Conflict_i}} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -314,10 +319,10 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \frametitle{Example}
 \begin{itemize}
 \item \textbf{Our research question:} How does conflict affect economic growth?
-\item \textbf{Our instrument for treatment:} Rainfall
-\item \textbf{First-Stage Regression:} $Conflict_i = 0.02 + 0.1^{*} Rainfall_i + \epsilon_i$
-\item \textbf{Fitted values from First-Stage Regression:} $\hat{Conflict_i} = 0.07, 0.02, 0.06, 0.12, 0.03...$
-\item \textbf{Second-Stage Regression:} $Growth_i = 1.2 - 0.04^{*} \hat{Conflict_i} + \epsilon_i$
+\item \textbf{Our instrument for treatment:} Low Rainfall
+\item \textbf{First-Stage Regression:} $\textcolor{blue}{Conflict_i} = 0.02 + 0.1^{*} \textcolor{purple}{Rainfall_i} + \epsilon_i$
+\item \textbf{Fitted values from First-Stage Regression:} $\textcolor{blue}{\hat{Conflict_i}} = 0.07, 0.02, 0.06, 0.12, 0.03...$
+\item \textbf{Second-Stage Regression:} $\textcolor{yellow}{Growth_i} = 1.2 - 0.04^{*} \textcolor{blue}{\hat{Conflict_i}} + \epsilon_i$
 \end{itemize}
 \end{frame}
 
@@ -337,7 +342,7 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \pause
 \begin{block}{Local Average Treatment Effect (LATE)}
 The Average Treatment Effect among the subset of units who are treated because of the instrument: \\
-$(D_i|Z_i=0) = 0$ and $(D_i|Z_i=1) = 1$
+$(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=0) = 0$ and $(\textcolor{blue}{D_i}|\textcolor{purple}{Z_i}=1) = 1$
 \end{block}
 \begin{itemize}
 \pause
