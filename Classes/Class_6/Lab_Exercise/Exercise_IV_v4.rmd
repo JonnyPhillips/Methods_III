@@ -97,7 +97,7 @@ d %>% lm(y_obs ~ First_stage_fitted, data=.) %>% stargazer(single.row=T, header=
 
 13. How should we interpret this estimate? What group does it apply to?
 
-14. The only thing wrong with our 2-Stage Least Squares Regression above is that the standard errors are not accurate. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivregress_ in Stata. Run this all-in-one model. Is the coefficient on treatment the same? How do the standard errors change?
+14. The only thing wrong with our 2-Stage Least Squares Regression above is that the standard errors are not accurate. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivreg2_ in Stata. Run this all-in-one model. Is the coefficient on treatment the same? How do the standard errors change?
 
 ```{r, results='asis'}
 library(AER)
