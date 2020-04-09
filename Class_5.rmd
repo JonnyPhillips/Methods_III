@@ -30,6 +30,6 @@ knitr::opts_chunk$set(echo = TRUE)
  - [Exercise](Classes/Class_5/Replication/Replication_Exercise_3_v2.pdf)
  - [Paper: De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1](Classes/Class_5/Replication/DeLaO_AJPS2013.pdf)
  - [Data](Classes/Class_5/Replication/DeLaO.csv)  
- <!-- - [Suggested Responses](Classes/Class_5/Replication/Replication_Exercise_3_v1_Suggested_Responses.pdf)  -->
+ - [Suggested Responses](Classes/Class_5/Replication/Replication_Exercise_3_v1_Suggested_Responses.pdf)
 
 
