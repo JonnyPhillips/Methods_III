@@ -89,7 +89,7 @@ d %>% lm(D ~ Z, data=.) %>% stargazer(single.row=T, header=F, title="Q10")
 d <- d %>% mutate(First_stage_fitted=lm(D ~ Z, data=.)$fitted.values)
 ```
 
-12. Now for the second stage of our instrumental variables analysis, use a regression to estimate how these fitted values explain the observed outcomes. ($y_i^{obs} \sim \hat{D_i}$) How does the result compare to our initial assumption about the size of the treatment effect?
+12. Now for the second stage of our instrumental variables analysis, use a regression to estimate how these fitted values explain the observed outcomes. ($y_i^{obs} \sim \hat{D_i}$) How does the result compare to the value we specified earlier for the real size of the treatment effect?
 
 ```{r, results='asis'}
 d %>% lm(y_obs ~ First_stage_fitted, data=.) %>% stargazer(single.row=T, header=F, title="Q12")

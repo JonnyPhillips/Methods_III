@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  7 APR 2020 18:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  9 APR 2020 17:01
 entering extended mode
 **./Exercise_IV_v4.tex
 (Exercise_IV_v4.tex
@@ -653,19 +653,19 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [1
 
 {C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 176.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 176.
 (Exercise_IV_v4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 175.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 175.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 176.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 176.
  ) 
 Here is how much of TeX's memory you used:
- 12959 strings out of 492893
- 187929 string characters out of 3133367
+ 12957 strings out of 492893
+ 187907 string characters out of 3133367
  302639 words of memory out of 3000000
  16629 multiletter control sequences out of 15000+200000
- 47156 words of font info for 75 fonts, out of 3000000 for 9000
+ 47026 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,5n,38p,815b,409s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Fil
@@ -678,7 +678,7 @@ fonts/type1/public/lm/lmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
 Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Program Files/MiKTe
 X 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /public/lm/lmsy10.pfb>
-Output written on Exercise_IV_v4.pdf (2 pages, 143305 bytes).
+Output written on Exercise_IV_v4.pdf (2 pages, 143563 bytes).
 PDF statistics:
  71 PDF objects out of 1000 (max. 8388607)
  18 named destinations out of 1000 (max. 500000)
