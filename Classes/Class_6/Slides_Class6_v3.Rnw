@@ -334,7 +334,7 @@ create_graph(nodes,edges, attr_theme = NULL) %>% add_global_graph_attrs('rankdir
 \pause
 \item They don't tell us about the causal effect for other units that \textit{never responded to the instrument}
 \pause
-\item Eg. For places where conflict started because of ethnic tensions or an accident
+\item Eg. For places where economic growth is produced by industry or services that are unaffected by rainfall
 \end{itemize}
 \end{itemize}
 \pause
