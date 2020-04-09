@@ -23,7 +23,8 @@ navbar:
         href: Class_5.html
       - text: "6 - Instrumental Variables"
         href: Class_6.html
-
+      - text: "7 - Discontinuities"
+        href: Class_7.html
     - text: "Project"
       icon: fa-book-open
       href: Project.html
