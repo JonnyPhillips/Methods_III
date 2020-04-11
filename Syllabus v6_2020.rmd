@@ -5,7 +5,7 @@ output:
     df_print: paged
   pdf_document:
     number_sections: yes
-date: "October 2019"
+date: "April 2020"
 subtitle: 'FLS6441: Métodos Quantitativos III: Explicação e Causação'
 ---
 
@@ -56,13 +56,13 @@ Part II practices implementing key causal methodologies. Each week we discuss th
 3. Field Experiments (19/03/20)
 4. Survey and Lab Experiments (26/03/20)
 5. Natural Experiments (02/04/20)
-6. Instrumental Variables (16/04/20)
-7. Discontinuities (23/04/20)
-8. Difference-in-Differences (30/04/20)
-9. Controlling for Confounding (07/05/20)
-10. Matching (14/05/20)
-11. Comparative Cases and Process Tracing (21/05/20)
-12. Generalizability, Reproducibility and Mechanisms (28/05/20)
+6. Instrumental Variables (09/04/20)
+7. Discontinuities (16/04/20)
+8. Difference-in-Differences (23/04/20)
+9. Controlling for Confounding (30/04/20)
+10. Matching (07/05/20)
+11. Comparative Cases and Process Tracing (14/05/20)
+12. Generalizability, Reproducibility and Mechanisms (21/05/20)
 
 # Evaluation
 
