@@ -34,7 +34,7 @@ d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100 + (income/500)^2,
                   y_1=y_0+2)
 ```
 
-3. Actual treatment assignment is not random but deterministic: Imagine it is a poverty-relief program that you receive only if your income is less than 500.
+3. Actual treatment assignment is not random but deterministic: Imagine it is a poverty-relief program that you receive only if your income is less than 500. Generate this treatment variable.
 
 ```{r}
 d <- d %>% mutate(D=ifelse(income<500,1,0))
@@ -53,13 +53,13 @@ d <- d %>% mutate(y_obs=case_when(D==0~y_0,
 d %>% lm(y_obs ~ D, data=.) %>% summary() #stargazer(single.row=T, header=F, title="Q7")
 ```
 
-6. Now apply the 'full bandwidth' regression discontinuity method. This just means controlling for the running variable, which in this case is income. Interpret the results. How do they compare to the treatment effect we specified?
+6. Now apply the 'full bandwidth' regression discontinuity method. This just means adding a control for the running variable, which in this case is income. Interpret the results. How do they compare to the treatment effect we specified?
 
 ```{r}
 d %>% lm(y_obs ~ D + income, data=.) %>% summary()
 ```
 
-7. Let's try and make a regression discontinuity plot to understand what's going on better. First, plot all the data, with the running variable (which one is that?) on the x-axis against the observable outcome variable on the y-axis. What can you see in the graph?
+7. Let's try and make a regression discontinuity plot manually to understand what's going on better. First, plot all the data, with the running variable on the x-axis and the observable outcome variable on the y-axis. What can you see in the graph?
 
 ```{r}
 d %>% ggplot() + 
@@ -67,10 +67,10 @@ d %>% ggplot() +
   theme_classic()
 ```
 
-8. The graph in Q7 is difficult to interpret so most regression discontinuity plots 'bin' the data into groups to more easily see the pattern. Bin the income data into 20 groups and plot this against the average observed outcome in each bin.
+8. The graph in Q7 is difficult to interpret so most regression discontinuity plots 'bin' the data into groups to more easily see the pattern. Bin the income data into 50 groups (try `cut()` in R), then calculate the average observed outcome in each bin and plot the two against each other.
 
 ```{r}
-d %>% mutate(income_binned=cut(income,20)) %>%
+d %>% mutate(income_binned=cut(income,50)) %>%
   group_by(income_binned) %>%
   summarize(y_obs_mean=mean(y_obs,na.rm=T)) %>%
   ggplot() +
@@ -79,7 +79,7 @@ d %>% mutate(income_binned=cut(income,20)) %>%
   theme_classic()
 ```
 
-9. An easy way to make a nice regression discontinuity plot is to use the _rdplot_ command in the _rdrobust_ package.
+9. An easier way to make a nice regression discontinuity plot is to use the _rdplot_ command in the _rdrobust_ package. Create this plot and be sure to specify the appropriate cutoff value based on the treatment assignment mechanism described above.
 
 ```{r}
 library(rdrobust)
@@ -94,7 +94,7 @@ d %>% filter(income<520 & income>480) %>%
   tidy()
 ```
 
-11. A third method of performing a regression discontinuity is to perform the regression approach only on a narrow 'bandwidth' close to the cutoff. Subset the data again to between 480 and 520 on the income scale and perform a regression discontinuity analysis. How do the results compare to your full-bandwidth regression discontinuity in Q6 and the difference-in-means estimate in Q10?
+11. A third method of performing a regression discontinuity is to perform the 'limited bandwidth' regression approach only on a narrow 'bandwidth' of data close to the cutoff. Subset the data again to between 480 and 520 on the income scale and perform a regression discontinuity analysis. How do the results compare to your full-bandwidth regression discontinuity in Q6 and the difference-in-means estimate in Q10?
 
 ```{r}
 d %>% filter(income<520 & income>480) %>% 

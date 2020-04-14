@@ -1,0 +1,117 @@
+---
+title: "Exercise: Instrumental Variables and Non-Compliance"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = T, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=T)
+library(tidyverse)
+library(stargazer)
+library(knitr)
+```
+
+Let's see how the presence of \textbf{non-compliance} with treatment affects our treatment effect estimates in some simple 'fake' data. And how \textbf{instrumental variables} can help us estimate an accurate average treatment effect even when there is non-compliance.
+
+1. First, let's generate an 'income' variable for 10,000 people. The data should be drawn randomly from the normal distribution with mean 500 and standard deviation 50.
+
+```{r}
+set.seed(54321)
+N <- 10000
+d <- tibble(income=rnorm(N,500,50))
+```
+
+2. Now let's simulate potential outcomes (let's say the outcome is 'attitude to redistribution') for each person that depend on their income. Assume:
+
+$$y_0=N(10,2)+\frac{income}{100}$$ 
+
+$$y_1=y_0+2$$
+
+So there is a constant treatment effect of 2.
+
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100,
+                  y_1=y_0+2)
+```
+
+3. The key thing to remember with non-compliance is that there is a difference between **treatment assignment** and actual **treatment**. Treatment assignment in our case will be completely random, so create a random binomial variable called $Z$ with 50\% chance of each person being assigned to treatment.
+
+```{r}
+d <- d %>% mutate(Z=rbinom(N,1,0.5))
+```
+
+4. For most people, treatment will be the same as treatment assignment, so make another 'treatment' variable called $D$ that directly copies treatment assignment $Z$. This is what an experiment with full compliance would look like. We already analyzed this when we studied field, survey and lab experiments.
+
+```{r}
+d <- d %>% mutate(D=Z)
+```
+
+5. To introduce non-compliance, let's adjust the 'treatment' variable $D$ so that rich people with an income above 550 are **'Never-takers'** - regardless of their value for treatment assignment $Z$, they *never* receive treatment (so $D=0$ regardless of the value of $Z$).
+
+```{r}
+d <- d %>% mutate(D=ifelse(income>550,0,D))
+```
+
+6. Now let's adjust the data so that people with an income below 450 are all **Always-Takers**, so regardless of treatment assignment $Z$ they always receive treatment ($D$=1).
+
+```{r}
+d <- d %>% mutate(D=ifelse(income<450,1,D))
+```
+
+7. Create a 2x2 table showing the number of people in your sample disaggregated by treatment assignment ($Z$) and treatment ($D$).
+
+```{r}
+table(d$Z, d$D) %>% kable(col.names=c("Actual Control","Actual Treated"))
+```
+
+8. Now calculate the observed outcome $y_{obs}$ based on the potential outcomes ($y_1, y_0$) and actual treatment status ($D$).
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+9. Now let's calculate the 'naive' Average Treatment Effect, ignoring the non-compliance, by running a regression of the observed outcomes on treatment (actual treatment, not treatment assignment). What is your estimate of the average treatment effect? How does this compare to the treatment effect we specified earlier?
+
+```{r, results='asis'}
+d %>% lm(y_obs ~ D, data=.) %>% stargazer(single.row=T, header=F, title="Q7")
+```
+
+10. Given this bias in our estimate, we can try to use treatment assignment as an **instrumental variable** for actual treatment. To do this, we first need to run the **First Stage** regression to show that treatment assignment explains treatment. ($D_i \sim Z_i$) Is treatment assignment a strong instrument for treatment? What evidence do you have?
+
+```{r, results='asis'}
+d %>% lm(D ~ Z, data=.) %>% stargazer(single.row=T, header=F, title="Q10")
+```
+
+11. Save the predicted/fitted values, $\hat{D_i}$, from this regression in Q10 as a new column in your dataset.
+
+```{r}
+d <- d %>% mutate(First_stage_fitted=lm(D ~ Z, data=.)$fitted.values)
+```
+
+12. Now for the second stage of our instrumental variables analysis, use a regression to estimate how these fitted values explain the observed outcomes. ($y_i^{obs} \sim \hat{D_i}$) How does the result compare to the value we specified earlier for the real size of the treatment effect?
+
+```{r, results='asis'}
+d %>% lm(y_obs ~ First_stage_fitted, data=.) %>% stargazer(single.row=T, header=F, title="Q12")
+```
+
+13. How should we interpret this estimate? What group does it apply to?
+
+14. The only thing wrong with our 2-Stage Least Squares Regression above is that the standard errors are not accurate. To correct this, we can use an all-in-one Instrumental Variables estimator, eg. _ivreg_ in the _AER_ package in R or _ivreg2_ in Stata. Run this all-in-one model. Is the coefficient on treatment the same? How do the standard errors change?
+
+```{r, results='asis'}
+library(AER)
+d %>% ivreg(y_obs ~ D|Z, data=.) %>% stargazer(single.row=T, header=F, title="Q14")
+```
+
+15. Finally, let's see how our treatment effect estimate changes when we introduce some \textbf{defiers}: Change your data so that anyone with income less than 480 who was assigned to control actually receives treatment AND so that anyone with income less than 480 who was assigned to treatment actually receives control. Calculate observed outcomes again. Then run the Instrumental Variables regression (either 2SLS or the all-in-one) and interpret the results.
+
+```{r, results='asis'}
+d <- d %>% mutate(D=case_when(income<480 & Z==0~1,
+                      income<480 & Z==1~0,
+                      income>=480~D),
+             y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+
+d %>% ivreg(y_obs ~ D|Z, data=.) %>% stargazer(single.row=T, header=F, title="Q15")
+```

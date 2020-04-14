@@ -24,11 +24,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- ## [Lecture Slides](Classes/Class_7/Slides_RDD_v1.pdf) -->
 
-<!-- ## [Lab Exercise to Complete during Class](Classes/Class_7/Lab Exercise/Exercise_RD_v5.pdf) -->
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_7/Lab Exercise/Exercise_RD_v6.pdf) -->
 
 <!-- ## Replication Exercise -->
 <!-- - [Exercise](Classes/Class_7/Replication/Replication_Discontinuities_v2.pdf) -->
 <!-- - [Paper: Titiunik, Rocio 2011, Incumbency Advantage in Brazil: Evidence from Municipal Mayor Elections](Classes/Class_7/Replication/Titiunik_2011.pdf) -->
+<!-- - [Electoral Data](Classes/Class_7/Replication/Electoral_Data.csv) -->
 <!-- - [Suggested Responses](Classes/Class_7/Replication/Replication_Discontinuities_v2_Suggested_Responses.pdf) -->
 
 

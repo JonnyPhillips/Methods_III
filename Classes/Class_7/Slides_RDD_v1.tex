@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -112,7 +112,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 7 - Discontinuities}
 \author{Jonathan Phillips}
-\date{May 2019}
+\date{April 2020}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -160,8 +160,11 @@
 \frametitle{Discontinuities}
 \begin{itemize}
 \item Natural Experiments
+\begin{itemize}
+\item Focused on the portion of treatment assignment which is 'as-if' random
+\end{itemize}
 \pause
-\item Where the 'as-if' random treatment assignment comes from \textit{discontinuities} in rules
+\item Where the 'as-if' random treatment assignment comes from \textit{discontinuities} in formal rules
 \pause
 \begin{itemize}
 \item Rules that \textbf{treat very similar people very differently}
@@ -214,6 +217,7 @@
 \item Weather
 \item Chance
 \item Mistakes
+\item Grading you can't control
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -225,6 +229,33 @@
 \begin{itemize}
 \item What is the Treatment Assignment Mechanism?
 \pause
+\[
+D_i=
+\begin{cases}
+1 & \text{if }x_i \geq \bar{x} \\
+0 & \text{if }x_i < \bar{x}
+\end{cases}
+\]
+\pause
+\item Intelligence/Education
+\item Preparation/Effort
+\item Difficulty of exam
+\item Age
+\pause
+\item Feeling sick on the day of the exam
+\item Weather making you late
+\item The questions you prepared didn't appear
+\item Who graded your exam
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{itemize}
+\item Regression Discontinuity
+\begin{itemize}
+\item What is the Treatment Assignment Mechanism?
 \[
 D_i=
 \begin{cases}
@@ -254,8 +285,14 @@ D_i=
 \item Comparisons in a regression discontinuity are always \textit{imperfect}
 \pause
 \item \textbf{Field experiment:} For every value of $X$ we have both treated and control values
+\begin{itemize}
+\item Overlap of covariates
+\end{itemize}
 \pause
 \item \textbf{Discontinuity:} We \textbf{cannot} have treated and control values with the same value of the running variable $x$
+\begin{itemize}
+\item 74.9 vs. 75.1
+\end{itemize}
 \pause
 \item So we have to \textbf{extrapolate} to guess what the potential outcomes would be if unit $i$ was treated instead of control
 \pause
@@ -267,7 +304,25 @@ D_i=
 \frametitle{Discontinuities}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/chart2_binned-1} 
+\includegraphics[width=\maxwidth]{figure/chart2_binned_0-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/chart2_binned_1-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Discontinuities}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/chart2_binned_2-1} 
 
 \end{knitrout}
 \end{frame}
@@ -280,7 +335,7 @@ D_i=
 \begin{itemize}
 \item \textbf{Running Variable $x_i$:} The \textit{continuous} variable to which the threshold/cutoff is applied, eg. exam score
 \pause
-\item \textbf{Treatment $D_i$:} Binary 0/1 depending on whether the running variable is above or below the threshold ($x_i>=\bar{x}$)
+\item \textbf{Treatment $D_i$:} Binary (0/1) variable depending on whether the running variable is above or below the threshold ($x_i \geq \bar{x}$)
 \pause
 \item \textbf{Outcome $Y_i$:} Any subsequent outcome you have measured
 \end{itemize}
@@ -292,17 +347,17 @@ D_i=
 \begin{itemize}
 \item Regression Discontinuity Assumptions:
 \begin{enumerate}
-\item Potential outcomes vary continuously (are independent of treatment) \textbf{at} the threshold
+\item \textbf{Potential outcomes vary continuously} (are independent of treatment) \textbf{at} the threshold
 \begin{enumerate}
 \pause
-\item Units cannot precisely control their score and sort either side of the threshold
+\item \textbf{No Sorting:} Units cannot precisely control their score and sort either side of the threshold
 \pause
-\item The threshold is not chosen strategically
+\item \textbf{No Manipulation:} The threshold is not chosen strategically
 \end{enumerate}
 \pause
-\item No compound treatments
+\item \textbf{No compound treatments} (additional treatments assigned by the same cutoff)
 \pause
-\item No spillovers (SUTVA)
+\item \textbf{No spillovers} (SUTVA)
 \end{enumerate}
 \end{itemize}
 \end{frame}
@@ -323,6 +378,14 @@ D_i=
 \pause
 \end{itemize}
 \item We need qualitative evidence to support these assumptions
+\pause
+\item AND balance tests to show measurable pre-treatment variables are the same either side of the threshold
+\pause
+\begin{itemize}
+\item Simple t-test in a small window either side of the threshold
+\pause
+\item Or a 'placebo' regression discontinuity with the balance variable as the outcome
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -332,7 +395,13 @@ D_i=
 \item We can check for sorting with a density test
 \item If units are bunched just above the threshold, this suggests manipulation
 \end{itemize}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Density_Fig-1} 
 
+\includegraphics[width=\maxwidth]{figure/Density_Fig-2} 
+
+\end{knitrout}
 \end{frame}
 
 
@@ -345,19 +414,21 @@ D_i=
 \begin{enumerate}
 \item \textbf{Difference-in-means:} Define a small window either side of the threshold and compare average outcomes in this window
 \begin{itemize}
-\item Can be biased since we're ignoring the omitted variable effect of the running variable on the outcome
+\item Biased since we're ignoring the omitted variable effect of the running variable on the outcome
+\item Low power/efficiency if we have few observations near the cutoff
 \pause
 \end{itemize}
 \item \textbf{'Full data' regression discontinuity:} Uses \textit{all} the data:
 $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$$
 \begin{itemize}
-\item Controls for the 'smooth' variation in the running variable
-\item Estimates the 'jump' impact of treatment with a binary variable (dummy)
+\item Controls for the continuous variation in the running variable
+\item Raises efficiency by using all observations
+\item BUT our estimate depends on getting the functional form correct
 \pause
 \end{itemize}
-\item \textbf{'Limited-bandwidth' regression discontinuity:}  A regression only using only data close to the threshold
+\item \textbf{'Limited-bandwidth' regression discontinuity:}  Same regression as above bu using only data close to the threshold
 \begin{itemize}
-\item What \textit{bandwidth} around the threshold do we use?
+\item Balancing efficiency and bias/model-dependence
 \end{itemize}
 \end{enumerate}
 \end{itemize}
@@ -437,18 +508,6 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \end{frame}
 
 \begin{frame}
-\frametitle{2b. Full Data Regression - Non-linear}
-\begin{center}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/chart5-1} 
-
-\end{knitrout}
-\end{center}
-\end{frame}
-
-
-\begin{frame}
 \frametitle{Estimating Discontinuities}
 \begin{itemize}
 \item Regression Discontinuity estimates a \textbf{Local Average Treatment Effect}
@@ -456,7 +515,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{itemize}
 \item Treatment assignment is only random at the threshold
 \pause
-\item Our estimates only apply to units close to the threshold
+\item Our estimates only apply to units at/close to the threshold
 \pause
 \item Units far from the threshold are very different for a reason, and causal effects are likely to be different
 \end{itemize}
@@ -474,6 +533,8 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \item Less precise than a randomized trial, so we need more data
 \pause
 \item Risk of sorting/manipulation
+\pause
+\item Opportunistic regression discontinuities may not identify a useful causal effect or for a relevant group
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -484,6 +545,10 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \frametitle{Close Elections}
 \begin{itemize}
 \item Close elections are one type of regression discontinuity in which political office is 'as-if' randomized
+\pause
+\begin{itemize}
+\item A couple of votes either way due to the weather, illness
+\end{itemize}
 \pause
 \item Useful for understanding the effects of political power
 \pause
@@ -524,8 +589,6 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \pause
 \begin{itemize}
 \item Radio licencing process depends on ability to lobby the Ministry and Congress
-\pause
-\item Local radio systematically used to favour specific politicians
 \pause
 \item Incumbents better placed to initiate exchange between Mayors and legislators
 \pause
@@ -571,7 +634,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Close Elections}
 \begin{center}
-\includegraphics[scale=0.33]{figure/BH_Results.png}
+\includegraphics[scale=0.31]{figure/BH_Results.png}
 \end{center}
 \end{frame}
 
@@ -580,13 +643,13 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \begin{frame}
 \frametitle{Geographic Discontinuities}
 \begin{itemize}
-\item What is the effect of programmatic governance reform on voters' attitudes?
+\item What is the effect of governance reform on voters' attitudes?
 \pause
-\item Bihar is one of the poorest places on the planet and one of the worst goverened
+\item Bihar is one of the poorest places on the planet and was one of the worst goverened
 \pause
 \item \textbf{Before 2005:} 'Jungle raj': Clientelism, violence, corruption, caste bias
 \pause
-\item \textbf{After 2005:} Bihar is a programmatic reform success case
+\item \textbf{After 2005:} Bihar is a reform success case
 \pause
 \end{itemize}
 \end{frame}
@@ -621,6 +684,7 @@ $$Y_i = \alpha + \beta_1 Running\_Variable_i + \beta_2 Treatment_i + \epsilon_i$
 \frametitle{Methodology}
 \begin{itemize}
 \item The 'running variable' is distance to the border, but in 2-dimensions:
+\item Captured by a flexible polynomial in latitude and longitude ($x$ and $y$)
 \begin{multline}
 y_i = \alpha + \beta Bihar_i + x_i + y_i \pause + x^2 + y^2 + x^3 + y^3 + x^4 + y^4 + x*y  \\+ x^2*y^2 + x^3*y^3 + x*y^2 + x*y^3 + x^2*y + x^3*y + \epsilon_i
 \end{multline}
@@ -683,7 +747,7 @@ y_i = \alpha + \beta Bihar_i + x_i + y_i \pause + x^2 + y^2 + x^3 + y^3 + x^4 + 
 \begin{itemize}
 \item Interpretation:
 \begin{itemize}
-\item Programmatic policy has changed voters' attitudes and expectations
+\item Governance reform has changed voters' attitudes and expectations
 \end{itemize}
 \item But some imbalance at the border...
 \pause
