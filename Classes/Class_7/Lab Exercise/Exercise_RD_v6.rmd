@@ -87,14 +87,14 @@ d %>% mutate(income_binned=cut(income,50)) %>%
   theme_classic()
 ```
 
-10. An easier way to make a nice regression discontinuity plot is to use the _rdplot_ command in the _rdrobust_ package. Create this plot and be sure to specify the appropriate cutoff value based on the treatment assignment mechanism described above.
+10. An easier way to make a nice regression discontinuity plot is to use the `rdplot` command in the `rdrobust` package. Create this plot and be sure to specify the appropriate cutoff value based on the treatment assignment mechanism described above.
 
 ```{r}
 library(rdrobust)
 rdplot(d$y_obs,d$income, c=500)
 ```
 
-11. The regression discontinuity plot makes it clear that approximating the data with a straight line is likely to create a major bias. Recall that in our original specification of the potential outcomes we made them depend on $income^2$. Do we get a better estimate of the treatment effect if we include a quadratic term in our regression discontinuity? Compare the results to your answer in Q7.
+11. The regression discontinuity plot makes it clear that approximating the data with a straight line is likely to create a bias. Recall that in our original specification of the potential outcomes we made them depend on $income^2$. Do we get a better estimate of the treatment effect if we include a quadratic term in our regression discontinuity? Compare the results to your answer in Q7.
 
 ```{r}
 d %>% lm(y_obs ~ D + income + I(income^2), data=.) %>% summary()
@@ -108,13 +108,13 @@ d %>% filter(income<520 & income>480) %>%
   summary()
 ```
 
-12. One way of easily picking an 'optimal' bandwidth (instead of assuming the range 480 to 520) is to use the automatic process in the _rdrobust_ command of the _rdrobust_ package. This method also provides more accurate standard errors. Apply the method, defining the cutoff appropriately and a quadratic running variable, and interpret the results.
+12. One way of easily picking an 'optimal' bandwidth (instead of assuming the range 480 to 520) is to use the automatic process in the `rdrobust` command of the `rdrobust` package. This method also provides more accurate standard errors. Apply the method, defining the cutoff appropriately and a quadratic running variable, and interpret the results. (Note `rdrobust` assumes treatment is above the threshold, not below, so the sign of your result might be the opposite of what it should be).
 
 ```{r}
 rdrobust(d$y_obs,d$income, c=500, p=2) %>% summary()
 ```
 
-13. Just to check our assumptions: We know there is no sorting around the cutoff in our model because we specified the treatment to be precisely based on the income cutoff and to not allow for any self-selection. But anyway let's run the standard test for sorting - the McCrary density test using the _rddensity_ package. Also make a nice graph with the _rdplotdensity_ command.
+13. Just to check our assumptions: We know there is no sorting around the cutoff in our model because we specified the treatment to be precisely based on the income cutoff and to not allow for any self-selection. But anyway let's run the standard test for sorting - the McCrary density test using the `rddensity` package. Also make a nice graph with the `rdplotdensity` command.
 
 ```{r}
 library(rddensity)
@@ -128,19 +128,19 @@ rdplotdensity(density_test, d$income)$Estplot
 
 $$y_0=N(10,2)+\frac{income}{100} + (\frac{income-600}{50})^2$$ 
 
-For those with income between 490 and 510, the treatment effect is:
+For those with income near the threshold, between 490 and 510, the treatment effect is:
 
 $$y_1=y_0+10$$
-For everyone else, the treatment effect is:
+For everyone else, the treatment effect is actually negative:
 
-$$y_1=y_0+3$$
+$$y_1=y_0-3$$
 ```{r}
 d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100 + ((income-600)/50)^2,
                   y_1=case_when(income<510 & income>490~y_0+10,
-                                TRUE~y_0+3))
+                                TRUE~y_0-3))
 ```
 
-16. Calculate the observed outcomes again and run the optimal-bandwidth regression discontinuity analysis using _rdrobust_. How do you interpret the results? What treatment effect is estimated here?
+16. Calculate the observed outcomes again and run the optimal-bandwidth regression discontinuity analysis using `rdrobust`. How do you interpret the results? For which people is the treatment effect estimated here?
 
 ```{r}
 d <- d %>% mutate(y_obs=case_when(D==0~y_0,

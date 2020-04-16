@@ -9,8 +9,6 @@ output:
 
 First read the paper by Titiunik (2011) on the class website. As with all regression discontinuities, 90% of the work is in preparing the dataset. If you want to prepare the dataset from scratch, please start with Question 1, it's a few extra lines of coding but it's a valuable learning experience. If you aren't able to prepare the dataset, or aren't comfortable with the coding, you can use the dataset available on the website and start at Question 5.
 
-However, we will not use her pre-prepared dataset - we will start the analysis by constructing our own.  
-
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 library(haven)
 library(tidyverse)
@@ -23,7 +21,7 @@ library(texreg)
 opts_chunk$set(echo=F, warning=F, message=F, include=F, eval=T)
 ```
 
-**1. We need data from 2000 and 2004 Mayors. We can download this from [cepespdata.io](cepespdata.io). Choose "Consultar resultados eleitorais" and we want prefeito data at the municipal level for *parties* in the 2000 elections first. Then 'Selecionar Colunas' to add the `COD_MUN_IBGE` variable. Then export this dataset to 'CSV'. Finally, make the same selection for 2004 and download this as a separate CSV. Details for the description of each variable can be found on cepesp.io (see adicionar colunas).**
+**1. We need data from 2000 and 2004 Mayors. We can download this from [cepespdata.io](cepespdata.io). Choose "Consultar resultados eleitorais" and we want prefeito data at the municipal level for *parties* in the 2000 elections first. Finally, make the same selection for 2004 and download this as a separate CSV. Details for the description of each variable can be found on cepesp.io (see 'selecionar colunas').**
 
 ```{r}
 d2000 <- read.csv("TSE_PREFEITO_MUNICIPIO_PARTIDO_2000.csv")
@@ -80,7 +78,9 @@ d <- d2000 %>% inner_join(d2004, by=c("COD_MUN_IBGE", "SIGLA_PARTIDO"))
 #d %>% write_csv("Electoral_data.csv")
 ```
 
-**5. If we did not know about regression discontinuity we might run the observational OLS regression of 2004 vote share on incumbency in 2000. For the next set of questions we will focus only on the PMDB. Subset the data so it includes only the PMDB, run and interpret this regression.**
+[If you are using the dataset downloaded from the website, start from Q5 below. Otherwise, continue with the dataset you prepared above.]
+
+**5. For the next set of questions we will focus only on the PMDB. Subset the data so it includes only the PMDB. If we did not know about regression discontinuity we might run the observational OLS regression of PMDB 2004 vote share on incumbency in 2000. Run and interpret this regression.**
 
 ```{r, results='asis'}
 d_PMDB <- d %>% filter(SIGLA_PARTIDO=="PMDB")
@@ -118,14 +118,14 @@ library(rdrobust)
 rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=1)
 ```
 
-**9. Create a second regression discontinuity plot with fourth-order polynomial regression lines.**
+**9. Create a second regression discontinuity plot with third-order polynomial regression lines.**
 
 
 ```{r}
-rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=4)
+rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=3)
 ```
 
-**10. We will now implement four alternative specifications of the same regression discontinuity. For the first version of the analysis, implement a simple difference-in-means test comparing the average vote share received by the PMDB in 2004 within a bandwidth of +/-3% winning margin in 2000. Interpret these results and compare to the observational regression in Q5.**
+**10. We will now implement four alternative specifications of the same regression discontinuity. For the first version of the analysis, implement a simple difference-in-means test comparing the average vote share received by the PMDB in 2004 for incumbents vs. non-incumbents within a bandwidth of +/-3% winning margin in 2000. Interpret these results and compare to the observational regression in Q5.**
 
 
 ```{r}
@@ -165,7 +165,7 @@ rdrobust(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=2) %>% summary()
 rdrobust(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=3) %>% summary()
 ```
 
-**15. The Mayor of a small municipality calls you for political advice. He wants to know what vote share his party (the PMDB) is likely to receive in the next election. He is very confident because at the last election he won easily with a winning margin of 30%. Based on the evidence you have recorded above from the regression discontinuities, how would you advise the Mayor about his likely performance in the next election?**
+**15. The Mayor of a small municipality calls you for political advice. He wants to know what vote share his party (the PMDB) is likely to receive in the next election. He is very confident because at the last election he won easily with a winning margin of 30% and he is now the incumbent. Based on the evidence you have recorded above from the regression discontinuities, how would you advise the Mayor about his likely performance in the next election? Will being an incumbent boost his vote share at the next election?**
 
 
 **16. Choose your preferred specification and implement the regression discontinuity for the other two parties: the PFL and the PSDB. How similar are your results to those in Titiunik (2011) for the +/-3% window?**

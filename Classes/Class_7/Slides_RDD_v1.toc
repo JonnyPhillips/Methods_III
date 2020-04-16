@@ -1,4 +1,4 @@
 \beamer@sectionintoc {1}{Discontinuities}{3}{0}{1}
 \beamer@sectionintoc {2}{Estimating Regression Discontinuities}{53}{0}{2}
 \beamer@sectionintoc {3}{Close Elections}{75}{0}{3}
-\beamer@sectionintoc {4}{Geographic Discontinuities}{95}{0}{4}
+\beamer@sectionintoc {4}{Geographic Discontinuities}{101}{0}{4}

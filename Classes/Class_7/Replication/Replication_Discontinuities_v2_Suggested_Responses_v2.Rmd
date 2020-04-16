@@ -7,9 +7,7 @@ output:
   html_document: default
 ---
 
-First read the paper by Titiunik (2011) on the class website. As with all regression discontinuities, 90% of the work is in preparing the dataset. If you want to prepare the dataset from scratch, please start with Question 1, it's a few extra lines of coding but it's a valuable learning experience. If you aren't able to prepare the dataset, or aren't comfortable with the coding, you can use the dataset available on the website and start at Question 5.
-
-However, we will not use her pre-prepared dataset - we will start the analysis by constructing our own.  
+First read the paper by Titiunik (2011) on the class website. As with all regression discontinuities, 90% of the work is in preparing the dataset. If you want to prepare the dataset from scratch, please start with Question 1, it's a few extra lines of coding but it's a valuable learning experience. If you aren't able to prepare the dataset, or aren't comfortable with the coding, you can use the dataset available on the website and start at Question 5. 
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 library(haven)
@@ -82,7 +80,10 @@ d <- d2000 %>% inner_join(d2004, by=c("COD_MUN_IBGE", "SIGLA_PARTIDO"))
 
 We want an inner join. This ensures that our dataset includes only parties that ran candidates in both the 2000 and 2004 elections, which is necessary for us to have the data to analyze the effect of interest.
 
-**5. If we did not know about regression discontinuity we might run the observational OLS regression of 2004 vote share on incumbency in 2000. For the next set of questions we will focus only on the PMDB. Subset the data so it includes only the PMDB, run and interpret this regression.**
+[If you are using the dataset downloaded from the website, start from Q5 below. Otherwise, continue with the dataset you prepared above.]
+
+
+**5. For the next set of questions we will focus only on the PMDB. Subset the data so it includes only the PMDB. If we did not know about regression discontinuity we might run the observational OLS regression of PMDB 2004 vote share on incumbency in 2000. Run and interpret this regression.**
 
 ```{r, results='asis'}
 d_PMDB <- d %>% filter(SIGLA_PARTIDO=="PMDB")
@@ -127,15 +128,15 @@ library(rdrobust)
 rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=1)
 ```
 
-**9. Create a second regression discontinuity plot with fourth-order polynomial regression lines.**
+**9. Create a second regression discontinuity plot with third-order polynomial regression lines.**
 
 The regression lines now follow more closely the data, but there remains a negative jump at the threshold.
 
 ```{r}
-rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=4)
+rdplot(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=3)
 ```
 
-**10. We will now implement four alternative specifications of the same regression discontinuity. For the first version of the analysis, implement a simple difference-in-means test comparing the average vote share received by the PMDB in 2004 within a bandwidth of +/-3% winning margin in 2000. Interpret these results and compare to the observational regression in Q5.**
+**10. We will now implement four alternative specifications of the same regression discontinuity. For the first version of the analysis, implement a simple difference-in-means test comparing the average vote share received by the PMDB in 2004 for incumbents vs. non-incumbents within a bandwidth of +/-3% winning margin in 2000. Interpret these results and compare to the observational regression in Q5.**
 
 Incumbency now has a negative effect of approximately -5.5\% points, and this is highly statistically significant.
 
@@ -180,7 +181,7 @@ rdrobust(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=2) %>% summary()
 rdrobust(d_PMDB$Pct_Votes_2004, d_PMDB$Win_Margin_2000, p=3) %>% summary()
 ```
 
-**15. The Mayor of a small municipality calls you for political advice. He wants to know what vote share his party (the PMDB) is likely to receive in the next election. He is very confident because at the last election he won easily with a winning margin of 30%. Based on the evidence you have recorded above from the regression discontinuities, how would you advise the Mayor about his likely performance in the next election?**
+**15. The Mayor of a small municipality calls you for political advice. He wants to know what vote share his party (the PMDB) is likely to receive in the next election. He is very confident because at the last election he won easily with a winning margin of 30% and he is now the incumbent. Based on the evidence you have recorded above from the regression discontinuities, how would you advise the Mayor about his likely performance in the next election? Will being an incumbent boost his vote share at the next election?**
 
 Our estimated negative incumbency effect only applies to candidates who won by a small margin, which this Mayor did not, so we cannot say anything causal about the impact incumbency will have on his 2004 performance. However, the running variable suggests that those who did better in 2000 tend to do well in 2004 as well. Specifically, the regression in Q11 suugests he will receive $0.467 - 0.048 + 0.231*0.3 = 0.488 = 48.8$\% points in 2014. But remember this is not a causal effect of incumbency, only a prediction.
 

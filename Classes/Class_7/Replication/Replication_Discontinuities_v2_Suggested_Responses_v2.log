@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  13 APR 2020 21:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  16 APR 2020 08:25
 entering extended mode
 **./Replication_Discontinuities_v2_Suggested_Responses_v2.tex
 (Replication_Discontinuities_v2_Suggested_Responses_v2.tex
@@ -666,18 +666,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 138.
+(Font)              <10> on input line 135.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 138.
+(Font)              <7> on input line 135.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 138.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 138.
+(Font)              <5> on input line 135.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 135.
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 138.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 135.
 [1
 
 {C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
@@ -729,22 +729,22 @@ files/figure-latex/unnamed-chunk-9-1.pdf  used on input line 399.
 [6 <./Replication_Discontinuities_v2_Suggested_Responses_v2_files/figure-latex/
 unnamed-chunk-8-1.pdf>] [7 <./Replication_Discontinuities_v2_Suggested_Response
 s_v2_files/figure-latex/unnamed-chunk-9-1.pdf>] [8] [9] [10]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 706.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 707.
 [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 706.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 707.
 (Replication_Discontinuities_v2_Suggested_Responses_v2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 706.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 706.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 707.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 707.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 13483 strings out of 492893
- 197698 string characters out of 3133367
+ 13485 strings out of 492893
+ 197718 string characters out of 3133367
  317640 words of memory out of 3000000
  17144 multiletter control sequences out of 15000+200000
- 52170 words of font info for 77 fonts, out of 3000000 for 9000
+ 52253 words of font info for 78 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  35i,10n,38p,854b,455s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Fil
@@ -761,7 +761,7 @@ y7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Progra
 m Files/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Program Files/MiKTeX 2.
 9/fonts/type1/public/lm/lmtti10.pfb>
 Output written on Replication_Discontinuities_v2_Suggested_Responses_v2.pdf (11
- pages, 295928 bytes).
+ pages, 296030 bytes).
 PDF statistics:
  146 PDF objects out of 1000 (max. 8388607)
  15 named destinations out of 1000 (max. 500000)
