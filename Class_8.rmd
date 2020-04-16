@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Required
 - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics, Ch.5](Classes/Class_8/Readings/Angrist & Pischke Ch5.pdf)**
 - **[Chimeli, Ariaster D. and Rodrigo R. Soares 2017, The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon, American Economic Journal: Applied Economics, 9:4](Classes/Class_8/Readings/Chimeli_Soares.pdf)**
+- **[Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf)**
 
 #### Additional Readings
 - [Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.5 ](Classes/Class_8/Readings/A&P_Ch5.pdf)
@@ -18,13 +19,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br> </br>
 
-## [Lecture Slides](Classes/Class_8/Slides_DinD_v1.pdf)
+<!-- ## [Lecture Slides](Classes/Class_8/Slides_DinD_v1.pdf) -->
 
-## [Lab Exercise to Complete during Class](Classes/Class_8/Lab Exercise/Exercise_DinD_v1.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_8/Lab Exercise/Exercise_DinD_v1.pdf) -->
 
-## Replication Exercise
-- [Exercise](Classes/Class_8/Replication/Replication_6_v2.pdf)
-- [Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf)
-- Data: [Vietnam0810.csv](Classes/Class_8/Replication/Vietnam0810.csv), [Vietnam0608.csv](Classes/Class_8/Replication/Vietnam0608.csv)
-- [Suggested Responses](Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!-- - [Exercise](Classes/Class_8/Replication/Replication_6_v2.pdf) -->
+<!-- - [Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf) -->
+<!-- - Data: [Vietnam0810.csv](Classes/Class_8/Replication/Vietnam0810.csv), [Vietnam0608.csv](Classes/Class_8/Replication/Vietnam0608.csv) -->
+<!-- - [Suggested Responses](Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf) -->
 
