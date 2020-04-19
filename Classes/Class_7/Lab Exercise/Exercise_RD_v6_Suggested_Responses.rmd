@@ -1,0 +1,151 @@
+---
+title: "Lab Exercise: Discontinuities"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = T, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=T)
+library(tidyverse)
+library(stargazer)
+library(broom)
+library(knitr)
+```
+
+This week we conduct the same simulation as usual, but this time using a regression discontinuity to estimate the effect. 
+
+1. First, let's generate an 'income' variable for 20,000 people. The data should be drawn randomly from the normal distribution with mean 500 and standard deviation 50.
+
+```{r}
+set.seed(54321)
+N <- 20000
+d <- tibble(income=rnorm(N,500,50))
+```
+
+2. Now let's simulate potential outcomes (let's say the outcome is 'attitude to redistribution') for each person that depends on their income. Assume:
+
+$$y_0=N(10,2)+\frac{income}{100} + (\frac{income-600}{50})^2$$ 
+
+$$y_1=y_0+2$$
+
+So there is a constant treatment effect of 2.
+
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100 + ((income-600)/50)^2,
+                  y_1=y_0+2)
+```
+
+3. Actual treatment assignment is not random but deterministic: Imagine it is a poverty-relief program that you receive only if your income is less than 500. Generate this treatment variable.
+
+```{r}
+d <- d %>% mutate(D=ifelse(income<500,1,0))
+```
+
+4. Now calculate the observed outcome based on the potential outcomes and actual treatment status.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+5. Now let's calculate the 'naive' Average Treatment Effect by running a simple OLS regression of the observed outcomes on treatment. What is your estimate of the average treatment effect? How does this compare to the treatment effect we specified earlier?
+
+```{r, results='asis'}
+d %>% lm(y_obs ~ D, data=.) %>% stargazer(single.row=T, header=F, title="Q5")
+```
+
+6. Our first attempt at a regression discontinuity analysis will be a simple 'non-parametric' difference-in-means comparison either side of the cutoff. Using the data between 480 and 520 on the income scale, perform a difference-in-means test for the efffect of treatment on the outcome. 
+
+```{r}
+d %>% filter(income<520 & income>480) %>%
+  t.test(y_obs~D, data=.) %>%
+  tidy() %>% kable()
+```
+
+7. Next, apply the 'full bandwidth' regression discontinuity method. This just means adding to your regression in Q5 a linear control for the running variable, which in this case is income. Interpret the results. How do they compare to the answer in Q5, Q6 and the treatment effect we specified?
+
+```{r, results='asis'}
+d %>% lm(y_obs ~ D + income, data=.) %>% stargazer(single.row=T, header=F, title="Q7")
+```
+
+8. Let's try and make a regression discontinuity plot manually to understand what's going on better. First, plot all the data, with the running variable on the x-axis and the observable outcome variable on the y-axis. What can you see in the graph?
+
+```{r}
+d %>% ggplot() + 
+  geom_point(aes(x=income, y=y_obs), size=0.5) +
+  theme_classic()
+```
+
+9. The graph in Q8 is difficult to interpret so most regression discontinuity plots 'bin' the data into groups to more easily see the pattern. Bin the income data into 50 groups (try `cut()` in R), then calculate the average observed outcome in each bin and plot the two against each other.
+
+```{r}
+d %>% mutate(income_binned=cut(income,50)) %>%
+  group_by(income_binned) %>%
+  summarize(y_obs_mean=mean(y_obs,na.rm=T)) %>%
+  ggplot() +
+  geom_point(aes(x=income_binned,y=y_obs_mean))+
+  theme_classic()
+```
+
+10. An easier way to make a nice regression discontinuity plot is to use the `rdplot` command in the `rdrobust` package. Create this plot and be sure to specify the appropriate cutoff value based on the treatment assignment mechanism described above.
+
+```{r}
+library(rdrobust)
+rdplot(d$y_obs,d$income, c=500)
+```
+
+11. The regression discontinuity plot makes it clear that approximating the data with a straight line is likely to create a bias. Recall that in our original specification of the potential outcomes we made them depend on $income^2$. Do we get a better estimate of the treatment effect if we include a quadratic term in our regression discontinuity? Compare the results to your answer in Q7.
+
+```{r, results='asis'}
+d %>% lm(y_obs ~ D + income + I(income^2), data=.) %>% 
+  stargazer(single.row=T, header=F, title="Q11")
+```
+
+12. A third method of performing a regression discontinuity is to perform the 'limited bandwidth' regression approach only on a narrow 'bandwidth' of data close to the cutoff. Subset the data again to between 480 and 520 on the income scale and apply the regression discontinuity you used in Q11. How do the results compare to your full-bandwidth regression discontinuity in Q7 and the difference-in-means estimate in Q6?
+
+```{r, results='asis'}
+d %>% filter(income<520 & income>480) %>% 
+  lm(y_obs ~ D + income + I(income^2), data=.) %>%
+  stargazer(single.row=T, header=F, title="Q12")
+```
+
+12. One way of easily picking an 'optimal' bandwidth (instead of assuming the range 480 to 520) is to use the automatic process in the `rdrobust` command of the `rdrobust` package. This method also provides more accurate standard errors. Apply the method, defining the cutoff appropriately and a quadratic running variable, and interpret the results. (Note `rdrobust` assumes treatment is above the threshold, not below, so the sign of your result might be the opposite of what it should be).
+
+```{r}
+rdrobust(d$y_obs,d$income, c=500, p=2) %>% summary()
+```
+
+13. Just to check our assumptions: We know there is no sorting around the cutoff in our model because we specified the treatment to be precisely based on the income cutoff and to not allow for any self-selection. But anyway let's run the standard test for sorting - the McCrary density test using the `rddensity` package. Also make a nice graph with the `rdplotdensity` command.
+
+```{r}
+library(rddensity)
+density_test <- rddensity(d$income, c=500)
+summary(density_test)
+
+rdplotdensity(density_test, d$income)$Estplot[[1]]
+```
+
+15. Now let's change how our potential outcomes are defined. Our $y_0$ stays the same, but this time let's abandon our constant treatment effect and assume the treatment effect itself varies depending on the level of income:
+
+$$y_0=N(10,2)+\frac{income}{100} + (\frac{income-600}{50})^2$$ 
+
+For those with income near the threshold, between 490 and 510, the treatment effect is:
+
+$$y_1=y_0+10$$
+For everyone else, the treatment effect is actually negative:
+
+$$y_1=y_0-3$$
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,10,2) + income/100 + ((income-600)/50)^2,
+                  y_1=case_when(income<510 & income>490~y_0+10,
+                                TRUE~y_0-3))
+```
+
+16. Calculate the observed outcomes again and run the optimal-bandwidth regression discontinuity analysis using `rdrobust`. How do you interpret the results? For which people is the treatment effect estimated here?
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+
+rdrobust(d$y_obs, d$income, c=500, p=2) %>% summary()
+```
