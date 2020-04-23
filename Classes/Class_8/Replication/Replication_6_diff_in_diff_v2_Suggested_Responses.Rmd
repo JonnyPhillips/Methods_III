@@ -1,0 +1,159 @@
+---
+title: "FLS 6415: Replication 6 - Difference-in-Differences"
+#author: "Jonathan"
+date: "April 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Wednesday 30th April.
+
+First read the paper by Malesky et al (2014) on the course website. 
+
+The replication data is in the files *Vietnam0810.csv* (for the main analysis) and *Vietnam0608.csv* (at the end of the eexercise). 
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(stargazer)
+library(estimatr)
+library(texreg)
+library(AER)
+library(haven)
+library(formatR)
+
+opts_chunk$set(echo=T, warning=F, message=F, include=T, tidy=T)
+```
+
+```{r, echo=F, eval=F, include=F}
+d <- read_dta("panel_commune_2008_2010.dta") %>%
+  dplyr::filter(reg8!=6) %>%
+  mutate(agrvisit=agrvisit/100,
+         index_infra=rowSums(.[c("goodroadv","transport","pro3","tapwater","roadv")],na.rm=T),
+         index_agric=rowSums(.[c("rm2c7d","rm2c7e","rm2c7g","animal_s","agrvisit","plant_s","agrext","irrigation")],na.rm=T),
+         index_health=rowSums(.[c("rm2c7c","pro5")],na.rm=T),
+         index_education=rowSums(.[c("pro4", "rm2c7b", "useschool", "kgarten", "v_prischool")],na.rm=T),
+         index_comms=rowSums(.[c("broadcast", "post", "vpost")],na.rm=T),
+         index_bus_dev=rowSums(.[c("rm2c7a", "rm2c7f", "market", "nonfarm", "vmarket1", "vmarket2", "vmarket3")],na.rm=T),
+         city=ifelse(tinh %in% c(1,31,48,92,79),1,0)) %>%
+  rename("District"="tinh",
+         "Region"="reg8") %>%
+  select(time, treatment, District, Region, city, lnarea, lnpopden, index_infra, index_agric, index_health, index_education, index_comms, index_bus_dev, totalland)
+
+d %>% write_csv("Vietnam0810.csv")
+```
+
+```{r}
+d <- read_csv("Vietnam0810.csv")
+```
+
+**1. What is treatment and control in this study? What is the treatment assignment mechanism?**
+
+**2. Run the 'naive' cross-sectional OLS regression of the infrastructure index (one of the 6 presented in Table 3 of Malesky et al) on treatment. How do you interpret the results? Provide at least one specific reason why the treatment effect in your regression may be a biased estimate.**
+
+```{r, results='asis'}
+d %>% lm(index_infra ~ treatment, data=.)  %>%
+  texreg(caption="Q2", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
+```
+
+**3. Run the 'naive' before-after OLS regression of the infrastructure index on the time variable (1 for 2010, 0 for 2008) for the treated units only. How do you interpret the results? Provide at least one specific reason why the treatment effect in your regression may be a biased estimate.**
+
+```{r, results='asis'}
+d %>% filter(treatment==1) %>%
+  lm(index_infra ~ time, data=.)  %>%
+  texreg(caption="Q3", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
+
+```
+
+**4. Now perform the main Difference-in-differences analysis for the Infrastructure Index outcome. Don't cluster your standard errors or include any control variables yet. Interpret the results.**
+
+```{r, results='asis'}
+d %>% lm(index_infra ~ time + treatment + time*treatment, data=.)  %>%
+  texreg(caption="Q4", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
+```
+
+**5. Repeat Q4 but now add the control variables (`lnarea`,`lnpopden`,`city`, and `Region` fixed effects) used in Table 3 of Malesky et al. Compare your answers to those in Table 3 of the paper.**
+
+```{r, results='asis'}
+d %>% lm(index_infra ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region), data=.)  %>%
+  texreg(caption="Q5", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
+```
+
+**6. Repeat Q5 but now with clustered standard errors at the `District` level. How does this alter your results?**
+
+```{r, results='asis'}
+d %>% lm_robust(index_infra ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region), data=., cluster=District)  %>%
+  texreg(caption="Q6", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
+```
+
+**7. Using your regression model from Question 6 applied to all of the outcome variables, try to replicate all of the columns of Panel 1 of Table 3 of Malesky et al. (Some of them might not be the same).**
+
+```{r, results='asis'}
+vars <- c("index_infra", "index_agric", "index_health", "index_education",
+          "index_comms", "index_bus_dev")
+
+regs <- vars %>% 
+  map(~lm_robust(as.formula(paste0(.x," ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region)")), 
+                 data=d, 
+                 cluster=District))
+
+regs %>% texreg(caption="Q7", caption.above=T, omit.coef="Region",
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3,
+                custom.model.names=c("Infra",'Agric',"Health","Educ", "Comms", 'Business'))
+```
+
+**8. Assess the balance in land area (`totalland`) of the treated and control units in time $t=0$ using a simple t-test. (Focus on the substantive difference more than the p-value.) Is there are any evidence of imbalance? Would this create a risk of bias for our difference-in-differences analysis?**
+
+```{r}
+d %>% filter(time==0) %>% 
+  t.test(totalland ~ treatment, data=.)
+```
+
+**9. The difference-in-differences methodology cannot protect us against *time-varying* confounders. Provide an example of an omitted (confounding) variable that might create bias in our results even though we have used a differences-in-differences approach.**
+
+**10. One way of testing for the presence of time-varying confounders is to check that there are *parallel pre-treatment trends* in the outcomes for treated and control units. Using the second dataset, `Vietnam0608.csv`, and your main difference-in-differences regression from Question 6 (with control variables and clustered standard errors), assess if treated units had a different trend to control units before treatment, i.e. between 2006 and 2008, for each of the 6 outcome indices. This should replicate Panel 2 of Table 3 in Malesky et al.**
+
+```{r, eval=F, include=F}
+d2 <- read_dta("panel_commune_2006_2008.dta") %>%
+  dplyr::filter(reg8!=6) %>%
+  mutate(agrvisit=agrvisit/100,
+         index_infra=rowSums(.[c("goodroadv","transport","pro3","tapwater","roadv")],na.rm=T),
+         index_agric=rowSums(.[c("rm2c7d","rm2c7e","rm2c7g","animal_s","agrvisit","plant_s","agrext","irrigation")],na.rm=T),
+         index_health=rowSums(.[c("rm2c7c","pro5")],na.rm=T),
+         index_education=rowSums(.[c("pro4", "rm2c7b", "useschool", "kgarten", "v_prischool")],na.rm=T),
+         index_comms=rowSums(.[c("broadcast", "post", "vpost")],na.rm=T),
+         index_bus_dev=rowSums(.[c("rm2c7a", "rm2c7f", "market", "nonfarm", "vmarket1", "vmarket2", "vmarket3")],na.rm=T),
+         city=ifelse(tinh %in% c(101,103,501,815,701),1,0)) %>%
+  rename("District"="tinh",
+         "Region"="reg8") %>%
+  select(time, treatment, District, Region, city, lnarea, lnpopden, index_infra, index_agric, index_health, index_education, index_comms, index_bus_dev, totalland)
+
+d2 %>% write_csv("Vietnam0608.csv")
+```
+
+```{r, results='asis'}
+d2 <- read_csv("Vietnam0608.csv")
+
+d2 %>% lm_robust(index_infra ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region), data=., cluster=District)  %>%
+  texreg(caption="Q10", caption.above=T,
+                stars=c(0.01, 0.05, 0.1), include.ci=F)
+```
+
+**11. Create a Difference-in-differences chart showing the average Infrastructure Index outcome by treatment group between 2008 and 2010. Compare this to the same chart between 2006 and 2008. What do these charts suggest about the validity of our difference-in-differences methodology?**
+
+```{r}
+d %>% mutate(time=time+1) %>% bind_rows(d2) %>% 
+  group_by(time, treatment) %>%
+  summarize(mean_index_infra=mean(index_infra,na.rm=T)) %>%
+  ggplot() +
+  geom_line(aes(x=time, y=mean_index_infra, group=factor(treatment), colour=factor(treatment))) +
+  theme_classic()
+```
+

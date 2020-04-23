@@ -21,7 +21,7 @@ library(texreg)
 opts_chunk$set(echo=T, warning=F, message=F, include=T, eval=T)
 ```
 
-**1. We need data from 2000 and 2004 Mayors. We can download this from [cepespdata.io](cepespdata.io). Choose "Consultar resultados eleitorais" and we want prefeito data at the municipal level for *parties* in the 2000 elections first. Then 'Selecionar Colunas' to add the `COD_MUN_IBGE` variable. Then export this dataset to 'CSV'. Finally, make the same selection for 2004 and download this as a separate CSV. Details for the description of each variable can be found on cepesp.io (see adicionar colunas).**
+**1. We need data from 2000 and 2004 Mayors. We can download this from [cepespdata.io](cepespdata.io). Choose "Consultar resultados eleitorais" and we want prefeito data at the municipal level for *parties* in the 2000 elections first. Finally, make the same selection for 2004 and download this as a separate CSV. Details for the description of each variable can be found on cepesp.io (see 'selecionar colunas').**
 
 ```{r}
 d2000 <- read.csv("TSE_PREFEITO_MUNICIPIO_PARTIDO_2000.csv")
@@ -108,7 +108,7 @@ There is statistically good balance for both bandwidths. However, there is subst
 
 **7. Next, check for sorting and manipulation of the threshold with the McCrary density test using the `rddensity` function. Interpret the results and produce a density plot using the `rdplotdensity`.**
 
-The results fail to reject the null hypothesis of no sorting. There are a very similar number of units just either side of the threshold, and the distribution is simmilar to what we would expect if there was no sorting.
+The results fail to reject the null hypothesis of no sorting. There are a very similar number of units just either side of the threshold, and the distribution is similar to what we would expect if there was no sorting.
 
 ```{r}
 library(rddensity)

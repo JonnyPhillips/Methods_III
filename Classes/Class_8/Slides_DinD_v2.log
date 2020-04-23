@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  16 MAY 2019 12:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  19 APR 2020 16:25
 entering extended mode
-**./Slides_DinD_v1.tex
-(Slides_DinD_v1.tex
+**./Slides_DinD_v2.tex
+(Slides_DinD_v2.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamer.cls"
 Document Class: beamer 2018/12/02 v3.55 A class for typesetting presentations
@@ -1293,12 +1293,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 101.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(Slides_DinD_v1.aux
-
-LaTeX Warning: Label `tab:addlabel' multiply defined.
-
-)
-\openout1 = `Slides_DinD_v1.aux'.
+(Slides_DinD_v2.aux)
+\openout1 = `Slides_DinD_v2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
@@ -1410,9 +1406,9 @@ LaTeX Info: Redefining \ref on input line 117.
 LaTeX Info: Redefining \pageref on input line 117.
 LaTeX Info: Redefining \nameref on input line 117.
 
-(Slides_DinD_v1.out) (Slides_DinD_v1.out)
+(Slides_DinD_v2.out) (Slides_DinD_v2.out)
 \@outlinefile=\write5
-\openout5 = `Slides_DinD_v1.out'.
+\openout5 = `Slides_DinD_v2.out'.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/translator\translator-basic-dictionary-
@@ -1445,7 +1441,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-(Slides_DinD_v1.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/p
+(Slides_DinD_v2.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/config/p
 dftex.map}
 
 ]
@@ -1585,397 +1581,203 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 ] [20
 
 ]
-LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <6> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 260.
+<figure/DinD_chart_points_a-1.pdf, id=981, 361.35pt x 180.675pt>
+File: figure/DinD_chart_points_a-1.pdf Graphic file (type pdf)
+<use figure/DinD_chart_points_a-1.pdf>
+Package pdftex.def Info: figure/DinD_chart_points_a-1.pdf  used on input line 2
+32.
+(pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
+ [21
 
-Underfull \hbox (badness 10000) in paragraph at lines 260--260
-[]|\T1/fav/b/n/6 Balances time-
- []
-
-pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel}
-) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.260 \end{frame}
-                  [21
-
-]
-LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 277.
+ <./figure/DinD_chart_points_a-1.pdf>]
+<figure/DinD_chart_points_b-1.pdf, id=1030, 361.35pt x 180.675pt>
+File: figure/DinD_chart_points_b-1.pdf Graphic file (type pdf)
+<use figure/DinD_chart_points_b-1.pdf>
+Package pdftex.def Info: figure/DinD_chart_points_b-1.pdf  used on input line 2
+41.
+(pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
  [22
 
-] [23
+ <./figure/DinD_chart_points_b-1.pdf>]
+<figure/DinD_chart_points_c-1.pdf, id=1079, 361.35pt x 180.675pt>
+File: figure/DinD_chart_points_c-1.pdf Graphic file (type pdf)
+<use figure/DinD_chart_points_c-1.pdf>
+Package pdftex.def Info: figure/DinD_chart_points_c-1.pdf  used on input line 2
+50.
+(pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
+ [23
 
-] [24
+ <./figure/DinD_chart_points_c-1.pdf>]
+<figure/DinD_chart_points_d-1.pdf, id=1128, 361.35pt x 180.675pt>
+File: figure/DinD_chart_points_d-1.pdf Graphic file (type pdf)
+<use figure/DinD_chart_points_d-1.pdf>
+Package pdftex.def Info: figure/DinD_chart_points_d-1.pdf  used on input line 2
+59.
+(pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
+ [24
 
-] [25
+ <./figure/DinD_chart_points_d-1.pdf>]
+LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 276.
+ [25
 
 ] [26
 
-]
-<UK_EU_Growth.png, id=1048, 337.26pt x 240.9pt>
-File: UK_EU_Growth.png Graphic file (type png)
-<use UK_EU_Growth.png>
-Package pdftex.def Info: UK_EU_Growth.png  used on input line 284.
-(pdftex.def)             Requested size: 236.08038pt x 168.62883pt.
- [27
+] [27
 
- <./UK_EU_Growth.png>]
-[28
+] [28
 
 ] [29
 
-] [30
+]
+<UK_EU_Growth.png, id=1397, 337.26pt x 240.9pt>
+File: UK_EU_Growth.png Graphic file (type png)
+<use UK_EU_Growth.png>
+Package pdftex.def Info: UK_EU_Growth.png  used on input line 283.
+(pdftex.def)             Requested size: 236.08038pt x 168.62883pt.
+ [30
 
-] [31
+ <./UK_EU_Growth.png>]
+[31
 
 ] [32
 
 ] [33
 
+] [34
+
+] [35
+
+] [36
+
 ]
-<figure/DinD_chart1-1.pdf, id=1309, 361.35pt x 180.675pt>
+<figure/DinD_chart1-1.pdf, id=1707, 361.35pt x 180.675pt>
 File: figure/DinD_chart1-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart1-1.pdf>
 Package pdftex.def Info: figure/DinD_chart1-1.pdf  used on input line 316.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [34
+ [37
 
  <./figure/DinD_chart1-1.pdf>]
-<figure/DinD_chart1b-1.pdf, id=1351, 361.35pt x 180.675pt>
+<figure/DinD_chart1b-1.pdf, id=1757, 361.35pt x 180.675pt>
 File: figure/DinD_chart1b-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart1b-1.pdf>
 Package pdftex.def Info: figure/DinD_chart1b-1.pdf  used on input line 326.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [35
+ [38
 
  <./figure/DinD_chart1b-1.pdf>]
-<figure/DinD_chart1c-1.pdf, id=1393, 361.35pt x 180.675pt>
+<figure/DinD_chart1c-1.pdf, id=1806, 361.35pt x 180.675pt>
 File: figure/DinD_chart1c-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart1c-1.pdf>
 Package pdftex.def Info: figure/DinD_chart1c-1.pdf  used on input line 335.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [36
+ [39
 
- <./figure/DinD_chart1c-1.pdf>] [37
+ <./figure/DinD_chart1c-1.pdf>] [40
 
-] [38
+] [41
 
-] [39
+] [42
 
-] [40
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[41
+] [43
 
 ]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[42
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[43
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
 [44
 
-]
+] [45
 
-! LaTeX Error: There's no line here to end.
+] [46
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+] [47
 
-[45
+] [48
 
-]
+] [49
 
-! LaTeX Error: There's no line here to end.
+] [50
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
+] [51
 
-[46
+] [52
+
+] [53
+
+] [54
+
+] [55
+
+] [56
+
+] [57
+
+] [58
 
 ]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[47
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[48
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[49
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[50
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[51
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[52
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[53
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[54
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[55
-
-]
-<figure/DinD_chart2-1.pdf, id=2145, 361.35pt x 180.675pt>
+<figure/DinD_chart2-1.pdf, id=2697, 361.35pt x 180.675pt>
 File: figure/DinD_chart2-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart2-1.pdf>
 Package pdftex.def Info: figure/DinD_chart2-1.pdf  used on input line 389.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [56
+
+[59
 
  <./figure/DinD_chart2-1.pdf>]
-<figure/DinD_chart3-1.pdf, id=2187, 361.35pt x 180.675pt>
+<figure/DinD_chart3-1.pdf, id=2746, 361.35pt x 180.675pt>
 File: figure/DinD_chart3-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart3-1.pdf>
 Package pdftex.def Info: figure/DinD_chart3-1.pdf  used on input line 399.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [57
+ [60
 
  <./figure/DinD_chart3-1.pdf>]
-<figure/DinD_chart4-1.pdf, id=2229, 361.35pt x 180.675pt>
+<figure/DinD_chart4-1.pdf, id=2795, 361.35pt x 180.675pt>
 File: figure/DinD_chart4-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart4-1.pdf>
 Package pdftex.def Info: figure/DinD_chart4-1.pdf  used on input line 409.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
-
-[58
+ [61
 
  <./figure/DinD_chart4-1.pdf>]
-<figure/DinD_chart5-1.pdf, id=2271, 361.35pt x 180.675pt>
+<figure/DinD_chart5-1.pdf, id=2845, 361.35pt x 180.675pt>
 File: figure/DinD_chart5-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart5-1.pdf>
 Package pdftex.def Info: figure/DinD_chart5-1.pdf  used on input line 419.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [59
+ [62
 
- <./figure/DinD_chart5-1.pdf>] [60
-
-]
-[61
-
-] [62
-
-] [63
+ <./figure/DinD_chart5-1.pdf>] [63
 
 ] [64
 
 ] [65
 
-] [66
+]
+[66
+
+] [67
+
+] [68
+
+] [69
 
 ]
-<figure/DinD_chart6-1.pdf, id=2571, 361.35pt x 180.675pt>
+<figure/DinD_chart6-1.pdf, id=3201, 361.35pt x 180.675pt>
 File: figure/DinD_chart6-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart6-1.pdf>
 Package pdftex.def Info: figure/DinD_chart6-1.pdf  used on input line 452.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [67
+ [70
 
  <./figure/DinD_chart6-1.pdf>]
-<figure/DinD_chart7-1.pdf, id=2614, 361.35pt x 180.675pt>
+<figure/DinD_chart7-1.pdf, id=3250, 361.35pt x 180.675pt>
 File: figure/DinD_chart7-1.pdf Graphic file (type pdf)
 <use figure/DinD_chart7-1.pdf>
 Package pdftex.def Info: figure/DinD_chart7-1.pdf  used on input line 461.
 (pdftex.def)             Requested size: 354.19536pt x 177.09888pt.
- [68
+ [71
 
- <./figure/DinD_chart7-1.pdf>] [69
-
-] [70
-
-] [71
-
-] [72
+ <./figure/DinD_chart7-1.pdf>] [72
 
 ] [73
 
@@ -1983,7 +1785,22 @@ Package pdftex.def Info: figure/DinD_chart7-1.pdf  used on input line 461.
 
 ] [75
 
-] [76
+]
+Underfull \hbox (badness 2680) in paragraph at lines 497--497
+[]|\T1/fav/m/n/6 Time-invariant char-ac-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--497
+\T1/fav/m/n/6 sectional char-ac-ter-is-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 497--497
+[]|\T1/fav/m/n/6 Balances Unit-specific
+ []
+
+[76
 
 ] [77
 
@@ -1991,8 +1808,7 @@ Package pdftex.def Info: figure/DinD_chart7-1.pdf  used on input line 461.
 
 ] [79
 
-]
-[80
+] [80
 
 ] [81
 
@@ -2014,1050 +1830,102 @@ Package pdftex.def Info: figure/DinD_chart7-1.pdf  used on input line 461.
 
 ] [90
 
-] [91
+]
+[91
 
 ] [92
 
 ] [93
 
+] [94
+
+] [95
+
+] [96
+
+] [97
+
 ]
-<Mahogany.png, id=3581, 786.59087pt x 525.79044pt>
+<Mahogany.png, id=4443, 786.59087pt x 525.79044pt>
 File: Mahogany.png Graphic file (type png)
 <use Mahogany.png>
-Package pdftex.def Info: Mahogany.png  used on input line 535.
+Package pdftex.def Info: Mahogany.png  used on input line 560.
 (pdftex.def)             Requested size: 275.31093pt x 184.0294pt.
- [94
+ [98
 
- <./Mahogany.png>]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Display math should end with $$.
-<to be read again> 
-                   \par 
-l.552 \end{frame}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-! Undefined control sequence.
-<argument> .../enumerate \beameritemnestingprefix 
-                                                  body end
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{beamer@framepauses} on input line 552 ended by \end{itemi
-ze}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{beamer@frameslide} on input line 552 ended by \end{beamer
-@framepauses}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.552 \end{frame}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-\endbeamer@frameslide ...box \else \beamer@zoomer 
-                                                  \fi \beamer@undolabels \be...
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.552 \end{frame}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[95
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Display math should end with $$.
-<to be read again> 
-                   \par 
-l.552 \end{frame}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-! Undefined control sequence.
-<argument> .../enumerate \beameritemnestingprefix 
-                                                  body end
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{beamer@framepauses} on input line 552 ended by \end{itemi
-ze}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{beamer@frameslide} on input line 552 ended by \end{beamer
-@framepauses}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.552 \end{frame}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-\endbeamer@frameslide ...box \else \beamer@zoomer 
-                                                  \fi \beamer@undolabels \be...
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.552 \end{frame}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[96
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Display math should end with $$.
-<to be read again> 
-                   \par 
-l.552 \end{frame}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-! Undefined control sequence.
-<argument> .../enumerate \beameritemnestingprefix 
-                                                  body end
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{beamer@framepauses} on input line 552 ended by \end{itemi
-ze}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{beamer@frameslide} on input line 552 ended by \end{beamer
-@framepauses}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.552 \end{frame}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-\endbeamer@frameslide ...box \else \beamer@zoomer 
-                                                  \fi \beamer@undolabels \be...
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.552 \end{frame}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[97
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Display math should end with $$.
-<to be read again> 
-                   \par 
-l.552 \end{frame}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-! Undefined control sequence.
-<argument> .../enumerate \beameritemnestingprefix 
-                                                  body end
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{beamer@framepauses} on input line 552 ended by \end{itemi
-ze}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{beamer@frameslide} on input line 552 ended by \end{beamer
-@framepauses}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.552 \end{frame}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-\endbeamer@frameslide ...box \else \beamer@zoomer 
-                                                  \fi \beamer@undolabels \be...
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.552 \end{frame}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[98
-
-]
-
-! LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Display math should end with $$.
-<to be read again> 
-                   \par 
-l.552 \end{frame}
-                 
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.552 \end{frame}
-                 
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 552
-[][]
- []
-
-! Undefined control sequence.
-<argument> .../enumerate \beameritemnestingprefix 
-                                                  body end
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{beamer@framepauses} on input line 552 ended by \end{itemi
-ze}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: \begin{beamer@frameslide} on input line 552 ended by \end{beamer
-@framepauses}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.552 \end{frame}
-                 
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\endbeamer@frameslide ...amer@framepauses}\egroup 
-                                                  \ifx \beamer@frametitle \@...
-l.552 \end{frame}
-                 
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Undefined control sequence.
-\endbeamer@frameslide ...box \else \beamer@zoomer 
-                                                  \fi \beamer@undolabels \be...
-l.552 \end{frame}
-                 
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-! LaTeX Error: \begin{document} ended by \end{beamer@frameslide}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.552 \end{frame}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-! Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.552 \end{frame}
-                 
-Things are pretty mixed up, but I think the worst is over.
-
-[99
+ <./Mahogany.png>] [99
 
 ] [100
 
 ] [101
 
 ]
+[102
+
+] [103
+
+]
+<C_S_Results.png, id=4708, 551.05875pt x 551.81157pt>
+File: C_S_Results.png Graphic file (type png)
+<use C_S_Results.png>
+Package pdftex.def Info: C_S_Results.png  used on input line 589.
+(pdftex.def)             Requested size: 192.87344pt x 193.13693pt.
+ [104
+
+ <./C_S_Results.png>] [105
+
+] [106
+
+] [107
+
+] [108
+
+]
+<C_S_Parallel_Trends.png, id=4928, 688.50774pt x 594.47903pt>
+File: C_S_Parallel_Trends.png Graphic file (type png)
+<use C_S_Parallel_Trends.png>
+Package pdftex.def Info: C_S_Parallel_Trends.png  used on input line 613.
+(pdftex.def)             Requested size: 240.98131pt x 208.07077pt.
+ [109
+
+ <./C_S_Parallel_Trends.png>] [110
+
+] [111
+
+] [112
+
+] [113
+
+] [114
+
+]
 \tf@nav=\write6
-\openout6 = `Slides_DinD_v1.nav'.
+\openout6 = `Slides_DinD_v2.nav'.
 
 \tf@toc=\write7
-\openout7 = `Slides_DinD_v1.toc'.
+\openout7 = `Slides_DinD_v2.toc'.
 
 \tf@snm=\write8
-\openout8 = `Slides_DinD_v1.snm'.
+\openout8 = `Slides_DinD_v2.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 568.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 568.
- (Slides_DinD_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 568.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 568.
-Package rerunfilecheck Info: File `Slides_DinD_v1.out' has not changed.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 632.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 632.
+ (Slides_DinD_v2.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 632.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 632.
+Package rerunfilecheck Info: File `Slides_DinD_v2.out' has not changed.
 (rerunfilecheck)             Checksum: 92498BD1A77FCC0C3671D868D3EF0295;141.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 22828 strings out of 492893
- 436249 string characters out of 3133367
- 550646 words of memory out of 3000000
- 25940 multiletter control sequences out of 15000+200000
- 76240 words of font info for 130 fonts, out of 3000000 for 9000
+ 22895 strings out of 492893
+ 437594 string characters out of 3133367
+ 558729 words of memory out of 3000000
+ 25976 multiletter control sequences out of 15000+200000
+ 73881 words of font info for 128 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,55p,874b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Fil
@@ -3069,9 +1937,9 @@ rogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program
 Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_DinD_v1.pdf (101 pages, 1029591 bytes).
+Output written on Slides_DinD_v2.pdf (114 pages, 1831390 bytes).
 PDF statistics:
- 3951 PDF objects out of 4296 (max. 8388607)
- 206 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 5275 PDF objects out of 6186 (max. 8388607)
+ 232 named destinations out of 1000 (max. 500000)
+ 144 words of extra memory for PDF output out of 10000 (max. 10000000)
 

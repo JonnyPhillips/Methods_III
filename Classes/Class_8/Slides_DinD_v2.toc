@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Difference-in-Differences}{3}{0}{1}
+\beamer@sectionintoc {2}{The Effect of Illegal Activities on Violence}{77}{0}{2}

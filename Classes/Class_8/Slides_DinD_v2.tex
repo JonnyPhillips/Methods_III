@@ -1,6 +1,56 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
-\documentclass[xcolor=x11names,compress]{beamer}
+\documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 %\documentclass[xcolor=x11names,compress,handout]{beamer}
 \usepackage[]{graphicx}
 \usepackage[]{color}
@@ -63,22 +113,10 @@
 \subtitle{Week 8 - Difference-in-Differences}
 \author{Jonathan Phillips}
 \date{April 2020}
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
-<<DinD, echo=FALSE, warning=FALSE, message=FALSE>>=
-library(tidyverse)
 
-Base_control <- 3
-Confounding <- 3
-Trend <- 2
-Effect <- 4
-
-data <- data.frame(c("Control","Treated"),c(Base_control,Base_control+Confounding),c(Base_control+Trend,Base_control+Confounding+Trend+Effect))
-colnames(data) <- c("Unit","Before","After")
-
-data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,After=Base_control+Confounding+Trend)
-@
 
 
 \frame{\titlepage}
@@ -186,79 +224,38 @@ data <- data %>% add_row(Unit="Counterfactual",Before=Base_control+Confounding,A
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart_points_a, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-library(ggforce)
-data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart_points_a-1} 
 
-data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
-                          Unit=factor(Unit,levels=c("Control","Treated","Counterfactual")))
-
-data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
-
-data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
-   geom_line(aes(x=Time,y=Outcome,group=Unit), lty=2) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2") 
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart_points_b, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-library(ggforce)
-data2 <- data %>% gather("Before","After",key="Time",value="Outcome") %>%
-  mutate(Unit=case_when(Unit=="Control"~"Control Unit",
-                        Unit=="Treated"~"Treated Unit",
-                        TRUE~"Counterfactual"))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart_points_b-1} 
 
-data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
-                          Unit=factor(Unit,levels=c("Control Unit","Treated Unit","Counterfactual")))
-
-data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
-
-data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
-   geom_line(aes(x=Time,y=Outcome,group=Unit), lty=2) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2") +
-  geom_mark_ellipse(aes(x=Time, y=Outcome, group=Unit, label=Unit))
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-\tiny
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{|l|c|c|c|c|}
-    \hline
-          & \multicolumn{2}{p{12.43em}}{\textbf{Balances time-invariant 'fixed' unit characteristics}} & \multicolumn{2}{c}{\textbf{Balances time-varying characteristics}} \\
-              \hline
-          & \multicolumn{1}{l}{Observed} & \multicolumn{1}{l}{Unobserved} & \multicolumn{1}{l}{Overall trends} & \multicolumn{1}{l}{Unit-specific trends} \\
-              \hline
-    Field Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Survey and Lab Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-          &       &       &       &  \\
-              \hline
-    Natural Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Instrumental Variables & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Regression Discontinuity & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-          &       &       &       &  \\
-              \hline
-    Cross-sectional comparisons & X     & X     & \checkmark     & X \\
-        \hline
-    Before-After comparisons & \checkmark     & \checkmark     & X     & X \\
-        \hline
-    Difference-in-Differences & \checkmark     & \checkmark     & \checkmark     & X \\
-        \hline
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}%
-\normalsize
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart_points_c-1} 
+
+\end{knitrout}
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart_points_d-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -311,40 +308,36 @@ data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart1, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart1-1} 
 
-data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
-                          Unit=factor(Unit,levels=c("Control","Treated","Counterfactual")))
-data2 %>% filter(Unit=="Control") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart1b, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data2 %>% filter(Unit!="Counterfactual") %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart1b-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart1c, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data2  %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart1c-1} 
+
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Estimating Difference-in-Differences}
 \begin{itemize}
-\item Regression for the cross-unit effect of treatment
+\item Regression for the cross-unit effect of being a treated unit
 \end{itemize}
 $$ Y_{it} = \alpha + \gamma D_i$$
 \pause
@@ -354,7 +347,7 @@ $$ Y_{it} = \alpha + \gamma D_i$$
 $$ Y_{it} = \alpha + \delta T_i$$
 \pause
 \begin{itemize}
-\item The difference-in-differences estimate is just the \textit{interaction} of time and treatment status
+\item The difference-in-differences estimate is just the \textit{interaction} of time and unit treatment status
 \end{itemize}
 $$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
 \begin{itemize}
@@ -374,7 +367,7 @@ $D=0, T=1: E(Y)=$ \pause $\alpha + \delta$ \\
 \pause
 $D=1, T=0: E(Y)=$ \pause $\alpha + \gamma$ \\
 \pause
-$D=1, T=1: E(Y)=$ \pause $\alpha + \delta + \gamma + \beta$ \\ \\
+$D=1, T=1: E(Y)=$ \pause $\alpha + \delta + \gamma + \beta$ \\
 \vspace*{20px}
 \pause
 $\Delta(Y|D=1) = E(Y|D=1, T=1) - E(Y|D=1, T=0) =$ \pause $ \delta + \beta$ \\
@@ -388,50 +381,41 @@ $\Delta(Y|D=1) - \Delta(Y|D=0) =$ \pause $\beta$
 \begin{frame}
 \frametitle{Difference-in-Differences}
 Raw Data:
-<<DinD_chart2, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data3 <- data2 %>% filter(Unit!="Counterfactual")
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart2-1} 
 
-data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
 Add a variable (fixed effect) for treated/control:
-<<DinD_chart3, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data3 <- data3 %>% mutate(Outcome=ifelse(Unit=="Control",Outcome+Confounding,Outcome))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart3-1} 
 
-data3 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
 Add a variable (fixed effect) for time:
-<<DinD_chart4, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data4 <- data3 %>% mutate(Outcome=ifelse(Time=="After",Outcome-Trend,Outcome))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart4-1} 
 
-data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
 Add a variable (fixed effect) for time:
-<<DinD_chart5, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-effect_line <- data.frame(x1 = 2, x2 = 2, y1 = 6, y2 = 10)
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart5-1} 
 
-data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) + geom_segment(data=effect_line,aes(x=x1,y=y1,xend=x2,yend=y2),lty=2) +
-  scale_colour_brewer(palette="Set2")
-
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -460,32 +444,20 @@ data4 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart6, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data5 <- data2 %>% filter(Unit!="Counterfactual") %>% 
-  add_row(Unit="Treated",Time="Earlier",Outcome=4) %>%
-  add_row(Unit="Control",Time="Earlier",Outcome=1)
-  
-data5$Time <- factor(data5$Time,c("Earlier","Before","After"))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart6-1} 
 
-data5 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart7, echo=FALSE, ,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-data6 <- data2 %>% 
-  add_row(Unit="Treated",Time="Earlier",Outcome=4) %>%
-  add_row(Unit="Control",Time="Earlier",Outcome=1)
-  
-data6$Time <- factor(data6$Time,c("Earlier","Before","After"))
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/DinD_chart7-1} 
 
-data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
-  theme_classic() + ylim(0,13) +
-  scale_colour_brewer(palette="Set2")
-@
+\end{knitrout}
 \end{frame}
 
 \begin{frame}
@@ -501,12 +473,37 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \end{enumerate}
 \end{frame}
 
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\tiny
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}@{}}
+\hline
+                                                  & Time-invariant characteristics                                        & \multicolumn{2}{|p{2.5cm}|}{Time-varying characteristics}                                                       \\ \hline
+\multicolumn{1}{|l|}{}                            & \multicolumn{1}{p{2.5cm}|}{Balances 'fixed' cross-sectional characteristics} & \multicolumn{1}{p{2.5cm}|}{Balances Overall Time Trends} & \multicolumn{1}{p{2.5cm}|}{Balances Unit-specific trends} \\ \hline
+\multicolumn{1}{|l|}{Field Experiments}           & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Survey and Lab Experiments}  & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Natural Experiments}         & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Instrumental Variables}      & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Regression Discontinuity}    & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Cross-sectional comparisons} & \multicolumn{1}{p{2.5cm}|}{X}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\multicolumn{1}{|l|}{Before-After comparisons}    & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{X}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\multicolumn{1}{|l|}{Difference-in-Differences}   & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\end{tabular}
+\end{table}
+\normalsize
+\end{frame}
+
+
+
 \section{The Effect of Illegal Activities on Violence}
 
 \begin{frame}
 \frametitle{Chimeli and Soares 2017}
 \begin{itemize}
-\item How does an activity being illegal affect violence?
+\item How does making an activity illegal affect violence?
 \pause
 \item How did Brazil's ban on mahogany affect homicides?
 \pause
@@ -568,15 +565,51 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \item Methodology:
 \pause
 \end{itemize}
-$$ Homicides_{it} = \beta_1 Post-1999_t + \beta_2 Mahogany_i \\ + \beta_3 (Post-1999_t *  Mahogany_i) + \epsilon_i$$
+\begin{multline}
+Homicides_{it} = \beta_1 Post1999_t + \beta_2 Mahogany_i + \\ \beta_3 (Post1999_t *  Mahogany_i) + \epsilon_i
+\end{multline}
 \pause
 \begin{itemize}
 \item Cluster standard errors by municipality
 \pause
 \item Apply more complex state-specific trends for covariates to minimize risk of non-parallel trends
+\begin{itemize}
+\item Not quite unit-specific, but better than nothing
+\end{itemize}
 \pause
 \item Supporting evidence: The 'extra' homicides were the type we'd expect from illegal activity
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{center}
+\includegraphics[scale=0.35]{C_S_Results.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Testing for Pre-treatment trends:
+\begin{itemize}
+\pause
+\item A 'Placebo' treatment in 1997/8: No effect
+\pause
+\end{itemize}
+\item Also try a low-powered test with unit-specific time trends
+\begin{itemize}
+\pause
+\item Doesn't change the results
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{center}
+\includegraphics[scale=0.35]{C_S_Parallel_Trends.png}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -586,8 +619,11 @@ $$ Homicides_{it} = \beta_1 Post-1999_t + \beta_2 Mahogany_i \\ + \beta_3 (Post-
 \pause
 \begin{itemize}
 \item Illegal activity prevents 'peaceful' contract enforcement
+\pause
 \item Competition between loggers
+\pause
 \item Contract enforcement with buyers
+\pause
 \item Intimidation of communities to not report logging
 \end{itemize}
 \end{itemize}

@@ -195,6 +195,39 @@ data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
 
 data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
 
+data2 %>% filter(Time=="After" & Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2") 
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart_points_b, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
+
+data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
+                          Unit=factor(Unit,levels=c("Control","Treated","Counterfactual")))
+
+data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
+
+data2 %>% filter(Unit=="Treated") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
+   geom_line(aes(x=Time,y=Outcome,group=Unit), lty=2) +
+  theme_classic() + ylim(0,13) +
+  scale_colour_brewer(palette="Set2") 
+@
+\end{frame}
+
+\begin{frame}
+\frametitle{Difference-in-Differences}
+<<DinD_chart_points_c, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
+data2 <- data %>% gather("Before","After",key="Time",value="Outcome")
+
+data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
+                          Unit=factor(Unit,levels=c("Control","Treated","Counterfactual")))
+
+data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
+
 data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
    geom_line(aes(x=Time,y=Outcome,group=Unit), lty=2) +
   theme_classic() + ylim(0,13) +
@@ -204,8 +237,7 @@ data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point
 
 \begin{frame}
 \frametitle{Difference-in-Differences}
-<<DinD_chart_points_b, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
-library(ggforce)
+<<DinD_chart_points_d, echo=FALSE,fig.keep='high',fig.height=2.5, fig.width=5, warning=FALSE, message=FALSE>>=
 data2 <- data %>% gather("Before","After",key="Time",value="Outcome") %>%
   mutate(Unit=case_when(Unit=="Control"~"Control Unit",
                         Unit=="Treated"~"Treated Unit",
@@ -216,49 +248,15 @@ data2 <- data2 %>% mutate(Time=factor(Time,levels=c("Before","After")),
 
 data2 <- data2 %>% mutate(Treatment_Status=factor(c(0,0,0,0,1,1)))
 
+windowsFonts(Arial=windowsFont("TT Arial"))
 data2 %>% filter(Unit!="Counterfactual") %>% ungroup() %>% ggplot() + geom_point(aes(x=Time,y=Outcome,group=Unit,color=Treatment_Status), size=5) +
    geom_line(aes(x=Time,y=Outcome,group=Unit), lty=2) +
   theme_classic() + ylim(0,13) +
   scale_colour_brewer(palette="Set2") +
-  geom_mark_ellipse(aes(x=Time, y=Outcome, group=Unit, label=Unit))
-@
-\end{frame}
+  geom_mark_ellipse(aes(x=Time, y=Outcome, group=Unit, label=Unit),
+                    label.buffer = unit(5, 'mm'), label.family="Arial")
 
-\begin{frame}
-\frametitle{Difference-in-Differences}
-\tiny
-\begin{table}[htbp]
-  \centering
-    \begin{tabular}{|l|c|c|c|c|}
-    \hline
-          & \multicolumn{2}{p{12.43em}}{\textbf{Balances time-invariant 'fixed' unit characteristics}} & \multicolumn{2}{c}{\textbf{Balances time-varying characteristics}} \\
-              \hline
-          & \multicolumn{1}{l}{Observed} & \multicolumn{1}{l}{Unobserved} & \multicolumn{1}{l}{Overall trends} & \multicolumn{1}{l}{Unit-specific trends} \\
-              \hline
-    Field Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Survey and Lab Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-          &       &       &       &  \\
-              \hline
-    Natural Experiments & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Instrumental Variables & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-    Regression Discontinuity & \checkmark     & \checkmark     & \checkmark     & \checkmark \\
-        \hline
-          &       &       &       &  \\
-              \hline
-    Cross-sectional comparisons & X     & X     & \checkmark     & X \\
-        \hline
-    Before-After comparisons & \checkmark     & \checkmark     & X     & X \\
-        \hline
-    Difference-in-Differences & \checkmark     & \checkmark     & \checkmark     & X \\
-        \hline
-    \end{tabular}%
-  \label{tab:addlabel}%
-\end{table}%
-\normalsize
+@
 \end{frame}
 
 \begin{frame}
@@ -344,7 +342,7 @@ data2  %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \begin{frame}
 \frametitle{Estimating Difference-in-Differences}
 \begin{itemize}
-\item Regression for the cross-unit effect of treatment
+\item Regression for the cross-unit effect of being a treated unit
 \end{itemize}
 $$ Y_{it} = \alpha + \gamma D_i$$
 \pause
@@ -354,7 +352,7 @@ $$ Y_{it} = \alpha + \gamma D_i$$
 $$ Y_{it} = \alpha + \delta T_i$$
 \pause
 \begin{itemize}
-\item The difference-in-differences estimate is just the \textit{interaction} of time and treatment status
+\item The difference-in-differences estimate is just the \textit{interaction} of time and unit treatment status
 \end{itemize}
 $$ Y_{it} = \alpha + \gamma D_i + \delta T_t + \beta D_i * T_t $$
 \begin{itemize}
@@ -374,7 +372,7 @@ $D=0, T=1: E(Y)=$ \pause $\alpha + \delta$ \\
 \pause
 $D=1, T=0: E(Y)=$ \pause $\alpha + \gamma$ \\
 \pause
-$D=1, T=1: E(Y)=$ \pause $\alpha + \delta + \gamma + \beta$ \\ \\
+$D=1, T=1: E(Y)=$ \pause $\alpha + \delta + \gamma + \beta$ \\
 \vspace*{20px}
 \pause
 $\Delta(Y|D=1) = E(Y|D=1, T=1) - E(Y|D=1, T=0) =$ \pause $ \delta + \beta$ \\
@@ -501,12 +499,37 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \end{enumerate}
 \end{frame}
 
+\begin{frame}
+\frametitle{Difference-in-Differences}
+\tiny
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+\begin{tabular}{@{}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}@{}}
+\hline
+                                                  & Time-invariant characteristics                                        & \multicolumn{2}{|p{2.5cm}|}{Time-varying characteristics}                                                       \\ \hline
+\multicolumn{1}{|l|}{}                            & \multicolumn{1}{p{2.5cm}|}{Balances 'fixed' cross-sectional characteristics} & \multicolumn{1}{p{2.5cm}|}{Balances Overall Time Trends} & \multicolumn{1}{p{2.5cm}|}{Balances Unit-specific trends} \\ \hline
+\multicolumn{1}{|l|}{Field Experiments}           & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Survey and Lab Experiments}  & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Natural Experiments}         & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Instrumental Variables}      & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Regression Discontinuity}    & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{\checkmark}                             \\ \hline
+\multicolumn{1}{|l|}{Cross-sectional comparisons} & \multicolumn{1}{p{2.5cm}|}{X}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\multicolumn{1}{|l|}{Before-After comparisons}    & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{X}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\multicolumn{1}{|l|}{Difference-in-Differences}   & \multicolumn{1}{p{2.5cm}|}{\checkmark}                                                & \multicolumn{1}{p{2.5cm}|}{\checkmark}                            & \multicolumn{1}{p{2.5cm}|}{X}                             \\ \hline
+\end{tabular}
+\end{table}
+\normalsize
+\end{frame}
+
+
+
 \section{The Effect of Illegal Activities on Violence}
 
 \begin{frame}
 \frametitle{Chimeli and Soares 2017}
 \begin{itemize}
-\item How does an activity being illegal affect violence?
+\item How does making an activity illegal affect violence?
 \pause
 \item How did Brazil's ban on mahogany affect homicides?
 \pause
@@ -568,15 +591,51 @@ data6 %>% ggplot() + geom_line(aes(x=Time,y=Outcome,group=Unit,color=Unit)) +
 \item Methodology:
 \pause
 \end{itemize}
-$$ Homicides_{it} = \beta_1 Post-1999_t + \beta_2 Mahogany_i \\ + \beta_3 (Post-1999_t *  Mahogany_i) + \epsilon_i$$
+\begin{multline}
+Homicides_{it} = \beta_1 Post1999_t + \beta_2 Mahogany_i + \\ \beta_3 (Post1999_t *  Mahogany_i) + \epsilon_i
+\end{multline}
 \pause
 \begin{itemize}
 \item Cluster standard errors by municipality
 \pause
 \item Apply more complex state-specific trends for covariates to minimize risk of non-parallel trends
+\begin{itemize}
+\item Not quite unit-specific, but better than nothing
+\end{itemize}
 \pause
 \item Supporting evidence: The 'extra' homicides were the type we'd expect from illegal activity
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{center}
+\includegraphics[scale=0.35]{C_S_Results.png}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{itemize}
+\item Testing for Pre-treatment trends:
+\begin{itemize}
+\pause
+\item A 'Placebo' treatment in 1997/8: No effect
+\pause
+\end{itemize}
+\item Also try a low-powered test with unit-specific time trends
+\begin{itemize}
+\pause
+\item Doesn't change the results
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Chimeli and Soares 2017}
+\begin{center}
+\includegraphics[scale=0.35]{C_S_Parallel_Trends.png}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -586,8 +645,11 @@ $$ Homicides_{it} = \beta_1 Post-1999_t + \beta_2 Mahogany_i \\ + \beta_3 (Post-
 \pause
 \begin{itemize}
 \item Illegal activity prevents 'peaceful' contract enforcement
+\pause
 \item Competition between loggers
+\pause
 \item Contract enforcement with buyers
+\pause
 \item Intimidation of communities to not report logging
 \end{itemize}
 \end{itemize}
