@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -112,7 +112,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 9 - Controlling for Confounding}
 \author{Jonathan Phillips}
-\date{May 2019}
+\date{April 2020}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -158,9 +158,32 @@
 \begin{frame}
 \frametitle{Controlling for Confounding}
 \begin{itemize}
-\item Adding control variables changes the comparison we are making: \textbf{Treatment is associated with higher values of the Outcome...holding constant the values of X}
+\item What if we don't have repeated observations over time for the same units?
 \pause
-\item But when does controlling allow us to say: \textbf{Treatment \textit{causes} higher values of the Outcome}?
+\item Or what if \textit{everyone} is treated at the same point in time?
+\pause
+\item We cannot use Difference-in-Differences
+\pause
+\item For cross-sectional observational studies, the next-best alternative is...
+\pause
+\item Controls!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+
+\item \textbf{What we know:} Adding control variable X changes the comparison we are making: 
+\begin{itemize} 
+\item \textbf{Treatment is \textit{associated} with higher values of the Outcome...for units with the same values of X}
+\end{itemize}
+\pause
+
+\item \textbf{What we don't yet know:} When does controlling allow us to say: 
+\begin{itemize}
+\item \textbf{Treatment \textit{causes} higher values of the Outcome}?
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -171,7 +194,7 @@
 \pause
 $$(y_0,y_1) \perp D$$
 \pause
-\item But it's also acceptable if treatment assignment is \textbf{conditionally independent of potential outcomes}
+\item But it's also acceptable if treatment assignment is \textbf{\textit{conditionally} independent of potential outcomes}
 \pause
 $$(y_0,y_1) \perp D | X$$
 \pause
@@ -185,6 +208,40 @@ $$(y_0,y_1) \perp D | X$$
 \item We have to make an argument and provide supporting evidence
 \end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Controlling for Confounding}
+\begin{itemize}
+\item Why does controlling for confounders help provide conditional independence?
+\pause
+\item We need to know what problem - what bias - confounders create:
+\pause
+\begin{itemize}
+\item The problem is of 'fake correlations' - $D$ and $Y$ look like they're related, even though treatment does not affect the outcome. 
+\end{itemize}
+\item Controlling \textit{removes these fake correlations} by only comparing $D$ and $Y$ for units with the same value of $X$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Causal Diagrams (DAGs)}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=1.8\linewidth]{figure/Dag2_a-1} 
+
+\end{knitrout}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/Dag_graph_eg-1} 
+
+\end{knitrout}
+\end{column}
+\end{columns}
 \end{frame}
 
 
@@ -284,7 +341,7 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \pause
 \item Then, within each group, the confounder is \textbf{constant} and can't affect the relationship between $D$ and $Y$.
 \pause
-\item We have \textbf{created balance} between the treated and control groups on all other characteristics
+\item We have \textbf{created balance} between the treated and control groups on the confounder
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -303,6 +360,9 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \item Only the variables \textbf{necessary} to stop confounding
 \pause
 \item Including unnecessary variables can produce bias
+\begin{itemize}
+\item "Bad controls"/"Post-treatment Bias"
+\end{itemize}
 \pause
 \item We lose power (degrees of freedom) for every control we add
 \pause
@@ -388,10 +448,10 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \end{itemize}
 \item \textbf{Block back-door paths} by controlling for any variable along the path
 \pause
-\item Identify the \textbf{Minimum set of controls} to achieve conditional independence
+\item Identify the \textbf{Minimum set of controls} that blocks \textit{All} back-door paths
 \pause
 \begin{itemize}
-\item \textit{Any} set of variables which blocks \textit{All} back-door paths
+\item This achieves conditional independence of treatment from potential outcomes!
 \pause
 \item Include these as control variables in our regression
 \end{itemize}
@@ -442,7 +502,7 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \begin{itemize}
 \item Because variables measured 'after' treatment can also be affected by treatment
 \pause
-\item They're not confounders, but \textbf{mediating variables}
+\item They're not confounders, but mechanisms/\textbf{mediating variables}
 \pause
 \item Controlling for them changes the definition of the causal effect we are estimating
 \end{itemize}
@@ -461,13 +521,13 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \begin{frame}
 \frametitle{3. Colliders}
 \begin{itemize}
-\item Colliders are variables on back-door paths which have arrows pointing both into them and out of them
+\item Colliders are variables on back-door paths which have arrows pointing both into them \textit{and} out of them
 \pause
-\item The water 'collides' in both directions but the source variables are not correlated, so produce no bias
+\item The water 'collides' in both directions so the source variables are not correlated, and produce no bias
 \pause
-\item But if we do 'control' for a collider we \textit{introduce} a bias in the relationship between $D$ and $Y$
+\item But if we do accidentally 'control' for a collider we \textit{introduce} a bias in the relationship between $D$ and $Y$
 \pause
-\item So we must avoid controlling for them
+\item So we must avoid controlling for colliders
 \pause
 \item Hard!
 \end{itemize}
@@ -526,7 +586,7 @@ $$ \beta_{wrong} = \beta_{true} + \gamma \delta$$
 \item Include as controls enough variables to \textbf{block all back-door paths} from treatment to the outcome
 \pause
 \begin{itemize}
-\item In practice, variables which theory and past studies identify as potential confounderss
+\item In practice, variables which theory and past studies identify as potential confounders
 \end{itemize}
 \pause
 \item Exclude any variables that are \textbf{post-treatment}
