@@ -181,9 +181,7 @@ $$(y_0,y_1) \perp D | X$$
 
 \begin{frame}
 \frametitle{Causal Diagrams (DAGs)}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-<<Dag2_a,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.8\\linewidth'>>=
+<<Dag2_a,echo=FALSE,warning=FALSE,message=FALSE,out.width='1.4\\linewidth'>>=
 grViz("
 	digraph rmarkdown {
 
@@ -199,19 +197,6 @@ grViz("
     X->D
 	}", height=1600)
 @
-\end{column}
-\begin{column}{0.5\textwidth}
-<<Dag_graph_eg,fig.keep='high',fig.height=5, fig.width=7,echo=FALSE,warning=FALSE,message=FALSE>>=
-tibble_temp <- tibble(Treatment=rnorm(100,5,1),
-                      Outcome=Treatment+2+rnorm(100,0,1))
-
-tibble_temp %>% ggplot() +
-  geom_point(aes(x=Treatment, y=Outcome)) +
-  geom_smooth(aes(x=Treatment, y=Outcome), se=F, method="lm") +
-  theme_minimal()
-@
-\end{column}
-\end{columns}
 \end{frame}
 
 <<egdata1,echo=FALSE,warning=FALSE,message=FALSE>>=
