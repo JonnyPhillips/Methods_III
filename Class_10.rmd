@@ -13,18 +13,19 @@ knitr::opts_chunk$set(echo = TRUE)
 - **[Morgan and Winship, Counterfactuals and Causal Inference, Ch. 4](Classes/Class_10/Readings/MW_Ch4.pdf)**
 - **[Stuart, Elizabeth, 2010, Matching methods for causal inference: A review and a look forward, Stat Sci. 25:1](Classes/Class_10/Readings/Stuart 2010.pdf)**
 - **[Arceneaux, Kevin, Alan S. Gerber and Donald P. Green, 2005, Comparing Experimental and Matching Methods Using a Large-Scale Voter Mobilization Experiment, Political Analysis](Classes/Class_10/Readings/Gerber and Green 2005.pdf)**
+- **[Paper - Boas and Hidalgo 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil](Classes/Class_10/Replication/Boas_and_Hidalgo_2011.pdf)**
 
 #### Additional Readings
 - [Sekhon, Jasjeet S., Opiates for the Matches: Matching Methods for Causal Inference, Annual Review of Political Science](Classes/Class_10/Readings/Sekhon 2009.pdf)
 - [King, Gary et al, 2011, Comparative Effectiveness of Matching Methods for Causal Inference](Classes/Class_10/Readings/King et al 2011.pdf)
 <br> </br>
 
-## [Lecture Slides](Classes/Class_10/Slides_Matching_v1.pdf)
+<!-- ## [Lecture Slides](Classes/Class_10/Slides_Matching_v1.pdf) -->
 
-## [Lab Exercise to Complete during Class](Classes/Class_10/Lab_Exercise/Exercise_Matching_v4.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_10/Lab_Exercise/Exercise_Matching_v4.pdf) -->
 
-## Replication Exercise
-- [Exercise](Classes/Class_10/Replication/Replication_Matching_v2.pdf)
-- [Paper - Boas and Hidalgo 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil](Classes/Class_10/Replication/Boas_and_Hidalgo_2011.pdf)
-- [Data](Classes/Class_10/Replication/Boas_Hidalgo.csv)
-- [Suggested Responses](Classes/Class_10/Replication/Replication_Matching_v2_Suggested_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!-- - [Exercise](Classes/Class_10/Replication/Replication_Matching_v2.pdf) -->
+<!-- - [Paper - Boas and Hidalgo 2011, Controlling the Airwaves: Incumbency Advantage and Community Radio in Brazil](Classes/Class_10/Replication/Boas_and_Hidalgo_2011.pdf) -->
+<!-- - [Data](Classes/Class_10/Replication/Boas_Hidalgo.csv) -->
+<!-- - [Suggested Responses](Classes/Class_10/Replication/Replication_Matching_v2_Suggested_Responses.pdf) -->

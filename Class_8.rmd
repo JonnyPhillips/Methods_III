@@ -28,5 +28,5 @@ knitr::opts_chunk$set(echo = TRUE)
  - [Exercise](Classes/Class_8/Replication/Replication_6_diff_in_diff_v2.pdf)
  - [Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf)
  - Data: [Vietnam0810.csv](Classes/Class_8/Replication/Vietnam0810.csv), [Vietnam0608.csv](Classes/Class_8/Replication/Vietnam0608.csv) 
-<!-- - [Suggested Responses](Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf) -->
+ - [Suggested Responses](Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf)
 

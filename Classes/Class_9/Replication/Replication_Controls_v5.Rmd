@@ -1,0 +1,134 @@
+---
+title: "FLS 6415: Replication 7 - Controlling for Confounding"
+#author: "Jonathan"
+date: "April 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Wednesday 6th May.
+
+First read the paper by Baldwin (2013) on the course website. 
+
+The replication data is in the file *Baldwin_adjusted.csv*. A list of available variables is also provided below.
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(stargazer)
+library(estimatr)
+library(texreg)
+library(AER)
+library(haven)
+library(formatR)
+library(zeligverse)
+
+opts_chunk$set(echo=F, warning=F, message=F, include=F, tidy=T, eval=T)
+```
+
+```{r, eval=F, include=F}
+d <- read_dta("Zambian_chiefdom_dataset.dta")
+
+#Remove data where chief not in office, i.e. where missingchief08>0
+d2 <- d %>% filter(missingchief08==0) %>%
+  rename("pop2000"="pop1000") %>%
+  mutate(pop2009=pop2000*1.15 + rnorm(125,0,1)) %>%
+  select(-missingchief08)
+
+d2 %>% write_csv("Baldwin_adjusted.csv")
+```
+
+Variable       | Description
+---------------|------------------------------------------
+connectionsMPchief | Number of years the MP has known the chief (already in 'log' form) - **Treatment**
+tempclass08 | Number of temporary classrooms in 2007-2008 - **Outcome**
+tempclass07 | Number of temporary classrooms in 2006-2007
+pop2000 | Village population in 2000
+pop2009 | Village population in 2009
+experienceMP | Years since MP first elected
+experiencechief | Years since Chief installed
+voteMP06 | % Vote for MP
+MMD06 | MP form governing party
+diffvoteconst06 | Difference in vote share between top two candidates
+univMP | MP went to University
+cabinetMP | MP has ever been in the cabinet
+localMP | MP is from the chiefdom
+secondaryedchief | Chief completed secondary education
+politicalexpchief | Chief has ever participated in politics
+agechief | Age of the chief in years
+constcode | Constituency code
+classneedper100 | Students per Classroom 2006-07
+yearinstalledchief | Year became chief
+percturnout06 | Turnout 2006 election
+numcandidates | Number of candidates in 2006 election
+
+**1. We will focus on assessing Baldwin's (2013) claim that "politicians with stronger relationships to chiefs actually do provide more local public goods". Create a plot of the treatment variable (`connectionsMPchief`) against the outcome variable, the number of temporary classrooms in 2008 (`tempclass08`). Add a linear line of best fit to assess the relationship.**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+d <- read_csv("Baldwin_adjusted.csv")
+
+d %>%  ggplot() + geom_point(aes(x=connectionsMPchief,y=tempclass08)) + 
+  theme_classic() + 
+  geom_smooth(aes(x=connectionsMPchief,y=tempclass08),method="lm")
+```
+
+**2. Implement the basic linear regression of the outcome on treatment with no controls/covariates. Interpret what you can conclude from this regression. *Note:* The `connectionsMPchief` variable is already in 'log' form (see Class 1 for guidance on how to interpret logged explanatory variables).**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+Q2 <- lm(tempclass08 ~ connectionsMPchief,data=d)
+stargazer(Q2, header=FALSE)
+```
+
+**3. Provide two concrete, specific reasons for why our estimate in Q2 might be biased. In each case, which direction would the bias be?**
+
+**4. Describe the Treatment Assignment Mechanism (why some units got treated and not others) for our treatment variable, the length of the relationship between MP and Chief.**
+
+**5. Draw (by hand) the causal diagram (DAG) for our study, including the treatment effect of interest, the treatment assignment mechanism, and the threats to causal inference you described above. (Don't make it too complicated, just include the key variables and relationships!)**
+
+**6. Based on your causal diagram (DAG) in Q5, apply the three rules we discussed about back-door paths and describe one set of control variables which would be sufficient to provide an unbiased estimate of the causal effect of treatment (if the DAG were correct).**
+
+**7. One potential omitted variable (confounder) is population - in larger villages the MP and Chief are less likely to know each other personally, and village size might also affect the resources/demand for temporary classrooms. There are two potential control variables in the dataset we could use, a measure of population in 2000 (`pop2000`) and a measure of population in 2009 (`pop2009'). Which should we use, and why? **
+
+**8. Run the simple linear regression of the outcome on treatment, controlling for any variables you identified as appropriate in Q6 and Q7 above. How do your results compare to the results of the regresssion in Q2?**
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+Q8 <- lm(tempclass08 ~ connectionsMPchief + univMP + 
+           secondaryedchief + numcandidates + pop2000, data=d)
+stargazer(Q8, header=FALSE)
+``` 
+
+**9. Baldwin (2013) runs her regression using an ordered multinomial (ordered logit) model, reflecting the fact that the outcome variable (number of temporary classrooms) is not really continuous and can only take on a fixed set of integer values. Repeat your regression from Q8 but with an ordered logit model and interpret the results. (Note that Baldwin also clusters standard errors at the constituency (`constcode`) level, but don't worry about replicating this, just focus on the coefficient). **
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+Q9 <- zelig(tempclass08 ~ connectionsMPchief + univMP+secondaryedchief+numcandidates+ pop2000,data=d, model="ologit", cite=F) %>% from_zelig_model()
+stargazer(Q9, header=FALSE)
+```
+
+**10. Now replicate the results from column (1) of Baldwin's Table 1, i.e. only include the control variables that she includes in Table 1. Compare the estimated treatment effect with your own model in Q9. (Again, don't worry about the standard errors).**
+
+```{r,  echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+Q10 <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief, data=d, model="ologit",cite=FALSE) %>% from_zelig_model()
+
+Q10 %>% stargazer(header=FALSE)
+```
+
+**11. Replicate all three columns of Table 1 in Baldwin (2013). How stable is the estimate of the treatment effect to alternative specifications of the control variables?**
+
+```{r,  echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
+Q11b <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief + MMD06 + voteMP06 + diffvoteconst06, data=d, model="ologit",cite=FALSE) %>% from_zelig_model() 
+
+Q11c <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief + univMP + cabinetMP + localMP + agechief + secondaryedchief + politicalexpchief, data=d, model="ologit",cite=FALSE) %>% from_zelig_model() 
+
+stargazer(list(Q10,Q11b,Q11c), header=FALSE)
+```
+
+```{r, echo=F, eval=F, include=F}
+library(MASS)
+temp <- polr(factor(tempclass08) ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief + MMD06 + voteMP06 + diffvoteconst06, data=d)
+temp_cl <- sandwich::vcovCL(temp, d$constcode)
+
+vcovCL(Q11b, d$constcode)
+```
+

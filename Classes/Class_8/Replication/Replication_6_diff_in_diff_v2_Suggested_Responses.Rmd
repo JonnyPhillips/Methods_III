@@ -51,13 +51,19 @@ d <- read_csv("Vietnam0810.csv")
 
 **1. What is treatment and control in this study? What is the treatment assignment mechanism?**
 
+Treatment is recentralization. Control is maintaining the local councils. The treatment assignment mechanism is an unusual mix of a semi-experimental design by the Ministry of Home Affairs, with some stratification based on their selection criteria and awareness of the need for diversity, but without explicit randomization. While direct self-selection was not allowed, informal political lobbying may well have been possible, along with any conscious or unconscious biases of the Ministry.
+
 **2. Run the 'naive' cross-sectional OLS regression of the infrastructure index (one of the 6 presented in Table 3 of Malesky et al) on treatment. How do you interpret the results? Provide at least one specific reason why the treatment effect in your regression may be a biased estimate.**
 
 ```{r, results='asis'}
-d %>% lm(index_infra ~ treatment, data=.)  %>%
+d %>% filter(time==1) %>% lm(index_infra ~ treatment, data=.)  %>%
   texreg(caption="Q2", caption.above=T,
                 stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
 ```
+
+There appears to be no significant cross-sectional relationship between recentralization and the infrastructure index. 
+
+One omitted variable which could bias this estimate would be if larger, wealthier provinces were more likely to be recentralized as they would also be more likely to have better infrastructure.
 
 **3. Run the 'naive' before-after OLS regression of the infrastructure index on the time variable (1 for 2010, 0 for 2008) for the treated units only. How do you interpret the results? Provide at least one specific reason why the treatment effect in your regression may be a biased estimate.**
 
@@ -69,6 +75,10 @@ d %>% filter(treatment==1) %>%
 
 ```
 
+The quality of infrastructure improved in the second period when treatment took place. 
+
+One alternative explanation for this is overall trend bias not associated with treatment. For example, that infrastructure was generally improving over time throughout the country as it got richer and Chinese investment and expertise improved infrastructure. 
+
 **4. Now perform the main Difference-in-differences analysis for the Infrastructure Index outcome. Don't cluster your standard errors or include any control variables yet. Interpret the results.**
 
 ```{r, results='asis'}
@@ -77,13 +87,17 @@ d %>% lm(index_infra ~ time + treatment + time*treatment, data=.)  %>%
                 stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
 ```
 
-**5. Repeat Q4 but now add the control variables (`lnarea`,`lnpopden`,`city`, and `Region` fixed effects) used in Table 3 of Malesky et al. Compare your answers to those in Table 3 of the paper.**
+Recentralization is associated with a 0.25 improvement on the infrastructure index, which is statistically significant at the $p=0.01$ level. This value is the additional amount that treated provinces improved between 2008 and 2010 *more* than the control provinces.
+
+**5. Repeat Q4 but now add the control variables (`lnarea`, `lnpopden`, `city`, and `Region` fixed effects) used in Table 3 of Malesky et al. Compare your answers to those in Table 3 of the paper.**
 
 ```{r, results='asis'}
 d %>% lm(index_infra ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region), data=.)  %>%
   texreg(caption="Q5", caption.above=T,
                 stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
 ```
+
+Controlling for area, population density, city status, and comparing provinces within the same region, recentralization is associated with a 0.225 unit improvement in the quality of infrastructure, statistically significant at thr $p=0.05$ level. The results are comparable to those in Table 3 but with slightly different standard errors. 
 
 **6. Repeat Q5 but now with clustered standard errors at the `District` level. How does this alter your results?**
 
@@ -92,6 +106,8 @@ d %>% lm_robust(index_infra ~ time + treatment + time*treatment + lnarea + lnpop
   texreg(caption="Q6", caption.above=T,
                 stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3)
 ```
+
+Clustering standard errors at the district level increases the uncertainty around our coefficients and reduces their statistical significance, including for the crucial interaction term of the differences-in-differences methodology.
 
 **7. Using your regression model from Question 6 applied to all of the outcome variables, try to replicate all of the columns of Panel 1 of Table 3 of Malesky et al. (Some of them might not be the same).**
 
@@ -109,14 +125,22 @@ regs %>% texreg(caption="Q7", caption.above=T, omit.coef="Region",
                 custom.model.names=c("Infra",'Agric',"Health","Educ", "Comms", 'Business'))
 ```
 
-**8. Assess the balance in land area (`totalland`) of the treated and control units in time $t=0$ using a simple t-test. (Focus on the substantive difference more than the p-value.) Is there are any evidence of imbalance? Would this create a risk of bias for our difference-in-differences analysis?**
+The agricultural services index seems the least well replicated.
+
+**8. Assess the balance in land area (`totalland`) of the treated and control units in time $t=0$ using a simple t-test. (Focus on the substantive difference more than the p-value.) Is there any evidence of imbalance? Would this create a risk of bias for our difference-in-differences analysis?**
 
 ```{r}
 d %>% filter(time==0) %>% 
   t.test(totalland ~ treatment, data=.)
 ```
 
+While the difference is not significantly different from zero, provinces in the control group on average have a somewhat larger land area than those in the treatment group. This would be a particular risk of omitted variable bias if we thought that smaller regions were likely to have better outcomes, for example on the infrastructure index, as this could serve as an alternative explanation for our finding. 
+
+However, the difference-in-differences methodology is not vulnerable to this risk as it removes all non-time-varying confounders by comparing the treated units before and after treatment, using themselves as controls. So this is not a problem at all.
+
 **9. The difference-in-differences methodology cannot protect us against *time-varying* confounders. Provide an example of an omitted (confounding) variable that might create bias in our results even though we have used a differences-in-differences approach.**
+
+The concern is that provinces in the treatment group were already improving more rapidly on the outcome indicators (eg. the infrastructure index) before the treatment was introduced, so subsequent measured differences are due to unit-specific trends and not the treatment itself. For example, the bureaucrats in charge of the selection may have chosen the most 'up-and-coming' places to test the recentralization as these are the places they are more interested in or spend more time interacting with and have more connections with. 
 
 **10. One way of testing for the presence of time-varying confounders is to check that there are *parallel pre-treatment trends* in the outcomes for treated and control units. Using the second dataset, `Vietnam0608.csv`, and your main difference-in-differences regression from Question 6 (with control variables and clustered standard errors), assess if treated units had a different trend to control units before treatment, i.e. between 2006 and 2008, for each of the 6 outcome indices. This should replicate Panel 2 of Table 3 in Malesky et al.**
 
@@ -141,10 +165,20 @@ d2 %>% write_csv("Vietnam0608.csv")
 ```{r, results='asis'}
 d2 <- read_csv("Vietnam0608.csv")
 
-d2 %>% lm_robust(index_infra ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region), data=., cluster=District)  %>%
-  texreg(caption="Q10", caption.above=T,
-                stars=c(0.01, 0.05, 0.1), include.ci=F)
+vars <- c("index_infra", "index_agric", "index_health", "index_education",
+          "index_comms", "index_bus_dev")
+
+regs_pre <- vars %>% 
+  map(~lm_robust(as.formula(paste0(.x," ~ time + treatment + time*treatment + lnarea + lnpopden + city + factor(Region)")), 
+                 data=d2, 
+                 cluster=District))
+
+regs_pre %>% texreg(caption="Q10", caption.above=T, omit.coef="Region",
+                stars=c(0.01, 0.05, 0.1), include.ci=F, digits=3,
+                custom.model.names=c("Infra",'Agric',"Health","Educ", "Comms", 'Business'))
 ```
+
+Applying the same regression specification to the earlier time period reveals no significant effect, and in fact a substantively negative coefficient on the interaction term. This provides considerable confidence that our earlier results are not due to unit-specific trends. 
 
 **11. Create a Difference-in-differences chart showing the average Infrastructure Index outcome by treatment group between 2008 and 2010. Compare this to the same chart between 2006 and 2008. What do these charts suggest about the validity of our difference-in-differences methodology?**
 
@@ -157,3 +191,9 @@ d %>% mutate(time=time+1) %>% bind_rows(d2) %>%
   theme_classic()
 ```
 
+The charts also highlight that the treated group's infrastructure was declining before the recentralization, so it is even more surprising that it started improving faster than the control group after the recentralization. 
+
+<!-- Possible question about imbalance as numebr of units changes over time and between groups -->
+<!-- Check District vs. Province language. Confusing -->
+<!-- Need to standardized agric index to 0 to 1 to replicate values -->
+<!-- Q2 specify in Q compare in time=1 -->
