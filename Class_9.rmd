@@ -22,6 +22,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## [Lecture Slides](Classes/Class_9/Slides_Controls_v2.pdf)
 
 ## [Lab Exercise to Complete during Class](Classes/Class_9/Lab Exercise/Exercise_Controls_v6.pdf)
+  - [Suggested Responses](Classes/Class_9/Lab Exercise/Exercise_Controls_v6_Suggested_Responses_Suggested_Responses.pdf)
 
 ## Replication Exercise
  - [Exercise](Classes/Class_9/Replication/Replication_Controls_v5.pdf) 

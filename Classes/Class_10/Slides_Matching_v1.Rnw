@@ -62,7 +62,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 10 - Matching}
 \author{Jonathan Phillips}
-\date{June 2019}
+\date{May 2020}
 
 \begin{document}
 
@@ -123,6 +123,7 @@ library(xtable)
 \item \textbf{Model-dependence} - Variable X is a confounder, but is it linear, quadratic, cubic or what? The wrong model of the real relationship with the outcome biases our results
 \pause
 \item \textbf{Researcher/publication bias} - Lots of freedom to tweak the regression to get positive results
+\pause
 \end{enumerate}
 \item All of these reflect the fact that regression is \textbf{parametric}
 \pause
@@ -155,12 +156,14 @@ library(xtable)
 \begin{frame}
 \frametitle{Matching}
 \begin{itemize}
-\item If treated and control groups have the \textbf{same values} of \textbf{all} of the confounding variables, we know that treatment is independent of potential outcomes
+\item If treated and control groups have the \textbf{same values} of \textbf{all} of the confounding variables, we know that treatment is (conditionally) independent of potential outcomes
 \pause
 \item There is no variation in the confounders that could possibly explain the difference between the outcomes in treated and control groups
 \pause
+\item So how do we force balance on multiple variables?
+\pause
 \begin{enumerate}
-\item One way of forcing balance is by \textbf{ajusting} each treated observation to predict what it would 'look like' if it were identical to a control observation - a regression model
+\item One way is by \textbf{adjusting/extrapolating} each treated observation to predict what it would 'look like' if it were identical to a control observation - a regression model
 \pause
 \item An alternative is just to \textbf{throw out} all of the treated observations that do not have a comparable control observation - this is matching
 \end{enumerate}
@@ -174,6 +177,7 @@ library(xtable)
 \begin{itemize}
 \item Dropping units that don't have good counterfactuals in the data
 \end{itemize}
+\pause
 \item It succeeds only where we can measure and create balance on all confounding variables
 \pause
 \item Matching is \textbf{NOT} an experimental method
@@ -189,7 +193,9 @@ library(xtable)
 \pause
 \item Drop all the unmatched units (eg. 'extra' treated units that are 'far away' from any control units)
 \pause
-\item Assess balance - re-run the matching process as many times as you can to maximize balance!
+\item Assess balance
+\pause
+\item If balance is low, re-run the matching process as many times as you can to maximize balance!
 \end{enumerate}
 \end{frame}
 
@@ -288,11 +294,11 @@ tibble(x1=c(5,17,4), x2=c(8,2,9), D=c(1,1,0)) %>% slice(1,3) %>% ggplot() +
 \begin{enumerate}
 \item Matching on few categorical variables: \textbf{Exact Matching}
 \pause
-\item Matching on continuous variables (sequential): \textbf{Nearest-Neighbour Matching}
+\item Matching on continuous variables (sequentially): \textbf{Nearest-Neighbour Matching}
 \pause
 \item Matching to maximize balance: \textbf{Optimal/Genetic Matching}
 \pause
-\item Matching on the probability of treatment: \textbf{Propensity Score Matching}
+\item Matching to balance the probability of treatment: \textbf{Propensity Score Matching}
 \end{enumerate}
 \end{frame}
 

@@ -1,0 +1,158 @@
+---
+title: "Exercise: Controlling for Confounding"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = T, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=T)
+library(tidyverse)
+library(stargazer)
+library(estimatr)
+```
+
+Let's simulate some fake data and see when we are able to recover the correct treatment effect just by controlling for covariates. 
+
+1. First, let's generate two potential confounder variables for 10,000 people. 
+(a) The variable 'age' should be drawn randomly from the normal distribution with mean 40 and standard deviation 7.
+(b) The variable 'gender' should be drawn randomly from the binomial distribution with a 0.5 probability of being male or female. (Let's assume gender=1 is female).
+
+```{r}
+set.seed(54321)
+N <- 10000
+d <- tibble(age=rnorm(N,40,7),
+            gender=rbinom(N,1,0.5))
+```
+
+2. Our outcome is going to be attitudes to redistribution. Use the expressions below to simulate potential outcomes, with a constant treatment effect of 5.
+
+$$y_0=N(10,2)+\frac{age}{5} - 12*gender$$ 
+
+$$y_1=y_0+5$$
+
+```{r}
+d <- d %>% mutate(y_0=rnorm(N,10,2) + age/5 - 12*gender,
+                  y_1=y_0+5)
+```
+
+3. Treatment $D$ is receiving a government social program, but treatment is **not** randomly  assigned in any way. Instead, treatment depends on age and gender, with older women more likely to be treated. Binary (1/0) treatment is determined by the following expression:
+
+$$D=\begin{cases}
+1 \text{ if } (20*gender + age)>50 \\ 
+0 \text{ else }
+\end{cases}$$
+
+```{r}
+d <- d %>% mutate(D=case_when(20*gender+age>50~1,
+                              T~0))
+```
+
+4. Calculate observed outcomes based on potential outcomes and treatment.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+5. Let's start with the 'naive' regression of the outcome on treatment with no controls. How does the result compare to our assumed treatment effect?
+
+```{r, results='asis'}
+d %>% lm(y_obs~D, data=.) %>% stargazer(title="Q5",
+                                                       header=F)
+```
+
+6. Is the result of the 'naive' regression larger or smaller than it should be? Why? Be specific and be concrete about the type and direction of bias.
+
+The result is smaller than we specified. Gender is a confounder: Women are more likely to be treated but have much lower potential outcomes, so the $y_1$s we see are more often for women and lower than for the overall sample, while the $y_0$s are higher.
+
+7. Draw (by hand and take a photo) the causal diagram (DAG) associated with the variables and equations we have generated above. 
+
+8. Identify all the back-door paths connecting treatment ($D$) and the outcome ($Y$). To **block** these back-door paths, which variables do we need to control for?
+
+Gender and age.
+
+9. Run a regression that controls for the variables you identified in Q8. Compare the result to the 'correct' treatment effect we assumed at the start.
+
+```{r, results='asis'}
+d %>% lm(y_obs~D + gender + age, data=.) %>% stargazer(title="Q9",
+                                                       header=F)
+```
+
+10. That was the easy part. Now let's make our example more complicated. First, imagine that attitudes to redistribution are **NOT** our outcome variable of interest. Instead, our outcome of interest is how much people gave to charity. Generate a new variable for charitable donations which directly depends on attitudes to redistribution (plus some noise):
+
+$$Charity=N(0,2) + 2*y_{obs}$$
+Note that the treatment effect of $D$ on $Charity$ should now be 10: $D$ increases $y_{obs}$ by 5, and then this effect is multiplied by 2 to create $Charity$.
+
+```{r}
+d <- d %>% mutate(Charity=rnorm(N,0,2) + 2*y_obs)
+```
+
+11. Draw the causal diagram (DAG) for this new set of variables including $Charity$.
+
+12. Now charity outcomes depend on treatment, age, gender and attitude to redistribution ($y_{obs}$) so let's regress charity on all of these variables. Is the estimate of the treatment effect correct? What's wrong with this regression?
+
+```{r, results='asis'}
+d %>% lm(Charity~D + gender + age + y_obs, data=.) %>% stargazer(title="Q12",
+                                                       header=F)
+```
+
+The estimate is less than expected because we are controlling for a post-treatment variable, which is removing part of the treatment effect.
+
+13. Propose and implement a regression to correctly estimate the effect of the treatment on $Charity$, only including appropriate controls. 
+
+```{r, results='asis'}
+d %>% lm(Charity~D + gender + age, data=.) %>% stargazer(title="Q13",
+                                                       header=F)
+```
+
+14. Finally, let's forget about the $Charity$ variable and create two more variables, $Education$ and $Religion$, as described below. Then redefine potential outcomes and recalculate observed outcomes, where the outcome is Attitude to Redistribution.
+
+$$education = N(10,1)$$
+
+$$religion = \begin{cases}
+1\text{ if } (2*age + 2*education + N(3,1))>100\\ 
+0 \text{ else}
+\end{cases}$$
+
+$$D=\begin{cases}
+1 \text{ if } (20*gender + age)>50 \\ 
+0 \text{ else }
+\end{cases}$$
+
+$$y_0=N(10,2)+\frac{age}{5} - 3*gender + 5*education$$ 
+$$y_1=y_0+5$$
+
+```{r}
+d <- d %>% mutate(education=rnorm(N,10,1),
+                  religion=case_when(2*age+2*education+rnorm(N,3,1)>100~1,
+                                     T~0),
+                  y_0=rnorm(N,10,2) + age/5 - 3*gender + 5*education,
+                  y_1=y_0+5,
+                  y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+15. Draw the causal diagram (DAG) including all of these variables. Identify all the back-door paths. How many are there? Which ones are open and which ones are blocked?
+
+The key point is that the path running through religion is a collider and so is already blocked. 
+
+16. Identify a minimum set of variables you need to control for to recover the correct treatment effect (don't run this regression yet).
+
+Gender and age are sufficient.
+
+17. If we just received a dataset with our treatment, outcome, gender, age, and religion variables, we might consider these last three all potential confounder variables and want to control for them. Run the regression of observed attitude outcomes on treatment, gender, age and religion. Is the estimated treatment effect correct? Why/why not?
+
+```{r, results='asis'}
+d %>% lm(y_obs~D + gender + age + religion, data=.) %>% stargazer(title="Q17",
+                                                       header=F)
+```
+
+This estimate is inaccurate because we are controlling for a collider (religion).
+
+18. Now remove religion from your regression. Is the estimated treatment effect correct?
+
+```{r, results='asis'}
+d %>% lm(y_obs~D + gender + age, data=.) %>% stargazer(title="Q18",
+                                                       header=F)
+```
+
