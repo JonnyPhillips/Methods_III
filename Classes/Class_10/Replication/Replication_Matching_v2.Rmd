@@ -7,7 +7,7 @@ output:
   html_document: default
 ---
 
-To be submitted (code + answers) by midnight, Thursday 14th May.
+To be submitted (code + answers) by midnight, Wednesday 13th May.
 
 First read the paper by Boas and Hidalgo (2011) on the course website. For this replication we will focus on the *second half* of their paper, not the initial RDD but the matching analysis of how possession of a radio licence affects the mayor's vote share in the next election.
 

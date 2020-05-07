@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  30 MAY 2019 13:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  7 MAY 2020 11:40
 entering extended mode
 **./Slides_Matching_v1.tex
 (Slides_Matching_v1.tex
@@ -1522,21 +1522,21 @@ LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
 
 ]
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 177.
+(Font)              scaled to size 10.51207pt on input line 178.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 177.
+(Font)              scaled to size 7.68005pt on input line 178.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 177.
+(Font)              scaled to size 5.76004pt on input line 178.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 177.
+(Font)              scaled to size 10.51207pt on input line 178.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 177.
+(Font)              scaled to size 7.68005pt on input line 178.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 177.
+(Font)              scaled to size 5.76004pt on input line 178.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 177.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 178.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 177.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 178.
  [4
 
 ] [5
@@ -1547,18 +1547,18 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
 
 ] [8
 
+] [9
+
 ]
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 196.
+(Font)              scaled to size 9.60007pt on input line 197.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.29605pt on input line 196.
+(Font)              scaled to size 7.29605pt on input line 197.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 196.
+(Font)              scaled to size 9.60007pt on input line 197.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.29605pt on input line 196.
- [9
-
-] [10
+(Font)              scaled to size 7.29605pt on input line 197.
+ [10
 
 ] [11
 
@@ -1587,58 +1587,57 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 
 ] [23
 
+] [24
+
+] [25
+
+] [26
+
+] [27
+
 ]
-<figure/unnamed-chunk-1-1.pdf, id=1790, 237.88875pt x 237.88875pt>
+<figure/unnamed-chunk-1-1.pdf, id=2046, 237.88875pt x 237.88875pt>
 File: figure/unnamed-chunk-1-1.pdf Graphic file (type pdf)
 <use figure/unnamed-chunk-1-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-1-1.pdf  used on input line 249.
+Package pdftex.def Info: figure/unnamed-chunk-1-1.pdf  used on input line 255.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (31.67764pt too high) detected at line 249
+Overfull \vbox (31.67764pt too high) detected at line 255
  []
 
-[24
+[28
 
  <./figure/unnamed-chunk-1-1.pdf>]
-<figure/unnamed-chunk-2-1.pdf, id=1866, 237.88875pt x 237.88875pt>
+<figure/unnamed-chunk-2-1.pdf, id=2121, 237.88875pt x 237.88875pt>
 File: figure/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use figure/unnamed-chunk-2-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-2-1.pdf  used on input line 261.
+Package pdftex.def Info: figure/unnamed-chunk-2-1.pdf  used on input line 267.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (31.67764pt too high) detected at line 261
+Overfull \vbox (31.67764pt too high) detected at line 267
  []
 
-[25
+[29
 
  <./figure/unnamed-chunk-2-1.pdf>]
-<figure/unnamed-chunk-3-1.pdf, id=1943, 237.88875pt x 237.88875pt>
+<figure/unnamed-chunk-3-1.pdf, id=2196, 237.88875pt x 237.88875pt>
 File: figure/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use figure/unnamed-chunk-3-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-3-1.pdf  used on input line 273.
+Package pdftex.def Info: figure/unnamed-chunk-3-1.pdf  used on input line 279.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (31.67764pt too high) detected at line 273
+Overfull \vbox (31.67764pt too high) detected at line 279
  []
 
-[26
+[30
 
- <./figure/unnamed-chunk-3-1.pdf>] [27
-
-] [28
-
-] [29
-
-] [30
-
-] [31
+ <./figure/unnamed-chunk-3-1.pdf>] [31
 
 ] [32
 
 ] [33
 
-]
-[34
+] [34
 
 ] [35
 
@@ -1646,501 +1645,501 @@ Overfull \vbox (31.67764pt too high) detected at line 273
 
 ] [37
 
-] [38
+]
+[38
 
 ] [39
 
+] [40
+
+] [41
+
+] [42
+
+] [43
+
 ]
-<Ho_Slides.pdf, id=2944, 364.19562pt x 273.14648pt>
+<Ho_Slides.pdf, id=3184, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf>
-Package pdftex.def Info: Ho_Slides.pdf  used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf  used on input line 321.
 (pdftex.def)             Requested size: 364.19473pt x 273.14581pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf>
-Package pdftex.def Info: Ho_Slides.pdf  used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf  used on input line 321.
 (pdftex.def)             Requested size: 364.19473pt x 273.14581pt.
-<Ho_Slides.pdf, id=2947, page=13, 364.19562pt x 273.14648pt>
+<Ho_Slides.pdf, id=3187, page=13, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 13>
-Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 321.
 (pdftex.def)             Requested size: 364.19473pt x 273.14581pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 13>
-Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 13>
-Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 13>
-Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 13>
-Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page13 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
- [40
+ [44
 
  <./Ho_Slides.pdf>]
-<Ho_Slides.pdf, id=2983, page=14, 364.19562pt x 273.14648pt>
+<Ho_Slides.pdf, id=3223, page=14, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 14>
-Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 315.
-(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
-File: Ho_Slides.pdf Graphic file (type pdf)
-<use Ho_Slides.pdf, page 14>
-Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 14>
-Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
- [41 <./Ho_Slides.pdf>]
-<Ho_Slides.pdf, id=2996, page=15, 364.19562pt x 273.14648pt>
+File: Ho_Slides.pdf Graphic file (type pdf)
+<use Ho_Slides.pdf, page 14>
+Package pdftex.def Info: Ho_Slides.pdf , page14 used on input line 321.
+(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
+ [45 <./Ho_Slides.pdf>]
+<Ho_Slides.pdf, id=3236, page=15, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 15>
-Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 15>
-Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 15>
-Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page15 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 
-[42 <./Ho_Slides.pdf>]
-<Ho_Slides.pdf, id=3009, page=16, 364.19562pt x 273.14648pt>
+[46 <./Ho_Slides.pdf>]
+<Ho_Slides.pdf, id=3249, page=16, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 16>
-Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 315.
-(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
-File: Ho_Slides.pdf Graphic file (type pdf)
-<use Ho_Slides.pdf, page 16>
-Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 16>
-Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
- [43 <./Ho_Slides.pdf>]
-<Ho_Slides.pdf, id=3016, page=17, 364.19562pt x 273.14648pt>
+File: Ho_Slides.pdf Graphic file (type pdf)
+<use Ho_Slides.pdf, page 16>
+Package pdftex.def Info: Ho_Slides.pdf , page16 used on input line 321.
+(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
+ [47 <./Ho_Slides.pdf>]
+<Ho_Slides.pdf, id=3255, page=17, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 17>
-Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 17>
-Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 17>
-Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page17 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
- [44 <./Ho_Slides.pdf>]
-<Ho_Slides.pdf, id=3031, page=18, 364.19562pt x 273.14648pt>
+ [48 <./Ho_Slides.pdf>]
+<Ho_Slides.pdf, id=3270, page=18, 364.19562pt x 273.14648pt>
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 18>
-Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 315.
-(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
-File: Ho_Slides.pdf Graphic file (type pdf)
-<use Ho_Slides.pdf, page 18>
-Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
 File: Ho_Slides.pdf Graphic file (type pdf)
 <use Ho_Slides.pdf, page 18>
-Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 315.
+Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 321.
 (pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
- [45 <./Ho_Slides.pdf>] [46] [47
+File: Ho_Slides.pdf Graphic file (type pdf)
+<use Ho_Slides.pdf, page 18>
+Package pdftex.def Info: Ho_Slides.pdf , page18 used on input line 321.
+(pdftex.def)             Requested size: 364.38922pt x 273.29169pt.
+ [49 <./Ho_Slides.pdf>] [50] [51
 
-] [48
+] [52
 
-] [49
+] [53
 
-] [50
+] [54
 
-] [51
+] [55
 
 ]
-<figure/exact_matching_1-1.pdf, id=3472, 237.88875pt x 237.88875pt>
+<figure/exact_matching_1-1.pdf, id=3706, 237.88875pt x 237.88875pt>
 File: figure/exact_matching_1-1.pdf Graphic file (type pdf)
 <use figure/exact_matching_1-1.pdf>
-Package pdftex.def Info: figure/exact_matching_1-1.pdf  used on input line 347.
+Package pdftex.def Info: figure/exact_matching_1-1.pdf  used on input line 353.
 
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 347
+Overfull \vbox (22.88217pt too high) detected at line 353
  []
 
-[52
+[56
 
  <./figure/exact_matching_1-1.pdf>]
-<figure/exact_matching_2a-1.pdf, id=3548, 237.88875pt x 237.88875pt>
+<figure/exact_matching_2a-1.pdf, id=3781, 237.88875pt x 237.88875pt>
 File: figure/exact_matching_2a-1.pdf Graphic file (type pdf)
 <use figure/exact_matching_2a-1.pdf>
-Package pdftex.def Info: figure/exact_matching_2a-1.pdf  used on input line 358
+Package pdftex.def Info: figure/exact_matching_2a-1.pdf  used on input line 364
 .
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 358
+Overfull \vbox (22.88217pt too high) detected at line 364
  []
 
-[53
+[57
 
  <./figure/exact_matching_2a-1.pdf>]
-<figure/exact_matching_2b-1.pdf, id=3624, 237.88875pt x 237.88875pt>
+<figure/exact_matching_2b-1.pdf, id=3856, 237.88875pt x 237.88875pt>
 File: figure/exact_matching_2b-1.pdf Graphic file (type pdf)
 <use figure/exact_matching_2b-1.pdf>
-Package pdftex.def Info: figure/exact_matching_2b-1.pdf  used on input line 369
+Package pdftex.def Info: figure/exact_matching_2b-1.pdf  used on input line 375
 .
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 369
+Overfull \vbox (22.88217pt too high) detected at line 375
  []
 
-[54
+[58
 
  <./figure/exact_matching_2b-1.pdf>]
-<figure/exact_matching_3-1.pdf, id=3704, 237.88875pt x 237.88875pt>
+<figure/exact_matching_3-1.pdf, id=3935, 237.88875pt x 237.88875pt>
 File: figure/exact_matching_3-1.pdf Graphic file (type pdf)
 <use figure/exact_matching_3-1.pdf>
-Package pdftex.def Info: figure/exact_matching_3-1.pdf  used on input line 380.
+Package pdftex.def Info: figure/exact_matching_3-1.pdf  used on input line 386.
 
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 380
+Overfull \vbox (22.88217pt too high) detected at line 386
  []
 
-[55
+[59
 
- <./figure/exact_matching_3-1.pdf>] [56
-
-] [57
-
-] [58
-
-] [59
-
-] [60
+ <./figure/exact_matching_3-1.pdf>] [60
 
 ] [61
 
 ] [62
 
+] [63
+
+] [64
+
+] [65
+
+] [66
+
 ]
-<figure/exact_matching_analysis0-1.pdf, id=4277, 237.88875pt x 237.88875pt>
+<figure/exact_matching_analysis0-1.pdf, id=4499, 237.88875pt x 237.88875pt>
 File: figure/exact_matching_analysis0-1.pdf Graphic file (type pdf)
 <use figure/exact_matching_analysis0-1.pdf>
 Package pdftex.def Info: figure/exact_matching_analysis0-1.pdf  used on input l
-ine 433.
+ine 439.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 433
- []
-
-[63
-
- <./figure/exact_matching_analysis0-1.pdf>]
-<figure/exact_matching_analysis0b-1.pdf, id=4353, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis0b-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis0b-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis0b-1.pdf  used on input 
-line 444.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 444
- []
-
-[64
-
- <./figure/exact_matching_analysis0b-1.pdf>]
-<figure/exact_matching_analysis-1.pdf, id=4429, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis-1.pdf  used on input li
-ne 455.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 455
- []
-
-[65
-
- <./figure/exact_matching_analysis-1.pdf>]
-<figure/exact_matching_analysis1b-1.pdf, id=4509, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis1b-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis1b-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis1b-1.pdf  used on input 
-line 466.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 466
- []
-
-[66
-
- <./figure/exact_matching_analysis1b-1.pdf>]
-<figure/exact_matching_analysis2-1.pdf, id=4585, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis2-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis2-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis2-1.pdf  used on input l
-ine 477.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 477
+Overfull \vbox (22.88217pt too high) detected at line 439
  []
 
 [67
 
- <./figure/exact_matching_analysis2-1.pdf>]
-<figure/exact_matching_analysis3-1.pdf, id=4662, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis3-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis3-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis3-1.pdf  used on input l
-ine 488.
+ <./figure/exact_matching_analysis0-1.pdf>]
+<figure/exact_matching_analysis0b-1.pdf, id=4575, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis0b-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis0b-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis0b-1.pdf  used on input 
+line 450.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 488
+Overfull \vbox (22.88217pt too high) detected at line 450
  []
 
 [68
 
- <./figure/exact_matching_analysis3-1.pdf>]
-<figure/exact_matching_analysis4-1.pdf, id=4738, 237.88875pt x 237.88875pt>
-File: figure/exact_matching_analysis4-1.pdf Graphic file (type pdf)
-<use figure/exact_matching_analysis4-1.pdf>
-Package pdftex.def Info: figure/exact_matching_analysis4-1.pdf  used on input l
-ine 499.
+ <./figure/exact_matching_analysis0b-1.pdf>]
+<figure/exact_matching_analysis-1.pdf, id=4650, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis-1.pdf  used on input li
+ne 461.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 499
+Overfull \vbox (22.88217pt too high) detected at line 461
  []
 
 [69
 
- <./figure/exact_matching_analysis4-1.pdf>]
-<figure/nearest_matching_1-1.pdf, id=4814, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_1-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_1-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_1-1.pdf  used on input line 51
-2.
+ <./figure/exact_matching_analysis-1.pdf>]
+<figure/exact_matching_analysis1b-1.pdf, id=4729, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis1b-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis1b-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis1b-1.pdf  used on input 
+line 472.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 512
+Overfull \vbox (22.88217pt too high) detected at line 472
  []
 
 [70
 
- <./figure/nearest_matching_1-1.pdf>]
-<figure/nearest_matching_2_pre-1.pdf, id=4890, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_2_pre-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_2_pre-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_2_pre-1.pdf  used on input lin
-e 523.
+ <./figure/exact_matching_analysis1b-1.pdf>]
+<figure/exact_matching_analysis2-1.pdf, id=4804, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis2-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis2-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis2-1.pdf  used on input l
+ine 483.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 523
+Overfull \vbox (22.88217pt too high) detected at line 483
  []
 
 [71
 
- <./figure/nearest_matching_2_pre-1.pdf>]
-<figure/nearest_matching_2-1.pdf, id=4966, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_2-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_2-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_2-1.pdf  used on input line 53
-5.
+ <./figure/exact_matching_analysis2-1.pdf>]
+<figure/exact_matching_analysis3-1.pdf, id=4879, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis3-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis3-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis3-1.pdf  used on input l
+ine 494.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 535
+Overfull \vbox (22.88217pt too high) detected at line 494
  []
 
 [72
 
- <./figure/nearest_matching_2-1.pdf>]
-<figure/nearest_matching_3-1.pdf, id=5042, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_3-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_3-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_3-1.pdf  used on input line 54
-6.
+ <./figure/exact_matching_analysis3-1.pdf>]
+<figure/exact_matching_analysis4-1.pdf, id=4954, 237.88875pt x 237.88875pt>
+File: figure/exact_matching_analysis4-1.pdf Graphic file (type pdf)
+<use figure/exact_matching_analysis4-1.pdf>
+Package pdftex.def Info: figure/exact_matching_analysis4-1.pdf  used on input l
+ine 505.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 546
+Overfull \vbox (22.88217pt too high) detected at line 505
  []
 
 [73
 
- <./figure/nearest_matching_3-1.pdf>]
-<figure/nearest_matching_4-1.pdf, id=5123, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_4-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_4-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_4-1.pdf  used on input line 55
-7.
+ <./figure/exact_matching_analysis4-1.pdf>]
+<figure/nearest_matching_1-1.pdf, id=5030, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_1-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_1-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_1-1.pdf  used on input line 51
+8.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 557
+Overfull \vbox (22.88217pt too high) detected at line 518
  []
 
 [74
 
- <./figure/nearest_matching_4-1.pdf>] [75
+ <./figure/nearest_matching_1-1.pdf>]
+<figure/nearest_matching_2_pre-1.pdf, id=5105, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_2_pre-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_2_pre-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_2_pre-1.pdf  used on input lin
+e 529.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-] [76
+Overfull \vbox (22.88217pt too high) detected at line 529
+ []
 
-] [77
+[75
 
-] [78
+ <./figure/nearest_matching_2_pre-1.pdf>]
+<figure/nearest_matching_2-1.pdf, id=5180, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_2-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_2-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_2-1.pdf  used on input line 54
+1.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-] [79
+Overfull \vbox (22.88217pt too high) detected at line 541
+ []
+
+[76
+
+ <./figure/nearest_matching_2-1.pdf>]
+<figure/nearest_matching_3-1.pdf, id=5255, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_3-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_3-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_3-1.pdf  used on input line 55
+2.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 552
+ []
+
+[77
+
+ <./figure/nearest_matching_3-1.pdf>]
+<figure/nearest_matching_4-1.pdf, id=5334, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_4-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_4-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_4-1.pdf  used on input line 56
+3.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 563
+ []
+
+[78
+
+ <./figure/nearest_matching_4-1.pdf>] [79
 
 ] [80
 
 ] [81
 
-]
-[82
+] [82
+
+] [83
+
+] [84
+
+] [85
 
 ]
-<figure/nearest_matching_1_caliper-1.pdf, id=5766, 237.88875pt x 237.88875pt>
+[86
+
+]
+<figure/nearest_matching_1_caliper-1.pdf, id=5969, 237.88875pt x 237.88875pt>
 File: figure/nearest_matching_1_caliper-1.pdf Graphic file (type pdf)
 <use figure/nearest_matching_1_caliper-1.pdf>
 Package pdftex.def Info: figure/nearest_matching_1_caliper-1.pdf  used on input
- line 618.
+ line 624.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 618
- []
-
-[83
-
- <./figure/nearest_matching_1_caliper-1.pdf>]
-<figure/nearest_matching_2_pre_caliper-1.pdf, id=5842, 237.88875pt x 237.88875p
-t>
-File: figure/nearest_matching_2_pre_caliper-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_2_pre_caliper-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_2_pre_caliper-1.pdf  used on i
-nput line 629.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 629
- []
-
-[84
-
- <./figure/nearest_matching_2_pre_caliper-1.pdf>]
-<figure/nearest_matching_2_caliper-1.pdf, id=5918, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_2_caliper-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_2_caliper-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_2_caliper-1.pdf  used on input
- line 640.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 640
- []
-
-[85
-
- <./figure/nearest_matching_2_caliper-1.pdf>]
-<figure/nearest_matching_3_caliper-1.pdf, id=5995, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_3_caliper-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_3_caliper-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_3_caliper-1.pdf  used on input
- line 651.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 651
- []
-
-[86
-
- <./figure/nearest_matching_3_caliper-1.pdf>]
-<figure/nearest_matching_4_caliper-1.pdf, id=6075, 237.88875pt x 237.88875pt>
-File: figure/nearest_matching_4_caliper-1.pdf Graphic file (type pdf)
-<use figure/nearest_matching_4_caliper-1.pdf>
-Package pdftex.def Info: figure/nearest_matching_4_caliper-1.pdf  used on input
- line 662.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 662
+Overfull \vbox (22.88217pt too high) detected at line 624
  []
 
 [87
 
- <./figure/nearest_matching_4_caliper-1.pdf>] [88
-
-] [89
-
-] [90
-
-]
-<figure/optimal_matching_1-1.pdf, id=6363, 237.88875pt x 237.88875pt>
-File: figure/optimal_matching_1-1.pdf Graphic file (type pdf)
-<use figure/optimal_matching_1-1.pdf>
-Package pdftex.def Info: figure/optimal_matching_1-1.pdf  used on input line 70
-2.
+ <./figure/nearest_matching_1_caliper-1.pdf>]
+<figure/nearest_matching_2_pre_caliper-1.pdf, id=6044, 237.88875pt x 237.88875p
+t>
+File: figure/nearest_matching_2_pre_caliper-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_2_pre_caliper-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_2_pre_caliper-1.pdf  used on i
+nput line 635.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 702
+Overfull \vbox (22.88217pt too high) detected at line 635
+ []
+
+[88
+
+ <./figure/nearest_matching_2_pre_caliper-1.pdf>]
+<figure/nearest_matching_2_caliper-1.pdf, id=6119, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_2_caliper-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_2_caliper-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_2_caliper-1.pdf  used on input
+ line 646.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 646
+ []
+
+[89
+
+ <./figure/nearest_matching_2_caliper-1.pdf>]
+<figure/nearest_matching_3_caliper-1.pdf, id=6194, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_3_caliper-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_3_caliper-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_3_caliper-1.pdf  used on input
+ line 657.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 657
+ []
+
+[90
+
+ <./figure/nearest_matching_3_caliper-1.pdf>]
+<figure/nearest_matching_4_caliper-1.pdf, id=6273, 237.88875pt x 237.88875pt>
+File: figure/nearest_matching_4_caliper-1.pdf Graphic file (type pdf)
+<use figure/nearest_matching_4_caliper-1.pdf>
+Package pdftex.def Info: figure/nearest_matching_4_caliper-1.pdf  used on input
+ line 668.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 668
  []
 
 [91
 
+ <./figure/nearest_matching_4_caliper-1.pdf>] [92
+
+] [93
+
+] [94
+
+]
+<figure/optimal_matching_1-1.pdf, id=6558, 237.88875pt x 237.88875pt>
+File: figure/optimal_matching_1-1.pdf Graphic file (type pdf)
+<use figure/optimal_matching_1-1.pdf>
+Package pdftex.def Info: figure/optimal_matching_1-1.pdf  used on input line 70
+8.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 708
+ []
+
+[95
+
  <./figure/optimal_matching_1-1.pdf>]
-<figure/optimal_matching_2-1.pdf, id=6440, 237.88875pt x 237.88875pt>
+<figure/optimal_matching_2-1.pdf, id=6633, 237.88875pt x 237.88875pt>
 File: figure/optimal_matching_2-1.pdf Graphic file (type pdf)
 <use figure/optimal_matching_2-1.pdf>
 Package pdftex.def Info: figure/optimal_matching_2-1.pdf  used on input line 71
-3.
+9.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 713
+Overfull \vbox (22.88217pt too high) detected at line 719
  []
 
-[92
+[96
 
  <./figure/optimal_matching_2-1.pdf>]
-<figure/optimal_matching_3-1.pdf, id=6516, 237.88875pt x 237.88875pt>
+<figure/optimal_matching_3-1.pdf, id=6708, 237.88875pt x 237.88875pt>
 File: figure/optimal_matching_3-1.pdf Graphic file (type pdf)
 <use figure/optimal_matching_3-1.pdf>
-Package pdftex.def Info: figure/optimal_matching_3-1.pdf  used on input line 72
-4.
+Package pdftex.def Info: figure/optimal_matching_3-1.pdf  used on input line 73
+0.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 724
+Overfull \vbox (22.88217pt too high) detected at line 730
  []
 
-[93
+[97
 
  <./figure/optimal_matching_3-1.pdf>]
-<figure/optimal_matching_4-1.pdf, id=6596, 237.88875pt x 237.88875pt>
+<figure/optimal_matching_4-1.pdf, id=6788, 237.88875pt x 237.88875pt>
 File: figure/optimal_matching_4-1.pdf Graphic file (type pdf)
 <use figure/optimal_matching_4-1.pdf>
-Package pdftex.def Info: figure/optimal_matching_4-1.pdf  used on input line 73
-5.
+Package pdftex.def Info: figure/optimal_matching_4-1.pdf  used on input line 74
+1.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 735
+Overfull \vbox (22.88217pt too high) detected at line 741
  []
 
-[94
+[98
 
- <./figure/optimal_matching_4-1.pdf>] [95
-
-] [96
-
-] [97
-
-] [98
-
-] [99
+ <./figure/optimal_matching_4-1.pdf>] [99
 
 ] [100
 
-]
-[101
+] [101
 
 ] [102
 
@@ -2148,7 +2147,8 @@ Overfull \vbox (22.88217pt too high) detected at line 735
 
 ] [104
 
-] [105
+]
+[105
 
 ] [106
 
@@ -2162,151 +2162,140 @@ Overfull \vbox (22.88217pt too high) detected at line 735
 
 ] [111
 
+] [112
+
+] [113
+
+] [114
+
+] [115
+
 ]
-<figure/pscore_matching_1-1.pdf, id=7880, 237.88875pt x 237.88875pt>
+<figure/pscore_matching_1-1.pdf, id=8054, 237.88875pt x 237.88875pt>
 File: figure/pscore_matching_1-1.pdf Graphic file (type pdf)
 <use figure/pscore_matching_1-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_1-1.pdf  used on input line 825
+Package pdftex.def Info: figure/pscore_matching_1-1.pdf  used on input line 831
 .
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 825
- []
-
-[112
-
- <./figure/pscore_matching_1-1.pdf>]
-<figure/pscore_matching_2-1.pdf, id=7956, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_2-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_2-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_2-1.pdf  used on input line 836
-.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 836
- []
-
-[113
-
- <./figure/pscore_matching_2-1.pdf>]
-<figure/pscore_matching_3-1.pdf, id=8032, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_3-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_3-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_3-1.pdf  used on input line 847
-.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 847
- []
-
-[114
-
- <./figure/pscore_matching_3-1.pdf>]
-<figure/pscore_matching_4-1.pdf, id=8108, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_4-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_4-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_4-1.pdf  used on input line 858
-.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 858
- []
-
-[115
-
- <./figure/pscore_matching_4-1.pdf>]
-<figure/pscore_matching_5-1.pdf, id=8185, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_5-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_5-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_5-1.pdf  used on input line 869
-.
-(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
-
-Overfull \vbox (22.88217pt too high) detected at line 869
+Overfull \vbox (22.88217pt too high) detected at line 831
  []
 
 [116
 
- <./figure/pscore_matching_5-1.pdf>] [117
-
-]
-<figure/pscore_matching_caliper_1-1.pdf, id=8331, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_caliper_1-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_caliper_1-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_caliper_1-1.pdf  used on input 
-line 902.
+ <./figure/pscore_matching_1-1.pdf>]
+<figure/pscore_matching_2-1.pdf, id=8129, 237.88875pt x 237.88875pt>
+File: figure/pscore_matching_2-1.pdf Graphic file (type pdf)
+<use figure/pscore_matching_2-1.pdf>
+Package pdftex.def Info: figure/pscore_matching_2-1.pdf  used on input line 842
+.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 902
+Overfull \vbox (22.88217pt too high) detected at line 842
+ []
+
+[117
+
+ <./figure/pscore_matching_2-1.pdf>]
+<figure/pscore_matching_3-1.pdf, id=8204, 237.88875pt x 237.88875pt>
+File: figure/pscore_matching_3-1.pdf Graphic file (type pdf)
+<use figure/pscore_matching_3-1.pdf>
+Package pdftex.def Info: figure/pscore_matching_3-1.pdf  used on input line 853
+.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 853
  []
 
 [118
 
- <./figure/pscore_matching_caliper_1-1.pdf>]
-<figure/pscore_matching_caliper_2-1.pdf, id=8407, 237.88875pt x 237.88875pt>
-File: figure/pscore_matching_caliper_2-1.pdf Graphic file (type pdf)
-<use figure/pscore_matching_caliper_2-1.pdf>
-Package pdftex.def Info: figure/pscore_matching_caliper_2-1.pdf  used on input 
-line 913.
+ <./figure/pscore_matching_3-1.pdf>]
+<figure/pscore_matching_4-1.pdf, id=8279, 237.88875pt x 237.88875pt>
+File: figure/pscore_matching_4-1.pdf Graphic file (type pdf)
+<use figure/pscore_matching_4-1.pdf>
+Package pdftex.def Info: figure/pscore_matching_4-1.pdf  used on input line 864
+.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 913
+Overfull \vbox (22.88217pt too high) detected at line 864
  []
 
 [119
 
+ <./figure/pscore_matching_4-1.pdf>] [120
+
+]
+<figure/pscore_matching_caliper_1-1.pdf, id=8423, 237.88875pt x 237.88875pt>
+File: figure/pscore_matching_caliper_1-1.pdf Graphic file (type pdf)
+<use figure/pscore_matching_caliper_1-1.pdf>
+Package pdftex.def Info: figure/pscore_matching_caliper_1-1.pdf  used on input 
+line 897.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 897
+ []
+
+[121
+
+ <./figure/pscore_matching_caliper_1-1.pdf>]
+<figure/pscore_matching_caliper_2-1.pdf, id=8499, 237.88875pt x 237.88875pt>
+File: figure/pscore_matching_caliper_2-1.pdf Graphic file (type pdf)
+<use figure/pscore_matching_caliper_2-1.pdf>
+Package pdftex.def Info: figure/pscore_matching_caliper_2-1.pdf  used on input 
+line 908.
+(pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
+
+Overfull \vbox (22.88217pt too high) detected at line 908
+ []
+
+[122
+
  <./figure/pscore_matching_caliper_2-1.pdf>]
-<figure/pscore_matching_caliper_3-1.pdf, id=8487, 237.88875pt x 237.88875pt>
+<figure/pscore_matching_caliper_3-1.pdf, id=8578, 237.88875pt x 237.88875pt>
 File: figure/pscore_matching_caliper_3-1.pdf Graphic file (type pdf)
 <use figure/pscore_matching_caliper_3-1.pdf>
 Package pdftex.def Info: figure/pscore_matching_caliper_3-1.pdf  used on input 
-line 924.
+line 919.
 (pdftex.def)             Requested size: 237.88815pt x 237.89903pt.
 
-Overfull \vbox (22.88217pt too high) detected at line 924
+Overfull \vbox (22.88217pt too high) detected at line 919
  []
 
-[120
+[123
 
- <./figure/pscore_matching_caliper_3-1.pdf>] [121
+ <./figure/pscore_matching_caliper_3-1.pdf>] [124
 
-] [122
-
-] [123
-
-] [124
-
-]
-[125
+] [125
 
 ] [126
 
 ] [127
 
-] [128
+]
+[128
 
 ] [129
 
-]
-<Balance-N_trade-off.png, id=9202, 454.51054pt x 407.08336pt>
-File: Balance-N_trade-off.png Graphic file (type png)
-<use Balance-N_trade-off.png>
-Package pdftex.def Info: Balance-N_trade-off.png  used on input line 972.
-(pdftex.def)             Requested size: 205.43394pt x 183.99953pt.
- [130
+] [130
 
- <./Balance-N_trade-off.png>] [131
+] [131
 
 ] [132
 
 ]
-[133
+<Balance-N_trade-off.png, id=9282, 454.51054pt x 407.08336pt>
+File: Balance-N_trade-off.png Graphic file (type png)
+<use Balance-N_trade-off.png>
+Package pdftex.def Info: Balance-N_trade-off.png  used on input line 969.
+(pdftex.def)             Requested size: 230.22481pt x 206.19972pt.
+ [133
 
-] [134
+ <./Balance-N_trade-off.png>] [134
 
 ] [135
 
-] [136
+]
+[136
 
 ] [137
 
@@ -2324,12 +2313,20 @@ Package pdftex.def Info: Balance-N_trade-off.png  used on input line 972.
 
 ] [144
 
-]
-[145
+] [145
 
 ] [146
 
 ] [147
+
+]
+[148
+
+] [149
+
+] [150
+
+] [151
 
 ]
 \tf@nav=\write6
@@ -2341,11 +2338,11 @@ Package pdftex.def Info: Balance-N_trade-off.png  used on input line 972.
 \tf@snm=\write8
 \openout8 = `Slides_Matching_v1.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1029.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1029.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1026.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1026.
  (Slides_Matching_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1029.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1029.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1026.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1026.
 
 Package rerunfilecheck Info: File `Slides_Matching_v1.out' has not changed.
 (rerunfilecheck)             Checksum: BAB0A09A1712D8D2C4D56F4FCAF16A54;168.
@@ -2355,10 +2352,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 23181 strings out of 492893
- 445786 string characters out of 3133367
- 589058 words of memory out of 3000000
- 26174 multiletter control sequences out of 15000+200000
+ 23182 strings out of 492893
+ 445645 string characters out of 3133367
+ 587784 words of memory out of 3000000
+ 26168 multiletter control sequences out of 15000+200000
  73550 words of font info for 127 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,878b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2374,9 +2371,9 @@ TeX 2.9/fonts/type1/public/amsfonts/cm/cmssi9.pfb><C:/Program Files/MiKTeX 2.9/
 fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/math
 design/mdbch/md-chbma.pfb>
-Output written on Slides_Matching_v1.pdf (147 pages, 2815987 bytes).
+Output written on Slides_Matching_v1.pdf (151 pages, 2829416 bytes).
 PDF statistics:
- 10580 PDF objects out of 10688 (max. 8388607)
- 299 named destinations out of 1000 (max. 500000)
- 297 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 10715 PDF objects out of 12825 (max. 8388607)
+ 307 named destinations out of 1000 (max. 500000)
+ 292 words of extra memory for PDF output out of 10000 (max. 10000000)
 

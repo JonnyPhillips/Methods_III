@@ -191,7 +191,7 @@ library(xtable)
 \pause
 \item Repeat for every treated unit
 \pause
-\item Drop all the unmatched units (eg. 'extra' treated units that are 'far away' from any control units)
+\item Drop all the unmatched units (eg. 'extra' control units that are 'far away' from any treated units)
 \pause
 \item Assess balance
 \pause
@@ -800,17 +800,17 @@ unmatched <- data %>% slice(unmatched_rows)
 \begin{frame}
 \frametitle{Propensity Score Matching}
 \begin{itemize}
-\item With many covariates we have a dimensionality challenge
+\item With many covariates we have a 'dimensionality' challenge
 \pause
 \begin{itemize}
 \item Overlap is almost zero
 \pause
 \item Counterfactuals are impossible to define
 \end{itemize}
-\item The propensity score collapses matching to a single dimension
+\item The propensity score simplifies matching to a single dimension
 \pause
 \begin{itemize}
-\item Confounders only matter to the extent they affect treatment
+\item Confounders only matter to the extent they affect the probability of treatment
 \pause
 \item So let's use the confounders to \textbf{predict treatment}
 \pause
@@ -886,15 +886,6 @@ data %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour=factor(Treat))) + them
 \begin{center}
 <<pscore_matching_4,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
 data %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour=factor(Treat))) + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2)
-@
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Propensity Score Matching}
-\begin{center}
-<<pscore_matching_5,echo=FALSE,warning=FALSE,message=FALSE,fig.keep='high',fig.height=3.3, fig.width=3.3>>=
-matches2 %>% ggplot() + geom_point(aes(x=Age,y=pscores,colour="Red"))+ geom_point(aes(x=Age1,y=pscores1,colour="Blue")) + theme_classic() + xlab("Probability of Treatment | Age") + geom_curve(data=matches2,aes(x=Age,y=pscores,xend=Age1,yend=pscores1),lty=2)
 @
 \end{center}
 \end{frame}
@@ -991,27 +982,29 @@ summary(matched)$sum.all %>%
 \begin{itemize}
 \item Matching was supposed to be 'non-parametric' to reduce researcher influence, but there are a lot of options here!
 \pause
-\item That's okay! Regression has no measure of 'success', but with matching we want to maximize balance
+\item That's okay! Regression can be biased if we try to make a p-value significant, but with matching we always want more balance
 \pause
 \begin{itemize}
-\item \textbf{Without} looking at the outcome variables
+\item As long as we do matching \textbf{without} looking at the outcome variables
 \end{itemize}
 \pause
 \item How much trimming/pruning should we undertake?
 \pause
 \item We can always enforce \textbf{stricter} matching (eg. narrower calipers, more exact matching) to get better balance
 \pause
+\begin{itemize}
 \item But our N will approach zero, so little statistical power
 \pause
 \item A Bias-variance trade-off
 \pause
-\item Try alternative specifications
+\item Try alternatives
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Matching}
-\includegraphics[width=0.58\textwidth]{Balance-N_trade-off.png}
+\includegraphics[width=0.65\textwidth]{Balance-N_trade-off.png}
 \end{frame}
 
 \begin{frame}
@@ -1054,7 +1047,7 @@ summary(matched)$sum.all %>%
 \begin{itemize}
 \item Bias was due to whether people actually answered phone calls
 \pause
-\item Huge N, \textbf{Perfect balance}
+\item Huge N, \textbf{Perfect balance} \pause (on what they could measure)
 \pause
 \item Experimental measure: 0.4
 \pause

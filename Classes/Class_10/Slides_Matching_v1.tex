@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -112,7 +112,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 10 - Matching}
 \author{Jonathan Phillips}
-\date{June 2019}
+\date{May 2020}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -166,6 +166,7 @@
 \item \textbf{Model-dependence} - Variable X is a confounder, but is it linear, quadratic, cubic or what? The wrong model of the real relationship with the outcome biases our results
 \pause
 \item \textbf{Researcher/publication bias} - Lots of freedom to tweak the regression to get positive results
+\pause
 \end{enumerate}
 \item All of these reflect the fact that regression is \textbf{parametric}
 \pause
@@ -198,12 +199,14 @@
 \begin{frame}
 \frametitle{Matching}
 \begin{itemize}
-\item If treated and control groups have the \textbf{same values} of \textbf{all} of the confounding variables, we know that treatment is independent of potential outcomes
+\item If treated and control groups have the \textbf{same values} of \textbf{all} of the confounding variables, we know that treatment is (conditionally) independent of potential outcomes
 \pause
 \item There is no variation in the confounders that could possibly explain the difference between the outcomes in treated and control groups
 \pause
+\item So how do we force balance on multiple variables?
+\pause
 \begin{enumerate}
-\item One way of forcing balance is by \textbf{ajusting} each treated observation to predict what it would 'look like' if it were identical to a control observation - a regression model
+\item One way is by \textbf{adjusting/extrapolating} each treated observation to predict what it would 'look like' if it were identical to a control observation - a regression model
 \pause
 \item An alternative is just to \textbf{throw out} all of the treated observations that do not have a comparable control observation - this is matching
 \end{enumerate}
@@ -217,6 +220,7 @@
 \begin{itemize}
 \item Dropping units that don't have good counterfactuals in the data
 \end{itemize}
+\pause
 \item It succeeds only where we can measure and create balance on all confounding variables
 \pause
 \item Matching is \textbf{NOT} an experimental method
@@ -230,9 +234,11 @@
 \pause
 \item Repeat for every treated unit
 \pause
-\item Drop all the unmatched units (eg. 'extra' treated units that are 'far away' from any control units)
+\item Drop all the unmatched units (eg. 'extra' control units that are 'far away' from any treated units)
 \pause
-\item Assess balance - re-run the matching process as many times as you can to maximize balance!
+\item Assess balance
+\pause
+\item If balance is low, re-run the matching process as many times as you can to maximize balance!
 \end{enumerate}
 \end{frame}
 
@@ -323,11 +329,11 @@
 \begin{enumerate}
 \item Matching on few categorical variables: \textbf{Exact Matching}
 \pause
-\item Matching on continuous variables (sequential): \textbf{Nearest-Neighbour Matching}
+\item Matching on continuous variables (sequentially): \textbf{Nearest-Neighbour Matching}
 \pause
 \item Matching to maximize balance: \textbf{Optimal/Genetic Matching}
 \pause
-\item Matching on the probability of treatment: \textbf{Propensity Score Matching}
+\item Matching to balance the probability of treatment: \textbf{Propensity Score Matching}
 \end{enumerate}
 \end{frame}
 
@@ -404,8 +410,8 @@
 \begin{frame}
 \frametitle{Exact Matching}
 \begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:41:56 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:38:20 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -559,8 +565,8 @@
 \begin{frame}
 \frametitle{Nearest Neighbour Matching}
 \begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:42:02 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:39:13 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -664,8 +670,8 @@
 \begin{frame}
 \frametitle{Nearest Neighbour Matching with Caliper}
 \begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:42:05 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:39:19 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -737,8 +743,8 @@
 \begin{frame}
 \frametitle{Optimal Matching}
 \begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:42:09 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:39:22 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -759,17 +765,17 @@
 \begin{frame}
 \frametitle{Propensity Score Matching}
 \begin{itemize}
-\item With many covariates we have a dimensionality challenge
+\item With many covariates we have a 'dimensionality' challenge
 \pause
 \begin{itemize}
 \item Overlap is almost zero
 \pause
 \item Counterfactuals are impossible to define
 \end{itemize}
-\item The propensity score collapses matching to a single dimension
+\item The propensity score simplifies matching to a single dimension
 \pause
 \begin{itemize}
-\item Confounders only matter to the extent they affect treatment
+\item Confounders only matter to the extent they affect the probability of treatment
 \pause
 \item So let's use the confounders to \textbf{predict treatment}
 \pause
@@ -860,19 +866,8 @@ $$Predicted\_Treat_i = -7.19 + 0.116 Age_i +\epsilon_i$$
 \begin{frame}
 \frametitle{Propensity Score Matching}
 \begin{center}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/pscore_matching_5-1} 
-
-\end{knitrout}
-\end{center}
-\end{frame}
-
-\begin{frame}
-\frametitle{Propensity Score Matching}
-\begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:42:13 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:40:07 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -926,8 +921,8 @@ $$Predicted\_Treat_i = -7.19 + 0.116 Age_i +\epsilon_i$$
 \begin{frame}
 \frametitle{Propensity Score Matching with Caliper}
 \begin{center}
-% latex table generated in R 3.6.0 by xtable 1.8-4 package
-% Thu May 30 13:42:14 2019
+% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Thu May 07 11:40:19 2020
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -948,27 +943,29 @@ $$Predicted\_Treat_i = -7.19 + 0.116 Age_i +\epsilon_i$$
 \begin{itemize}
 \item Matching was supposed to be 'non-parametric' to reduce researcher influence, but there are a lot of options here!
 \pause
-\item That's okay! Regression has no measure of 'success', but with matching we want to maximize balance
+\item That's okay! Regression can be biased if we try to make a p-value significant, but with matching we always want more balance
 \pause
 \begin{itemize}
-\item \textbf{Without} looking at the outcome variables
+\item As long as we do matching \textbf{without} looking at the outcome variables
 \end{itemize}
 \pause
 \item How much trimming/pruning should we undertake?
 \pause
 \item We can always enforce \textbf{stricter} matching (eg. narrower calipers, more exact matching) to get better balance
 \pause
+\begin{itemize}
 \item But our N will approach zero, so little statistical power
 \pause
 \item A Bias-variance trade-off
 \pause
-\item Try alternative specifications
+\item Try alternatives
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Matching}
-\includegraphics[width=0.58\textwidth]{Balance-N_trade-off.png}
+\includegraphics[width=0.65\textwidth]{Balance-N_trade-off.png}
 \end{frame}
 
 \begin{frame}
@@ -1011,7 +1008,7 @@ $$Predicted\_Treat_i = -7.19 + 0.116 Age_i +\epsilon_i$$
 \begin{itemize}
 \item Bias was due to whether people actually answered phone calls
 \pause
-\item Huge N, \textbf{Perfect balance}
+\item Huge N, \textbf{Perfect balance} \pause (on what they could measure)
 \pause
 \item Experimental measure: 0.4
 \pause

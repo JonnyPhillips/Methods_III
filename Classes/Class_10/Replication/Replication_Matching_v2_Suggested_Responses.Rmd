@@ -7,7 +7,7 @@ output:
   html_document: default
 ---
 
-To be submitted (code + answers) by midnight, Thursday 14th May.
+To be submitted (code + answers) by midnight, Wednesday 13th May.
 
 First read the paper by Boas and Hidalgo (2011) on the course website. For this replication we will focus on the *second half* of their paper, not the initial RDD but the matching analysis of how possession of a radio licence affects the mayor's vote share in the next election.
 
@@ -188,7 +188,7 @@ matched_data_Q14 <- matchit(as.formula(paste0("treat~",covars_formula)), data=d,
 matched_data_Q14 %>% match.data() %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q14, Nearest Neighbour Matching, All Variables, with Caliper of 0.01", single.row = T)
 ```
 
-Adding a caliper greatly affects the estimated treatment effect, which rises to 0.39% points (the exact value will vary as the algorithm inlcudes a random process) and is statistically significant.
+Adding a caliper greatly affects the estimated treatment effect, which rises to 0.39% points (the exact value will vary as the algorithm includes a random process) and is statistically significant.
 
 **15. Another problem with nearest neighbour matching is that it is 'greedy' - the first matches might make it harder to match well later. Boas and Hidalgo use genetic matching, which is a complex automated process to try and get the best 'overall' matches for the full dataset. Run genetic matching process with the same variables and then run your regression (with no controls) again. *Note:* Genetic matching might take 10-20 minutes.**
 
