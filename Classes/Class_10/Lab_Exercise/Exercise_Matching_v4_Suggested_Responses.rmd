@@ -5,7 +5,7 @@ fontsize: 16pt
 ---
 
 ```{r setup, echo=F,warning=F, error=F, message=F}
-knitr::opts_chunk$set(echo = F, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=F)
+knitr::opts_chunk$set(echo = T, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=T)
 library(tidyverse)
 library(stargazer)
 library(MatchIt)
@@ -73,6 +73,8 @@ d <- d %>% mutate(y_obs=case_when(D==0~y_0,
 d %>% lm(y_obs ~ D, data=.) %>% stargazer(title="Q5")
 ```
 
+Gender, age, income and education are all confounders that bias our estimate.
+
 6. Our first task is to try and do a 'manual' matching example - to try and 'match' one treated unit with one control unit so that the *only* thing that is different about them is their treatment status. Take the first treated unit in your dataset. What are its values of gender, age, income and education? Manually, by trial-and-error (not using any package or pre-prepared function), identify the most similar *control* unit. How different are your matched pair on these four variables?
 
 ```{r}
@@ -83,11 +85,15 @@ control_unit <- control_units %>% filter(age>32 & age < 36 & income>500 & income
 rbind(treated_unit, control_unit) %>% kable(caption="Q6")
 ```
 
+The treated unit is a 34.5 year-old female with income of 540 and education of level 1; the control unit is a 33.5 year-old female with income of 533 and education of level 1. These differences seem reasonably small so they are good counterfactuals for each other.  
+
 7. Compare the outcome between your matched treated unit and control unit. Is this consistent with our assumed treatment effect? Why is it similar? Why is it different?
 
 ```{r}
 treated_unit$y_obs - control_unit$y_obs
 ```
+
+This is much larger than our assumed treatment effect, purely by chance because the $y_1$ of the treated unit is high and the $y_0$ of the control unit is low. This reflects the 'noise' in potential outcomes and not any systematic confounding, since we have already made sure the two units are balanced on these confounding variables.
 
 8. Matching repeats this process for multiple units and then finds the average difference in outcomes between the treated and control units. Use the _matchit_ package to conduct 'nearest neighbour' (the default) matching method on your dataset for the four confounder variables: gender, education, age and income. What is the result of the matching procedure - how many units were matched?
 
@@ -97,6 +103,8 @@ d <- d %>% mutate(gender=factor(gender),
 matched_data_Q8 <- matchit(D ~ gender + education + age + income, data=d)
 matched_data_Q8
 ```
+
+The result shows that all 48 treated units are matched, and 48 of the 52 control units are matched. In other words, 4 control units are thrown away because they are not useful for comparison.
 
 9. Use _match.data_ to extract the matched dataset and calculate the average difference in means between the treated and control groups. How does the result compare to the naive regression in Q5?
 
@@ -108,6 +116,8 @@ matched_data_Q8 %>% match.data() %>%
   mutate(diff_y_obs=y_obs-lead(y_obs)) %>% kable(caption="Q9")
 ```
 
+The matched dataset has a difference in outcomes between treatment and control of 6.6, more than our specified effect of 5 and quite similar to the naive regression in Q5.
+
 10. To understand how matching changed our dataset, check the _summary_ information about your matched data. 
 
 (a) On which variables did balance improve? Did balance deteriorate on any variables?
@@ -115,6 +125,8 @@ matched_data_Q8 %>% match.data() %>%
 ```{r}
 matched_data_Q8 %>% summary()
 ```
+  
+Balance improved for gender, education, age and income. 
 
 (b) Since we still have imbalance after matching, we can try to estimate the effect of treatment using a regression *on our matched dataset*. Include all of the confounding variables as controls. Does our estimate improve?
 
@@ -135,11 +147,15 @@ matched_data_Q11 <- matchit(D ~ gender + education + age + income, data=data.fra
 matched_data_Q11
 ```
 
+Now only 74 units are matched (37 control and 37 treated), with 15 control and 11 treated units thrown away.
+
 (c) Has balanced improved or deteriorated on any variables? 
 
 ```{r}
 matched_data_Q11 %>% summary()
 ```
+
+Balance has improved a lot on gender and education - they are now perfectly balanced - while age and income are now slightly *less* balanced.
 
 (d) What is the average difference in mean outcomes between treated and control groups?
 
@@ -150,6 +166,8 @@ matched_data_Q11 %>% match.data() %>%
   arrange(-D) %>%
   mutate(diff_y_obs=y_obs-lead(y_obs)) %>% kable(caption="Q611(d)")
 ```
+
+The mean difference in outcomes between treatment and control is now 8.87, higher than our specified value of 5.
 
 12. An alternative way of limiting the number of matches is to specify a maximum distance measure beyond which paired units are dropped. 
 
@@ -165,11 +183,15 @@ matched_data_Q12 <- matchit(D ~ gender + education + age + income, data=data.fra
 matched_data_Q12
 ```
 
+58 units are matched, and 42 thrown away.
+
 (c) Has balanced improved? 
 
 ```{r}
 matched_data_Q12 %>% summary()
 ```
+
+Balance has improved on all variables, and is perfect on gender and education.
 
 (d) What is the average difference in mean outcomes between treated and control groups?
 
@@ -180,6 +202,8 @@ matched_data_Q12 %>% match.data() %>%
   arrange(-D) %>%
   mutate(diff_y_obs=y_obs-lead(y_obs))
 ```
+
+The mean difference in outcomes between treatment and control is now 5.54, only slightly higher than our specified value of 5.
 
 13. One problem with this nearest neighbour matching procedure is that it is 'dumb', matching one pair, and then another, even if the distance between all paired units would be lower if the matches were switched around. 
 
@@ -216,6 +240,11 @@ matched_data_Q13_genetic %>% match.data() %>%
   mutate(diff_y_obs=y_obs-lead(y_obs)) %>% kable(caption="Q13(c) Genetic Matching")
 ```
 
+
+Optimal matching matches 96 units, with improvements in balance on all variables. The difference in outcomes is 6.6. 
+
+Genetic matching matches 72 units (24 control and 48 treated, some control units are reused), with improvements in balance on all variables. The difference in outcomes is 7.6.
+
 14. Try conducting matching with the Coarsened Exact Matching (`cem`) methodology. This turns continuous variables into categorical variables and then uses exact matching. Compare balance and the outcomes for treated and control groups.
 
 ```{r}
@@ -228,6 +257,9 @@ matched_data_Q14 %>% match.data() %>%
   arrange(-D) %>%
   mutate(diff_y_obs=y_obs-lead(y_obs)) %>% kable(caption="Q14")
 ```
+
+Coarsened exact matching matches 42 units, with improvements in balance on all variables. The difference in outcomes is 7.6.
+
 
 15. Finally, let's calculate the propensity score (the probability each unit was treated) and match treated and control units on similar values of this new propensity score. 
 
@@ -251,4 +283,9 @@ matched_data_Q15 %>% match.data() %>%
   mutate(diff_y_obs=y_obs-lead(y_obs)) %>% kable(caption="Q15")
 ```
 
+Propensity Score matching matches 58 units, with improvements in balance on the propensity score. The difference in outcomes is 6.1.
+
 16. The risk of using matching is that we have so many options that we can keep trying until we find a 'big' effect. So we should always be guided by a clear, measurable goal: improving balance. One possible goal is maximizing balance (ignoring considerations of sample size): Which of the matching methods you used above maximize balance on the four confounding variables?
+
+Genetic matching seems to offer the best balance in this case.
+

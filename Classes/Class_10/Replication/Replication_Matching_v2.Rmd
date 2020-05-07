@@ -1,0 +1,174 @@
+---
+title: "FLS 6415: Replication 8 - Matching"
+#author: "Jonathan"
+date: "May 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Thursday 14th May.
+
+First read the paper by Boas and Hidalgo (2011) on the course website. For this replication we will focus on the *second half* of their paper, not the initial RDD but the matching analysis of how possession of a radio licence affects the mayor's vote share in the next election.
+
+The replication data is in the file *Boas_Hidalgo.csv*. A list of the most important variables is also provided below.
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(broom)
+library(stargazer)
+library(estimatr)
+library(texreg)
+library(AER)
+library(haven)
+library(formatR)
+library(zeligverse)
+library(MatchIt)
+library(rgenoud)
+
+opts_chunk$set(echo=F, warning=F, message=F, include=T, tidy=T, eval=F)
+```
+
+```{r, eval=F, include=F}
+d <- readRDS("combined_data.RDS")
+
+d %>% write_csv("Boas_Hidalgo.csv")
+```
+
+Variable       | Description
+---------------|------------------------------------------
+pctVV | The councillor's vote share in the 2004 elections
+treat | Whether a councillor that applied for a media licence received approval before the 2004 election
+male | Councillor is male
+log.valid.votes | Log of the size of the electorate (proxied by valid votes)
+
+**1. What is treatment? What is control? What is the outcome?**
+
+**2. Why do Boas and Hidalgo not use an experiment or natural experiment to estimate the effect of possessing a radio licence?**
+
+**3. Conduct and interpret a basic linear regression of the outcome on treatment with no controls.**
+
+```{r, results='asis'}
+d <- read_csv("Boas_Hidalgo.csv")
+
+d %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q3")
+```
+
+**4. One potential confounding variable is gender (this could affect the chances of an application being approved if there is bias in the Ministry, and the candidate's vote share if there is bias among voters). Is there balance across control and treatment groups on the `male` variable?**
+
+```{r}
+d %>% t.test(male ~ treat, data=.)
+```
+
+**5. One way of controlling for gender is to add it as a control variable to your regression in Q3. Interpret the result.**
+
+```{r, results='asis'}
+d %>% lm(pctVV ~ treat + male, data=.) %>% stargazer(header=F, single.row = T, 
+                                                     title="Q5")
+```
+
+**6. An alternative approach is to use matching. Let's try to do one-to-one exact matching on gender *manually*. There are 311 treated units but 1144 control units in your data, so one-to-one matching means *throwing away* 833 control units.**  
+(a) Split your data into four different datasets: treated males, treated females, control males and control females;  
+(b) How many treated males do you have? Reduce your dataset of control males so you have only the same number as the number of treated males - since they are exactly matched on gender it doesn't matter which you pick so choose which ones to keep/drop randomly;  
+(c) Do the same for control females - reduce the number of control females to the same as the number of treated females;  
+(d) Join your four datasets back together to make one dataset (this will be smaller than the original dataset as we threw some data away);  
+(e) Check for balance in gender on the new dataset - it should be perfectly balanced, right?
+
+```{r}
+d_treated_male <- d %>% filter(treat==1 & male==1)
+d_treated_female <- d %>% filter(treat==1 & male==0)
+d_control_male <- d %>% filter(treat==0 & male==1) %>% sample_n(dim(d_treated_male)[1])
+d_control_female <- d %>% filter(treat==0 & male==0) %>% sample_n(dim(d_treated_female)[1])
+
+d_matched_gender <- bind_rows(d_treated_male,d_treated_female,d_control_male,d_control_female)
+
+d_matched_gender %>% t.test(male ~ treat, data=.)
+```
+
+**7. Using the matched dataset from Q6, conduct two analyses of the difference in outcomes between treated and control groups. One using a difference-in-means t-test and one using a simple linear regression. Interpret the results. **
+
+```{r}
+d_matched_gender %>% t.test(pctVV ~ treat, data=.)
+```
+
+```{r, results='asis'}
+d_matched_gender %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, single.row = T,
+                                                             title="Q7")
+```
+
+**8. To match on continuous or multiple variables it's easier to use `matchit`. **
+
+**(a) Return to your original full dataset and, using nearest neighbour matching, match only on the size of the electorate (_log.valid.votes_). **
+
+**(b) How many units are matched? Why this number? **
+
+**(c) Conduct a simple balance t-test on the size of the electorate for the full dataset and for your matched dataset (you can recover it with `match.data(output_of_matchit)`). How does balance change after matching?**
+
+```{r}
+matched_data_Q8 <- matchit(treat~log.valid.votes, data=d,method="nearest")
+
+d %>% t.test(log.valid.votes ~ treat, data=.)
+matched_data_Q8 %>% match.data() %>% t.test(log.valid.votes ~ treat, data=.)
+```
+
+**9. Let's see which units were dropped by our matching method in Q8. For the full (unmatched) dataset, create a graph of the size of the electorate against the outcome variable. Colour the points according to treatment status. Make this layer semi-transparent (adjust the 'alpha' of your graph in R) if you can so we can see all the points. Finally, add another layer to your graph showing the same variables for the *matched* data but with a different shape so we can distinguish them. What does this graph tell you about which units were matched?**
+
+```{r}
+d %>% ggplot() +
+  geom_point(aes(x=log.valid.votes, y=pctVV, colour=factor(treat)), alpha=0.3, shape=3) +
+  geom_point(data=matched_data_Q8 %>% match.data(), aes(x=log.valid.votes, y=pctVV, colour=factor(treat)))
+
+```
+
+**10. Using the matched dataset from Q8, conduct two analyses of the difference in outcomes between treated and control groups. One using a difference-in-means t-test and one using a simple linear regression. Interpret the results. **
+
+```{r}
+matched_data_Q8 %>% match.data() %>% t.test(pctVV ~ treat, data=.)
+```
+
+```{r, results='asis'}
+matched_data_Q8 %>% match.data() %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q10, Nearest Neighbour Matching on Size of the Electorate", single.row = T)
+```
+
+**11. Now let's include all of the matching variables that Boas and Hidalgo use, and use nearest neighbour matching in `matchit` to construct a matched dataset. Use the list of matching variables provided below to conduct nearest neighbour matching.**
+
+"occBlue.collar", "occEducation", "occGovernment", "occMedia", "occNone", "occOther", "occPolitician", "occWhite.collar", "lat", "long", "ran.prior", "incumbent", "log.valid.votes", "party.prior.pctVV", "prior.pctVV", "elec.year", "match.partyPCB", "match.partyPC.do.B", "match.partyPDT", "match.partyPFL", "match.partyPL", "match.partyPMDB", "match.partyPMN", "match.partyPP", "match.partyPPS", "match.partyPSB", "match.partyPSC", "match.partyPSDB", "match.partyPSDC", "match.partyPSL", "match.partyPT", "match.partyPTB", "match.partyPV", "uf.rs", "uf.sp", "yob", "eduMore.than.Primary..Less.than.Superior", "eduSome.Superior.or.More", "log.total.assets", "pt_pres_1998", "psdb_2000", "hdi_2000", "income_2000", "log.num.apps"
+
+```{r}
+covars <- c("occBlue.collar", "occEducation", "occGovernment", "occMedia", "occNone", "occOther", "occPolitician", "occWhite.collar", "lat", "long", "ran.prior", "incumbent", "log.valid.votes", "party.prior.pctVV", "prior.pctVV", "elec.year", "match.partyPCB", "match.partyPC.do.B", "match.partyPDT", "match.partyPFL", "match.partyPL", "match.partyPMDB", "match.partyPMN", "match.partyPP", "match.partyPPS", "match.partyPSB", "match.partyPSC", "match.partyPSDB", "match.partyPSDC", "match.partyPSL", "match.partyPT", "match.partyPTB", "match.partyPV", "uf.rs", "uf.sp", "yob", "eduMore.than.Primary..Less.than.Superior", "eduSome.Superior.or.More", "log.total.assets", "pt_pres_1998", "psdb_2000", "hdi_2000", "income_2000", "log.num.apps")
+
+covars_formula <- paste0(covars,collapse=" + ")
+
+matched_data_Q11 <- matchit(as.formula(paste0("treat~",covars_formula)), data=d,method="nearest")
+```
+
+**12. Using your matched dataset from Q11, conduct a simple linear regression of the outcome on treatment. Interpret the results and compare them to the result in the first column of Table 4 in Boas and Hidalgo (2011) (it probably won't be the same, see the next questions). **
+
+```{r, results='asis'}
+matched_data_Q11 %>% match.data() %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q12, Nearest Neighbour Matching, All Variables, No Controls", single.row = T)
+```
+
+**13. With lots of variables it's impossible to get perfect balance on all variables, there are just too many dimensions and too few units. One option to control for 'residual confounding' is to include the matching variables as control variables in our analysis regression. How does this change your estimated treatment effect from Q12?**
+
+```{r, results='asis'}
+matched_data_Q11 %>% match.data() %>% lm(as.formula(paste0("pctVV ~ treat + ", covars_formula)), data=.) %>% stargazer(header=F, title="Q13, Nearest Neighbour Matching, All Variables, with Controls", single.row = T)
+```
+
+**14. One risk with nearest-neighbour matching is that the control unit can still be far away from the treated unit if there are no good matches. Re-run the matching process from Q11 but with a caliper of 0.01 standard deviations, and then re-run the regression from Q12 (no controls). How does the number of units and the result change?**
+
+```{r, results='asis'}
+matched_data_Q14 <- matchit(as.formula(paste0("treat~",covars_formula)), data=d,method="nearest", caliper=0.01)
+matched_data_Q14 %>% match.data() %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q14, Nearest Neighbour Matching, All Variables, with Caliper of 0.01", single.row = T)
+```
+
+
+**15. Another problem with nearest neighbour matching is that it is 'greedy' - the first matches might make it harder to match well later. Boas and Hidalgo use genetic matching, which is a complex automated process to try and get the best 'overall' matches for the full dataset. Run genetic matching process with the same variables and then run your regression (with no controls) again. *Note:* Genetic matching might take 10-20 minutes.**
+
+```{r, cache=T, results='asis', include=F, warning=F, message=F}
+matched_data_Q15 <- matchit(as.formula(paste0("treat~",covars_formula)), data=d,method="genetic")
+```
+
+```{r, cache=T, results='asis'}
+matched_data_Q15 %>% match.data() %>% lm(pctVV ~ treat, data=.) %>% stargazer(header=F, title="Q15, Genetic Matching", single.row = T) #0.28
+```
