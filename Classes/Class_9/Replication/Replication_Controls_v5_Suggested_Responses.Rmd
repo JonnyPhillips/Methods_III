@@ -78,18 +78,63 @@ d %>%  ggplot() + geom_point(aes(x=connectionsMPchief,y=tempclass08)) +
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
 Q2 <- lm(tempclass08 ~ connectionsMPchief,data=d)
-stargazer(Q2, header=FALSE)
+stargazer(Q2, header=FALSE, title="Q2")
 ```
 
 A 1% increase in the number of years the chief has known the MP is associated with a `r round(log(101/100)*1.439,3)` ($log(\frac{101}{100})*1.439$) increase in the number of temporary classrooms. 
 
 **3. Provide two concrete, specific reasons for why our estimate in Q2 might be biased. In each case, which direction would the bias be?**
 
+- The population of the village could be a confounding variable; population implies more children and could lead to the construction of more temporary classrooms (affecting our outcome variable), and population might make it harder for any single MP to know the chief personally (affecting the treatment varibale). So bigger villages would have low treatment and high outcome, while smaller villages would have high treatment and low outcome. This creates a 'false' negative correlation between treatment and outcome, which would lead us to *underestimate* the treatment effect.
+
+- The number of years the MP has been elected may be a confounding variable. The longer the MP has been in office, the longer they are likely to have known an important figure such as the Chief (affecting the treatment); and we know from other research in political science that MPs that stay in longer for office usually face less competition and therefore might face weaker incentives to provide social services like temporary classrooms. Again, this creates a 'false' negative correlation between treatment and outcome, which would lead us to *underestimate* the treatment effect.
+
 **4. Describe the Treatment Assignment Mechanism (why some units got treated and not others) for our treatment variable, the length of the relationship between MP and Chief.**
+
+Why do some MPs know the Chief for longer? That depends on how social networks are formed. Clearly there are some random/arbitrary elements like a chance encounter that became a friendship. But we know these networks are strongly influenced by socioeconomic conditions, by going to the same school or university, working in the same type of job, living in the same neighbourhood. 
+
+Note that some of these variables might plausibly affect the outcome (number of temporary classrooms) as well, which would make them confounders, for example whether the MP went to university. But some are unlikely to affect the outcome, for example the neighbourhhod they live in.
 
 **5. Draw (by hand) the causal diagram (DAG) for our study, including the treatment effect of interest, the treatment assignment mechanism, and the threats to causal inference you described above. (Don't make it too complicated, just include the key variables and relationships!)**
 
+```{r}
+library(dagitty)
+library(ggdag)
+
+dag <- dagitty('dag{
+               Connections_MP_Chief [pos="0,1"]
+               temp_class_08 [pos="2,1"]
+               Years_as_MP [pos="0,2"]
+               Population [pos="0,0"]
+               University [pos="-1,2"]
+               Neighbourhood [pos="-1,1"]
+               Job [pos="-1,0"]
+               Random_meetings [pos="-1,-1"]
+               
+               Connections_MP_Chief -> temp_class_08
+               Years_as_MP -> Connections_MP_Chief
+               Years_as_MP -> temp_class_08
+               Population -> Connections_MP_Chief
+               Population -> temp_class_08
+               University -> Connections_MP_Chief
+               University -> temp_class_08
+               Neighbourhood -> Connections_MP_Chief
+               Job -> Connections_MP_Chief
+               Random_meetings -> Connections_MP_Chief
+}')
+
+plot(dag)
+```
+
+
 **6. Based on your causal diagram (DAG) in Q5, apply the three rules we discussed about back-door paths and describe one set of control variables which would be sufficient to provide an unbiased estimate of the causal effect of treatment (if the DAG were correct).**
+
+The three back-door paths are:  
+    1. Connections_MP_Chief <- Years_as_MP -> tempclass08  
+    2. Connections_MP_Chief <- Population -> tempclass08  
+    3. Connections_MP_Chief <- University -> tempclass08  
+
+This implies that the minimal set of control variables necessary to provide an accurate estimate of the causal effect is 'Years_as_MP', 'Population' and 'University'. 
 
 **7. One potential omitted variable (confounder) is population - in larger villages the MP and Chief are less likely to know each other personally, and village size might also affect the resources/demand for temporary classrooms. There are two potential control variables in the dataset we could use, a measure of population in 2000 (`pop2000`) and a measure of population in 2009 (`pop2009'). Which should we use, and why? **
 
@@ -99,26 +144,31 @@ We have to use `pop2000` to avoid post-treatment bias. It could be that better r
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
 Q8 <- lm(tempclass08 ~ connectionsMPchief + univMP + 
-           secondaryedchief + numcandidates + pop2000, data=d)
-stargazer(Q8, header=FALSE)
+           experienceMP + pop2000, data=d)
+stargazer(Q8, header=FALSE, title="Q8")
 ``` 
+
+After controlling for the potential confounders, the estimate of the treatment effect declines. 
 
 **9. Baldwin (2013) runs her regression using an ordered multinomial (ordered logit) model, reflecting the fact that the outcome variable (number of temporary classrooms) is not really continuous and can only take on a fixed set of integer values. Repeat your regression from Q8 but with an ordered logit model and interpret the results. (Note that Baldwin also clusters standard errors at the constituency (`constcode`) level, but don't worry about replicating this, just focus on the coefficient). **
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
-Q9 <- zelig(tempclass08 ~ connectionsMPchief + univMP+secondaryedchief+numcandidates+ pop2000,data=d, model="ologit", cite=F) %>% from_zelig_model()
-stargazer(Q9, header=FALSE)
+Q9 <- zelig(tempclass08 ~ connectionsMPchief + univMP + 
+           experienceMP + pop2000,data=d, model="ologit", cite=F) %>% from_zelig_model()
+stargazer(Q9, header=FALSE, title="Q9")
 ```
 
-A 1% increase in the number of years the chief has known the MP is associated with a `r round(log(101/100)*0.407,3)` ($log(\frac{101}{100})*0.407$) increase in the log-odds of having one more temporary classroom.
+A 1% increase in the number of years the chief has known the MP is associated with a `r round(100*(exp(log(101/100)*0.443)-1),3)`% ($100*(exp(log(101/100)*0.443)-1)$)  increase in the odds of having one more temporary classroom.
 
 **10. Now replicate the results from column (1) of Baldwin's Table 1, i.e. only include the control variables that she includes in Table 1. Compare the estimated treatment effect with your own model in Q9. (Again, don't worry about the standard errors).**
 
 ```{r,  echo=FALSE, warning=FALSE, message=FALSE, results='asis'}
 Q10 <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief, data=d, model="ologit",cite=FALSE) %>% from_zelig_model()
 
-Q10 %>% stargazer(header=FALSE)
+Q10 %>% stargazer(header=FALSE, title="Q10")
 ```
+
+The coefficient of 0.352 is smaller than in the model in Q9. A 1% increase in the number of years the chief has known the MP is associated with a `r round(100*(exp(log(101/100)*0.352)-1),3)`% ($100*(exp(log(101/100)*0.352)-1)$)%  increase in the odds of having one more temporary classroom.
 
 **11. Replicate all three columns of Table 1 in Baldwin (2013). How stable is the estimate of the treatment effect to alternative specifications of the control variables?**
 
@@ -127,8 +177,10 @@ Q11b <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experie
 
 Q11c <- zelig(tempclass08 ~ connectionsMPchief + tempclass07 + pop2000 + experienceMP + experiencechief + univMP + cabinetMP + localMP + agechief + secondaryedchief + politicalexpchief, data=d, model="ologit",cite=FALSE) %>% from_zelig_model() 
 
-stargazer(list(Q10,Q11b,Q11c), header=FALSE)
+stargazer(list(Q10,Q11b,Q11c), header=FALSE, title="Q11")
 ```
+
+The coefficients are relatively stable, providing confidence that the conclusion is not overly-sensitive to the specification.
 
 ```{r, echo=F, eval=F, include=F}
 library(MASS)
