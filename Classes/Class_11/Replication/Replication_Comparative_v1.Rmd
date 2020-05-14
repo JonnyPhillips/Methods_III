@@ -1,0 +1,97 @@
+---
+title: "FLS 6415: Replication 8 - Matching"
+#author: "Jonathan"
+date: "May 2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+To be submitted (code + answers) by midnight, Wednesday 20th May.
+
+First read the paper by Levitsky and Way (2010) on the course website. Rather than a quantitative replication we are going to work through the logic of their argument from the perspective of causal inference. 
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(broom)
+
+
+opts_chunk$set(echo=F, warning=F, message=F, include=F, tidy=T, eval=F)
+```
+
+**1. What are the treatment and outcome variables in Levitsky and Way (2010)? Define the potential outcomes $Y_0$ and $Y_1$ for their study.**
+
+```{r}
+# Treatment is that the ruling party was formed in violent struggle. Control is any party that was not formed in violent struggle. The scope of the argument is competitive authoritarian regimes.
+# The outcome is durability, both time in office and overcoming major national crises.
+
+# y_0 is party durability if it had not been formed by violent struggle.
+# y_0 is party durability if it had been formed by violent struggle.
+```
+
+**2. Describe the treatment assignment mechanism.**
+
+```{r}
+# Treatment assignment depends on the history of conflict in the country; for example, Cold War era proxy conflicts, and which elites were able to come to power in the aftermath, including the capacity for violence of the party. 
+```
+
+**3. The confounders Levitsky and Way identify are informed by alternative theories that might explain the fall of a ruling party. List the alternative theories that you can identify in their article and the associated variables/measurement that they seek to show are not a threat either because they are balanced or that the variable points in the 'other' direction.**
+
+```{r}
+# Party Scope - size of membership
+# Patronage - resource availability
+# Intensity of crisis - fall in GDP, inflation
+# Poverty, rural - GDP per capita
+# Duration in power - number of years
+```
+
+**4. Pick two of the confounders you identified in Q3 and do some quick research online to get quantitative estimates of the value of these confounders for each of the four countries (eg. if population growth was a factor you could look up population growth rates for each country...). Create a very simple table and use it to assess if you think these confounders are problematic for their argument.**
+
+```{r}
+confounders <- tibble(Country=c("Zimbabwe", "Zambia", "Mozambique", "Kenya"),
+                      Poverty=c("NA", "54%", "82%", "31%"),
+                      Natural_Resources_1990=c("4%", "21%", "14%", "5%"))
+
+# Natural Resources cannot explain why Zambia fell while Zimbabwe did not, nor can poverty explain why Kenya fell and Mozambique did not. 
+```
+
+**5. One assumption we made in the first class was SUTVA (Stable Unit Treatment Value Assumption), which means that the treatment of unit $i$ does not affect the potential outcomes for unit $j$. Is this assumption likely to be valid for this particular study? Provide a real-world example to support your point.**
+
+```{r}
+# Parties' violent origins in one country can affect potential outcomes in neighbouring countries, for example by encouraging or discouraging revolution. Consider the Arab Spring.
+```
+
+
+**7. One potential confounder is natural resources, which might make violent revolution more likely (as groups fight to control the resource) AND might make ruling parties less likely to collapse (as they have more resources to support their dominance). Imagine that Zambia had much more natural resources than Zimbabwe (which it does). Would this pattern of imbalance be a risk to Levitsky and Way's research design? Why/why not?**
+
+```{r}
+# This is not a risk as Zambia actually has lower durability than Zimbabwe, so this variable is uncapable of explaining the pattern of the outcome variable.
+```
+
+**8. Levitsky and Way do not describe in detail their case selection process. Describe what you think are the main reasons for their choice of cases.**
+
+```{r}
+# Most-similar cases on the confounding variables, but varied on the origins of ruling parties.
+```
+
+**9. How generalizable to other cases of competitive authoritarian ruling parties are their findings? Pick one of the confounders you measured in Q4 and compare the cases to values for a few other competitive authoritarian regimes to see how representative they are. *Hint: Just pick a few examples at random, no need to calculate a mean or anything.* **
+
+```{r}
+# Other competitive authoritarian regimes tend to have lower rates of poverty, so it is not clear that the dependence on parties with violent origins also applies in other economic contexts, eg. Russia. 
+```
+
+**10. Identify another country case that would support Levitsky and Way's argument, and explain why it supports their argument. OR identify a country that would undermine their argument, and explain why it undermines their argument. *Hint:* See [Here](https://en.wikipedia.org/wiki/Polity_data_series) for a list of countries by regime type (competitive authoritarian is basically 'anocracy').**
+
+```{r}
+# Cuba seems supportive, as does Rwanda and Uganda.
+# Venezuela may yet be a supportive or problematic case - it depends whether you consider coups sufficient to generate 'violent origins'.
+```
+
+
+**11. One strategy for improving causal inference is to increase the number of observations \textit{within} our cases. Provide one suggestion for how we might get more observations to test their theory even if we stick with the country cases of Kenya, Mozambique, Zambia and Zimbabwe.**
+
+```{r}
+#We could look at each country over time, or subnationally at different provinces. 
+```
+

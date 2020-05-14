@@ -93,7 +93,7 @@ treated_unit$y_obs - control_unit$y_obs
 
 ```{r}
 d <- d %>% mutate(gender=factor(gender),
-                       education=factor(gender))
+                       education=factor(education))
 matched_data_Q8 <- matchit(D ~ gender + education + age + income, data=d)
 matched_data_Q8
 ```

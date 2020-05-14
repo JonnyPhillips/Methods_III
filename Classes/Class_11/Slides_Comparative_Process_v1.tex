@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -113,7 +113,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 11 - Comparative Case Studies \& Process Tracing}
 \author{Jonathan Phillips}
-\date{June 2019}
+\date{May 2020}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -163,7 +163,10 @@
 \pause
 \item \textbf{Exactly} the same causal inference logic as Large-N
 \pause
+\item The Fundamental Problem of Causal Inference
+\begin{itemize} 
 \item We need counterfactuals to estimate treatment effects: \textbf{Comparative} Cases
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -183,7 +186,7 @@
 \pause
 \item But they cannot \textbf{confirm} a theory
 \pause
-\item We need variation in the dependent variable if we are to \textit{explain} it
+\item We need \textbf{variation} in the dependent variable if we are to \textbf{explain} it
 \pause
 \item Common error: "research that tries to explain the outbreak of war with studies only of wars" (KKV)
 \end{itemize}
@@ -195,11 +198,13 @@
 \item In a small-N study, what causal inference technique is most useful?
 \pause
 \begin{itemize}
+\item \textbf{Field experiments:} If we can randomly treat two units, we can treat more
+\pause
 \item \textbf{Natural experiments:} Possible, but rare
 \pause
 \item \textbf{Diff-in-diff:} Maybe if we have time-series data
 \pause
-\item \textbf{Controlling:} Not enough observations
+\item \textbf{Controlling:} Not enough observations for parametric adjustments
 \pause
 \item \textbf{Matching:} More useful
 \end{itemize}
@@ -209,18 +214,18 @@
 \begin{frame}
 \frametitle{Comparative Case Studies}
 \begin{itemize}
-\item Matching is the \textbf{'Comparative Method'}
+\item Matching \textit{is} the \textbf{'Comparative Method'}
 \begin{itemize}
 \item Don't look at the outcome variable
 \pause
-\item Split the sample on a single treatment variable
+\item Split the sample on a single binary treatment variable
 \pause
 \item Balance on confounders through careful case selection - remove unmatched cases
 \pause
 \item We can't match on everything, so focus on getting balance on \textbf{key confounders/alternative theories}
 \pause
 \end{itemize}
-\item \textbf{Our Large-N dataset after matching might look very similar to comparative case studies}
+\item \textbf{Our Large-N dataset reduced after matching might look reasonably similar to comparative case studies}
 \end{itemize}
 \end{frame}
 
@@ -242,7 +247,7 @@
 \item We want cases which vary in level of development
 \item But are identical in the other variables theory suggests might be confounders \pause \textbf{Possible!}
 \begin{itemize}
-\item Or at least those variables which suggest the treated case would be \textit{less} democratic
+\item Or at least those variables which suggest the treated case would be \textit{more} democratic
 \end{itemize}
 \pause
 \item Alternative Theories of Democratization:
@@ -275,9 +280,39 @@
     \hline
           & Continent & Europe & Europe \bigstrut\\
     \hline
+          & Inequality & 0.45  & 0.65 \bigstrut\\
+    \hline
+          & Economic growth & 1.2\% & 2\% \bigstrut\\
+    \hline
+          & National dish & Pasta & Corn \bigstrut\\
+    \hline
+          & Length of Railways & 400km & 120km \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}%
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparative Case Studies}
+\begin{table}[htbp]
+  \centering
+  \caption{Does Development cause Democracy?}
+    \begin{tabular}{|r|l|c|c|}
+    \hline
+          & Variable & \multicolumn{1}{l|}{Case A} & \multicolumn{1}{l|}{Case B} \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Outcome} & Democracy & ?     & ? \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Treatment} & Development & Low   & High \bigstrut\\
+    \hline
+    \multicolumn{1}{|l|}{Controls} & Religion & Christian & Christian \bigstrut\\
+    \hline
+          & Continent & Europe & Europe \bigstrut\\
+    \hline
           & Inequality & 0.45  & 0.44 \bigstrut\\
     \hline
-          & Economic growth & 1.2\% & 5\% \bigstrut\\
+          & Economic growth & 1.2\% & 2\% \bigstrut\\
     \hline
           & National dish & Pasta & Corn \bigstrut\\
     \hline
@@ -352,7 +387,7 @@
 \pause
 \item Randomized sampling is not the same as randomized treatment
 \end{itemize}
-\item Probably easier to 'block' on key confounders and impose variation in treatment - purposive sampling
+\item More reliable to pick equal numbers of treated and control units, ensuring balance on key confounders - \textbf{purposive} sampling
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -582,9 +617,9 @@
 \item We can also test mechanisms on the causal path of confounders:
 \pause
 \begin{itemize}
-\item Evidence of Mechanism X NOT occurring can rule out this alternative theory
+\item Evidence of Mechanism X NOT occurring can rule out this confounder, but there might still be others
 \pause
-\item Evidence of Mechanism X occurring is consistent with Treatment having a causal effect, but not proof
+\item Evidence of Mechanism X occurring is consistent with Treatment having no effect, but not proof
 \pause
 \end{itemize}
 \item This is a 'straw in the wind' test
@@ -627,7 +662,7 @@
 \begin{multicols}{2}
 \item But did higher income \textit{cause} democracy?
 \pause
-\item Higher incomes raise the demand for democracy, and diversify power away from the state
+\item \textbf{Theory:} Higher incomes raise the demand for democracy, and diversify power away from the state
 \pause
 \item If this were true we should see:
 \begin{itemize}
@@ -639,7 +674,7 @@
 \end{itemize}
 \pause
 \columnbreak
-\item Or was it American pressure (alternative theory)?
+\item \textbf{Alternative Theory:} Or was it American pressure?
 \pause
 \item South Korean elites faced costs to continuing dictatorship, and choose to democratize
 \pause
@@ -669,14 +704,37 @@
 \begin{frame}
 \frametitle{Process Tracing}
 \begin{itemize}
-\item What happened to counterfactuals here?
+\item Brady (2010)
 \pause
-\item We still don't know what would have happened if our case had not received the treatment
+\item Difference-in-differences evidence that the early announcement of a Democrat victory in Florida led to reduced Republican voting
 \pause
-\item We're substituting assumptions/theory for a counterfactual
+\item Estimated 10,000 lost Republican votes
+\pause
+\item The only way the causal effect is true is if there is a causal mechanism connecting the treatment to the outcome:
 \pause
 \begin{itemize}
-\item We 'assume' that the only way our treatment could work is through the mechanism we specify
+\item How long was left for the election after treatment?: \pause 10 minutes
+\pause
+\item How many voters were \textbf{potentially influenced}: \pause 4,200 voters
+\pause
+\item How many voters were \textbf{probably treated}: \pause 560 voters
+\pause
+\item How many voters \textbf{likely complied with treatment}: \pause 56 voters \pause < 10,000
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Process Tracing}
+\begin{itemize}
+\item What happened to counterfactuals here?
+\pause
+\item We still don't know what would have happened if our case had not received the treatment (eg. been low income)
+\pause
+\item We're substituting \textbf{assumptions/theory} for a counterfactual
+\pause
+\begin{itemize}
+\item We \textbf{'assume'} that the only way our treatment could work is through the mechanism we specify
 \pause
 \item And we assume the only way confounding works is through the mechanism we specify
 \end{itemize}
@@ -713,28 +771,5 @@
 \end{frame}
 
 %Framework relies on deterministic effects, not probabilistic ones (really means we've taken all the confounders into account)
-
-\begin{frame}
-\frametitle{Process Tracing}
-\begin{itemize}
-\item Brady (2010)
-\pause
-\item Difference-in-differences evidence that the early announcement of a Democrat victory in Florida led to reduced Republican voting
-\pause
-\item Estimated 10,000 lost Republican votes
-\pause
-\item The only way the causal effect is true is if there is a causal mechanism connecting the treatment to the outcome:
-\pause
-\begin{itemize}
-\item How long was left for the election after treatment?: \pause 10 minutes
-\pause
-\item How many voters were \textbf{potentially influenced}: \pause 4,200 voters
-\pause
-\item How many voters were \textbf{probably treated}: \pause 560 voters
-\pause
-\item How many voters \textbf{likely complied with treatment}: \pause 56 voters \pause < 10,000
-\end{itemize}
-\end{itemize}
-\end{frame}
 
 \end{document}

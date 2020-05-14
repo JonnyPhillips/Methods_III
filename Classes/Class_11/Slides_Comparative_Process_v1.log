@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  2 JUN 2019 15:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  13 MAY 2020 21:48
 entering extended mode
 **./Slides_Comparative_Process_v1.tex
 (Slides_Comparative_Process_v1.tex
@@ -1346,6 +1346,9 @@ tim
 
 LaTeX Warning: Label `tab:addlabel' multiply defined.
 
+
+LaTeX Warning: Label `tab:addlabel' multiply defined.
+
 )
 \openout1 = `Slides_Comparative_Process_v1.aux'.
 
@@ -1577,35 +1580,36 @@ LaTeX Font Warning: Font shape `T1/fav/m/sc' undefined
 
 ]
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 10.51207pt on input line 168.
+(Font)              scaled to size 10.51207pt on input line 171.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.68005pt on input line 168.
+(Font)              scaled to size 7.68005pt on input line 171.
 LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 5.76004pt on input line 168.
+(Font)              scaled to size 5.76004pt on input line 171.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 10.51207pt on input line 168.
+(Font)              scaled to size 10.51207pt on input line 171.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.68005pt on input line 168.
+(Font)              scaled to size 7.68005pt on input line 171.
 LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 5.76004pt on input line 168.
+(Font)              scaled to size 5.76004pt on input line 171.
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 168.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 171.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 171.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 7.29605pt on input line 171.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 9.60007pt on input line 171.
+LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
+(Font)              scaled to size 7.29605pt on input line 171.
+LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 171.
  [4
 
 ] [5
 
 ] [6
 
-]
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 9.60007pt on input line 190.
-LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
-(Font)              scaled to size 7.29605pt on input line 190.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 9.60007pt on input line 190.
-LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
-(Font)              scaled to size 7.29605pt on input line 190.
- [7
+] [7
 
 ] [8
 
@@ -1619,10 +1623,7 @@ LaTeX Font Info:    Font shape `MDA/mdbch/b/n' will be
 
 ] [13
 
-]
-LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 207.
- [14
+] [14
 
 ] [15
 
@@ -1664,16 +1665,21 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 ]
 [33
 
+] [34
+
 ]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.289 \end{frame}
-                  [34
+l.294 \end{frame}
+                  [35
 
-] [35
-
-] [36
+]pdfTeX warning (ext4): destination with the same identifier (name{tab:addlabel
+}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.324 \end{frame}
+                  [36
 
 ] [37
 
@@ -1691,12 +1697,12 @@ l.289 \end{frame}
 
 ] [44
 
-]
-[45
+] [45
 
 ] [46
 
-] [47
+]
+[47
 
 ] [48
 
@@ -1722,12 +1728,12 @@ l.289 \end{frame}
 
 ] [59
 
-]
-[60
+] [60
 
 ] [61
 
-] [62
+]
+[62
 
 ] [63
 
@@ -1753,12 +1759,12 @@ l.289 \end{frame}
 
 ] [74
 
-]
-[75
+] [75
 
 ] [76
 
-] [77
+]
+[77
 
 ] [78
 
@@ -1784,12 +1790,12 @@ l.289 \end{frame}
 
 ] [89
 
-]
-[90
+] [90
 
 ] [91
 
-] [92
+]
+[92
 
 ] [93
 
@@ -1801,350 +1807,350 @@ l.289 \end{frame}
 
 ] [97
 
-]
-<figure/Dag1-1.pdf, id=4075, 1003.75pt x 582.175pt>
-File: figure/Dag1-1.pdf Graphic file (type pdf)
-<use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
-(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+] [98
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
-[]  
- []
-
-
-Overfull \vbox (215.93785pt too high) detected at line 522
- []
-
-[98
-
- <./figure/Dag1-1.pdf>]
-File: figure/Dag1-1.pdf Graphic file (type pdf)
-<use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
-(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
-
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
-[]  
- []
-
-
-Overfull \vbox (215.93785pt too high) detected at line 522
- []
-
-[99
+] [99
 
 ]
+<figure/Dag1-1.pdf, id=4257, 1003.75pt x 582.175pt>
 File: figure/Dag1-1.pdf Graphic file (type pdf)
 <use figure/Dag1-1.pdf>
-Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 522.
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 557.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 522--522
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 557--557
 []  
  []
 
 
-Overfull \vbox (215.93785pt too high) detected at line 522
+Overfull \vbox (215.93785pt too high) detected at line 557
  []
 
 [100
 
-]
-<figure/Dag2-1.pdf, id=4207, 1003.75pt x 582.175pt>
-File: figure/Dag2-1.pdf Graphic file (type pdf)
-<use figure/Dag2-1.pdf>
-Package pdftex.def Info: figure/Dag2-1.pdf  used on input line 538.
+ <./figure/Dag1-1.pdf>]
+File: figure/Dag1-1.pdf Graphic file (type pdf)
+<use figure/Dag1-1.pdf>
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 557.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 538--538
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 557--557
 []  
  []
 
 
-Overfull \vbox (219.92453pt too high) detected at line 538
+Overfull \vbox (215.93785pt too high) detected at line 557
  []
 
 [101
 
- <./figure/Dag2-1.pdf>]
-<figure/Dag3-1.pdf, id=4257, 1003.75pt x 582.175pt>
-File: figure/Dag3-1.pdf Graphic file (type pdf)
-<use figure/Dag3-1.pdf>
-Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 559.
+]
+File: figure/Dag1-1.pdf Graphic file (type pdf)
+<use figure/Dag1-1.pdf>
+Package pdftex.def Info: figure/Dag1-1.pdf  used on input line 557.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 559--559
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 557--557
 []  
  []
 
 
-Overfull \vbox (255.58pt too high) detected at line 559
+Overfull \vbox (215.93785pt too high) detected at line 557
  []
 
 [102
 
- <./figure/Dag3-1.pdf>]
-File: figure/Dag3-1.pdf Graphic file (type pdf)
-<use figure/Dag3-1.pdf>
-Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 559.
+]
+<figure/Dag2-1.pdf, id=4392, 1003.75pt x 582.175pt>
+File: figure/Dag2-1.pdf Graphic file (type pdf)
+<use figure/Dag2-1.pdf>
+Package pdftex.def Info: figure/Dag2-1.pdf  used on input line 573.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 559--559
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 573--573
 []  
  []
 
 
-Overfull \vbox (255.58pt too high) detected at line 559
+Overfull \vbox (219.92453pt too high) detected at line 573
  []
 
 [103
 
-]
-<figure/Dag3b-1.pdf, id=4349, 1003.75pt x 582.175pt>
-File: figure/Dag3b-1.pdf Graphic file (type pdf)
-<use figure/Dag3b-1.pdf>
-Package pdftex.def Info: figure/Dag3b-1.pdf  used on input line 576.
+ <./figure/Dag2-1.pdf>]
+<figure/Dag3-1.pdf, id=4444, 1003.75pt x 582.175pt>
+File: figure/Dag3-1.pdf Graphic file (type pdf)
+<use figure/Dag3-1.pdf>
+Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 594.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 576--576
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 594--594
 []  
  []
 
 
-Overfull \vbox (249.18001pt too high) detected at line 576
+Overfull \vbox (255.58pt too high) detected at line 594
  []
 
 [104
 
- <./figure/Dag3b-1.pdf>]
-<figure/Dag4-1.pdf, id=4399, 1003.75pt x 582.175pt>
-File: figure/Dag4-1.pdf Graphic file (type pdf)
-<use figure/Dag4-1.pdf>
-Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+ <./figure/Dag3-1.pdf>]
+File: figure/Dag3-1.pdf Graphic file (type pdf)
+<use figure/Dag3-1.pdf>
+Package pdftex.def Info: figure/Dag3-1.pdf  used on input line 594.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 594--594
 []  
  []
 
 
-Overfull \vbox (233.53783pt too high) detected at line 597
+Overfull \vbox (255.58pt too high) detected at line 594
  []
 
 [105
 
- <./figure/Dag4-1.pdf>]
-File: figure/Dag4-1.pdf Graphic file (type pdf)
-<use figure/Dag4-1.pdf>
-Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+]
+<figure/Dag3b-1.pdf, id=4537, 1003.75pt x 582.175pt>
+File: figure/Dag3b-1.pdf Graphic file (type pdf)
+<use figure/Dag3b-1.pdf>
+Package pdftex.def Info: figure/Dag3b-1.pdf  used on input line 611.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 611--611
 []  
  []
 
 
-Overfull \vbox (233.53783pt too high) detected at line 597
+Overfull \vbox (249.18001pt too high) detected at line 611
  []
 
 [106
 
-]
+ <./figure/Dag3b-1.pdf>]
+<figure/Dag4-1.pdf, id=4588, 1003.75pt x 582.175pt>
 File: figure/Dag4-1.pdf Graphic file (type pdf)
 <use figure/Dag4-1.pdf>
-Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 632.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 632--632
 []  
  []
 
 
-Overfull \vbox (233.53783pt too high) detected at line 597
+Overfull \vbox (233.53783pt too high) detected at line 632
  []
 
 [107
 
-]
+ <./figure/Dag4-1.pdf>]
 File: figure/Dag4-1.pdf Graphic file (type pdf)
 <use figure/Dag4-1.pdf>
-Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 597.
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 632.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 597--597
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 632--632
 []  
  []
 
 
-Overfull \vbox (233.53783pt too high) detected at line 597
+Overfull \vbox (233.53783pt too high) detected at line 632
  []
 
 [108
 
 ]
-<figure/Dag5-1.pdf, id=4572, 1003.75pt x 582.175pt>
-File: figure/Dag5-1.pdf Graphic file (type pdf)
-<use figure/Dag5-1.pdf>
-Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+File: figure/Dag4-1.pdf Graphic file (type pdf)
+<use figure/Dag4-1.pdf>
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 632.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 632--632
 []  
  []
 
 
-Overfull \vbox (211.58pt too high) detected at line 617
+Overfull \vbox (233.53783pt too high) detected at line 632
  []
 
 [109
 
- <./figure/Dag5-1.pdf>]
-File: figure/Dag5-1.pdf Graphic file (type pdf)
-<use figure/Dag5-1.pdf>
-Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+]
+File: figure/Dag4-1.pdf Graphic file (type pdf)
+<use figure/Dag4-1.pdf>
+Package pdftex.def Info: figure/Dag4-1.pdf  used on input line 632.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 632--632
 []  
  []
 
 
-Overfull \vbox (211.58pt too high) detected at line 617
+Overfull \vbox (233.53783pt too high) detected at line 632
  []
 
 [110
 
 ]
+<figure/Dag5-1.pdf, id=4766, 1003.75pt x 582.175pt>
 File: figure/Dag5-1.pdf Graphic file (type pdf)
 <use figure/Dag5-1.pdf>
-Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 652.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 652--652
 []  
  []
 
 
-Overfull \vbox (211.58pt too high) detected at line 617
+Overfull \vbox (211.58pt too high) detected at line 652
  []
 
 [111
 
-]
+ <./figure/Dag5-1.pdf>]
 File: figure/Dag5-1.pdf Graphic file (type pdf)
 <use figure/Dag5-1.pdf>
-Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 617.
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 652.
 (pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
 
-Overfull \hbox (283.35736pt too wide) in paragraph at lines 617--617
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 652--652
 []  
  []
 
 
-Overfull \vbox (211.58pt too high) detected at line 617
+Overfull \vbox (211.58pt too high) detected at line 652
  []
 
 [112
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 652.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 652--652
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 652
  []
 
 [113
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+File: figure/Dag5-1.pdf Graphic file (type pdf)
+<use figure/Dag5-1.pdf>
+Package pdftex.def Info: figure/Dag5-1.pdf  used on input line 652.
+(pdftex.def)             Requested size: 637.55272pt x 369.80139pt.
+
+Overfull \hbox (283.35736pt too wide) in paragraph at lines 652--652
+[]  
+ []
+
+
+Overfull \vbox (211.58pt too high) detected at line 652
  []
 
 [114
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [115
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [116
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [117
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [118
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [119
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [120
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [121
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [122
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [123
 
 ]
-Overfull \vbox (3.48314pt too high) detected at line 657
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [124
 
 ]
-<South_Korea.jpg, id=5241, 642.4pt x 384.43625pt>
-File: South_Korea.jpg Graphic file (type jpg)
-<use South_Korea.jpg>
-Package pdftex.def Info: South_Korea.jpg  used on input line 667.
-(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
-
-Overfull \vbox (27.61412pt too high) detected at line 667
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [125
 
- <./South_Korea.jpg>]
-File: South_Korea.jpg Graphic file (type jpg)
-<use South_Korea.jpg>
-Package pdftex.def Info: South_Korea.jpg  used on input line 667.
-(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
-
-Overfull \vbox (27.61412pt too high) detected at line 667
+]
+Overfull \vbox (13.48314pt too high) detected at line 692
  []
 
 [126
 
-] [127
+]
+<South_Korea.jpg, id=5450, 642.4pt x 384.43625pt>
+File: South_Korea.jpg Graphic file (type jpg)
+<use South_Korea.jpg>
+Package pdftex.def Info: South_Korea.jpg  used on input line 702.
+(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
 
-] [128
+Overfull \vbox (27.61412pt too high) detected at line 702
+ []
+
+[127
+
+ <./South_Korea.jpg>]
+File: South_Korea.jpg Graphic file (type jpg)
+<use South_Korea.jpg>
+Package pdftex.def Info: South_Korea.jpg  used on input line 702.
+(pdftex.def)             Requested size: 299.06374pt x 178.97218pt.
+
+Overfull \vbox (27.61412pt too high) detected at line 702
+ []
+
+[128
 
 ] [129
 
@@ -2164,12 +2170,12 @@ Overfull \vbox (27.61412pt too high) detected at line 667
 
 ] [137
 
-]
-[138
+] [138
 
 ] [139
 
-] [140
+]
+[140
 
 ] [141
 
@@ -2189,12 +2195,16 @@ Overfull \vbox (27.61412pt too high) detected at line 667
 
 ] [149
 
-]
-[150
+] [150
 
 ] [151
 
-] [152
+]
+[152
+
+] [153
+
+] [154
 
 ]
 \tf@nav=\write6
@@ -2206,11 +2216,11 @@ Overfull \vbox (27.61412pt too high) detected at line 667
 \tf@snm=\write8
 \openout8 = `Slides_Comparative_Process_v1.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 740.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 740.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 775.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 775.
  (Slides_Comparative_Process_v1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 740.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 740.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 775.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 775.
 Package rerunfilecheck Info: File `Slides_Comparative_Process_v1.out' has not c
 hanged.
 (rerunfilecheck)             Checksum: D49828B29C3869B5C392D0C1BC11ED39;160.
@@ -2223,10 +2233,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 23075 strings out of 492893
- 439911 string characters out of 3133367
- 562803 words of memory out of 3000000
- 26090 multiletter control sequences out of 15000+200000
+ 23081 strings out of 492893
+ 439948 string characters out of 3133367
+ 563612 words of memory out of 3000000
+ 26092 multiletter control sequences out of 15000+200000
  74256 words of font info for 125 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,889b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -2237,10 +2247,10 @@ revSans-Bold.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-
 Oblique.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman
 .pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:
 /Program Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Comparative_Process_v1.pdf (152 pages, 1537330 bytes).
+Output written on Slides_Comparative_Process_v1.pdf (154 pages, 1586659 bytes).
 
 PDF statistics:
- 6483 PDF objects out of 7423 (max. 8388607)
- 309 named destinations out of 1000 (max. 500000)
+ 6721 PDF objects out of 7423 (max. 8388607)
+ 313 named destinations out of 1000 (max. 500000)
  102 words of extra memory for PDF output out of 10000 (max. 10000000)
 

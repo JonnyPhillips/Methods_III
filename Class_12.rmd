@@ -8,7 +8,12 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Readings
+#### Required
+  - **[Huber, John (2013), "Is theory getting lost in the 'identification revolution' ?"](https://themonkeycage.org/2013/06/is-theory-getting-lost-in-the-identification-revolution/)**
+  - **[Samii, Cyrus (2016), Causal Empiricism in Quantitative Research](Classes/Class_12/Readings/Samii_2016.pdf)**
+  - **[Monogan, James E. (2015), Research Preregistration in Political Science: THe Case, Counterarguments, and a Response to Critiques](Classes/Class_12/Readings/Monogan Pre-Registration.pdf)**
 
 #### Additional Readings
+  - **[Imai et al (2011), Unpacking the Black Box of Causality: Learning about Causal Mechanisms from Experimental and Observational Studies](https://imai.fas.harvard.edu/research/files/mediationP.pdf)**
 
-## [Lecture Slides](Classes/Class_12/Slides_Summary_v3.pdf)
+<!-- ## [Lecture Slides](Classes/Class_12/Slides_Summary_v3.pdf) -->

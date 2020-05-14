@@ -32,10 +32,14 @@ d <- tibble(inequality=rnorm(N,0.5,0.2),
                              prob=c(0.25,0.25,0.25,0.25), replace=T))
 ```
 
-2. Our outcome is going to be a binary variable for whether the country is a democracy or not. Use the expressions below to simulate potential outcomes, with a treatment effect which boosts the chances of democratization by 50\% (so our treatment effect is 0.5). (`Europe` is an indicator for whether the country is in Europe).
+2. The relationships we will assume are based on existing theory and evidence:
+  * European countries are more likely to be high-income and democracies
+  * 
+
+2. Our outcome is going to be a binary variable for whether the country is a democracy or not. Use the expressions below to simulate potential outcomes, with a treatment effect which boosts the chances of democratization by 50\% (so our treatment effect is 0.5). (`Europe` is an indicator for whether the country is in Europe), `Binom(0.5)` is a random binary variable with probability 0.5 of being 1).
 
 $$y_0= \begin{cases}
-1\text{ if } 2*inequality - \frac{growth}{10} + Europe >1\\ 
+1\text{ if } (2*inequality - \frac{growth}{10} + Europe) >1\\ 
 0 \text{ else}
 \end{cases}$$ 
 
@@ -61,7 +65,7 @@ d <- d %>% mutate(Europe=ifelse(country=="Europe",1,0),
 3. Treatment $D$ is the level of income of the country. It depends on the confounding variables and we will simplify to High versus Low income based on whether the country has an income over USD10,000. Imagine we know the treatment assignment mechanism so that binary (1/0) treatment is determined by the following expression:
 
 $$D=\begin{cases}
-1 \text{ if } N(10000,2000) + 2000*Europe - 1000*inequality - growth*200 > 10000 \\ 
+1 \text{ if } (N(10000,2000) + 2000*Europe - 1000*inequality - growth*200) > 10000 \\ 
 0 \text{ else }
 \end{cases}$$
 
@@ -78,13 +82,17 @@ d <- d %>% mutate(y_obs=case_when(D==0~y_0,
                                   D==1~y_1))
 ```
 
+5. Draw the causal diagram that represents the relationships in the simulated data. (Make sure you indicate the direction of the effect).
+
+6. 
+
 5. As always, as a benchmark, let's run the 'naive' regression of the outcome on the treatment with no controls. 
 
 ```{r}
 d %>% lm(y_obs ~ D, data=.) %>% summary()
 ```
 
-6. Now we will implement a comparative case study methodology for just two units. Select one treated (high income) unit that is a democracy. What are the values of the three confounding variables, inequality, growth and contintent? 
+6. Now we will implement a comparative case study methodology for just two units. Select one treated (**high income**) unit that is a **democracy**. What are the values of the three confounding variables, inequality, growth and contintent? 
 
 ```{r}
 set.seed(123)
@@ -95,9 +103,9 @@ country_treated <- d_treat %>% pull(country)
 ```
 
 7. From all of the control (low income) units that are NOT democracies, pick one at random. 
-(a) Is it possible that inequality explains why your treated unit is a democracy and the control unit is not?
-(b) Is it possible that economic growth explains why your treated unit is a democracy and the control unit is not?
-(c) Is it possible that being European explains why your treated unit is a democracy and the control unit is not?
+(a) Is it *possible* that inequality explains why your treated unit is a democracy and the control unit is not?
+(b) Is it *possible* that economic growth explains why your treated unit is a democracy and the control unit is not?
+(c) Is it *possible* that being European explains why your treated unit is a democracy and the control unit is not?
 (d) Can we conclude anything about the role of income level (treatment) on democracy?
 
 ```{r}

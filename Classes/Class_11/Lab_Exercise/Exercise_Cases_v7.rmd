@@ -1,0 +1,183 @@
+---
+title: "Exercise: Comparative Case Studies & Process Tracing"
+output: pdf_document
+fontsize: 16pt
+---
+
+```{r setup, echo=F,warning=F, error=F, message=F}
+knitr::opts_chunk$set(echo = F, warning=F, error=F, message=F, fig.height=3, fig.width=3, include=F)
+library(tidyverse)
+library(stargazer)
+library(MatchIt)
+library(optmatch)
+library(rgenoud)
+library(cem)
+library(zeligverse)
+```
+
+Let's simulate some fake data and see whether we are able to recover the correct treatment effect using comparative case study methods. Our research question is whether being a high-income country causes democracy.
+
+1. First, let's generate some confounder variables for 100 countries (we have only cross-section data).   
+    (a) The variable 'Inequality' should be drawn randomly from the normal distribution with mean 0.5 and standard deviation 0.2. 
+    (b) The variable 'Continent' should be randomly drawn with equal probability from four possibilities: Europe, Americas, Asia, and Africa.
+
+```{r}
+#rm(list=ls())
+set.seed(54321)
+N <- 100
+d <- tibble(inequality=rnorm(N,0.5,0.2),
+            continent=sample(c("Europe","Americas","Asia","Africa"),N,
+                             prob=c(0.25,0.25,0.25,0.25), replace=T))
+```
+
+2. Our outcome is going to be a binary variable for whether the country is a democracy or not. The relationships we will assume are based on existing theory and evidence:
+    * European countries are more likely to be high-income and democracies
+    * Inequality increases the chances of democracy (Meltzer-Richards theory), but reduces the level of development
+    * Our treatment variable, high income, increases the log-odds of democracy by 0.5 (so our treatment effect in a logit model should be 0.5).
+ 
+Use the expressions below to simulate potential outcomes 
+
+$$y_0= \begin{cases}
+1\text{ if } (2*inequality + 0.5*Europe) >1\\ 
+0 \text{ else}
+\end{cases}$$ 
+
+$$y_1=\begin{cases}
+1\text{ if } y_0=1\\
+1\text{ if } y_0=0 \text{ } \& \text{ } Binom(0.5)=1\\
+0 \text{ else}
+\end{cases}$$
+
+```{r}
+set.seed(54001)
+d <- d %>% mutate(Europe=ifelse(continent=="Europe",1,0),
+  y_0=case_when(2*inequality + 0.5*Europe>1~1,
+                                T~0),
+  rnd_y_1 = rbinom(N,1,0.5),
+                  y_1=case_when(y_0==1~1,
+                                y_0==0 & rnd_y_1==1~1,
+                                T~0))
+```
+
+3. Treatment $D$ is the level of income of the country. It depends on the confounding variables and we will simplify to High versus Low income based on whether the country has an income over USD10,000. Imagine we know the treatment assignment mechanism so that binary (1/0) treatment is determined by the following expression:
+
+$$D=\begin{cases}
+1 \text{ if } (N(10000,2000) + 2000*Europe - 1000*inequality) > 10000 \\ 
+0 \text{ else }
+\end{cases}$$
+
+```{r}
+set.seed(54001)
+d <- d %>% mutate(D=case_when(2000*Europe-1000*inequality + rnorm(N,10000,2000)>10000 ~ 1,
+                              T~0))
+```
+
+4. Calculate observed outcomes based on potential outcomes and treatment.
+
+```{r}
+d <- d %>% mutate(y_obs=case_when(D==0~y_0,
+                                  D==1~y_1))
+```
+
+5. Draw the causal diagram that represents the relationships in the simulated data. (Make sure you indicate the direction of the effect).
+
+6. Now we will implement a comparative case study methodology for just two units. Select one treated (**high income**) unit that is a **democracy**. What are the values of the two confounding variables, inequality and continent? 
+
+```{r}
+set.seed(4)
+d_treat <- d %>% filter(D==1 & y_obs==1) %>% sample_n(1)
+ineq_treated <- d_treat %>% pull(inequality)
+continent_treated <- d_treat %>% pull(continent)
+```
+
+7. From all of the control (low income) units that are NOT democracies, pick one at random. 
+    (a) Is it *possible* that being European explains why your treated unit is a democracy and the control unit is not?
+    (b) Is it *possible* that inequality explains why your treated unit is a democracy and the control unit is not?
+    (c) Can we conclude anything about the role of income level (treatment) on democracy from this comparison?
+
+```{r}
+set.seed(123)
+d %>% filter(D==0 & y_obs==0) %>% sample_n(1)
+
+#The treated unit is European and the control unit is not. Since being European increases the probability of democracy, yes, it is possible that this explains why the treated unit is a democracy and the control unit is not.
+#The control unit is more unequal than the treated unit, and since inequality is associated with democracy this would imply that the control unit would be more likely to be a democracy than the treated unit. But that's not true, so inequality cannot be an alternative explanation.
+# Given the arrangement of the continent variable we cannot say anything about the role of income.
+```
+
+8. What would be the ideal characteristics of a control unit that allow you to answer "No" to questions (a)-(b) in Question 7 and will help demonstrate the effect of income level (treatment) on democracy? I.e. what continent should the control unit be from, and what level of inequality should it have (compared to the treated unit)?
+
+```{r}
+#We want a control unit that is not European, unless the treated unit also is.
+#We want a control unit with higher inequality than the treated unit.
+```
+
+9. Identify one control unit that is a non-democracy and has values of the confounders you identified in Question 8. It may not be possible - if not, try picking a different treated unit and then search for an appropriate control unit.
+
+```{r}
+d %>% filter(D==0 & y_obs==0 & continent==continent_treated  & inequality>ineq_treated)
+#No units
+
+set.seed(1)
+d_treat <- d %>% filter(D==1 & y_obs==1) %>% sample_n(1)
+ineq_treated <- d_treat %>% pull(inequality)
+continent_treated <- d_treat %>% pull(continent)
+
+d_control <- d %>% filter(D==0 & y_obs==0 & continent==continent_treated  & inequality>ineq_treated) %>%
+  slice(1)
+```
+
+10. Once you succeed in finding an appropriate pairing of treated and control units, what can you conclude about the role of development in explaining democracy?
+
+```{r}
+d_treat %>% bind_rows(d_control)
+#The control unit is on the same continent, and has higher inequality than the treated unit, so these alternative theories cannot explain why the control unit is a non-democracy and the democracy is not. The fact that the control unit is low-income and the treated unit is high-income is consistent with development explaining democracy. Though it could also be by chance/some other not accounted for factor.
+```
+
+11. How \textbf{representative} are your treated and control cases? Use a table or graph or numerical comparison to compare them to the overall distribution of countries on the confounding variables.
+
+```{r}
+d %>% ggplot() +
+  geom_density(aes(x=inequality)) +
+  geom_point(data=d_treat, aes(x=inequality, y=0.25), colour="green") +
+  geom_point(data=d_control, aes(x=inequality, y=0.25), colour="red") +
+  theme_classic()
+```
+
+```{r}
+d %>% ggplot() +
+  geom_bar(aes(x=continent)) +
+  theme_classic()
+```
+
+12. Let's take a closer look at Europe. We know democracies are more common in Europe, and so if we had a treated unit in Europe we would need a control unit also in Europe to avoid the risk of bias. How easy is it to find these units? Specifically, how many units do you have in Europe and how many of them are control (low-income) units? How many are also non-democracies?
+
+```{r}
+d %>% filter(continent=="Europe") %>%
+  group_by(D) %>%
+  tally()
+
+d %>% filter(continent=="Europe" & D==0 & y_obs==0) 
+#There are only 3/27 control units in Europe. And all are democracies. So it is impossible to find an appropriate comparison unit.
+```
+
+13. Return to your selected treated case and ignore the control cases. If we were to conduct process tracing on our single treated case to generate additional evidence that it was development that caused democracy in this case, what observable implications of this theory/mechanism would you look for? 
+
+```{r}
+# We would expect development to create a demand for democracy, as expected by the theory. So we could measure whether people with higher incomes, more information and in more urban areas were more supportive of democracy. We could also look at the lobbying performed by interest groups like businesses in support of democracy.
+```
+
+
+14. A competing theory of democratization (think Acemoglu and Robinson) is the role of inequality in generating a stronger demand for redistribution, which is expressed through protests by the poor/left and is ultimately only possible to guarantee through democracy. What observable implications can you think of that might help us \textit{exclude} the mechanism of inequality as an explanation of our treated case using process tracing? 
+
+```{r}
+# We can look for evidence of the *absence* of protests, public opinion polls indicating no demand for higher taxes and against redistribution of wealth, etc.
+```
+
+
+15. Comparing the observable implications you have suggested in Q13 and Q14, which are most likely to help us distinguish the influence of development versus inequality?
+
+```{r}
+# The observable implications that best separate the mechanisms of development and inequality are whether the richer segments of society are supportive of democracy. Modernization theory suggests they should be, but redistributive inequality theory suggests they should be opposed.
+```
+
+

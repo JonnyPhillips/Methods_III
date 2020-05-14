@@ -99,7 +99,7 @@ This is much larger than our assumed treatment effect, purely by chance because 
 
 ```{r}
 d <- d %>% mutate(gender=factor(gender),
-                       education=factor(gender))
+                       education=factor(education))
 matched_data_Q8 <- matchit(D ~ gender + education + age + income, data=d)
 matched_data_Q8
 ```
