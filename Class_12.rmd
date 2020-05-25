@@ -16,4 +16,4 @@ knitr::opts_chunk$set(echo = TRUE)
 #### Additional Readings
   - **[Imai et al (2011), Unpacking the Black Box of Causality: Learning about Causal Mechanisms from Experimental and Observational Studies](https://imai.fas.harvard.edu/research/files/mediationP.pdf)**
 
-<!-- ## [Lecture Slides](Classes/Class_12/Slides_Summary_v3.pdf) -->
+## [Lecture Slides](Classes/Class_12/Slides_Summary_v4.pdf)

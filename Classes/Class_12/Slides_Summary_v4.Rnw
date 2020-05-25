@@ -427,6 +427,7 @@ grViz("
 \pause
 \item Note this does not mean that being a first-term mayor \textit{causes} audits to be more effective
 \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -465,11 +466,11 @@ grViz("
 \end{frame}
 
 \begin{frame}
-\includegraphics[scale=0.5]{placebo_2.png}
+\includegraphics[scale=0.4]{placebo_2.png}
 \end{frame}
 
 \begin{frame}
-\includegraphics[scale=0.5]{placebo.png}
+\includegraphics[width=\linewidth]{placebo.png}
 \end{frame}
 
 \begin{frame}

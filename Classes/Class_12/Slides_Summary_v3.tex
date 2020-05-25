@@ -1,8 +1,8 @@
 % Font options: 10pm, 11pt, 12pt
 % Align headings left instead of center: nocenter
 \documentclass[xcolor=x11names,compress]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
 \def\maxwidth{ %
   \ifdim\Gin@nat@width>\linewidth
@@ -113,7 +113,7 @@
 \title{FLS 6441 - Methods III: Explanation and Causation}
 \subtitle{Week 12 - Review \& Frontiers}
 \author{Jonathan Phillips}
-\date{June 2019}
+\date{May 2020}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
@@ -222,12 +222,14 @@
 \item Messy: Observational study
 \pause
 \end{itemize}
-\item Where is the as-if variation in treatment?
+\item Where is the (as-if random) variation in treatment statuss?
 \pause
 \begin{itemize}
-\item Across time: Diff-in-diff
-\item Across threshold: RDD
+\item At discontinuous threshold: RDD
 \item Before treatment: IV 
+\item Across time and units: Diff-in-diff
+\item Across units: Matching/Controls/Comparative case studies
+\item None: Process Tracing
 \end{itemize}
 \pause
 \item How many units can we get accurate measures for?
@@ -286,45 +288,75 @@
 \begin{frame}
 \frametitle{The Role of Theory}
 \begin{itemize}
-\item To avoid data mining: We have to test plausible, relevant theories
+\item To avoid \textbf{data mining} and multiple testing: We have to test plausible, relevant and falsifiable theories
 \pause
-\item To tell us which experiments and research designs to run
+\item To tell us \textbf{which experiments} and research designs to run
 \pause
-\item To justify assumptions (exclusion restriction, confounders)
+\item To \textbf{justify assumptions} (exclusion restriction, confounders)
 \pause
-\item To help us interpret what we have learned
+\item To help us \textbf{interpret} what we have learned
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{The Role of Qualitative Evidence}
 \begin{itemize}
-\item Vital for identifying natural experiments
+\item Vital for 'finding' natural experiments
 \pause
-\item To validate assumptions (no sorting, randomization worked, SUTVA)
+\item To \textbf{validate assumptions} (no sorting, randomization worked, SUTVA)
 \pause
-\item To understand specific analysis requirements, eg. non-compliance, clustering
+\item To understand specific \textbf{analysis requirements}, eg. non-compliance, clustering
 \pause
-\item For Process Tracing: Causal Process Observations
+\item For Process Tracing: \textbf{Causal Process Observations}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparing Methodologies}
+\begin{itemize}
+\item Different methodologies measure \textit{different treatment effects} for \textit{different populations}
+\pause
+\item Often a trade-off between \textbf{Bias} and \textbf{Generalizability}
+\end{itemize}
+\pause
+\begin{multicols}{2}
+\begin{itemize}
+\item \textbf{Regression Discontinuity:}
+\pause
+\item Low bias, Low generalizability
+\pause
+\item LATE, estimated for a population where discontinuities were available
+\end{itemize}
+\columnbreak
+\begin{itemize}
+\item \textbf{Regression with Controls:}
+\pause
+\item High bias, High generalizability
+\pause
+\item ATE, estimated for the whole population we have data for
+\pause
+\item \textit{But}: Aronow and Samii (2016) - simple regression also implicitly weights your sample, so it's not as generalizable as you think
+\end{itemize}
+\end{multicols}
+\begin{itemize}
+\item We can do both and compare!
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Limitations of Causal Methodologies}
 \begin{itemize}
-\item Usually a trade-off between avoiding bias and generalizability
+\item Sure you have shown that $D$ affects $Y$, but \textit{how}?? The connection is still a black box!
 \pause
-\item Sure you have shown that $D$ affects $Y$, but how?? The connection is still a black box!
+\item Causal effects are probably highly heterogeneous - do we really \textit{care about the ATE} (the average effect)?
 \pause
-\item Causal effects are probably highly heteregeneous - who cares about the average?
-\pause
-\item They only tell us about 'unusual' parts of the population (eg. RDD)
+\item They only tell us about \textit{'unusual'} parts of the population (eg. RDD, Field Experiment)
 \pause
 \item Even if variable X has a causal effect, \textit{how much} of the real world does it explain?
 \pause
 \item Sometimes it's just not possible to show causation. That's OK!
 \begin{itemize}
-\item We just need to recognize the evidence we have is not representative of everything that happens in the real world
+\item We just need to recognize the limits of the evidence we have
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -340,7 +372,7 @@
 \pause
 \item We also need to show that our estimate is reliable and not a 'chance' finding
 \pause
-\item More importantly, that it is evidence in support of \textbf{specific} theory
+\item More importantly, that it is evidence in support of a \textbf{specific} theory
 \pause
 \item You don't want to publish a paper that someone contradicts next week!
 \end{itemize}
@@ -359,26 +391,21 @@
 \pause
 \item Alternative (but conceptually equivalent) measures of key variables
 \pause
-\item Alternative samples (dropping outliers etc.)
+\item Alternative samples (dropping outliers, different countries etc.)
 \pause
-\item Various formal tests, but best to plot overlap of confidence intervals from many models
+\item Multiple tests of different parts of theory
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Sensitivity Analysis}
 \begin{itemize}
-\item An alternative is to ask - quantitatively - how much do our results change when we alter the model or its assumptions?
+\item An alternative is to ask - quantitatively - \textit{how much} do our results change when we alter the model or its assumptions?
 \pause
 \item One example for observational studies:
 \begin{itemize}
 \item How much larger would \textbf{unmeasured} confounders have to be than \textbf{measured confounders} to remove the entire estimated treatment effect? (Altonji et al 2005)
 \pause
-\item Take a small set of covariates, run your regression and store $\beta_R$
-\pause
-\item Take a larger set of covariates, run your regression and store $\beta_F$ 
-\pause
-\item Calculate $\frac{\beta_F}{\beta_R - \beta_F}$
 \end{itemize}
 \item Eg. Nunn and Wantchekon (2011) argue that for unmeasured confounders to explain their estimated effect of the slave trade on trust, they would have to be 3 - 11 times larger than measured confounders
 \end{itemize}
@@ -393,7 +420,7 @@
 \pause
 \item We can test for heterogeneous effects: \textbf{Conditional Average Treatment Effects (CATE)}
 \pause
-\item $Y_i ~ \beta_1 D_i + \beta_2 X_i + \beta_3 D_i*X_i + \epsilon_i$
+\item $Y_i \sim \beta_1 D_i + \beta_2 X_i + \beta_3 D_i*X_i + \epsilon_i$
 \pause
 \item $X_i$ MUST be a \textbf{pre-treatment} covariate we are testing for heterogeneous effects on
 \pause
@@ -408,13 +435,16 @@
 \begin{itemize}
 \item Audits reduce corruption, they argue due to electoral accountability
 \pause
-\item The effects should therefore be stronger where more people know about the audits
+\item The effects should therefore be stronger where:
 \pause
-\item And for first-term Mayors with re-eletion incentives
+\begin{itemize}
+\item More people know about the audits (local radio): It is!
+\pause
+\item And for first-term Mayors with re-election incentives. It is!
 \end{itemize}
 \item Are there other theories consistent with \textit{all} of this evidence?
 \pause
-\item Note this does not mean that being a first-term mayor \textit{causes} audits to be less effective
+\item Note this does not mean that being a first-term mayor \textit{causes} audits to be more effective
 \end{itemize}
 \end{frame}
 
@@ -423,7 +453,9 @@
 \begin{itemize}
 \item But what if we look for heterogeneous effects on 20 variables?
 \pause
-\item And then construct an appropriate theory based on the variables that show differential effects
+\begin{itemize}
+\item And then construct a theory to 'explain' the variables that show differential effects
+\end{itemize}
 \pause
 \item Theory first! Avoid \textit{ex post} construction of theory and data-mining
 \pause
@@ -438,13 +470,13 @@
 \begin{itemize}
 \item How likely is it that our treatment effect is just a product of messy data?
 \pause
-\item Normally we test for a treatment effect where we expect one
+\item Normally we test for a treatment effect where we \textbf{expect} one
 \pause
 \item But we can also test for a treatment effect where we \textbf{don't} expect one
 \begin{itemize}
-\item Evidence of no treatment effect supports our interpretation
+\item Evidence of \textbf{no} treatment effect supports our interpretation
 \pause
-\item Evidence of a treatment effect suggests messy data
+\item Evidence of a 'surprising' treatment effect suggests messy data, or an incomplete theory
 \end{itemize}
 \pause
 \item Common for regression discontinuities (alternative thresholds) and difference-in-differences (alternative times of treatment)
@@ -452,11 +484,11 @@
 \end{frame}
 
 \begin{frame}
-\includegraphics[width=\linewidth]{placebo_2.png}
+\includegraphics[scale=0.5]{placebo_2.png}
 \end{frame}
 
 \begin{frame}
-\includegraphics[width=\linewidth]{placebo.png}
+\includegraphics[scale=0.5]{placebo.png}
 \end{frame}
 
 \begin{frame}

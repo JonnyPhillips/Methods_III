@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  25 MAY 2020 15:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  25 MAY 2020 16:13
 entering extended mode
-**./Slides_Summary_v3.tex
-(Slides_Summary_v3.tex
+**./Slides_Summary_v4.tex
+(Slides_Summary_v4.tex
 LaTeX2e <2018-12-01>
 ("C:\Program Files\MiKTeX 2.9\tex/latex/beamer\beamer.cls"
 Document Class: beamer 2018/12/02 v3.55 A class for typesetting presentations
@@ -1342,8 +1342,8 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 102.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(Slides_Summary_v3.aux)
-\openout1 = `Slides_Summary_v3.aux'.
+(Slides_Summary_v4.aux)
+\openout1 = `Slides_Summary_v4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
 LaTeX Font Info:    ... okay on input line 118.
@@ -1454,9 +1454,9 @@ LaTeX Info: Redefining \ref on input line 118.
 LaTeX Info: Redefining \pageref on input line 118.
 LaTeX Info: Redefining \nameref on input line 118.
 
-(Slides_Summary_v3.out) (Slides_Summary_v3.out)
+(Slides_Summary_v4.out) (Slides_Summary_v4.out)
 \@outlinefile=\write5
-\openout5 = `Slides_Summary_v3.out'.
+\openout5 = `Slides_Summary_v4.out'.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex/latex/translator\translator-basic-dictionary-
@@ -1489,7 +1489,7 @@ Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-(Slides_Summary_v3.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/confi
+(Slides_Summary_v4.nav) [1{C:/Users/jonny/AppData/Local/MiKTeX/2.9/pdftex/confi
 g/pdftex.map}
 
 ] [2
@@ -1797,31 +1797,168 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 
 ] [78
 
-])
-Runaway argument?
-\let \AtEndDocument \@firstofone \@enddocumenthook \@checkend {docume\ETC.
-! File ended while scanning use of \beamer@collect@@body.
-<inserted text> 
-                \par 
-<*> ./Slides_Summary_v3.tex
-                           
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+] [79
 
-! Emergency stop.
-<*> ./Slides_Summary_v3.tex
-                           
-*** (job aborted, no legal \end found)
+] [80
 
- 
+] [81
+
+] [82
+
+]
+[83
+
+] [84
+
+] [85
+
+] [86
+
+] [87
+
+] [88
+
+] [89
+
+] [90
+
+] [91
+
+] [92
+
+] [93
+
+]
+<placebo_2.png, id=3262, 507.5325pt x 582.26625pt>
+File: placebo_2.png Graphic file (type png)
+<use placebo_2.png>
+Package pdftex.def Info: placebo_2.png  used on input line 489.
+(pdftex.def)             Requested size: 203.0094pt x 232.90236pt.
+ [94
+
+ <./placebo_2.png>]
+<placebo.png, id=3298, 819.6075pt x 546.13126pt>
+File: placebo.png Graphic file (type png)
+<use placebo.png>
+Package pdftex.def Info: placebo.png  used on input line 493.
+(pdftex.def)             Requested size: 354.19536pt x 236.01518pt.
+
+[95
+
+ <./placebo.png>] [96
+
+] [97
+
+] [98
+
+] [99
+
+] [100
+
+] [101
+
+] [102
+
+] [103
+
+]
+<twins_compliers.png, id=3606, 831.92625pt x 583.0875pt>
+File: twins_compliers.png Graphic file (type png)
+<use twins_compliers.png>
+Package pdftex.def Info: twins_compliers.png  used on input line 518.
+(pdftex.def)             Requested size: 354.19536pt x 248.24931pt.
+
+Overfull \vbox (7.2583pt too high) detected at line 518
+ []
+
+[104
+
+ <./twins_compliers.png>] [105
+
+] [106
+
+] [107
+
+] [108
+
+] [109
+
+] [110
+
+] [111
+
+]
+[112
+
+] [113
+
+] [114
+
+] [115
+
+] [116
+
+] [117
+
+] [118
+
+] [119
+
+] [120
+
+] [121
+
+] [122
+
+] [123
+
+]
+[124
+
+] [125
+
+]
+\tf@nav=\write6
+\openout6 = `Slides_Summary_v4.nav'.
+
+\tf@toc=\write7
+\openout7 = `Slides_Summary_v4.toc'.
+
+\tf@snm=\write8
+\openout8 = `Slides_Summary_v4.snm'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 597.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 597.
+ (Slides_Summary_v4.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 597.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 597.
+Package rerunfilecheck Info: File `Slides_Summary_v4.out' has not changed.
+(rerunfilecheck)             Checksum: E908169ADBF74B1DB0BC283692D889E9;87.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 22874 strings out of 492893
- 437073 string characters out of 3133367
+ 22988 strings out of 492893
+ 438652 string characters out of 3133367
  553437 words of memory out of 3000000
- 26036 multiletter control sequences out of 15000+200000
- 71257 words of font info for 124 fonts, out of 3000000 for 9000
+ 26059 multiletter control sequences out of 15000+200000
+ 73134 words of font info for 126 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,877b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/arev/arevoms.enc}{C:/Program Fil
+es/MiKTeX 2.9/fonts/enc/dvips/arev/arevot1.enc}{C:/Program Files/MiKTeX 2.9/fon
+ts/enc/dvips/arev/arevoml.enc}{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base
+/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Bold.pfb>
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Oblique.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program 
+Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9
+/fonts/type1/mathdesign/mdbch/md-chbma.pfb>
+Output written on Slides_Summary_v4.pdf (125 pages, 1615428 bytes).
+PDF statistics:
+ 4457 PDF objects out of 5155 (max. 8388607)
+ 254 named destinations out of 1000 (max. 500000)
+ 79 words of extra memory for PDF output out of 10000 (max. 10000000)
+
