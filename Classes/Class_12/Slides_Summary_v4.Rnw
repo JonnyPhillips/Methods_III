@@ -269,6 +269,8 @@ grViz("
 \begin{frame}
 \frametitle{The Role of Theory}
 \begin{itemize}
+\item Political Scientists test \textbf{theories}, not interventions
+\pause
 \item To avoid \textbf{data mining} and multiple testing: We have to test plausible, relevant and falsifiable theories
 \pause
 \item To tell us \textbf{which experiments} and research designs to run
@@ -327,7 +329,7 @@ grViz("
 \begin{frame}
 \frametitle{Limitations of Causal Methodologies}
 \begin{itemize}
-\item Sure you have shown that $D$ affects $Y$, but \textit{how}?? The connection is still a black box!
+\item Sure, you have shown that $D$ affects $Y$, but \textit{how}?? The connection is still a black box!
 \pause
 \item Causal effects are probably highly heterogeneous - do we really \textit{care about the ATE} (the average effect)?
 \pause
@@ -363,8 +365,10 @@ grViz("
 \frametitle{Robustness Tests}
 \begin{itemize}
 \item In general, we will trust our estimate more if it doesn't change even when we change our model
+\pause
 \begin{itemize}
 \item Not just direction and significance, but in the substantive effect size
+\pause
 \end{itemize}
 \item Alternative covariates/matching procedures
 \pause
@@ -422,6 +426,7 @@ grViz("
 \item More people know about the audits (local radio): It is!
 \pause
 \item And for first-term Mayors with re-election incentives. It is!
+\pause
 \end{itemize}
 \item Are there other theories consistent with \textit{all} of this evidence?
 \pause
@@ -489,9 +494,7 @@ grViz("
 \item Relative likelihood that a complier has covariate X equals:
 \end{itemize}
 \pause
-$$\frac{\text{First Stage Effect for Units with Covariate X}}{\text{First Stage Effect for Everyone}}$$
-\pause
-$$\frac{Pr(D_i=1\text{ \& }Z_i=1 | X_i=1)}{Pr(D_i=1\text{ \& }Z_i=1)}$$
+$$\frac{Pr(Complier | X_i=1)}{Pr(Complier)}$$
 \end{frame}
 
 \begin{frame}
@@ -510,6 +513,7 @@ $$\frac{Pr(D_i=1\text{ \& }Z_i=1 | X_i=1)}{Pr(D_i=1\text{ \& }Z_i=1)}$$
 \pause
 \item Replication of different treatment implementations
 \end{itemize}
+\pause
 \item This is how we accumulate knowledge
 \end{itemize}
 \end{frame}

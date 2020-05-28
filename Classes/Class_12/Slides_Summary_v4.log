@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  25 MAY 2020 16:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7000 64-bit) (preloaded format=pdflatex 2019.4.28)  28 MAY 2020 12:31
 entering extended mode
 **./Slides_Summary_v4.tex
 (Slides_Summary_v4.tex
@@ -1677,7 +1677,7 @@ Overfull \vbox (331.68079pt too high) detected at line 209
 
 ]
 LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 299.
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 301.
  [38
 
 ] [39
@@ -1695,55 +1695,55 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10.95> not available
 
 ] [45
 
-]
-Overfull \vbox (25.03197pt too high) detected at line 344
- []
-
-[46
+] [46
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [47
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [48
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [49
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [50
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [51
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [52
 
 ]
-Overfull \vbox (25.03197pt too high) detected at line 344
+Overfull \vbox (25.03197pt too high) detected at line 346
  []
 
 [53
 
-] [54
+]
+Overfull \vbox (25.03197pt too high) detected at line 346
+ []
+
+[54
 
 ] [55
 
@@ -1771,21 +1771,21 @@ Overfull \vbox (25.03197pt too high) detected at line 344
 
 ] [67
 
-]
-[68
-
-] [69
+] [68
 
 ]
-LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
-(Font)              Font shape `T1/fav/b/n' tried instead on input line 412.
- [70
+[69
+
+] [70
 
 ] [71
 
 ] [72
 
-] [73
+]
+LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
+(Font)              Font shape `T1/fav/b/n' tried instead on input line 416.
+ [73
 
 ] [74
 
@@ -1805,10 +1805,10 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 
 ] [82
 
-]
-[83
+] [83
 
-] [84
+]
+[84
 
 ] [85
 
@@ -1828,32 +1828,31 @@ LaTeX Font Info:    Font shape `T1/fav/bx/n' in size <10> not available
 
 ] [93
 
-]
-<placebo_2.png, id=3262, 507.5325pt x 582.26625pt>
-File: placebo_2.png Graphic file (type png)
-<use placebo_2.png>
-Package pdftex.def Info: placebo_2.png  used on input line 489.
-(pdftex.def)             Requested size: 203.0094pt x 232.90236pt.
- [94
+] [94
 
- <./placebo_2.png>]
-<placebo.png, id=3298, 819.6075pt x 546.13126pt>
-File: placebo.png Graphic file (type png)
-<use placebo.png>
-Package pdftex.def Info: placebo.png  used on input line 493.
-(pdftex.def)             Requested size: 354.19536pt x 236.01518pt.
+] [95
 
-[95
-
- <./placebo.png>] [96
+] [96
 
 ] [97
 
-] [98
+]
+<placebo_2.png, id=3399, 507.5325pt x 582.26625pt>
+File: placebo_2.png Graphic file (type png)
+<use placebo_2.png>
+Package pdftex.def Info: placebo_2.png  used on input line 494.
+(pdftex.def)             Requested size: 203.0094pt x 232.90236pt.
+ [98
 
-] [99
+ <./placebo_2.png>]
+<placebo.png, id=3435, 819.6075pt x 546.13126pt>
+File: placebo.png Graphic file (type png)
+<use placebo.png>
+Package pdftex.def Info: placebo.png  used on input line 498.
+(pdftex.def)             Requested size: 354.19536pt x 236.01518pt.
+ [99
 
-] [100
+ <./placebo.png>] [100
 
 ] [101
 
@@ -1861,25 +1860,25 @@ Package pdftex.def Info: placebo.png  used on input line 493.
 
 ] [103
 
-]
-<twins_compliers.png, id=3606, 831.92625pt x 583.0875pt>
-File: twins_compliers.png Graphic file (type png)
-<use twins_compliers.png>
-Package pdftex.def Info: twins_compliers.png  used on input line 518.
-(pdftex.def)             Requested size: 354.19536pt x 248.24931pt.
+] [104
 
-Overfull \vbox (7.2583pt too high) detected at line 518
- []
-
-[104
-
- <./twins_compliers.png>] [105
+] [105
 
 ] [106
 
-] [107
+]
+<twins_compliers.png, id=3708, 831.92625pt x 583.0875pt>
+File: twins_compliers.png Graphic file (type png)
+<use twins_compliers.png>
+Package pdftex.def Info: twins_compliers.png  used on input line 521.
+(pdftex.def)             Requested size: 354.19536pt x 248.24931pt.
 
-] [108
+Overfull \vbox (7.2583pt too high) detected at line 521
+ []
+
+[107
+
+ <./twins_compliers.png>] [108
 
 ] [109
 
@@ -1887,14 +1886,14 @@ Overfull \vbox (7.2583pt too high) detected at line 518
 
 ] [111
 
-]
-[112
+] [112
 
 ] [113
 
 ] [114
 
-] [115
+]
+[115
 
 ] [116
 
@@ -1912,10 +1911,18 @@ Overfull \vbox (7.2583pt too high) detected at line 518
 
 ] [123
 
-]
-[124
+] [124
 
 ] [125
+
+] [126
+
+]
+[127
+
+] [128
+
+] [129
 
 ]
 \tf@nav=\write6
@@ -1927,11 +1934,11 @@ Overfull \vbox (7.2583pt too high) detected at line 518
 \tf@snm=\write8
 \openout8 = `Slides_Summary_v4.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 597.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 597.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 601.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 601.
  (Slides_Summary_v4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 597.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 597.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 601.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 601.
 Package rerunfilecheck Info: File `Slides_Summary_v4.out' has not changed.
 (rerunfilecheck)             Checksum: E908169ADBF74B1DB0BC283692D889E9;87.
 
@@ -1940,10 +1947,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 22988 strings out of 492893
- 438652 string characters out of 3133367
- 553437 words of memory out of 3000000
- 26059 multiletter control sequences out of 15000+200000
+ 22992 strings out of 492893
+ 438581 string characters out of 3133367
+ 553441 words of memory out of 3000000
+ 26055 multiletter control sequences out of 15000+200000
  73134 words of font info for 126 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,19n,58p,877b,774s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1956,9 +1963,9 @@ rogram Files/MiKTeX 2.9/fonts/type1/public/arev/ArevSans-Roman.pfb><C:/Program
 Files/MiKTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7t.pfb><C:/Program Files/Mi
 KTeX 2.9/fonts/type1/mathdesign/mdbch/md-chb7y.pfb><C:/Program Files/MiKTeX 2.9
 /fonts/type1/mathdesign/mdbch/md-chbma.pfb>
-Output written on Slides_Summary_v4.pdf (125 pages, 1615428 bytes).
+Output written on Slides_Summary_v4.pdf (129 pages, 1644489 bytes).
 PDF statistics:
- 4457 PDF objects out of 5155 (max. 8388607)
- 254 named destinations out of 1000 (max. 500000)
+ 4595 PDF objects out of 5155 (max. 8388607)
+ 262 named destinations out of 1000 (max. 500000)
  79 words of extra memory for PDF output out of 10000 (max. 10000000)
 
