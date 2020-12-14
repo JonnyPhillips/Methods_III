@@ -20,6 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -344,13 +346,13 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Syllabus - Quantitative Methods III: Explanation and Causation</h1>
 <h3 class="subtitle">FLS6441: Métodos Quantitativos III: Explicação e Causação</h3>
-<h4 class="date">February, 2020</h4>
+<h4 class="date">December 2020</h4>
 
 </div>
 
 
-<div id="objectives" class="section level2">
-<h2>Objectives</h2>
+<div id="objectives" class="section level1">
+<h1>Objectives</h1>
 <p>This course is the third course in a three course sequence, following Quantitative Methods I (Introductory Statistics) and Quantitative Methods II (Multivariate Regression). This is an applied course in how to <em>explain</em> the outcomes – public policies, democracy, peace, governance, corruption, inequality – we study in political science. It provides students with the skills, tools and confidence to implement a wide range of analyses commonly used in leading political science studies. By the end of this course you will be able to:</p>
 <ol style="list-style-type: decimal">
 <li>Describe research questions in terms of counterfactual observations;</li>
@@ -362,68 +364,67 @@ $(document).ready(function () {
 <p>Lots of these words are probably unfamiliar and intimidating. Don’t worry - the aim of this course is to overcome these barriers and give students the intuition, experience and confidence to regularly use these tools. You will get lots of hands-on practice in how to replicate major studies using their original datasets, so the techniques will make much more sense and you will understand what they can and cannot help us explain.</p>
 <p>More practically, this course is excellent preparation for students who want to understand and critique papers, develop their own research designs for dissertations, or be able to engage more in sandwich programs or at conferences.</p>
 </div>
-<div id="justification" class="section level2">
-<h2>Justification</h2>
+<div id="justification" class="section level1">
+<h1>Justification</h1>
 <p>All good political science research projects are causal - they do not just describe the world but seek to <em>explain</em> it: Do women govern better than men? Can corrupt politicians influence local media to get re-elected? How do authoritarian regimes survive during economic crises?</p>
 <p>But explanation is hard because societies are extremely complex and lots of processes are happening all at the same time. We simply do not - cannot - know what the alternative outcome would have been if Angela Merkel had lost at the last election or if Hilary Clinton had won.</p>
 <p>Even if we throw huge amounts of data and lots of control variables into a regression we would not be able to explain these outcomes convincingly. A range of problems prevent us saying that X causes Y - an omitted variable, some reverse causation, or a selection bias. Regression on its own cannot solve any of these problems. Instead, we need an alternative - smarter - strategy, which carefully selects the data we are comparing and identifies the most likely <em>counterfactual</em> observations.</p>
 <p>For example, instead of comparing all women and men in politics we could focus on India where some government positions are randomly-allocated by gender; instead of asking all voters what they think of corrupt politicians we could ask only those who live in places which are on the border of receiving local radio stations those politicians control; instead of comparing all authoritarian regimes we could focus on a paired comparison between two neighbouring countries which share similar histories, economies and institutions.</p>
 <p>The essential toolkit for empirical research in political science therefore includes being able to describe and identify appropriate counterfactuals, choose appropriate research designs to maximize causal inference, apply these research designs to real data, and provide compelling <em>explanations</em> for the patterns in the data.</p>
 </div>
-<div id="prerequisites" class="section level2">
-<h2>Prerequisites</h2>
+<div id="prerequisites" class="section level1">
+<h1>Prerequisites</h1>
 <p>Students are required to have completed FLS 6183, Quantitative Methods II, or equivalent.</p>
 </div>
-<div id="content" class="section level2">
-<h2>Content</h2>
+<div id="content" class="section level1">
+<h1>Content</h1>
 <p>Part I focuses on reviewing the core tools and ideas for understanding the variation in our data.</p>
 <ol style="list-style-type: decimal">
-<li>Review: What regression does and does not do. (21/03/19)</li>
-<li>A Framework for Explanation (28/03/19)</li>
+<li>Review: What regression does and does not do</li>
+<li>A Framework for Explanation</li>
 </ol>
 <p>Part II practices implementing key causal methodologies. Each week we discuss the methodology, read a high-profile paper that uses the methodology, and replicate the analysis ourselves using the raw data in R or Stata.</p>
 <ol start="3" style="list-style-type: decimal">
-<li>Field Experiments (04/04/19)</li>
-<li>Survey and Lab Experiments (11/04/19)</li>
-<li>Natural Experiments (18/04/19)</li>
-<li>Instrumental Variables (25/04/19)</li>
-<li>Discontinuities (02/05/19)</li>
-<li>Difference-in-Differences (16/05/19)</li>
-<li>Controlling for Confounding (23/05/19)</li>
-<li>Matching (30/05/19)</li>
-<li>Comparative Cases and Process Tracing (06/06/19)</li>
-<li>Generalizability, Reproducibility and Mechanisms (13/06/19)</li>
+<li>Field Experiments</li>
+<li>Survey and Lab Experiments</li>
+<li>Natural Experiments</li>
+<li>Instrumental Variables</li>
+<li>Discontinuities</li>
+<li>Difference-in-Differences</li>
+<li>Controlling for Confounding</li>
+<li>Matching</li>
+<li>Comparative Cases and Process Tracing</li>
+<li>Generalizability, Reproducibility and Mechanisms</li>
 </ol>
 </div>
-<div id="evaluation" class="section level2">
-<h2>Evaluation</h2>
+<div id="evaluation" class="section level1">
+<h1>Evaluation</h1>
 <ol style="list-style-type: decimal">
-<li><strong>Replication Tasks (40%)</strong> - Each week I will provide you with a pre-prepared dataset from a well-known political science paper that uses the methodology we are studying that week, and you will replicate the core analysis of the paper in R or Stata.
+<li><strong>Replication Tasks (40%)</strong> - Each week I will provide you with a pre-prepared dataset from a well-known political science paper that uses the methodology we are studying that week.
 <ul>
-<li>I will provide clear instructions and examples of how to do this in class so this will be accessible for all students.</li>
-<li>Note that the emphasis is not on using precisely the same specification or reproducing identical standard errors, but implementing the core methodology to understand what is happening.</li>
-<li>You should submit two files each week - the analysis code and a short write-up (in English, for practice!) containing your final graphs/tables and interpreting and explaining your results (no more than 400 words written). You are encouraged to use R markdown to simplify this task, but it is not required.</li>
-<li>Students are required to submit at least 7 out of 9 replication tasks (your grade will be based on your 8 best submissions).</li>
+<li>Rather than replicate the full paper, I will provide specific questions for you to answer to structure and guide you through the replication.</li>
+<li>You will be graded on the understanding you show in your responses to these questions and in implementing the core methodology, and not on how precisely you replicate the final result. I.e. it doesn’t matter at all if your standard errors are slightly different.</li>
+<li>I will provide clear instructions and examples of how to apply the methodologies in class so this will be accessible for all students.</li>
+<li>Students are required to submit at least 7 out of 9 replication tasks (your grade will be based on your 7 best submissions).</li>
 </ul></li>
 <li><strong>Short Research Paper (40%)</strong> - To apply your new skills you will pick a research question of interest to you (possibly your thesis/dissertation) and suggest a research design that would be effective at answering that question.
 <ul>
 <li>This should be a question for which data is available and you can provide a first attempt at applying the methodology - the results themselves don’t matter.</li>
 <li>Papers should be no more than 15 pages, and can be in English or Portuguese.</li>
-<li>The deadline for submission will be 27th July.</li>
+<li>The deadline for submission will be in July 2021.</li>
 </ul></li>
 <li><strong>Participation (20%)</strong> - Presence and constructive contribution in class.</li>
 </ol>
 </div>
-<div id="bibliography" class="section level2">
-<h2>Bibliography</h2>
-<p>The list below is a general list of reference texts that we will use repeatedly throughout the course. For a detailed breakdown of readings for each class, please see the class-specific pages from the menu above.</p>
+<div id="bibliography" class="section level1">
+<h1>Bibliography</h1>
+<p>The list below is a general list of reference texts that we will use repeatedly throughout the course. For a detailed breakdown of readings for each class, please see the course website.</p>
 <ul>
 <li>Joshua D Angrist and Steve Pischke. Mastering ’Metrics. 2015.</li>
 <li>Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015.</li>
 <li>Thad Dunning. Natural Experiments in the Social Sciences: A Design-Based Approach. Yale University Press, 2012.</li>
 <li>Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics: An Empiricist’s Companion. Princeton University Press, 2009.</li>
 <li>Stephen L Morgan and Christopher Winship. Counterfactuals and Causal Inference: Methods and Principles for Social Research. Cambridge University Press, 2007.</li>
-<li>Miguel A. Hernán, James M. Robins. Causal Inference. Boca Raton: Chapman &amp; Hall/CRC. Forthcoming.</li>
 </ul>
 </div>
 

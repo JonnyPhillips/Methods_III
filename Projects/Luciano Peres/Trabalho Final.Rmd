@@ -1,0 +1,72 @@
+---
+title: "Projeto Final"
+author: "Luciano Nurnberg Peres"
+date: "21/07/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE, echo = FALSE)
+```
+
+```{r}
+require(stargazer)
+require(tidyverse)
+require(readxl)
+```
+
+Carregando os dados
+```{r}
+tra18_19 <- read_excel("Transferencias 2018-2019.xlsx")
+tra17_18 <- read_excel("Transferencias 2017-2018.xlsx")
+```
+
+<BR>
+
+Teste de tendência paralela
+```{r, results='asis'}
+require(texreg)
+require(estimatr)
+
+tra17_18 %>% lm(T_Vol ~ Tratamento + Periodo + Tratamento*Periodo, data=.) %>% 
+  stargazer(single.row=T, header=F, type = 'html')
+```
+
+<BR>
+
+Teste de tendência paralela clusterizando
+```{r, results='asis'}
+tra17_18 %>% lm_robust(T_Vol ~ Tratamento + Periodo + Tratamento*Periodo, data=.,
+                       cluster=Municipio) %>% htmlreg(include.ci = F)
+```
+
+<BR>
+
+Diff-in-Diff "simples" (sem clusterizar)
+```{r, results='asis'}
+tra18_19 %>% lm(T_Vol ~ Tratamento + Periodo + Tratamento*Periodo, data=.) %>%
+stargazer(single.row=T, header=F, type = 'html')
+```
+
+<BR>
+
+Diff-in-Diff clusterizando
+```{r, results='asis'}
+tra18_19 %>% lm_robust(T_Vol ~ Tratamento + Periodo + Tratamento*Periodo, data=.,
+                       cluster=Municipio) %>% htmlreg(include.ci = F)
+```
+
+<BR>
+
+Gráfico de tendência entre os períodos 2017-2019
+```{r}
+tra18_19 %>% mutate(Periodo = Periodo + 1) %>% bind_rows(tra17_18) %>% group_by(Periodo, Tratamento) %>%
+  summarize(Trasnferencias = mean(T_Vol, na.rm = T)) %>% mutate(Periodo = Periodo + 2017) %>% ggplot() +
+  geom_line(aes(x = Periodo, y = Trasnferencias, group = factor(Tratamento),
+                colour = factor(Tratamento))) +
+  scale_x_continuous(name = "Ano", breaks = c(2017, 2018, 2019)) +
+  ylab("Trasnferências") +
+  theme_classic()
+```
+
+<BR>
