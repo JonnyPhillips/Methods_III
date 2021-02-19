@@ -9,15 +9,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 1, 2 & 7](Classes/Class_5/Readings/Dunning Ch1,2,7.pdf)**
-- **[Paper: De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1](Classes/Class_5/Replication/DeLaO_AJPS2013.pdf)**
-- **[Sekhon, Jasjeet S. and Titiunik, Rocio (2012), "When Natural Experiments are Neither Natural nor Experiments", American Political Science Review 106:1](Classes/Class_5/Readings/Sekhon and Titiunik 2012.pdf)**
-- **[Posner, Daniel N. (2004), "The Political Salience of Cultural Difference: Why Chewas and Tumbukas are Allies in Zambia and Adversaries in Malawi", American Political Science Review 98:4](Classes/Class_5/Readings/Posner_2004.pdf)**
+- Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 1, 2 & 7
+- De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1
+- Sekhon, Jasjeet S. and Titiunik, Rocio (2012), "When Natural Experiments are Neither Natural nor Experiments", American Political Science Review 106:1
+- Posner, Daniel N. (2004), "The Political Salience of Cultural Difference: Why Chewas and Tumbukas are Allies in Zambia and Adversaries in Malawi", American Political Science Review 98:4
+<!-- - **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 1, 2 & 7](Classes/Class_5/Readings/Dunning Ch1,2,7.pdf)** -->
+<!-- - **[De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1](Classes/Class_5/Replication/DeLaO_AJPS2013.pdf)** -->
+<!-- - **[Sekhon, Jasjeet S. and Titiunik, Rocio (2012), "When Natural Experiments are Neither Natural nor Experiments", American Political Science Review 106:1](Classes/Class_5/Readings/Sekhon and Titiunik 2012.pdf)** -->
+<!-- - **[Posner, Daniel N. (2004), "The Political Salience of Cultural Difference: Why Chewas and Tumbukas are Allies in Zambia and Adversaries in Malawi", American Political Science Review 98:4](Classes/Class_5/Readings/Posner_2004.pdf)** -->
 
 #### Additional Readings
-- [Miguel, Edward (2004), "Tribe or Nation? Nation Building and Public Goods in Kenya versus Tanzania", World Politics 56](Classes/Class_5/Readings/Miguel_2004.pdf)
-- [Chattopadhyay, Raghabendra and Esther Duflo (2004), "Women as Policy Makers: Evidence from a Randomized Policy Experiment in India", Econometrica, 72:5](Classes/Class_5/Readings/Chattopadhyay_2004.pdf)
-- [Ferraz, and Finan (2008), "Exposing Corrupt Politicians: The Effects of Brazil's Publicly Released Audits on Electoral Outcomes", Quarterly Journal of Economics](Classes/Class_5/Readings/Ferraz_Finan.pdf)
+- Miguel, Edward (2004), "Tribe or Nation? Nation Building and Public Goods in Kenya versus Tanzania", World Politics 56
+<!-- - [Miguel, Edward (2004), "Tribe or Nation? Nation Building and Public Goods in Kenya versus Tanzania", World Politics 56](Classes/Class_5/Readings/Miguel_2004.pdf) -->
+- Chattopadhyay, Raghabendra and Esther Duflo (2004), "Women as Policy Makers: Evidence from a Randomized Policy Experiment in India", Econometrica, 72:5
+<!-- - [Chattopadhyay, Raghabendra and Esther Duflo (2004), "Women as Policy Makers: Evidence from a Randomized Policy Experiment in India", Econometrica, 72:5](Classes/Class_5/Readings/Chattopadhyay_2004.pdf) -->
+- Ferraz, and Finan (2008), "Exposing Corrupt Politicians: The Effects of Brazil's Publicly Released Audits on Electoral Outcomes", Quarterly Journal of Economics
+<!-- - [Ferraz, and Finan (2008), "Exposing Corrupt Politicians: The Effects of Brazil's Publicly Released Audits on Electoral Outcomes", Quarterly Journal of Economics](Classes/Class_5/Readings/Ferraz_Finan.pdf) -->
 
 
 <br> </br>
@@ -28,7 +35,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Replication Exercise
  - [Exercise](Classes/Class_5/Replication/Replication_Exercise_3_v2.pdf)
- - [Paper: De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1](Classes/Class_5/Replication/DeLaO_AJPS2013.pdf)
+ - Paper: De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1
+
+ <!-- - [Paper: De La O, Ana (2013), Do Conditional Cash Transfers Affect Electoral Behavior? Evidence from a Randomized Experiment in Mexico, American Journal of Political Science, 57:1](Classes/Class_5/Replication/DeLaO_AJPS2013.pdf) -->
  - [Data](Classes/Class_5/Replication/DeLaO.csv)  
  - [Suggested Responses](Classes/Class_5/Replication/Replication_Exercise_3_v2_Suggested_Responses.pdf)
 

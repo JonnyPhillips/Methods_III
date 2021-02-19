@@ -9,13 +9,17 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Morgan and Winship, Counterfactuals and Causal Inference, Chapters 3 and 5](Classes/Class_9/Readings/M&W.pdf)**
-- **[Rubin, Donald, "For Objective Causal Inference, Design Trumps Analysis"](Classes/Class_9/Readings/Rubin Design Trumps Analysis.pdf)**
-- **[Angrist & Pischke, Mastering 'Metrics, Ch. 2](Classes/Class_9/Readings/A&P_Ch.2.pdf)**
-- **[Paper: Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4](Classes/Class_9/Replication/Baldwin 2013.pdf)**
+- Morgan and Winship, Counterfactuals and Causal Inference, Chapters 3 and 5
+- Rubin, Donald, "For Objective Causal Inference, Design Trumps Analysis"
+- Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4
+<!-- - **[Morgan and Winship, Counterfactuals and Causal Inference, Chapters 3 and 5](Classes/Class_9/Readings/M&W.pdf)** -->
+<!-- - **[Rubin, Donald, "For Objective Causal Inference, Design Trumps Analysis"](Classes/Class_9/Readings/Rubin Design Trumps Analysis.pdf)** -->
+<!-- - **[Angrist & Pischke, Mastering 'Metrics, Ch. 2](Classes/Class_9/Readings/A&P_Ch.2.pdf)** -->
+<!-- - **[Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4](Classes/Class_9/Replication/Baldwin 2013.pdf)** -->
 
 #### Additional Readings
-- [Imbens and Rubin, Ch. 12](Classes/Class_9/Readings/Imbens and Rubin Ch.12.pdf)
+- Imbens and Rubin, Ch. 12
+<!-- - [Imbens and Rubin, Ch. 12](Classes/Class_9/Readings/Imbens and Rubin Ch.12.pdf) -->
 
 <br> </br>
 
@@ -26,7 +30,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Replication Exercise
  - [Exercise](Classes/Class_9/Replication/Replication_Controls_v5.pdf) 
- - [Paper: Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4](Classes/Class_9/Replication/Baldwin 2013.pdf) 
+- Paper: Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4
+
+ <!-- - [Paper: Baldwin, Kate, 2013, "Why Vote with the Chief? Political Connections and Public Goods Provision in Zambia", American Journal of Political Science, 57:4](Classes/Class_9/Replication/Baldwin 2013.pdf)  -->
  - [Data](Classes/Class_9/Replication/Baldwin_adjusted.csv) 
  - [Suggested Responses](Classes/Class_9/Replication/Replication_Controls_v5_Suggested_Responses.pdf)
 

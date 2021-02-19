@@ -9,15 +9,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Readings
 #### Required
-- **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3](Classes/Class_6/Readings/Angrist and Pischke Ch.3.pdf)**
-- **[Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers' Guide, American Journal of Political Science](Classes/Class_6/Readings/Sovey and Green.pdf)**
-- **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4](Classes/Class_6/Readings/Dunning Natural Experiments IV.pdf)**
-- **[Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation](Classes/Class_6/Readings/AJR 2001.pdf)**
+- Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3
+Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers' Guide, American Journal of Political Science
+- Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4
+- Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation
+<!-- - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3](Classes/Class_6/Readings/Angrist and Pischke Ch.3.pdf)** -->
+<!-- - **[Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers' Guide, American Journal of Political Science](Classes/Class_6/Readings/Sovey and Green.pdf)** -->
+<!-- - **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4](Classes/Class_6/Readings/Dunning Natural Experiments IV.pdf)** -->
+<!-- - **[Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation](Classes/Class_6/Readings/AJR 2001.pdf)** -->
 
 #### Additional Readings
-- [Mostly Harmless Econometrics, Ch.4 ](Classes/Class_6/Readings/Angrist and Pischke Ch.4.pdf)
-- [Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development](Classes/Class_6/Readings/Deaton 2009.pdf)
-- [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23](Classes/Class_6/Readings/Imbens and Rubin IV.pdf)
+- Mostly Harmless Econometrics, Ch.4
+Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the - Search for the Elusive Keys to Economic Development
+- Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23
+<!-- - [Mostly Harmless Econometrics, Ch.4 ](Classes/Class_6/Readings/Angrist and Pischke Ch.4.pdf) -->
+<!-- - [Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development](Classes/Class_6/Readings/Deaton 2009.pdf) -->
+<!-- - [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23](Classes/Class_6/Readings/Imbens and Rubin IV.pdf) -->
 
 <br> </br>
 
@@ -29,7 +36,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Replication Exercise
  - [Exercise](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2.pdf)
- - [Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2](Classes/Class_6/Replication/Albertson and Lawrence 2009.pdf) 
+ - Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2
+ 
+ <!-- - [Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2](Classes/Class_6/Replication/Albertson and Lawrence 2009.pdf)  -->
  - [Data](Classes/Class_6/Replication/IV.csv) 
  - [Suggested Responses](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2_Suggested_Responses.pdf)
 

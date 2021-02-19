@@ -11,7 +11,8 @@ This is a review week where we solidify the fundamentals of regression and its w
 
 ## Readings
 #### Required
-**[King, Keohane and Verba, Designing Social Inquiry, pp. 150 - 196 & 128 - 139](Classes/Class_1/KKV_Class_1.pdf)**
+- King, Keohane and Verba, Designing Social Inquiry, pp. 150 - 196 & 128 - 139
+<!-- **[King, Keohane and Verba, Designing Social Inquiry, pp. 150 - 196 & 128 - 139](Classes/Class_1/KKV_Class_1.pdf)** -->
 
 <br> </br>
 

@@ -19,39 +19,32 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-
-
-
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -62,10 +55,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -82,40 +71,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -143,7 +105,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -155,7 +117,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -166,10 +128,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -181,7 +156,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -259,14 +233,14 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Overview
   </a>
 </li>
 <li>
   <a href="Syllabus-v6_2021.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Syllabus
   </a>
@@ -318,14 +292,14 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="Project.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Project
   </a>
 </li>
 <li>
   <a href="Links.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Links
   </a>
@@ -338,7 +312,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -352,18 +326,16 @@ $(document).ready(function () {
 <div id="required" class="section level4">
 <h4>Required</h4>
 <ul>
-<li><strong><a href="Classes/Class_6/Readings/Angrist%20and%20Pischke%20Ch.3.pdf">Joshua D Angrist and Steve Pischke. Mastering ’Metrics. 2015, Ch. 3</a></strong></li>
-<li><strong><a href="Classes/Class_6/Readings/Sovey%20and%20Green.pdf">Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers’ Guide, American Journal of Political Science</a></strong></li>
-<li><strong><a href="Classes/Class_6/Readings/Dunning%20Natural%20Experiments%20IV.pdf">Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4</a></strong></li>
-<li><strong><a href="Classes/Class_6/Readings/AJR%202001.pdf">Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation</a></strong></li>
+<li>Joshua D Angrist and Steve Pischke. Mastering ‘Metrics. 2015, Ch. 3 Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers’ Guide, American Journal of Political Science</li>
+<li>Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4</li>
+<li>Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation <!-- - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics. 2015, Ch. 3](Classes/Class_6/Readings/Angrist and Pischke Ch.3.pdf)** --> <!-- - **[Sovey, Alison and Donald P. Green (2010), Instrumental Variables Estimation in Political Science: A Readers' Guide, American Journal of Political Science](Classes/Class_6/Readings/Sovey and Green.pdf)** --> <!-- - **[Dunning, Thad (2012), Natural Experiments in the Social Sciences: A Design-Based Approach, Cambridge University Press, Ch. 4](Classes/Class_6/Readings/Dunning Natural Experiments IV.pdf)** --> <!-- - **[Acemoglu, Johnson and Robinson, The Colonial Origins of Comparative Development: An Empirical Investigation](Classes/Class_6/Readings/AJR 2001.pdf)** --></li>
 </ul>
 </div>
 <div id="additional-readings" class="section level4">
 <h4>Additional Readings</h4>
 <ul>
-<li><a href="Classes/Class_6/Readings/Angrist%20and%20Pischke%20Ch.4.pdf">Mostly Harmless Econometrics, Ch.4</a></li>
-<li><a href="Classes/Class_6/Readings/Deaton%202009.pdf">Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development</a></li>
-<li><a href="Classes/Class_6/Readings/Imbens%20and%20Rubin%20IV.pdf">Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23</a></li>
+<li>Mostly Harmless Econometrics, Ch.4 Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the - Search for the Elusive Keys to Economic Development</li>
+<li>Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23 <!-- - [Mostly Harmless Econometrics, Ch.4 ](Classes/Class_6/Readings/Angrist and Pischke Ch.4.pdf) --> <!-- - [Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics, and the Search for the Elusive Keys to Economic Development](Classes/Class_6/Readings/Deaton 2009.pdf) --> <!-- - [Guido W. Imbens and Donald B Rubin. Causal Inference for Statistics, Social, and Biomedical Sciences. 2015. Ch. 23](Classes/Class_6/Readings/Imbens and Rubin IV.pdf) --></li>
 </ul>
 <p><br> </br></p>
 </div>
@@ -381,10 +353,9 @@ $(document).ready(function () {
 <h2>Replication Exercise</h2>
 <ul>
 <li><a href="Classes/Class_6/Replication/Replication_Exercise_4_TV_v2.pdf">Exercise</a></li>
-<li><a href="Classes/Class_6/Replication/Albertson%20and%20Lawrence%202009.pdf">Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2</a></li>
-<li><a href="Classes/Class_6/Replication/IV.csv">Data</a></li>
-<li><a href="Classes/Class_6/Replication/Replication_Exercise_4_TV_v2_Suggested_Responses.pdf">Suggested Responses</a></li>
+<li>Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2</li>
 </ul>
+<p><!-- - [Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2](Classes/Class_6/Replication/Albertson and Lawrence 2009.pdf)  --> - <a href="Classes/Class_6/Replication/IV.csv">Data</a> - <a href="Classes/Class_6/Replication/Replication_Exercise_4_TV_v2_Suggested_Responses.pdf">Suggested Responses</a></p>
 </div>
 
 
@@ -396,7 +367,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -414,7 +385,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -19,39 +19,32 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-
-
-
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -62,10 +55,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -82,40 +71,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -143,7 +105,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -155,7 +117,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -166,10 +128,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -181,7 +156,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -259,14 +233,14 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Overview
   </a>
 </li>
 <li>
   <a href="Syllabus-v6_2021.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Syllabus
   </a>
@@ -318,14 +292,14 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="Project.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Project
   </a>
 </li>
 <li>
   <a href="Links.html">
-    <span class="fa fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Links
   </a>
@@ -338,7 +312,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -352,16 +326,16 @@ $(document).ready(function () {
 <div id="required" class="section level4">
 <h4>Required</h4>
 <ul>
-<li><strong><a href="Classes/Class_8/Readings/Angrist%20&amp;%20Pischke%20Ch5.pdf">Joshua D Angrist and Steve Pischke. Mastering ’Metrics, Ch.5</a></strong></li>
-<li><strong><a href="Classes/Class_8/Readings/Chimeli_Soares.pdf">Chimeli, Ariaster D. and Rodrigo R. Soares 2017, The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon, American Economic Journal: Applied Economics, 9:4</a></strong></li>
-<li><strong><a href="Classes/Class_8/Replication/Malesky%202014.pdf">Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1</a></strong></li>
+<li>Joshua D Angrist and Steve Pischke. Mastering ’Metrics, Ch.5</li>
+<li>Chimeli, Ariaster D. and Rodrigo R. Soares 2017, The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon, American Economic Journal: Applied Economics, 9:4</li>
+<li>Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1 <!-- - **[Joshua D Angrist and Steve Pischke. Mastering 'Metrics, Ch.5](Classes/Class_8/Readings/Angrist & Pischke Ch5.pdf)** --> <!-- - **[Chimeli, Ariaster D. and Rodrigo R. Soares 2017, The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon, American Economic Journal: Applied Economics, 9:4](Classes/Class_8/Readings/Chimeli_Soares.pdf)** --> <!-- - **[Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf)** --></li>
 </ul>
 </div>
 <div id="additional-readings" class="section level4">
 <h4>Additional Readings</h4>
 <ul>
-<li><a href="Classes/Class_8/Readings/A&amp;P_Ch5.pdf">Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.5</a></li>
-<li><a href="Classes/Class_8/Readings/Bertrand%20et%20al%202003.pdf">Bertrand, Marianne, Esther Duflo and Sendhil Mullainathan 2003, How much Should we Trust Difference-in-Differences Estimates?</a></li>
+<li>Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.5</li>
+<li>Bertrand, Marianne, Esther Duflo and Sendhil Mullainathan 2003, How much Should we Trust Difference-in-Differences Estimates? <!-- - [Joshua D Angrist and Steve Pischke. Mostly Harmless Econometrics, Ch.5 ](Classes/Class_8/Readings/A&P_Ch5.pdf) --> <!-- - [Bertrand, Marianne, Esther Duflo and Sendhil Mullainathan 2003, How much Should we Trust Difference-in-Differences Estimates?](Classes/Class_8/Readings/Bertrand et al 2003.pdf) --></li>
 </ul>
 <p><br> </br></p>
 </div>
@@ -379,10 +353,9 @@ $(document).ready(function () {
 <h2>Replication Exercise</h2>
 <ul>
 <li><a href="Classes/Class_8/Replication/Replication_6_diff_in_diff_v2.pdf">Exercise</a></li>
-<li><a href="Classes/Class_8/Replication/Malesky%202014.pdf">Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1</a></li>
-<li>Data: <a href="Classes/Class_8/Replication/Vietnam0810.csv">Vietnam0810.csv</a>, <a href="Classes/Class_8/Replication/Vietnam0608.csv">Vietnam0608.csv</a></li>
-<li><a href="Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf">Suggested Responses</a></li>
+<li>Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1</li>
 </ul>
+<p><!-- - [Paper: Malesky, Edmund, Cuong Viet Nguyen and Anh Tran, 2014, The Impact of Recentralization on Public Services: A Difference-in-Differences Analysis of the Abolition of Elected Councils in Vietnam, American Political Science Review, 108:1](Classes/Class_8/Replication/Malesky 2014.pdf) --> - Data: <a href="Classes/Class_8/Replication/Vietnam0810.csv">Vietnam0810.csv</a>, <a href="Classes/Class_8/Replication/Vietnam0608.csv">Vietnam0608.csv</a> - <a href="Classes/Class_8/Replication/Replication_6_diff_in_diff_v2_Suggested_Responses.pdf">Suggested Responses</a></p>
 </div>
 
 
@@ -394,7 +367,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -412,7 +385,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
