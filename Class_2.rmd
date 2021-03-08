@@ -30,6 +30,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- ## [Causal Relationships App](https://poliong.shinyapps.io/DAGs/) -->
 
-## [Lab Exercise to Complete during Class](Classes/Class_2/Exercise_POs_v1.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_2/Exercise_POs_v1.pdf) -->
 
-## [Suggested Responses to Lab Exercises](Classes/Class_2/Exercise_POs_v1_responses.pdf)
+<!-- ## [Suggested Responses to Lab Exercises](Classes/Class_2/Exercise_POs_v1_responses.pdf) -->

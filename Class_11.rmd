@@ -34,11 +34,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## [Lecture Slides](Classes/Class_11/Slides_Comparative_Process_v1.pdf)
 
-## [Lab Exercise to Complete during Class](Classes/Class_11/Lab_Exercise/Exercise_Cases_v7.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_11/Lab_Exercise/Exercise_Cases_v7.pdf) -->
 
-## Replication Exercise
-  - [Exercise](Classes/Class_11/Replication/Replication_Comparative_v1.pdf) 
-  - Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability
-  
-  <!-- - [Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability](https://github.com/JonnyPhillips/Methods_III/blob/master/Classes/Class_11/Replication/Levitsky_and_Way.pdf)  -->
-  - [Suggested Responses](Classes/Class_11/Replication/Replication_Comparative_v1_Suggested_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!--   - [Exercise](Classes/Class_11/Replication/Replication_Comparative_v1.pdf)  -->
+<!--   - Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability -->
+
+<!--   <!-- - [Paper - Levitsky, S. and Way, L., 2010, Beyond Patronage: Ruling Party Cohesion and Authoritarian Stability](https://github.com/JonnyPhillips/Methods_III/blob/master/Classes/Class_11/Replication/Levitsky_and_Way.pdf)  --> -->
+<!--   - [Suggested Responses](Classes/Class_11/Replication/Replication_Comparative_v1_Suggested_Responses.pdf) -->

@@ -28,13 +28,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- ## [Experiments App](https://poliong.shinyapps.io/to_deploy/) -->
 
-## [Lab Exercise to Complete during Class](Classes/Class_3/Exercise_Field_Exp_v2.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_3/Exercise_Field_Exp_v2.pdf) -->
 
- - [Suggested Responses](Classes/Class_3/Exercise_Field_Exp_v2_responses.pdf)
+<!--  - [Suggested Responses](Classes/Class_3/Exercise_Field_Exp_v2_responses.pdf) -->
 
-## Replication Exercise
-- Paper: Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.
-<!-- - [Paper: Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.](Classes/Class_3/Replication/Gerber Green and Larimer 2008.pdf) -->
-- [Exercise](Classes/Class_3/Replication/Replication_Exercise_1_v7.pdf)
-- [Data](Classes/Class_3/Replication/GGL_data_prepared.csv)
-- [Suggested Responses](Classes/Class_3/Replication/Replication_Exercise_1_v7_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!-- - Paper: Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008. -->
+<!-- <!-- - [Paper: Alan S. Gerber, et al. Social Pressure and Voter Turnout: Evidence from a Large-Scale Field Experiment. American Political Science Review, 102(1), February 2008.](Classes/Class_3/Replication/Gerber Green and Larimer 2008.pdf) --> -->
+<!-- - [Exercise](Classes/Class_3/Replication/Replication_Exercise_1_v7.pdf) -->
+<!-- - [Data](Classes/Class_3/Replication/GGL_data_prepared.csv) -->
+<!-- - [Suggested Responses](Classes/Class_3/Replication/Replication_Exercise_1_v7_Responses.pdf) -->

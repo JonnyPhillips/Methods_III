@@ -30,17 +30,17 @@ Deaton, Angus S. (2009), Instruments of Development: Ranomization in the Tropics
 
 ## [Lecture Slides](Classes/Class_6/Slides_Class6_v3.pdf) 
 
-## [Lab Exercise to Complete during Class](Classes/Class_6/Lab_Exercise/Exercise_IV_v4.pdf)
-  - [Suggested Responses](Classes/Class_6/Lab_Exercise/Exercise_IV_v4_Suggested_Responses.pdf)
+<!-- ## [Lab Exercise to Complete during Class](Classes/Class_6/Lab_Exercise/Exercise_IV_v4.pdf) -->
+<!--   - [Suggested Responses](Classes/Class_6/Lab_Exercise/Exercise_IV_v4_Suggested_Responses.pdf) -->
 
 
-## Replication Exercise
- - [Exercise](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2.pdf)
- - Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2
- 
- <!-- - [Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2](Classes/Class_6/Replication/Albertson and Lawrence 2009.pdf)  -->
- - [Data](Classes/Class_6/Replication/IV.csv) 
- - [Suggested Responses](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2_Suggested_Responses.pdf)
+<!-- ## Replication Exercise -->
+<!--  - [Exercise](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2.pdf) -->
+<!--  - Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2 -->
+
+<!--  <!-- - [Paper: Albertson, Bethany and Lawrence, Adria (2009), After the Credits Roll: The Long-Term Effects of Educational Television on Public Knowledge and Attitudes, American Politics Research, 37:2](Classes/Class_6/Replication/Albertson and Lawrence 2009.pdf)  --> -->
+<!--  - [Data](Classes/Class_6/Replication/IV.csv)  -->
+<!--  - [Suggested Responses](Classes/Class_6/Replication/Replication_Exercise_4_TV_v2_Suggested_Responses.pdf) -->
 
 
 
